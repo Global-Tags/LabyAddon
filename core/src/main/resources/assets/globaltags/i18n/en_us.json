@@ -1,0 +1,10 @@
+{
+    "globaltags": {
+        "settings": {
+            "name": "Global Tags",
+            "enabled": {
+                "name": "Enabled"
+            }
+        }
+    }
+}

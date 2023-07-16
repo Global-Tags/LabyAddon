@@ -10,14 +10,14 @@ version = "1.0.0"
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 labyMod {
-    defaultPackageName = "org.example" //change this to your main package name (used by all modules)
+    defaultPackageName = "com.rappytv.globaltags" //change this to your main package name (used by all modules)
     addonInfo {
-        namespace = "example"
-        displayName = "ExampleAddon"
-        author = "Example Author"
-        description = "Example Description"
+        namespace = "globaltags"
+        displayName = "Global Tags"
+        author = "RappyTV"
+        description = "..."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "0.0.1")
+        version = System.getenv().getOrDefault("VERSION", "1.0.0")
     }
 
     minecraft {
