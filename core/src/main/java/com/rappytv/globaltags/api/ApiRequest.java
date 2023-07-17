@@ -29,7 +29,7 @@ public class ApiRequest {
                 BodyPublishers.ofString(gson.toJson(new RequestBody(tag)));
 
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:5000/players/" + uuid + "/" + additionalPath))
+                .uri(new URI("https://gt.rappytv.com/players/" + uuid + "/" + additionalPath))
                 .header("Content-Type", "application/json")
                 .header("Authorization", key)
                 .method(method, bodyPublisher)
