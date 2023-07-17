@@ -8,6 +8,9 @@
             "showOwnTag": {
                 "name": "Show own tag"
             },
+            "tagSize": {
+                "name": "Tag size"
+            },
             "position": {
                 "name": "Position",
                 "entries": {
