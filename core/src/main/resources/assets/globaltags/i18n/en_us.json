@@ -4,7 +4,54 @@
             "name": "Global Tags",
             "enabled": {
                 "name": "Enabled"
+            },
+            "showOwnTag": {
+                "name": "Show own tag"
+            },
+            "position": {
+                "name": "Position",
+                "entries": {
+                    "aboveName": "Above name",
+                    "belowName": "Below name",
+                    "rightToName": "Right to name",
+                    "leftToName": "Left to name"
+                }
+            },
+            "tags": {
+                "name": "Tag settings",
+                "tag": {
+                    "name": "Set global tag"
+                },
+                "setTag": {
+                    "name": "Set tag you entered in the text field",
+                    "text": "Click"
+                },
+                "resetTag": {
+                    "name": "Delete global tag",
+                    "text": "Delete"
+                },
+                "clearCache": {
+                    "name": "Clear cache",
+                    "text": "Clear",
+                    "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f."
+                }
             }
+        },
+        "activity": {
+            "newtag": "New Tag"
+        },
+        "notifications": {
+            "success": "Success!",
+            "error": "An error ocurred",
+            "cacheCleared": "The cache was cleared!",
+            "cacheEmpty": "The cache is alreay empty!"
+        },
+        "messages": {
+            "clearCache": "Clear cache",
+            "hoverClearCache": "Click here to clear the tag cache!"
+        },
+        "context": {
+            "report": "Report Globaltag"
         }
     }
 }
