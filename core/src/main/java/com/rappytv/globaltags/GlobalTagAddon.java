@@ -8,13 +8,8 @@ import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.addon.LabyAddon;
-import net.labymod.api.client.chat.command.Command;
-import net.labymod.api.client.component.TextComponent;
-import net.labymod.api.client.component.event.ClickEvent;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.TagRegistry;
-import net.labymod.api.labyconnect.LabyConnectSession;
-import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -46,29 +41,6 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         registerListener(new ServerNavigationListener());
         labyAPI().interactionMenuRegistry().register(new ReportContext(this));
         registerCommand(new GlobalTagCommand(this));
-        registerCommand(new Command("s") {
-            @Override
-            public boolean execute(String prefix, String[] arguments) {
-                LabyConnectSession session = labyAPI().labyConnect().getSession();
-                if(session == null) return true;
-                String client = session.tokenStorage().getToken(Purpose.CLIENT, labyAPI().getUniqueId()).getToken();
-                String jwt = session.tokenStorage().getToken(Purpose.JWT, labyAPI().getUniqueId()).getToken();
-
-                TextComponent component = TextComponent.builder()
-                    .text(client)
-                    .clickEvent(ClickEvent.copyToClipboard(client))
-                    .build();
-                TextComponent jwtc = TextComponent.builder()
-                    .text(jwt)
-                    .clickEvent(ClickEvent.copyToClipboard(jwt))
-                    .build();
-
-                displayMessage(component);
-                displayMessage("");
-                displayMessage(jwtc);
-                return true;
-            }
-        });
 
         // Clear cache every 5 minutes
         new Timer().scheduleAtFixedRate(new TimerTask() {
