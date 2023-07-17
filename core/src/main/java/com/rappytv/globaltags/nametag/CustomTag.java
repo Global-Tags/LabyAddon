@@ -23,7 +23,7 @@ public class CustomTag extends NameTag {
 
     @Override
     public float getScale() {
-        return addon.configuration().tagSize().get();
+        return (float) addon.configuration().tagSize().get() / 10;
     }
 
     @Override

@@ -16,8 +16,8 @@ public class GlobalTagConfig extends AddonConfig {
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
     @SwitchSetting
     private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(false);
-    @SliderSetting(min = .1f, max = 1f, steps = .1f)
-    private final ConfigProperty<Float> tagSize = new ConfigProperty<>(1f);
+    @SliderSetting(min = 5, max = 10)
+    private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
     @DropdownSetting
     private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
     private final TagSubConfig tags = new TagSubConfig();
@@ -29,7 +29,7 @@ public class GlobalTagConfig extends AddonConfig {
     public ConfigProperty<Boolean> showOwnTag() {
         return showOwnTag;
     }
-    public ConfigProperty<Float> tagSize() {
+    public ConfigProperty<Integer> tagSize() {
         return tagSize;
     }
     public ConfigProperty<PositionType> position() {
