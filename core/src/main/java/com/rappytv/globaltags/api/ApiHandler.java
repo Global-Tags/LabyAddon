@@ -12,7 +12,7 @@ public class ApiHandler {
     public String getTag(UUID uuid) {
         ApiRequest request = new ApiRequest(
             "GET",
-            "[TEMPORARY SESSION KEY]",
+            Util.getSessionToken(),
             uuid,
             null,
             ""
@@ -24,7 +24,7 @@ public class ApiHandler {
     public void setTag(String tag) {
         ApiRequest request = new ApiRequest(
             "POST",
-            "[TEMPORARY SESSION KEY]",
+            Util.getSessionToken(),
             Laby.labyAPI().getUniqueId(),
             tag,
             ""
@@ -40,7 +40,7 @@ public class ApiHandler {
     public void resetTag() {
         ApiRequest request = new ApiRequest(
             "DELETE",
-            "[TEMPORARY SESSION KEY]",
+            Util.getSessionToken(),
             Laby.labyAPI().getUniqueId(),
             null,
             ""
@@ -56,7 +56,7 @@ public class ApiHandler {
     public void reportPlayer(UUID uuid) {
         ApiRequest request = new ApiRequest(
             "POST",
-            "[TEMPORARY SESSION KEY]",
+            Util.getSessionToken(),
             uuid,
             null,
             "report"

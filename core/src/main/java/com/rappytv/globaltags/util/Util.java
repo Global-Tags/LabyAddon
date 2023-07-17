@@ -3,9 +3,11 @@ package com.rappytv.globaltags.util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.gui.icon.Icon;
+import net.labymod.api.client.session.Session;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
 import net.labymod.api.util.I18n;
+import org.jetbrains.annotations.Nullable;
 
 public class Util {
 
@@ -29,5 +31,12 @@ public class Util {
         }
         TagCache.clear();
         return true;
+    }
+
+    public static @Nullable String getSessionToken() {
+        Session session = Laby.labyAPI().minecraft().sessionAccessor().getSession();
+        if(session == null) return null;
+
+        return session.getAccessToken();
     }
 }
