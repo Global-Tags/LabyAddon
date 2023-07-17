@@ -39,9 +39,9 @@ public class CustomTag extends NameTag {
             tag = TagCache.get(uuid);
         else {
             tag = addon.getApiHandler().getTag(uuid);
-            if(tag == null) return null;
             TagCache.add(uuid, tag);
         }
+        if(tag == null) return null;
 
         return RenderableComponent.of(Component.text(
             tag.replace('&', '§')
