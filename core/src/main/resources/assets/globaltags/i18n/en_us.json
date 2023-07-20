@@ -48,11 +48,13 @@
             "success": "Success!",
             "error": "An error ocurred",
             "cacheCleared": "The cache was cleared!",
-            "cacheEmpty": "The cache is alreay empty!"
+            "cacheEmpty": "The cache is alreay empty!",
+            "unknownError": "An unknown error ocurred! Please check your internet connection."
         },
         "messages": {
             "clearCache": "Clear cache",
-            "hoverClearCache": "Click here to clear the tag cache!"
+            "hoverClearCache": "Click here to clear the tag cache!",
+            "offline": "Connection failed!"
         },
         "context": {
             "report": "Report Globaltag"

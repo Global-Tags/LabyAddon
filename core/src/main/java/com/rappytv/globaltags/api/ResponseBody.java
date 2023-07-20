@@ -8,4 +8,7 @@ public class ResponseBody {
 
     // For errors
     public String error;
+
+    // Version
+    public String version;
 }
