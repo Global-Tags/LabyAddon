@@ -8,7 +8,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.Te
 import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.Setting;
-import net.labymod.api.util.Debounce;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.MethodOrder;
 
@@ -18,25 +17,20 @@ public class TagSubConfig extends Config {
 
     public TagSubConfig() {
         apiHandler = GlobalTagAddon.getAddon().getApiHandler();
-        tag.addChangeListener((property, oldValue, newValue) ->
-            Debounce.of("globaltag-set", 4000, () -> {
-                apiHandler.setTag(newValue);
-                Util.clearCache(false);
-            }
-        ));
     }
 
     @TextFieldSetting
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
-//    @MethodOrder(after = "tag")
-//    @ButtonSetting
-//    public void setTag(Setting setting) {
-//        apiHandler.setTag(tag.get());
-//    }
-
-    //@MethodOrder(after = "setTag")
     @MethodOrder(after = "tag")
+    @ButtonSetting
+    public void setTag(Setting setting) {
+        apiHandler.setTag(tag.get());
+        tag.set("");
+        Util.clearCache(false);
+    }
+
+    @MethodOrder(after = "setTag")
     @ButtonSetting
     public void resetTag(Setting setting) {
         apiHandler.resetTag();
