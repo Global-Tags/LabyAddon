@@ -23,7 +23,8 @@
             "tags": {
                 "name": "Tag settings",
                 "tag": {
-                    "name": "Set global tag"
+                    "name": "Global tag",
+                    "description": "This tag gets published as soon as you press the button below."
                 },
                 "setTag": {
                     "name": "Set tag you entered in the text field",
