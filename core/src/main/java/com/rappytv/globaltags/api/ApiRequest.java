@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.api;
 
 import com.google.gson.Gson;
+import net.labymod.api.util.I18n;
 import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.net.URI;
@@ -11,7 +12,6 @@ import java.net.http.HttpRequest.BodyPublisher;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
-import java.util.UUID;
 
 public class ApiRequest {
 
@@ -19,8 +19,9 @@ public class ApiRequest {
     private String message;
     private String tag;
     private String error;
+    private String version;
 
-    public ApiRequest(String method, String key, UUID uuid, @Nullable String tag, String additionalPath) {
+    public ApiRequest(String method, String path, String key, @Nullable String tag) {
         Gson gson = new Gson();
 
         try {
@@ -29,7 +30,7 @@ public class ApiRequest {
                 BodyPublishers.ofString(gson.toJson(new RequestBody(tag)));
 
             HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("https://gt.rappytv.com/players/" + uuid + "/" + additionalPath))
+                .uri(new URI("https://gt.rappytv.com" + path))
                 .header("Content-Type", "application/json")
                 .header("Authorization", key)
                 .method(method, bodyPublisher)
@@ -45,12 +46,18 @@ public class ApiRequest {
                 successful = false;
                 return;
             }
+            if(responseBody.version != null) {
+                version = responseBody.version;
+                successful = true;
+                return;
+            }
 
             this.message = responseBody.message;
             this.tag = responseBody.tag;
             successful = true;
         } catch (IOException | InterruptedException | URISyntaxException e) {
             e.printStackTrace();
+            error = I18n.translate("globaltags.notifications.unknownError");
             successful = false;
         }
     }
@@ -66,5 +73,8 @@ public class ApiRequest {
     }
     public String getError() {
         return error;
+    }
+    public String getVersion() {
+        return version;
     }
 }

@@ -9,13 +9,23 @@ import java.util.UUID;
 @Singleton
 public class ApiHandler {
 
+    public String getApiVersion() {
+        ApiRequest request = new ApiRequest(
+            "GET",
+            "/",
+            "",
+            null
+        );
+
+        return request.getVersion();
+    }
+
     public String getTag(UUID uuid) {
         ApiRequest request = new ApiRequest(
             "GET",
+            "/players/" + uuid,
             Util.getSessionToken(),
-            uuid,
-            null,
-            ""
+            null
         );
 
         return request.getTag();
@@ -24,10 +34,9 @@ public class ApiHandler {
     public void setTag(String tag) {
         ApiRequest request = new ApiRequest(
             "POST",
+            "/players/" + Laby.labyAPI().getUniqueId(),
             Util.getSessionToken(),
-            Laby.labyAPI().getUniqueId(),
-            tag,
-            ""
+            tag
         );
 
         if(!request.isSuccessful()) {
@@ -40,10 +49,9 @@ public class ApiHandler {
     public void resetTag() {
         ApiRequest request = new ApiRequest(
             "DELETE",
+            "/players/" + Laby.labyAPI().getUniqueId(),
             Util.getSessionToken(),
-            Laby.labyAPI().getUniqueId(),
-            null,
-            ""
+            null
         );
 
         if(!request.isSuccessful()) {
@@ -56,10 +64,9 @@ public class ApiHandler {
     public void reportPlayer(UUID uuid) {
         ApiRequest request = new ApiRequest(
             "POST",
+            "/players/" + uuid + "/report",
             Util.getSessionToken(),
-            uuid,
-            null,
-            "report"
+            null
         );
 
         if(!request.isSuccessful()) {
