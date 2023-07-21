@@ -6,6 +6,7 @@ import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.Setting;
 import net.labymod.api.util.I18n;
@@ -20,10 +21,12 @@ public class TagSubConfig extends Config {
     }
 
     @TextFieldSetting
+    @SpriteSlot(size = 32, y = 1)
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
     @MethodOrder(after = "tag")
     @ButtonSetting
+    @SpriteSlot(size = 32, y = 1, x = 1)
     public void setTag(Setting setting) {
         apiHandler.setTag(tag.get());
         tag.set("");
@@ -32,6 +35,7 @@ public class TagSubConfig extends Config {
 
     @MethodOrder(after = "setTag")
     @ButtonSetting
+    @SpriteSlot(size = 32, y = 1, x = 2)
     public void resetTag(Setting setting) {
         apiHandler.resetTag();
         Util.clearCache(false);
@@ -39,6 +43,7 @@ public class TagSubConfig extends Config {
 
     @MethodOrder(after = "resetTag")
     @ButtonSetting
+    @SpriteSlot(size = 32, y = 1, x = 3)
     public void clearCache(Setting setting) {
         if(Util.clearCache(true))
             Util.notify(
