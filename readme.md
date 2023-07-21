@@ -5,7 +5,7 @@ The [API](https://github.com/RappyLabyAddons/GlobalTagAPI) for the storage of th
 ### Installation
 1. Press `Win` + `R`
 2. Paste this into the window that popped up: `%appdata%/.minecraft/LabyMod-neo/addons` and press enter
-3. It should open your Labymod addon directory; Paste the [Global-Tags.jar](https://github.com/RappyLabyAddons/GlobalTags/releases/download/v1.0.1/Global-Tags.jar) in there.
+3. It should open your Labymod addon directory; Paste the [Global-Tags.jar](https://github.com/RappyLabyAddons/GlobalTags/releases/download/v1.0.2/Global-Tags.jar) in there.
 4. Launch your Labymod client.
 
 If you have any problems with the addon/have update ideas, feel free to
