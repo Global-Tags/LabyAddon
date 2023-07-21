@@ -26,7 +26,7 @@ public class GlobalTagCommand extends Command {
         String apiVersion = addon.getApiHandler().getApiVersion();
 
         TextComponent clearComponent = TextComponent.builder()
-            .append(GlobalTagAddon.prefix + "§aVersion: §b" + addon.addonInfo().getVersion() + "\n")
+            .append(GlobalTagAddon.prefix + "§aVersion: §b" + GlobalTagAddon.version + "\n")
             .append(GlobalTagAddon.prefix + "§aAPI Version: " + (apiVersion != null ? "§b" + apiVersion : "§c" + I18n.translate("globaltags.messages.offline")) + "\n")
             .append(GlobalTagAddon.prefix)
             .append(TextComponent.builder()

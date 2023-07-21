@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.api;
 
 import com.google.gson.Gson;
+import com.rappytv.globaltags.GlobalTagAddon;
 import net.labymod.api.util.I18n;
 import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class ApiRequest {
                 .uri(new URI("https://gt.rappytv.com" + path))
                 .header("Content-Type", "application/json")
                 .header("Authorization", key)
+                .header("X-Addon-Version", GlobalTagAddon.version)
                 .method(method, bodyPublisher)
                 .build();
 

@@ -18,6 +18,7 @@ import java.util.TimerTask;
 public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
     public static String prefix = "§1§lGlobalTags §8» §f";
+    public static String version;
     private static GlobalTagAddon addon;
     private ApiHandler apiHandler;
 
@@ -30,6 +31,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
+        version = addon.addonInfo().getVersion();
 
         TagRegistry tagRegistry = labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())
