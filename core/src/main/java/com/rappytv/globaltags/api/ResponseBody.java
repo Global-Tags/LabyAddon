@@ -4,6 +4,7 @@ public class ResponseBody {
 
     // For success
     public String tag;
+    public String position;
     public String message;
 
     // For errors
