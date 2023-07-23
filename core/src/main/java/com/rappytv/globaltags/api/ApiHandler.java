@@ -40,10 +40,10 @@ public class ApiHandler {
         );
 
         if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), null);
+            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
             return;
         }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), null);
+        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
     }
 
     public void setPosition(PositionType position) {
@@ -55,10 +55,10 @@ public class ApiHandler {
         );
 
         if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), null);
+            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
             return;
         }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), null);
+        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
     }
 
     public void resetTag() {
@@ -69,10 +69,10 @@ public class ApiHandler {
         );
 
         if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), null);
+            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
             return;
         }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), null);
+        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
     }
 
     public void reportPlayer(UUID uuid) {
@@ -83,9 +83,9 @@ public class ApiHandler {
         );
 
         if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), null);
+            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
             return;
         }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), null);
+        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
     }
 }

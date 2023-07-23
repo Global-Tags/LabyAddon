@@ -6,6 +6,7 @@ import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.Player;
+import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
 import net.labymod.api.client.render.font.RenderableComponent;
 import org.jetbrains.annotations.Nullable;
@@ -14,9 +15,11 @@ import java.util.UUID;
 public class CustomTag extends NameTag {
 
     private final GlobalTagAddon addon;
+    private final PositionType position;
 
-    public CustomTag(GlobalTagAddon addon) {
+    public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.addon = addon;
+        this.position = position;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class CustomTag extends NameTag {
             TagCache.add(uuid, info);
         }
         if(info.getTag() == null) return null;
-        if(!addon.configuration().position().get().equals(info.getPosition())) return null;
+        if(!position.equals(info.getPosition())) return null;
 
         return RenderableComponent.of(Component.text(
             info.getTag().replace('&', '§')

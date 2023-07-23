@@ -38,7 +38,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
             tagRegistry.register(
                 "friendtags_tag",
                 positionType,
-                new CustomTag(this)
+                new CustomTag(this, positionType)
             );
         registerListener(new ServerNavigationListener());
         labyAPI().interactionMenuRegistry().register(new ReportContext(this));
