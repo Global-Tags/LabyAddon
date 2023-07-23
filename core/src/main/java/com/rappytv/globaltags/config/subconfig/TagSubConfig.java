@@ -3,8 +3,10 @@ package com.rappytv.globaltags.config.subconfig;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.util.Util;
+import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
+import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
@@ -18,6 +20,7 @@ public class TagSubConfig extends Config {
 
     public TagSubConfig() {
         apiHandler = GlobalTagAddon.getAddon().getApiHandler();
+        position.addChangeListener((property, oldValue, newValue) -> apiHandler.setPosition(newValue));
     }
 
     @TextFieldSetting
@@ -33,7 +36,11 @@ public class TagSubConfig extends Config {
         Util.clearCache(false);
     }
 
-    @MethodOrder(after = "setTag")
+    @DropdownSetting
+    @SpriteSlot(size = 32, x = 3)
+    private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
+
+    @MethodOrder(after = "position")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 2)
     public void resetTag(Setting setting) {
@@ -49,7 +56,7 @@ public class TagSubConfig extends Config {
             Util.notify(
                 I18n.translate("globaltags.notifications.success"),
                 I18n.translate("globaltags.notifications.cacheCleared"),
-                null
+                true
             );
     }
 }

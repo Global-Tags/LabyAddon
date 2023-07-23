@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -14,11 +15,11 @@ import java.util.UUID;
 public class CustomTag extends NameTag {
 
     private final GlobalTagAddon addon;
-    private final PositionType positionType;
+    private final PositionType position;
 
-    public CustomTag(GlobalTagAddon addon, PositionType positionType) {
+    public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.addon = addon;
-        this.positionType = positionType;
+        this.position = position;
     }
 
     @Override
@@ -30,21 +31,21 @@ public class CustomTag extends NameTag {
     protected @Nullable RenderableComponent getRenderableComponent() {
         if(!addon.configuration().enabled().get()) return null;
         if(entity == null || !(entity instanceof Player)) return null;
-        if(!addon.configuration().position().get().equals(positionType)) return null;
         UUID uuid = entity.getUniqueId();
         if(!addon.configuration().showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid)) return null;
 
-        String tag;
+        PlayerInfo info;
         if(TagCache.has(uuid))
-            tag = TagCache.get(uuid);
+            info = TagCache.get(uuid);
         else {
-            tag = addon.getApiHandler().getTag(uuid);
-            TagCache.add(uuid, tag);
+            info = addon.getApiHandler().getInfo(uuid);
+            TagCache.add(uuid, info);
         }
-        if(tag == null) return null;
+        if(info.getTag() == null) return null;
+        if(!position.equals(info.getPosition())) return null;
 
         return RenderableComponent.of(Component.text(
-            tag.replace('&', '§')
+            info.getTag().replace('&', '§')
         ));
     }
 }
