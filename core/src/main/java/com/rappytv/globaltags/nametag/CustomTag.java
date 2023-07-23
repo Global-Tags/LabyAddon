@@ -48,4 +48,9 @@ public class CustomTag extends NameTag {
             info.getTag().replace('&', '§')
         ));
     }
+
+    @Override
+    public boolean isVisible() {
+        return !this.entity.isCrouching() && super.isVisible();
+    }
 }
