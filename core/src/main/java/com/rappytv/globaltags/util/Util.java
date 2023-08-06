@@ -4,7 +4,9 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
-import net.labymod.api.client.session.Session;
+import net.labymod.api.labyconnect.LabyConnectSession;
+import net.labymod.api.labyconnect.TokenStorage.Purpose;
+import net.labymod.api.labyconnect.TokenStorage.Token;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
 import net.labymod.api.util.I18n;
@@ -46,9 +48,17 @@ public class Util {
     }
 
     public static @Nullable String getSessionToken() {
-        Session session = Laby.labyAPI().minecraft().sessionAccessor().getSession();
+        LabyConnectSession session = Laby.labyAPI().labyConnect().getSession();
+
         if(session == null) return null;
 
-        return session.getAccessToken();
+        Token token = session.tokenStorage().getToken(
+            Purpose.JWT,
+            session.self().getUniqueId()
+        );
+
+        if(token == null || token.isExpired()) return null;
+
+        return token.getToken();
     }
 }
