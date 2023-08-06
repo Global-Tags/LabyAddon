@@ -56,7 +56,7 @@ public class TagSubConfig extends Config {
             Util.notify(
                 I18n.translate("globaltags.notifications.success"),
                 I18n.translate("globaltags.notifications.cacheCleared"),
-                true
+                false
             );
     }
 }
