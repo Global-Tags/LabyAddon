@@ -38,7 +38,7 @@ public class ApiRequest {
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("https://gt.rappytv.com" + path))
                 .header("Content-Type", "application/json")
-                .header("Authorization", key)
+                .header("Authorization", key != null ? key : "")
                 .header("X-Addon-Version", GlobalTagAddon.version)
                 .method(method, bodyPublisher)
                 .build();
