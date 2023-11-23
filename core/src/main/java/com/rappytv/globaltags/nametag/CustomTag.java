@@ -12,12 +12,15 @@ import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
 import net.labymod.api.client.render.font.RenderableComponent;
 import org.jetbrains.annotations.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class CustomTag extends NameTag {
 
     private final GlobalTagAddon addon;
     private final PositionType position;
+    private final Set<UUID> resolving = new HashSet<>();
 
     public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.addon = addon;
@@ -40,10 +43,14 @@ public class CustomTag extends NameTag {
         if(TagCache.has(uuid))
             info = TagCache.get(uuid);
         else {
-            InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
-            request.sendAsyncRequest().thenRun(() ->
-                TagCache.add(uuid, new PlayerInfo(request.getTag(), request.getPosition()))
-            );
+            if(!resolving.contains(uuid)) {
+                resolving.add(uuid);
+                InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
+                request.sendAsyncRequest().thenRun(() -> {
+                    TagCache.add(uuid, new PlayerInfo(request.getTag(), request.getPosition()));
+                    resolving.remove(uuid);
+                });
+            }
         }
         if(info == null || info.getTag() == null) return null;
         if(!position.equals(info.getPosition())) return null;
