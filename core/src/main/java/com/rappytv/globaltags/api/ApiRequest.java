@@ -63,7 +63,7 @@ public class ApiRequest {
             this.tag = responseBody.tag;
             this.position = responseBody.position;
             successful = true;
-        } catch (IOException | InterruptedException | URISyntaxException e) {
+        } catch (IOException | InterruptedException | URISyntaxException | NullPointerException e) {
             e.printStackTrace();
             error = I18n.translate("globaltags.notifications.unknownError");
             successful = false;
