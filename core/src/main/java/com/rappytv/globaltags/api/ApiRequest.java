@@ -31,10 +31,8 @@ public abstract class ApiRequest {
 
     public CompletableFuture<Void> sendAsyncRequest() {
         CompletableFuture<Void> future = new CompletableFuture<>();
-        System.out.println("Send Async");
 
         try {
-            System.out.println("Try");
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("https://gt.rappytv.com" + path))
                 .header("Content-Type", "application/json")
@@ -44,15 +42,13 @@ public abstract class ApiRequest {
                 .build();
 
             HttpClient client = HttpClient.newHttpClient();
-            System.out.println("1");
             client.sendAsync(request, BodyHandlers.ofString()).thenAccept(response -> {
-                System.out.println("2");
                 responseBody = gson.fromJson(response.body(), ResponseBody.class);
 
                 if(responseBody.error != null) {
                     error = responseBody.error;
-                    System.out.println("Error: " + error);
                     successful = false;
+                    future.complete(null);
                     return;
                 }
 
