@@ -14,9 +14,9 @@ public class VersionGetRequest extends ApiRequest {
 
     @Override
     public CompletableFuture<Void> sendAsyncRequest() {
-        CompletableFuture<Void> future = super.sendAsyncRequest();
-        if(isSuccessful()) version = responseBody.version;
-        return future;
+        return super.sendAsyncRequest().thenRun(() -> {
+            if(isSuccessful()) version = responseBody.version;
+        });
     }
 
     @Override

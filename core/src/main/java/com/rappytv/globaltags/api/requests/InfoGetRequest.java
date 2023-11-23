@@ -16,12 +16,12 @@ public class InfoGetRequest extends ApiRequest {
 
     @Override
     public CompletableFuture<Void> sendAsyncRequest() {
-        CompletableFuture<Void> future = super.sendAsyncRequest();
-        if(isSuccessful()) {
-            this.tag = responseBody.tag;
-            this.position = responseBody.position;
-        }
-        return future;
+        return super.sendAsyncRequest().thenRun(() -> {
+            if(isSuccessful()) {
+                this.tag = responseBody.tag;
+                this.position = responseBody.position;
+            }
+        });
     }
 
     @Override
