@@ -3,6 +3,7 @@ package com.rappytv.globaltags.api.requests;
 import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.api.RequestBody;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class InfoGetRequest extends ApiRequest {
 
@@ -11,10 +12,16 @@ public class InfoGetRequest extends ApiRequest {
 
     public InfoGetRequest(UUID uuid, String key) {
         super("GET", "/players/" + uuid, key);
+    }
+
+    @Override
+    public CompletableFuture<Void> sendAsyncRequest() {
+        CompletableFuture<Void> future = super.sendAsyncRequest();
         if(isSuccessful()) {
-            this.tag = responseBody.error;
+            this.tag = responseBody.tag;
             this.position = responseBody.position;
         }
+        return future;
     }
 
     @Override

@@ -42,7 +42,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
             );
         registerListener(new ServerNavigationListener());
         labyAPI().interactionMenuRegistry().register(new ReportContext(this));
-        registerCommand(new GlobalTagCommand(this));
+        registerCommand(new GlobalTagCommand());
 
         // Clear cache every 5 minutes
         new Timer().scheduleAtFixedRate(new TimerTask() {

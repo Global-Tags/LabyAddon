@@ -1,10 +1,7 @@
 package com.rappytv.globaltags.api;
 
-import com.rappytv.globaltags.api.requests.InfoGetRequest;
 import com.rappytv.globaltags.api.requests.PositionSetRequest;
 import com.rappytv.globaltags.api.requests.TagSetRequest;
-import com.rappytv.globaltags.api.requests.VersionGetRequest;
-import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -14,21 +11,6 @@ import java.util.UUID;
 
 @Singleton
 public class ApiHandler {
-
-    public String getApiVersion() {
-        VersionGetRequest request = new VersionGetRequest();
-
-        return request.getVersion();
-    }
-
-    public PlayerInfo getInfo(UUID uuid) {
-        InfoGetRequest request = new InfoGetRequest(
-            uuid,
-            Util.getSessionToken()
-        );
-
-        return new PlayerInfo(request.getTag(), request.getPosition());
-    }
 
     public void setTag(String tag) {
         TagSetRequest request = new TagSetRequest(
