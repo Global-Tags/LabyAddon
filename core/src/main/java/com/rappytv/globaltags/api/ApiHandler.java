@@ -1,5 +1,9 @@
 package com.rappytv.globaltags.api;
 
+import com.rappytv.globaltags.api.requests.InfoGetRequest;
+import com.rappytv.globaltags.api.requests.PositionSetRequest;
+import com.rappytv.globaltags.api.requests.TagSetRequest;
+import com.rappytv.globaltags.api.requests.VersionGetRequest;
 import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
@@ -12,19 +16,14 @@ import java.util.UUID;
 public class ApiHandler {
 
     public String getApiVersion() {
-        ApiRequest request = new ApiRequest(
-            "GET",
-            "/",
-            ""
-        );
+        VersionGetRequest request = new VersionGetRequest();
 
         return request.getVersion();
     }
 
     public PlayerInfo getInfo(UUID uuid) {
-        ApiRequest request = new ApiRequest(
-            "GET",
-            "/players/" + uuid,
+        InfoGetRequest request = new InfoGetRequest(
+            uuid,
             Util.getSessionToken()
         );
 
@@ -32,9 +31,7 @@ public class ApiHandler {
     }
 
     public void setTag(String tag) {
-        ApiRequest request = new ApiRequest(
-            "POST",
-            "/players/" + Laby.labyAPI().getUniqueId(),
+        TagSetRequest request = new TagSetRequest(
             Util.getSessionToken(),
             tag
         );
@@ -47,9 +44,7 @@ public class ApiHandler {
     }
 
     public void setPosition(PositionType position) {
-        ApiRequest request = new ApiRequest(
-            "POST",
-            "/players/" + Laby.labyAPI().getUniqueId() + "/position",
+        PositionSetRequest request = new PositionSetRequest(
             Util.getSessionToken(),
             position
         );
@@ -66,7 +61,12 @@ public class ApiHandler {
             "DELETE",
             "/players/" + Laby.labyAPI().getUniqueId(),
             Util.getSessionToken()
-        );
+        ) {
+            @Override
+            public RequestBody getBody() {
+                return null;
+            }
+        };
 
         if(!request.isSuccessful()) {
             Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
@@ -80,7 +80,12 @@ public class ApiHandler {
             "POST",
             "/players/" + uuid + "/report",
             Util.getSessionToken()
-        );
+        ) {
+            @Override
+            public RequestBody getBody() {
+                return null;
+            }
+        };
 
         if(!request.isSuccessful()) {
             Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
