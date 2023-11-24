@@ -25,6 +25,6 @@ public class RequestBody {
 
     public enum StringType {
         TAG,
-        REPORT_REASON;
+        REPORT_REASON
     }
 }

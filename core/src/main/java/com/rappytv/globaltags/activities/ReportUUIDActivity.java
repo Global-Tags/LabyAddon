@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.activities;
 
-import net.labymod.api.Laby;
+import com.rappytv.globaltags.GlobalTagAddon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
@@ -20,10 +20,12 @@ import java.util.UUID;
 @AutoActivity
 public class ReportUUIDActivity extends SimpleActivity {
 
+    private final GlobalTagAddon addon;
     private final UUID uuid;
     private final String username;
 
-    public ReportUUIDActivity(UUID uuid, String username) {
+    public ReportUUIDActivity(GlobalTagAddon addon, UUID uuid, String username) {
+        this.addon = addon;
         this.uuid = uuid;
         this.username = username;
     }
@@ -43,7 +45,9 @@ public class ReportUUIDActivity extends SimpleActivity {
             .updateComponent(Component.translatable("globaltags.report.send", NamedTextColor.RED))
             .addId("report-button");
         button.setEnabled(false);
-        button.setActionListener(() -> Laby.references().chatExecutor().displayClientMessage("§cReported Player"));
+        button.setActionListener(() ->
+            addon.getApiHandler().reportPlayer(uuid, textField.getText())
+        );
         textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
 
         profileWrapper.addEntry(headWidget);
