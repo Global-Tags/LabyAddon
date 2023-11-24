@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.api;
 
+import com.rappytv.globaltags.api.RequestBody.StringType;
 import com.rappytv.globaltags.api.requests.PositionSetRequest;
 import com.rappytv.globaltags.api.requests.TagSetRequest;
 import com.rappytv.globaltags.util.Util;
@@ -68,7 +69,7 @@ public class ApiHandler {
         ) {
             @Override
             public RequestBody getBody() {
-                return null;
+                return new RequestBody(reason, StringType.REPORT_REASON);
             }
         };
         request.sendAsyncRequest().thenRun(() -> {
