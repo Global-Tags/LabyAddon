@@ -13,17 +13,27 @@ import net.labymod.api.configuration.loader.property.ConfigProperty;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
+    public GlobalTagConfig() {
+        exceptions = displayExceptions.get();
+        displayExceptions.addChangeListener((value) -> exceptions = value);
+    }
+
+    public static boolean exceptions;
+
     @SwitchSetting
     @SpriteSlot(size = 32)
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
     @SwitchSetting
     @SpriteSlot(size = 32, x = 1)
     private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(false);
-    @SliderSetting(min = 5, max = 10)
     @SpriteSlot(size = 32, x = 2)
+    @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
     @SpriteSlot(size = 32, x = 1)
     private final TagSubConfig tags = new TagSubConfig();
+    @SpriteSlot(size = 32, x = 3)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> displayExceptions = new ConfigProperty<>(false);
 
     @Override
     public ConfigProperty<Boolean> enabled() {
