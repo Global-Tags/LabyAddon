@@ -9,6 +9,7 @@ import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.DivWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
@@ -31,30 +32,32 @@ public class ReportUUIDActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        FlexibleContentWidget windowWidget = new FlexibleContentWidget();
-        windowWidget.addId("window");
-        HorizontalListWidget profileWrapper = new HorizontalListWidget();
-        profileWrapper.addId("header");
-        IconWidget headWidget = new IconWidget(Icon.head(this.uuid));
-        headWidget.addId("head");
-        profileWrapper.addEntry(headWidget);
-        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.report.title", this.username);
-        titleWidget.addId("username");
-        profileWrapper.addEntry(titleWidget);
-        windowWidget.addContent(profileWrapper);
-        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.report.reason");
-        reasonWidget.addId("reason");
-        windowWidget.addContent(reasonWidget);
-        TextFieldWidget textField = new TextFieldWidget();
-        textField.placeholder(Component.translatable("globaltags.report.placeholder", NamedTextColor.DARK_GRAY));
-        textField.addId("text-field");
-        windowWidget.addContent(textField);
-        ButtonWidget button = new ButtonWidget();
-        button.updateComponent(Component.translatable("globaltags.report.send", NamedTextColor.RED));
-        button.addId("report-button");
+        FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
+        HorizontalListWidget outerWrapper = new HorizontalListWidget().addId("outer-header");
+        HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
+        IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
+        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.report.title", this.username).addId("username");
+        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.report.reason").addId("reason");
+        TextFieldWidget textField = new TextFieldWidget()
+            .placeholder(Component.translatable("globaltags.report.placeholder", NamedTextColor.DARK_GRAY))
+            .addId("text-field");
+        ButtonWidget button = new ButtonWidget()
+            .updateComponent(Component.translatable("globaltags.report.send", NamedTextColor.RED))
+            .addId("report-button");
         button.setEnabled(false);
         button.setActionListener(() -> Laby.references().chatExecutor().displayClientMessage("§cReported Player"));
         textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
+
+        profileWrapper.addEntry(headWidget);
+        profileWrapper.addEntry(titleWidget);
+
+        outerWrapper.addEntry(new DivWidget());
+        outerWrapper.addEntry(profileWrapper);
+        outerWrapper.addEntry(new DivWidget());
+
+        windowWidget.addContent(outerWrapper);
+        windowWidget.addContent(reasonWidget);
+        windowWidget.addContent(textField);
         windowWidget.addContent(button);
         this.document.addChild(windowWidget);
     }
