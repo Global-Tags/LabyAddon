@@ -1,24 +1,18 @@
-package com.rappytv.globaltags.context;
+package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.activities.ReportUUIDActivity;
 import com.rappytv.globaltags.util.TagCache;
+import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.interaction.BulletPoint;
 import net.labymod.api.client.gui.icon.Icon;
-import net.labymod.api.util.I18n;
 
-public class ReportContext implements BulletPoint {
-
-    private final GlobalTagAddon addon;
-
-    public ReportContext(GlobalTagAddon addon) {
-        this.addon = addon;
-    }
+public class ReportBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.text(I18n.translate("globaltags.context.report"));
+        return Component.translatable("globaltags.context.report");
     }
 
     @Override
@@ -28,7 +22,9 @@ public class ReportContext implements BulletPoint {
 
     @Override
     public void execute(Player player) {
-        addon.getApiHandler().reportPlayer(player.getUniqueId());
+        Laby.labyAPI().minecraft().executeNextTick(() ->
+            Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ReportUUIDActivity(player.getUniqueId(), player.getName()))
+        );
     }
 
     @Override
