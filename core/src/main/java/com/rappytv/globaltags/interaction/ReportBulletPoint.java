@@ -2,6 +2,7 @@ package com.rappytv.globaltags.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.activities.ReportUUIDActivity;
+import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -35,7 +36,8 @@ public class ReportBulletPoint implements BulletPoint {
     }
 
     @Override
-    public boolean isVisible(Player playerInfo) {
-        return TagCache.get(playerInfo.getUniqueId()) != null;
+    public boolean isVisible(Player player) {
+        PlayerInfo playerInfo = TagCache.get(player.getUniqueId());
+        return playerInfo != null && playerInfo.getTag() != null;
     }
 }
