@@ -19,11 +19,11 @@
         .head {
             width: 16;
             height: width;
-            alignment-x: center;
+            alignment: center;
         }
 
         .username {
-            alignment-x: center;
+            alignment: center;
         }
     }
 

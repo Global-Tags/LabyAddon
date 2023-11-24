@@ -9,7 +9,6 @@ import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
-import net.labymod.api.client.gui.screen.widget.widgets.DivWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
@@ -33,7 +32,6 @@ public class ReportUUIDActivity extends SimpleActivity {
     public void initialize(Parent parent) {
         super.initialize(parent);
         FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
-        HorizontalListWidget outerWrapper = new HorizontalListWidget().addId("outer-header");
         HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
         ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.report.title", this.username).addId("username");
@@ -51,11 +49,7 @@ public class ReportUUIDActivity extends SimpleActivity {
         profileWrapper.addEntry(headWidget);
         profileWrapper.addEntry(titleWidget);
 
-        outerWrapper.addEntry(new DivWidget());
-        outerWrapper.addEntry(profileWrapper);
-        outerWrapper.addEntry(new DivWidget());
-
-        windowWidget.addContent(outerWrapper);
+        windowWidget.addContent(profileWrapper);
         windowWidget.addContent(reasonWidget);
         windowWidget.addContent(textField);
         windowWidget.addContent(button);
