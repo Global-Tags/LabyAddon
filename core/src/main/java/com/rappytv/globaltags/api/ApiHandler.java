@@ -17,12 +17,13 @@ public class ApiHandler {
             Util.getSessionToken(),
             tag
         );
-
-        if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
-            return;
-        }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        request.sendAsyncRequest().thenRun(() -> {
+            if(!request.isSuccessful()) {
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                return;
+            }
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        });
     }
 
     public void setPosition(PositionType position) {
@@ -30,12 +31,13 @@ public class ApiHandler {
             Util.getSessionToken(),
             position
         );
-
-        if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
-            return;
-        }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        request.sendAsyncRequest().thenRun(() -> {
+            if(!request.isSuccessful()) {
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                return;
+            }
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        });
     }
 
     public void resetTag() {
@@ -49,12 +51,13 @@ public class ApiHandler {
                 return null;
             }
         };
-
-        if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
-            return;
-        }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        request.sendAsyncRequest().thenRun(() -> {
+            if(!request.isSuccessful()) {
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                return;
+            }
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        });
     }
 
     public void reportPlayer(UUID uuid) {
@@ -68,11 +71,12 @@ public class ApiHandler {
                 return null;
             }
         };
-
-        if(!request.isSuccessful()) {
-            Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
-            return;
-        }
-        Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        request.sendAsyncRequest().thenRun(() -> {
+            if(!request.isSuccessful()) {
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                return;
+            }
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        });
     }
 }

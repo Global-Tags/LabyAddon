@@ -2,6 +2,7 @@ package com.rappytv.globaltags.api;
 
 import com.google.gson.Gson;
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.config.GlobalTagConfig;
 import net.labymod.api.util.I18n;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -55,15 +56,20 @@ public abstract class ApiRequest {
                 if(responseBody.message != null) this.message = responseBody.message;
                 successful = true;
                 future.complete(null);
-            });
+            }).exceptionally((e) -> handleException(e, future));
         } catch (Exception e) {
-            e.printStackTrace();
-            future.complete(null);
-            error = I18n.translate("globaltags.notifications.unknownError");
-            successful = false;
+            handleException(e, future);
         }
 
         return future;
+    }
+
+    private Void handleException(Throwable e, CompletableFuture<Void> future) {
+        e.printStackTrace();
+        future.complete(null);
+        error = GlobalTagConfig.exceptions ? e.getMessage() : I18n.translate("globaltags.notifications.unknownError");
+        successful = false;
+        return null;
     }
 
     public boolean isSuccessful() {
