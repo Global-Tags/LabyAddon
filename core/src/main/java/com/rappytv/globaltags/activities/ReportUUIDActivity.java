@@ -8,11 +8,13 @@ import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
+import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 import java.util.UUID;
 
@@ -37,6 +39,7 @@ public class ReportUUIDActivity extends SimpleActivity {
         HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
         ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.report.title", this.username).addId("username");
+        VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
         ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.report.reason").addId("reason");
         TextFieldWidget textField = new TextFieldWidget()
             .placeholder(Component.translatable("globaltags.report.placeholder", NamedTextColor.DARK_GRAY))
@@ -53,10 +56,12 @@ public class ReportUUIDActivity extends SimpleActivity {
         profileWrapper.addEntry(headWidget);
         profileWrapper.addEntry(titleWidget);
 
+        content.addChild(reasonWidget);
+        content.addChild(textField);
+        content.addChild(button);
+
         windowWidget.addContent(profileWrapper);
-        windowWidget.addContent(reasonWidget);
-        windowWidget.addContent(textField);
-        windowWidget.addContent(button);
+        windowWidget.addContent(content);
         this.document.addChild(windowWidget);
     }
 }

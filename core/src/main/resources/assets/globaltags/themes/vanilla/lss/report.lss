@@ -27,21 +27,32 @@
         }
     }
 
-    .reason {
+    .content {
+        width: 100%;
+        height: 100%;
         alignment-x: center;
         alignment-y: center;
-        margin: 30 0 5 0;
-    }
+        overwrite-width: false;
 
-    .text-field {
-        width: 200;
-        margin-bottom: 5;
-        alignment-x: center;
-    }
+        .reason {
+            margin-top: 40;
+            alignment-x: center;
+            alignment-y: center;
+        }
 
-    .report-button {
-        alignment-x: center;
-        width: 70;
-        height: 20;
+        .text-field {
+            margin-top: 6;
+            width: 200;
+            alignment-x: center;
+            alignment-y: center;
+        }
+
+        .report-button {
+            margin-top: 5;
+            width: 70;
+            height: 20;
+            alignment-x: center;
+            alignment-y: center;
+        }
     }
 }
