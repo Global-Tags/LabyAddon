@@ -72,6 +72,12 @@
         },
         "context": {
             "report": "Report Globaltag"
+        },
+        "report": {
+            "title": "Report %s",
+            "send": "Send report",
+            "reason": "Reason",
+            "placeholder": "Please enter a reason..."
         }
     }
 }
