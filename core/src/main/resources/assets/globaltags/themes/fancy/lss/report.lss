@@ -1,0 +1,47 @@
+.window {
+    left: 50%;
+    top: 50%;
+    width: 300;
+    height: 180;
+    alignment-x: center;
+    alignment-y: center;
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 1 dark_gray;
+
+    .header {
+        left: 50%;
+        width: 100%;
+        height: 20;
+        padding: 0 2 0 2;
+        space-between-entries: 2;
+        background-color: rgba(10, 10, 10, 0.4);
+
+        .head {
+            width: 16;
+            height: width;
+            alignment-x: center;
+        }
+
+        .username {
+            alignment-x: center;
+        }
+    }
+
+    .reason {
+        alignment-x: center;
+        alignment-y: center;
+        margin: 30 0 5 0;
+    }
+
+    .text-field {
+        width: 200;
+        margin-bottom: 5;
+        alignment-x: center;
+    }
+
+    .report-button {
+        alignment-x: center;
+        width: 50;
+        height: 20;
+    }
+}
