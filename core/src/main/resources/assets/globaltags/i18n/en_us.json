@@ -20,6 +20,10 @@
                     "leftToName": "Left to name"
                 }
             },
+            "displayExceptions": {
+                "name": "Java Exceptions",
+                "description": "Shows Java Exceptions instead of \"An unknown error ocurred\"."
+            },
             "tags": {
                 "name": "Tag settings",
                 "tag": {
