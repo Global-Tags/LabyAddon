@@ -60,7 +60,7 @@ public class ApiHandler {
         });
     }
 
-    public void reportPlayer(UUID uuid) {
+    public void reportPlayer(UUID uuid, String reason) {
         ApiRequest request = new ApiRequest(
             "POST",
             "/players/" + uuid + "/report",
