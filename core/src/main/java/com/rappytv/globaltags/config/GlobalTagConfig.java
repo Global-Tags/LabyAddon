@@ -29,11 +29,11 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
-    @SpriteSlot(size = 32, x = 1)
-    private final TagSubConfig tags = new TagSubConfig();
-    @SpriteSlot(size = 32, x = 3)
+    @SpriteSlot(size = 32, y = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> displayExceptions = new ConfigProperty<>(false);
+    @SpriteSlot(size = 32, x = 1)
+    private final TagSubConfig tags = new TagSubConfig();
 
     @Override
     public ConfigProperty<Boolean> enabled() {
