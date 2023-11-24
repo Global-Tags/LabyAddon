@@ -7,10 +7,13 @@ import com.rappytv.globaltags.context.ReportContext;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.util.TagCache;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.TagRegistry;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import net.labymod.api.revision.SimpleRevision;
+import net.labymod.api.util.version.SemanticVersion;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,13 +27,14 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
     @Override
     protected void preConfigurationLoad() {
-        this.apiHandler = new ApiHandler();
-        addon = this;
+        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.0"), "2023-11-24"));
     }
 
     @Override
     protected void enable() {
         registerSettingCategory();
+        this.apiHandler = new ApiHandler();
+        addon = this;
         version = addon.addonInfo().getVersion();
 
         TagRegistry tagRegistry = labyAPI().tagRegistry();
