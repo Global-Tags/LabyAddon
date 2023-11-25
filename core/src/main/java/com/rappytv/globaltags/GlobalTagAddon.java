@@ -3,7 +3,7 @@ package com.rappytv.globaltags;
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
-import com.rappytv.globaltags.context.ReportContext;
+import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.util.TagCache;
@@ -45,7 +45,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
                 new CustomTag(this, positionType)
             );
         registerListener(new ServerNavigationListener());
-        labyAPI().interactionMenuRegistry().register(new ReportContext(this));
+        labyAPI().interactionMenuRegistry().register(new ReportBulletPoint(this));
         registerCommand(new GlobalTagCommand());
 
         // Clear cache every 5 minutes

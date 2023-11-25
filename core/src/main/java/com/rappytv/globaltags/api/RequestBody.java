@@ -6,9 +6,13 @@ public class RequestBody {
 
     public String tag;
     public String position;
+    public String reason;
 
-    public RequestBody(String tag) {
-        this.tag = tag;
+    public RequestBody(String argument, StringType type) {
+        switch (type) {
+            case TAG -> this.tag = argument;
+            case REPORT_REASON -> this.reason = argument;
+        }
     }
     public RequestBody(PositionType type) {
         position = switch (type) {
@@ -17,5 +21,10 @@ public class RequestBody {
             case RIGHT_TO_NAME -> "RIGHT";
             case LEFT_TO_NAME -> "LEFT";
         };
+    }
+
+    public enum StringType {
+        TAG,
+        REPORT_REASON
     }
 }
