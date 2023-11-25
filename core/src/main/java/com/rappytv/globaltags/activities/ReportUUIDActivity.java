@@ -1,10 +1,12 @@
 package com.rappytv.globaltags.activities;
 
 import com.rappytv.globaltags.GlobalTagAddon;
+import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.screen.Parent;
+import net.labymod.api.client.gui.screen.ScreenInstance;
 import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
@@ -48,9 +50,10 @@ public class ReportUUIDActivity extends SimpleActivity {
             .updateComponent(Component.translatable("globaltags.report.send", NamedTextColor.RED))
             .addId("report-button");
         button.setEnabled(false);
-        button.setActionListener(() ->
-            addon.getApiHandler().reportPlayer(uuid, textField.getText())
-        );
+        button.setActionListener(() -> {
+            Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+            addon.getApiHandler().reportPlayer(uuid, textField.getText());
+        });
         textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
 
         profileWrapper.addEntry(headWidget);
