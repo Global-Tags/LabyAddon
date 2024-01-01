@@ -1,4 +1,5 @@
 # Global Tags
+![Downloads](https://labybadges-delta.vercel.app/api/downloads/globaltags/formatted)<br>
 With this addon you can set custom public tags to appear whereever you want.
 The [API](https://github.com/RappyLabyAddons/GlobalTagAPI) for the storage of the tags is ofcourse public to avoid misuse of the session tokens
 
