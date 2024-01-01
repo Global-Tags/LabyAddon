@@ -25,7 +25,7 @@ public class ApiHandler {
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
         });
     }
@@ -42,7 +42,7 @@ public class ApiHandler {
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
         });
     }
@@ -65,7 +65,7 @@ public class ApiHandler {
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
         });
     }
@@ -88,7 +88,7 @@ public class ApiHandler {
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
         });
     }
