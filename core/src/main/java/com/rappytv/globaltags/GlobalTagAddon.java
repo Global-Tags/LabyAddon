@@ -7,6 +7,7 @@ import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.util.TagCache;
+import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -52,7 +53,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                TagCache.clear();
+                Util.clearCache(false);
             }
         }, 0, 1000 * 60 * 5);
     }

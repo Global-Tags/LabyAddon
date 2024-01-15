@@ -44,7 +44,7 @@ labyMod {
     }
 
     addonDev {
-        snapshotRelease()
+        productionRelease()
     }
 }
 
