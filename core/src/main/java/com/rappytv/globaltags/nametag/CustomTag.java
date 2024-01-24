@@ -2,20 +2,25 @@ package com.rappytv.globaltags.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.requests.InfoGetRequest;
+import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
+import net.labymod.api.client.render.matrix.Stack;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+@SuppressWarnings("deprecation")
 public class CustomTag extends NameTag {
 
     private final GlobalTagAddon addon;
@@ -37,7 +42,8 @@ public class CustomTag extends NameTag {
         if(!addon.configuration().enabled().get()) return null;
         if(entity == null || !(entity instanceof Player)) return null;
         UUID uuid = entity.getUniqueId();
-        if(!addon.configuration().showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid)) return null;
+        if(!addon.configuration().showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
+            return null;
 
         PlayerInfo info = null;
         if(TagCache.has(uuid))
@@ -47,7 +53,11 @@ public class CustomTag extends NameTag {
                 resolving.add(uuid);
                 InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
                 request.sendAsyncRequest().thenRun(() -> {
-                    TagCache.add(uuid, new PlayerInfo(request.getTag(), request.getPosition()));
+                    TagCache.add(uuid, new PlayerInfo(
+                        request.getTag(),
+                        request.getPosition(),
+                        request.getIcon()
+                    ));
                     resolving.remove(uuid);
                 });
             }
@@ -58,6 +68,21 @@ public class CustomTag extends NameTag {
         return RenderableComponent.of(Component.text(
             info.getTag().replace('&', '§')
         ));
+    }
+
+    @Override
+    public void render(Stack stack, Entity entity) {
+        super.render(stack, entity);
+        if(this.getRenderableComponent() == null) return;
+        PlayerInfo info = TagCache.get(entity.getUniqueId());
+        if(info == null || info.getIcon() == GlobalIcon.NONE) return;
+
+        addon.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
+            if(!info.getIcon().resourceLocation().exists()) return;
+            Icon icon = Icon.texture(info.getIcon().resourceLocation());
+
+            icon.render(stack, -10, -1, 10, 10);
+        });
     }
 
     @Override
