@@ -40,7 +40,22 @@
                     "entries": {
                         "none": "None",
                         "discord": "Discord",
+                        "bereal": "BeReal.",
+                        "ebio": "e.bio",
+                        "epicgames": "Epic Games",
+                        "github": "GitHub",
+                        "gitlab": "GitLab",
+                        "instagram": "Instagram",
+                        "kick": "Kick",
+                        "pinterest": "Pinterest",
+                        "playstation": "Playstation",
+                        "snapchat": "Snapchat",
+                        "steam": "Steam",
+                        "threads": "Threads",
+                        "tiktok": "TikTok",
                         "twitch": "Twitch",
+                        "x": "x",
+                        "xbox": "Xbox",
                         "youtube": "YouTube"
                     }
                 },
