@@ -1,8 +1,10 @@
 package com.rappytv.globaltags.api;
 
 import com.rappytv.globaltags.api.RequestBody.StringType;
+import com.rappytv.globaltags.api.requests.IconSetRequest;
 import com.rappytv.globaltags.api.requests.PositionSetRequest;
 import com.rappytv.globaltags.api.requests.TagSetRequest;
+import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -34,6 +36,23 @@ public class ApiHandler {
         PositionSetRequest request = new PositionSetRequest(
             Util.getSessionToken(),
             position
+        );
+        request.sendAsyncRequest().thenRun(() -> {
+            if(!request.isSuccessful()) {
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                return;
+            }
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+        }).exceptionally((e) -> {
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
+            return null;
+        });
+    }
+
+    public void setIcon(GlobalIcon icon) {
+        IconSetRequest request = new IconSetRequest(
+            Util.getSessionToken(),
+            icon
         );
         request.sendAsyncRequest().thenRun(() -> {
             if(!request.isSuccessful()) {
