@@ -29,12 +29,10 @@ public class PlayerInfo {
     }
 
     public GlobalIcon getIcon() {
-        if(icon == null) return GlobalIcon.NONE;
-        return switch(icon) {
-            default -> GlobalIcon.NONE;
-            case "DISCORD" -> GlobalIcon.DISCORD;
-            case "TWITCH" -> GlobalIcon.TWITCH;
-            case "YOUTUBE" -> GlobalIcon.YOUTUBE;
-        };
+        try {
+            return GlobalIcon.valueOf(icon.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return GlobalIcon.NONE;
+        }
     }
 }
