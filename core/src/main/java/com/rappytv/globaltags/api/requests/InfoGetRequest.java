@@ -9,6 +9,7 @@ public class InfoGetRequest extends ApiRequest {
 
     private String tag;
     private String position;
+    private String icon;
 
     public InfoGetRequest(UUID uuid, String key) {
         super("GET", "/players/" + uuid, key);
@@ -20,6 +21,7 @@ public class InfoGetRequest extends ApiRequest {
             if(isSuccessful()) {
                 this.tag = responseBody.tag;
                 this.position = responseBody.position;
+                this.icon = responseBody.icon;
             }
         });
     }
@@ -34,5 +36,8 @@ public class InfoGetRequest extends ApiRequest {
     }
     public String getPosition() {
         return position;
+    }
+    public String getIcon() {
+        return icon;
     }
 }
