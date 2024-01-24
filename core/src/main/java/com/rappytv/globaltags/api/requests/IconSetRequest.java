@@ -4,7 +4,6 @@ import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.api.RequestBody;
 import com.rappytv.globaltags.util.GlobalIcon;
 import net.labymod.api.Laby;
-import net.labymod.api.client.entity.player.tag.PositionType;
 
 public class IconSetRequest extends ApiRequest {
 
