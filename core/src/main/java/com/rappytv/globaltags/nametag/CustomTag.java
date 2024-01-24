@@ -81,7 +81,7 @@ public class CustomTag extends NameTag {
             if(!info.getIcon().resourceLocation().exists()) return;
             Icon icon = Icon.texture(info.getIcon().resourceLocation());
 
-            icon.render(stack, -10, -1, 10, 10);
+            icon.render(stack, -12, -1, 10, 10);
         });
     }
 
