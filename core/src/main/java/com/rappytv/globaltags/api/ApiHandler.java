@@ -26,6 +26,7 @@ public class ApiHandler {
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.clearCache(false);
         }).exceptionally((e) -> {
             Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
@@ -43,6 +44,7 @@ public class ApiHandler {
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.clearCache(false);
         }).exceptionally((e) -> {
             Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
@@ -60,6 +62,7 @@ public class ApiHandler {
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.clearCache(false);
         }).exceptionally((e) -> {
             Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
@@ -83,6 +86,7 @@ public class ApiHandler {
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.clearCache(false);
         }).exceptionally((e) -> {
             Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
             return null;
