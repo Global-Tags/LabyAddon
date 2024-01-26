@@ -11,15 +11,6 @@
             "tagSize": {
                 "name": "Tag size"
             },
-            "position": {
-                "name": "Position",
-                "entries": {
-                    "aboveName": "Above name",
-                    "belowName": "Below name",
-                    "rightToName": "Right to name",
-                    "leftToName": "Left to name"
-                }
-            },
             "displayExceptions": {
                 "name": "Java Exceptions",
                 "description": "Shows Java Exceptions instead of \"An unknown error ocurred\"."
@@ -42,6 +33,30 @@
                         "belowName": "Below name",
                         "rightToName": "Right to name",
                         "leftToName": "Left to name"
+                    }
+                },
+                "globalIcon": {
+                    "name": "Global Icon",
+                    "entries": {
+                        "none": "None",
+                        "discord": "Discord",
+                        "bereal": "BeReal.",
+                        "ebio": "e.bio",
+                        "epicgames": "Epic Games",
+                        "github": "GitHub",
+                        "gitlab": "GitLab",
+                        "instagram": "Instagram",
+                        "kick": "Kick",
+                        "pinterest": "Pinterest",
+                        "playstation": "Playstation",
+                        "snapchat": "Snapchat",
+                        "steam": "Steam",
+                        "threads": "Threads",
+                        "tiktok": "TikTok",
+                        "twitch": "Twitch",
+                        "x": "x",
+                        "xbox": "Xbox",
+                        "youtube": "YouTube"
                     }
                 },
                 "resetTag": {

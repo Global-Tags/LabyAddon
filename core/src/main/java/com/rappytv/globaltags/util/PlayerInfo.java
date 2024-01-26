@@ -6,10 +6,12 @@ public class PlayerInfo {
 
     private final String tag;
     private final String position;
+    private final String icon;
 
-    public PlayerInfo(String tag, String position) {
+    public PlayerInfo(String tag, String position, String icon) {
         this.tag = tag;
         this.position = position;
+        this.icon = icon;
     }
 
     public String getTag() {
@@ -17,11 +19,20 @@ public class PlayerInfo {
     }
 
     public PositionType getPosition() {
+        if(position == null) return PositionType.ABOVE_NAME;
         return switch(position) {
             default -> PositionType.ABOVE_NAME;
             case "BELOW" -> PositionType.BELOW_NAME;
             case "RIGHT" -> PositionType.RIGHT_TO_NAME;
             case "LEFT" -> PositionType.LEFT_TO_NAME;
         };
+    }
+
+    public GlobalIcon getIcon() {
+        try {
+            return GlobalIcon.valueOf(icon.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return GlobalIcon.NONE;
+        }
     }
 }

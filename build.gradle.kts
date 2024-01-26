@@ -17,7 +17,7 @@ labyMod {
         author = "RappyTV"
         description = "Get yourself a custom Globaltag that's publicly visible to anyone using this addon."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.0.10")
+        version = System.getenv().getOrDefault("VERSION", "1.1.0")
     }
 
     minecraft {
@@ -72,11 +72,7 @@ fun configureRun(provider: net.labymod.gradle.core.minecraft.provider.VersionPro
         args("--addon-dev-environment", "true")
     }
 
-    provider.javaVersion = when (gameVersion) {
-        else -> {
-            JavaVersion.VERSION_17
-        }
-    }
+    provider.javaVersion = JavaVersion.VERSION_17
 
     provider.mixin {
         val mixinMinVersion = when (gameVersion) {

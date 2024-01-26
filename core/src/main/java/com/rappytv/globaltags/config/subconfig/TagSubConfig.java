@@ -2,6 +2,7 @@ package com.rappytv.globaltags.config.subconfig;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
@@ -23,6 +24,7 @@ public class TagSubConfig extends Config {
     public TagSubConfig() {
         apiHandler = GlobalTagAddon.getAddon().getApiHandler();
         position.addChangeListener((property, oldValue, newValue) -> apiHandler.setPosition(newValue));
+        globalIcon.addChangeListener((property, oldValue, newValue) -> apiHandler.setIcon(newValue));
     }
 
     @TextFieldSetting
@@ -42,12 +44,14 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
 
-    @MethodOrder(after = "position")
+    @DropdownSetting
+    private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
+
+    @MethodOrder(after = "globalIcon")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 2)
     public void resetTag(Setting setting) {
         apiHandler.resetTag();
-        Util.clearCache(false);
     }
 
     @MethodOrder(after = "resetTag")
