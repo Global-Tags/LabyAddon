@@ -6,7 +6,6 @@ import com.rappytv.globaltags.config.GlobalTagConfig;
 import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
-import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
@@ -40,8 +39,9 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
         TagRegistry tagRegistry = labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())
-            tagRegistry.register(
+            tagRegistry.registerBefore(
                 "friendtags_tag",
+                "globaltag",
                 positionType,
                 new CustomTag(this, positionType)
             );
