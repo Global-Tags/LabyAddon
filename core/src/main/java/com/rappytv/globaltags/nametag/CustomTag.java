@@ -24,13 +24,12 @@ import java.util.UUID;
 @SuppressWarnings("deprecation")
 public class CustomTag extends NameTag {
 
-    private final GlobalTagAddon addon;
     private final GlobalTagConfig config;
     private final PositionType position;
     private final Set<UUID> resolving = new HashSet<>();
+    private PlayerInfo info;
 
     public CustomTag(GlobalTagAddon addon, PositionType position) {
-        this.addon = addon;
         this.config = addon.configuration();
         this.position = position;
     }
@@ -48,7 +47,6 @@ public class CustomTag extends NameTag {
         if(!config.showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
             return null;
 
-        PlayerInfo info = null;
         if(TagCache.has(uuid))
             info = TagCache.get(uuid);
         else {
@@ -75,10 +73,9 @@ public class CustomTag extends NameTag {
     public void render(Stack stack, Entity entity) {
         super.render(stack, entity);
         if(this.getRenderableComponent() == null) return;
-        PlayerInfo info = TagCache.get(entity.getUniqueId());
         if(info == null || info.getIcon() == GlobalIcon.NONE) return;
 
-        addon.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
+        Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
             if(!info.getIcon().resourceLocation().exists()) return;
             Icon icon = Icon.texture(info.getIcon().resourceLocation());
 
