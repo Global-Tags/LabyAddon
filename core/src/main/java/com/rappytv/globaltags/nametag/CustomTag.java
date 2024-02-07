@@ -2,6 +2,7 @@ package com.rappytv.globaltags.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.requests.InfoGetRequest;
+import com.rappytv.globaltags.config.GlobalTagConfig;
 import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
@@ -24,25 +25,27 @@ import java.util.UUID;
 public class CustomTag extends NameTag {
 
     private final GlobalTagAddon addon;
+    private final GlobalTagConfig config;
     private final PositionType position;
     private final Set<UUID> resolving = new HashSet<>();
 
     public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.addon = addon;
+        this.config = addon.configuration();
         this.position = position;
     }
 
     @Override
     public float getScale() {
-        return (float) addon.configuration().tagSize().get() / 10;
+        return (float) config.tagSize().get() / 10;
     }
 
     @Override
     protected @Nullable RenderableComponent getRenderableComponent() {
-        if(!addon.configuration().enabled().get()) return null;
+        if(!config.enabled().get()) return null;
         if(entity == null || !(entity instanceof Player)) return null;
         UUID uuid = entity.getUniqueId();
-        if(!addon.configuration().showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
+        if(!config.showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
             return null;
 
         PlayerInfo info = null;
@@ -54,7 +57,7 @@ public class CustomTag extends NameTag {
                 InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
                 request.sendAsyncRequest().thenRun(() -> {
                     TagCache.add(uuid, new PlayerInfo(
-                        request.getTag(),
+                        translateColorCodes(request.getTag()),
                         request.getPosition(),
                         request.getIcon()
                     ));
@@ -65,9 +68,7 @@ public class CustomTag extends NameTag {
         if(info == null || info.getTag() == null) return null;
         if(!position.equals(info.getPosition())) return null;
 
-        return RenderableComponent.of(Component.text(
-            info.getTag().replace('&', '§')
-        ));
+        return RenderableComponent.of(info.getTag());
     }
 
     @Override
@@ -88,5 +89,11 @@ public class CustomTag extends NameTag {
     @Override
     public boolean isVisible() {
         return !this.entity.isCrouching() && super.isVisible();
+    }
+
+    private Component translateColorCodes(String string) {
+        // Temporary solution
+        // TODO: Enhance
+        return Component.text(string.replace('&', '§'));
     }
 }
