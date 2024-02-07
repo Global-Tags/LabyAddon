@@ -44,6 +44,7 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
 
+    // TODO: Add icon
     @DropdownSetting
     private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
 

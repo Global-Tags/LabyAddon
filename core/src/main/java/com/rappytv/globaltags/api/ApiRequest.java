@@ -34,6 +34,7 @@ public abstract class ApiRequest {
         CompletableFuture<Void> future = new CompletableFuture<>();
 
         try {
+            // TODO: Use Request#ofGson
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("https://gt.rappytv.com" + path))
                 .header("Content-Type", "application/json")
