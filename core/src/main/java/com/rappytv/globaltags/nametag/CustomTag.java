@@ -48,6 +48,7 @@ public class CustomTag extends NameTag {
         if(!config.showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
             return null;
 
+        info = null;
         if(TagCache.has(uuid))
             info = TagCache.get(uuid);
         else {
