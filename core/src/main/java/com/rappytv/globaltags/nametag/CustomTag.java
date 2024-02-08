@@ -9,6 +9,7 @@ import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
 import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -89,8 +90,8 @@ public class CustomTag extends NameTag {
     }
 
     private Component translateColorCodes(String string) {
-        // Temporary solution
-        // TODO: Enhance
-        return Component.text(string.replace('&', '§'));
+        return LegacyComponentSerializer
+            .legacyAmpersand()
+            .deserialize(string);
     }
 }
