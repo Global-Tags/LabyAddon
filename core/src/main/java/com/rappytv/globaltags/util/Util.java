@@ -49,7 +49,6 @@ public class Util {
 
     public static @Nullable String getSessionToken() {
         LabyConnectSession session = Laby.labyAPI().labyConnect().getSession();
-
         if(session == null) return null;
 
         Token token = session.tokenStorage().getToken(

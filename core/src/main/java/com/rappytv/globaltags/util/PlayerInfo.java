@@ -1,20 +1,21 @@
 package com.rappytv.globaltags.util;
 
+import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.tag.PositionType;
 
 public class PlayerInfo {
 
-    private final String tag;
+    private final Component tag;
     private final String position;
     private final String icon;
 
-    public PlayerInfo(String tag, String position, String icon) {
+    public PlayerInfo(Component tag, String position, String icon) {
         this.tag = tag;
         this.position = position;
         this.icon = icon;
     }
 
-    public String getTag() {
+    public Component getTag() {
         return tag;
     }
 

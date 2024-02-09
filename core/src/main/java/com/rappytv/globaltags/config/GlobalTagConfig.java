@@ -33,7 +33,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
     @IntroducedIn(namespace = "globaltags", value = "1.1.0")
-    @SpriteSlot(size = 32, y = 2)
+    @SpriteSlot(size = 32, y = 2, x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> displayExceptions = new ConfigProperty<>(false);
     @SpriteSlot(size = 32, x = 1)
