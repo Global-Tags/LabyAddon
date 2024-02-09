@@ -44,20 +44,21 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
 
-    // TODO: Add icon
+
     @DropdownSetting
+    @SpriteSlot(size = 32, y = 1, x = 2)
     private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
 
     @MethodOrder(after = "globalIcon")
     @ButtonSetting
-    @SpriteSlot(size = 32, y = 1, x = 2)
+    @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
         apiHandler.resetTag();
     }
 
     @MethodOrder(after = "resetTag")
     @ButtonSetting
-    @SpriteSlot(size = 32, y = 1, x = 3)
+    @SpriteSlot(size = 32, y = 2)
     public void clearCache(Setting setting) {
         if(Util.clearCache(true))
             Util.notify(
