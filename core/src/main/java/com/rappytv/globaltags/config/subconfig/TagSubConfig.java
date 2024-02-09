@@ -4,6 +4,7 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.Util;
+import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
@@ -23,8 +24,14 @@ public class TagSubConfig extends Config {
 
     public TagSubConfig() {
         apiHandler = GlobalTagAddon.getAddon().getApiHandler();
-        position.addChangeListener((property, oldValue, newValue) -> apiHandler.setPosition(newValue));
-        globalIcon.addChangeListener((property, oldValue, newValue) -> apiHandler.setIcon(newValue));
+        position.addChangeListener((property, oldValue, newValue) -> {
+            if(Laby.labyAPI().isFullyInitialized())
+                apiHandler.setPosition(newValue);
+        });
+        globalIcon.addChangeListener((property, oldValue, newValue) -> {
+            if(Laby.labyAPI().isFullyInitialized())
+                apiHandler.setIcon(newValue);
+        });
     }
 
     @TextFieldSetting
