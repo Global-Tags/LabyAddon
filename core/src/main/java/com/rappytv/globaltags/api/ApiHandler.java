@@ -8,6 +8,7 @@ import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.util.I18n;
 import javax.inject.Singleton;
 import java.util.UUID;
@@ -22,13 +23,13 @@ public class ApiHandler {
         );
         request.sendAsyncRequest().thenRun(() -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
             return null;
         });
     }
@@ -40,13 +41,13 @@ public class ApiHandler {
         );
         request.sendAsyncRequest().thenRun(() -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
             return null;
         });
     }
@@ -58,13 +59,13 @@ public class ApiHandler {
         );
         request.sendAsyncRequest().thenRun(() -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), Icon.texture(icon.resourceLocation()));
             Util.clearCache(false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
             return null;
         });
     }
@@ -82,13 +83,13 @@ public class ApiHandler {
         };
         request.sendAsyncRequest().thenRun(() -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
             return null;
         });
     }
@@ -106,12 +107,12 @@ public class ApiHandler {
         };
         request.sendAsyncRequest().thenRun(() -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError(), true);
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage(), false);
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
         }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage(), true);
+            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
             return null;
         });
     }
