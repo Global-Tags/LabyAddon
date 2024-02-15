@@ -25,6 +25,10 @@ public enum GlobalIcon {
     private final ResourceLocation resourceLocation;
 
     GlobalIcon() {
+        if(name().equals("NONE")) {
+            resourceLocation = null;
+            return;
+        }
         this.resourceLocation = ResourceLocation.create(
             "globaltags",
             "textures/icons/" + this.name().toLowerCase() + ".png"
