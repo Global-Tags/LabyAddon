@@ -52,7 +52,7 @@ public class CustomTag extends NameTag {
         if(TagCache.has(uuid))
             info = TagCache.get(uuid);
         else {
-            if(!resolving.contains(uuid)) {
+            if(position == PositionType.ABOVE_NAME && !resolving.contains(uuid)) {
                 resolving.add(uuid);
                 InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
                 request.sendAsyncRequest().thenRun(() -> {
