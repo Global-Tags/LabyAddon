@@ -1,7 +1,6 @@
 package com.rappytv.globaltags.util;
 
-import net.labymod.api.client.resources.ResourceLocation;
-
+@SuppressWarnings("unused")
 public enum GlobalIcon {
     NONE,
     BEREAL,
@@ -20,22 +19,5 @@ public enum GlobalIcon {
     TWITCH,
     X,
     XBOX,
-    YOUTUBE;
-
-    private final ResourceLocation resourceLocation;
-
-    GlobalIcon() {
-        if(name().equals("NONE")) {
-            resourceLocation = null;
-            return;
-        }
-        this.resourceLocation = ResourceLocation.create(
-            "globaltags",
-            "textures/icons/" + this.name().toLowerCase() + ".png"
-        );
-    }
-
-    public ResourceLocation resourceLocation() {
-        return resourceLocation;
-    }
+    YOUTUBE
 }
