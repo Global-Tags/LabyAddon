@@ -12,11 +12,13 @@ public class PlayerInfo {
     private final Component tag;
     private final String position;
     private final String icon;
+    private final boolean admin;
 
-    public PlayerInfo(Component tag, String position, String icon) {
+    public PlayerInfo(Component tag, String position, String icon, boolean admin) {
         this.tag = tag;
         this.position = position;
         this.icon = icon;
+        this.admin = admin;
     }
 
     public Component getTag() {
@@ -48,5 +50,9 @@ public class PlayerInfo {
             location.exists() ? Icon.texture(location) : null
         );
         return getIcon();
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 }

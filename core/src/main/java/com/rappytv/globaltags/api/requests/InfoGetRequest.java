@@ -10,6 +10,7 @@ public class InfoGetRequest extends ApiRequest {
     private String tag;
     private String position;
     private String icon;
+    private boolean admin;
 
     public InfoGetRequest(UUID uuid, String key) {
         super("GET", "/players/" + uuid, key);
@@ -22,6 +23,7 @@ public class InfoGetRequest extends ApiRequest {
                 this.tag = responseBody.tag;
                 this.position = responseBody.position;
                 this.icon = responseBody.icon;
+                this.admin = responseBody.admin;
             }
         });
     }
@@ -39,5 +41,8 @@ public class InfoGetRequest extends ApiRequest {
     }
     public String getIcon() {
         return icon;
+    }
+    public boolean isAdmin() {
+        return admin;
     }
 }

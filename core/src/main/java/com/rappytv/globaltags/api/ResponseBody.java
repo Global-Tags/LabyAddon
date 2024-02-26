@@ -6,6 +6,7 @@ public class ResponseBody {
     public String tag;
     public String position;
     public String icon;
+    public boolean admin;
     public String message;
 
     // For errors
