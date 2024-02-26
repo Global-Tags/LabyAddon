@@ -13,11 +13,13 @@ import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
+import net.labymod.api.client.entity.player.tag.tags.NameTagBackground;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
 import net.labymod.api.client.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -26,6 +28,7 @@ import java.util.UUID;
 public class CustomTag extends NameTag {
 
     private final Icon admin;
+    private final int black = new Color(0, 0, 0, 70).getRGB();
     private final GlobalTagConfig config;
     private final PositionType position;
     private final Set<UUID> resolving = new HashSet<>();
@@ -85,8 +88,20 @@ public class CustomTag extends NameTag {
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
             info.getIcon().render(stack, -11, 0, 9, 9);
-            if(info.isAdmin()) admin.render(stack, getWidth() + 2, 0, 9, 9);
+            if(info.isAdmin()) admin.render(stack, getWidth() + 1.5F, 0, 9, 9);
         });
+    }
+
+    @Override
+    protected NameTagBackground getCustomBackground() {
+        boolean enabled = config.showBackground().get();
+        NameTagBackground background = super.getCustomBackground();
+
+        if (background == null)
+            background = NameTagBackground.custom(enabled, black);
+
+        background.setEnabled(enabled);
+        return background;
     }
 
     @Override
