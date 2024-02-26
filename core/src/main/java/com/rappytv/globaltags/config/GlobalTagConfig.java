@@ -35,7 +35,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2, x = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
-    @IntroducedIn(namespace = "globaltags", value = "1.1.0")
+    @IntroducedIn(namespace = "globaltags", value = "1.1.7")
     @SpriteSlot(size = 32, y = 2, x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> displayExceptions = new ConfigProperty<>(false);
