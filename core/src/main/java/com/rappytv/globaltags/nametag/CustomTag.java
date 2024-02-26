@@ -13,8 +13,10 @@ import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
+import net.labymod.api.client.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +25,7 @@ import java.util.UUID;
 @SuppressWarnings("deprecation")
 public class CustomTag extends NameTag {
 
+    private final Icon admin;
     private final GlobalTagConfig config;
     private final PositionType position;
     private final Set<UUID> resolving = new HashSet<>();
@@ -31,6 +34,10 @@ public class CustomTag extends NameTag {
     public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.config = addon.configuration();
         this.position = position;
+        admin = Icon.texture(ResourceLocation.create(
+            "globaltags",
+            "textures/icons/staff.png"
+        ));
     }
 
     @Override
@@ -57,7 +64,8 @@ public class CustomTag extends NameTag {
                     TagCache.add(uuid, new PlayerInfo(
                         translateColorCodes(request.getTag()),
                         request.getPosition(),
-                        request.getIcon()
+                        request.getIcon(),
+                        request.isAdmin()
                     ));
                     resolving.remove(uuid);
                 });
@@ -75,9 +83,10 @@ public class CustomTag extends NameTag {
         if(this.getRenderableComponent() == null) return;
         if(info == null || info.getIcon() == null) return;
 
-        Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () ->
-            info.getIcon().render(stack, -11, 0, 9, 9)
-        );
+        Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
+            info.getIcon().render(stack, -11, 0, 9, 9);
+            if(info.isAdmin()) admin.render(stack, getWidth() + 2, 0, 9, 9);
+        });
     }
 
     @Override
