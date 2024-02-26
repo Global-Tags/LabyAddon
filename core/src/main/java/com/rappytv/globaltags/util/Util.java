@@ -2,7 +2,6 @@ package com.rappytv.globaltags.util;
 
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.labyconnect.TokenStorage.Token;
@@ -14,14 +13,9 @@ import org.jetbrains.annotations.Nullable;
 public class Util {
 
     public static void notify(String title, String text) {
-        notify(title, text, null);
-    }
-
-    public static void notify(String title, String text, Icon icon) {
         Notification.Builder builder = Notification.builder()
             .title(Component.text(title))
             .text(Component.text(text))
-            .icon(icon != null ? icon.getResourceLocation() != null ? icon : null : null)
             .type(Type.SOCIAL);
         Laby.labyAPI().notificationController().push(builder.build());
     }
