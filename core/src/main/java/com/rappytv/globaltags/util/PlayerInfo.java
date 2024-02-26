@@ -2,6 +2,10 @@ package com.rappytv.globaltags.util;
 
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.tag.PositionType;
+import net.labymod.api.client.gui.icon.Icon;
+import net.labymod.api.client.resources.ResourceLocation;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerInfo {
 
@@ -29,11 +33,20 @@ public class PlayerInfo {
         };
     }
 
-    public GlobalIcon getIcon() {
-        try {
-            return GlobalIcon.valueOf(icon.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return GlobalIcon.NONE;
-        }
+    // To reduce object creation. Won't be cleared until restart
+    private final Map<String, Icon> iconCache = new HashMap<>();
+
+    public Icon getIcon() {
+        if(iconCache.containsKey(this.icon.toLowerCase()))
+            return iconCache.get(this.icon.toLowerCase());
+        ResourceLocation location = ResourceLocation.create(
+            "globaltags",
+            "textures/icons/" + this.icon.toLowerCase() + ".png"
+        );
+        iconCache.put(
+            this.icon.toLowerCase(),
+            location.exists() ? Icon.texture(location) : null
+        );
+        return getIcon();
     }
 }
