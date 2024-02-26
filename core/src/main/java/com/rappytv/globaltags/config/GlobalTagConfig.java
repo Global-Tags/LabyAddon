@@ -32,7 +32,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
-    @SpriteSlot
+    @SpriteSlot(size = 32, y = 2, x = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
     @IntroducedIn(namespace = "globaltags", value = "1.1.0")
