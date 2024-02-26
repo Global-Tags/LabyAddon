@@ -3,7 +3,6 @@ package com.rappytv.globaltags.nametag;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.requests.InfoGetRequest;
 import com.rappytv.globaltags.config.GlobalTagConfig;
-import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
@@ -14,10 +13,13 @@ import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
+import net.labymod.api.client.entity.player.tag.tags.NameTagBackground;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
+import net.labymod.api.client.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -25,6 +27,8 @@ import java.util.UUID;
 @SuppressWarnings("deprecation")
 public class CustomTag extends NameTag {
 
+    private final Icon admin;
+    private final int black = new Color(0, 0, 0, 70).getRGB();
     private final GlobalTagConfig config;
     private final PositionType position;
     private final Set<UUID> resolving = new HashSet<>();
@@ -33,6 +37,10 @@ public class CustomTag extends NameTag {
     public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.config = addon.configuration();
         this.position = position;
+        admin = Icon.texture(ResourceLocation.create(
+            "globaltags",
+            "textures/icons/staff.png"
+        ));
     }
 
     @Override
@@ -59,7 +67,8 @@ public class CustomTag extends NameTag {
                     TagCache.add(uuid, new PlayerInfo(
                         translateColorCodes(request.getTag()),
                         request.getPosition(),
-                        request.getIcon()
+                        request.getIcon(),
+                        request.isAdmin()
                     ));
                     resolving.remove(uuid);
                 });
@@ -75,14 +84,24 @@ public class CustomTag extends NameTag {
     public void render(Stack stack, Entity entity) {
         super.render(stack, entity);
         if(this.getRenderableComponent() == null) return;
-        if(info == null || info.getIcon() == GlobalIcon.NONE) return;
+        if(info == null || info.getIcon() == null) return;
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            if(!info.getIcon().resourceLocation().exists()) return;
-            Icon icon = Icon.texture(info.getIcon().resourceLocation());
-
-            icon.render(stack, -11, 0, 9, 9);
+            info.getIcon().render(stack, -11, 0, 9, 9);
+            if(info.isAdmin()) admin.render(stack, getWidth() + 1.5F, 0, 9, 9);
         });
+    }
+
+    @Override
+    protected NameTagBackground getCustomBackground() {
+        boolean enabled = config.showBackground().get();
+        NameTagBackground background = super.getCustomBackground();
+
+        if (background == null)
+            background = NameTagBackground.custom(enabled, black);
+
+        background.setEnabled(enabled);
+        return background;
     }
 
     @Override
