@@ -84,11 +84,11 @@ public class CustomTag extends NameTag {
     public void render(Stack stack, Entity entity) {
         super.render(stack, entity);
         if(this.getRenderableComponent() == null) return;
-        if(info == null || info.getIcon() == null) return;
+        if(info == null) return;
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            info.getIcon().render(stack, -11, 0, 9, 9);
-            if(info.isAdmin()) admin.render(stack, getWidth() + 1.5F, 0, 9, 9);
+            if(info.getIcon() != null) info.getIcon().render(stack, -11, 0, 9, 9);
+            if(info.isAdmin()) admin.render(stack, getWidth() + 0.9F, -1.2F, 11, 11);
         });
     }
 
