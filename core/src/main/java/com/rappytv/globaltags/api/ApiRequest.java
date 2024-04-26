@@ -1,23 +1,13 @@
 package com.rappytv.globaltags.api;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.config.GlobalTagConfig;
-import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Callback;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublisher;
-import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public abstract class ApiRequest {
 
