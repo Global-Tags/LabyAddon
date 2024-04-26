@@ -21,7 +21,7 @@ public class GlobalTagCommand extends Command {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         VersionGetRequest request = new VersionGetRequest();
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response) -> {
             String version = request.getVersion();
 
             TextComponent clearComponent = TextComponent.builder()
