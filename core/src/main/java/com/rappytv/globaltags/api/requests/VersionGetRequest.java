@@ -18,6 +18,7 @@ public class VersionGetRequest extends ApiRequest {
     public void sendAsyncRequest(Callback<JsonObject> callback) {
         super.sendAsyncRequest((response) -> {
             if(isSuccessful()) version = responseBody.version;
+            callback.accept(response);
         });
     }
 

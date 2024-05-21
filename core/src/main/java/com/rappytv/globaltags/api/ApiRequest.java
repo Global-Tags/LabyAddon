@@ -47,6 +47,7 @@ public abstract class ApiRequest {
             if(response.hasException()) {
                 successful = false;
                 error = response.exception().getMessage();
+                callback.accept(response);
                 return;
             }
             responseBody = gson.fromJson(response.get(), ResponseBody.class);
@@ -54,14 +55,13 @@ public abstract class ApiRequest {
             if(responseBody.error != null) {
                 error = responseBody.error;
                 successful = false;
+                callback.accept(response);
                 return;
             }
 
             if(responseBody.message != null) this.message = responseBody.message;
             successful = true;
             callback.accept(response);
-            // This gets logged
-            System.out.println("Callback called 1");
         });
     }
 
