@@ -7,7 +7,7 @@ import net.labymod.api.Laby;
 import net.labymod.api.util.io.web.request.Callback;
 import net.labymod.api.util.io.web.request.Request;
 import net.labymod.api.util.io.web.request.Request.Method;
-import java.util.HashMap;
+import net.labymod.api.util.io.web.request.types.GsonRequest;
 import java.util.Map;
 
 public abstract class ApiRequest {
@@ -29,28 +29,40 @@ public abstract class ApiRequest {
     }
 
     public void sendAsyncRequest(Callback<JsonObject> callback) {
-        Request.ofGson(JsonObject.class)
+        GsonRequest<JsonObject> request = Request.ofGson(JsonObject.class)
             .url("https://gt.rappytv.com" + path)
             .method(method)
-            .body(getBody() != null ? getBody() : new HashMap<>())
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", key != null ? key : "")
             .addHeader("X-Addon-Version", GlobalTagAddon.version)
             .addHeader("X-Minecraft-Language", Laby.labyAPI().minecraft().options().getCurrentLanguage())
-            .async()
-            .execute((response) -> {
-                responseBody = gson.fromJson(response.get(), ResponseBody.class);
+            .async();
 
-                if(responseBody.error != null) {
-                    error = responseBody.error;
-                    successful = false;
-                    return;
-                }
+        Map<String, String> body = getBody();
+        if(body != null) {
+            request.body(body);
+        }
 
-                if(responseBody.message != null) this.message = responseBody.message;
-                successful = true;
-                callback.accept(response);
-            });
+        request.execute((response) -> {
+            if(response.hasException()) {
+                successful = false;
+                error = response.exception().getMessage();
+                return;
+            }
+            responseBody = gson.fromJson(response.get(), ResponseBody.class);
+
+            if(responseBody.error != null) {
+                error = responseBody.error;
+                successful = false;
+                return;
+            }
+
+            if(responseBody.message != null) this.message = responseBody.message;
+            successful = true;
+            callback.accept(response);
+            // This gets logged
+            System.out.println("Callback called 1");
+        });
     }
 
     public boolean isSuccessful() {
