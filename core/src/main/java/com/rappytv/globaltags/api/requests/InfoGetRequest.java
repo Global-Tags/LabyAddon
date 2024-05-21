@@ -27,6 +27,7 @@ public class InfoGetRequest extends ApiRequest {
                 this.icon = responseBody.icon;
                 this.admin = responseBody.admin;
             }
+            callback.accept(response);
         });
     }
 
