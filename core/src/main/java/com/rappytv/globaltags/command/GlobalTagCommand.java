@@ -22,6 +22,8 @@ public class GlobalTagCommand extends Command {
     public boolean execute(String prefix, String[] arguments) {
         VersionGetRequest request = new VersionGetRequest();
         request.sendAsyncRequest((response) -> {
+            // This is not being logged
+            System.out.println("Callback called 2");
             String version = request.getVersion();
 
             TextComponent clearComponent = TextComponent.builder()
