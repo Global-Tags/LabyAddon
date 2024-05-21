@@ -39,9 +39,8 @@ public abstract class ApiRequest {
             .async();
 
         Map<String, String> body = getBody();
-        if(body != null) {
-            request.body(body);
-        }
+        if(body != null)
+            request.json(body);
 
         request.execute((response) -> {
             if(response.hasException()) {
