@@ -36,6 +36,7 @@ public abstract class ApiRequest {
             .addHeader("Authorization", key != null ? key : "")
             .addHeader("X-Addon-Version", GlobalTagAddon.version)
             .addHeader("X-Minecraft-Language", Laby.labyAPI().minecraft().options().getCurrentLanguage())
+            .handleErrorStream()
             .async();
 
         Map<String, String> body = getBody();
