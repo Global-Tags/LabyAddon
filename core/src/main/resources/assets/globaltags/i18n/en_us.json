@@ -14,6 +14,10 @@
             "showBackground": {
                 "name": "Show background"
             },
+            "localizedResponses": {
+                "name": "Localize API responses",
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
+            },
             "tags": {
                 "name": "Tag settings",
                 "tag": {
