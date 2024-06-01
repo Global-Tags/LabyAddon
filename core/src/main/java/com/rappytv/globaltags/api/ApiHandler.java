@@ -1,6 +1,5 @@
 package com.rappytv.globaltags.api;
 
-import com.rappytv.globaltags.api.RequestBody.StringType;
 import com.rappytv.globaltags.api.requests.IconSetRequest;
 import com.rappytv.globaltags.api.requests.PositionSetRequest;
 import com.rappytv.globaltags.api.requests.TagSetRequest;
@@ -9,7 +8,10 @@ import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.util.I18n;
+import net.labymod.api.util.io.web.request.Request.Method;
 import javax.inject.Singleton;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Singleton
@@ -20,17 +22,14 @@ public class ApiHandler {
             Util.getSessionToken(),
             tag
         );
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response -> {
             if(!request.isSuccessful()) {
                 Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
-        }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
-            return null;
-        });
+        }));
     }
 
     public void setPosition(PositionType position) {
@@ -38,17 +37,14 @@ public class ApiHandler {
             Util.getSessionToken(),
             position
         );
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response -> {
             if(!request.isSuccessful()) {
                 Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
-        }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
-            return null;
-        });
+        }));
     }
 
     public void setIcon(GlobalIcon icon) {
@@ -56,63 +52,56 @@ public class ApiHandler {
             Util.getSessionToken(),
             icon
         );
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response -> {
             if(!request.isSuccessful()) {
                 Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
-        }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
-            return null;
-        });
+        }));
     }
 
     public void resetTag() {
         ApiRequest request = new ApiRequest(
-            "DELETE",
+            Method.DELETE,
             "/players/" + Laby.labyAPI().getUniqueId(),
             Util.getSessionToken()
         ) {
             @Override
-            public RequestBody getBody() {
+            public Map<String, String> getBody() {
                 return null;
             }
         };
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response)-> {
             if(!request.isSuccessful()) {
                 Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
             Util.clearCache(false);
-        }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
-            return null;
         });
     }
 
     public void reportPlayer(UUID uuid, String reason) {
         ApiRequest request = new ApiRequest(
-            "POST",
+            Method.POST,
             "/players/" + uuid + "/report",
             Util.getSessionToken()
         ) {
             @Override
-            public RequestBody getBody() {
-                return new RequestBody(reason, StringType.REPORT_REASON);
+            public Map<String, String> getBody() {
+                Map<String, String> body = new HashMap<>();
+                body.put("reason", reason);
+                return body;
             }
         };
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response) -> {
             if(!request.isSuccessful()) {
                 Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
-        }).exceptionally((e) -> {
-            Util.notify(I18n.translate("globaltags.notifications.error"), e.getMessage());
-            return null;
         });
     }
 }

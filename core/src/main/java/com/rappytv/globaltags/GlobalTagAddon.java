@@ -29,6 +29,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     protected void preConfigurationLoad() {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.0"), "2023-11-24"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
+        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
         this.apiHandler = new ApiHandler();
         addon = this;
     }

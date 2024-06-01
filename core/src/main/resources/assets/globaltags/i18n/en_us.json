@@ -14,9 +14,9 @@
             "showBackground": {
                 "name": "Show background"
             },
-            "displayExceptions": {
-                "name": "Java Exceptions",
-                "description": "Shows Java Exceptions instead of \"An unknown error ocurred\"."
+            "localizedResponses": {
+                "name": "Localize API responses",
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
             },
             "tags": {
                 "name": "Tag settings",
@@ -80,8 +80,7 @@
             "success": "Success!",
             "error": "An error ocurred",
             "cacheCleared": "The cache was cleared!",
-            "cacheEmpty": "The cache is alreay empty!",
-            "unknownError": "An unknown error ocurred! Please check your internet connection."
+            "cacheEmpty": "The cache is already empty!"
         },
         "messages": {
             "clearCache": "Clear cache",

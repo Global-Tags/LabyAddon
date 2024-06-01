@@ -1,9 +1,11 @@
 package com.rappytv.globaltags.api.requests;
 
+import com.google.gson.JsonObject;
 import com.rappytv.globaltags.api.ApiRequest;
-import com.rappytv.globaltags.api.RequestBody;
+import net.labymod.api.util.io.web.request.Callback;
+import net.labymod.api.util.io.web.request.Request.Method;
+import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 public class InfoGetRequest extends ApiRequest {
 
@@ -13,23 +15,24 @@ public class InfoGetRequest extends ApiRequest {
     private boolean admin;
 
     public InfoGetRequest(UUID uuid, String key) {
-        super("GET", "/players/" + uuid, key);
+        super(Method.GET, "/players/" + uuid, key);
     }
 
     @Override
-    public CompletableFuture<Void> sendAsyncRequest() {
-        return super.sendAsyncRequest().thenRun(() -> {
+    public void sendAsyncRequest(Callback<JsonObject> callback) {
+        super.sendAsyncRequest((response) -> {
             if(isSuccessful()) {
                 this.tag = responseBody.tag;
                 this.position = responseBody.position;
                 this.icon = responseBody.icon;
                 this.admin = responseBody.admin;
             }
+            callback.accept(response);
         });
     }
 
     @Override
-    public RequestBody getBody() {
+    public Map<String, String> getBody() {
         return null;
     }
 

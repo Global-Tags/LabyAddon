@@ -1,26 +1,29 @@
 package com.rappytv.globaltags.api.requests;
 
+import com.google.gson.JsonObject;
 import com.rappytv.globaltags.api.ApiRequest;
-import com.rappytv.globaltags.api.RequestBody;
-import java.util.concurrent.CompletableFuture;
+import net.labymod.api.util.io.web.request.Callback;
+import net.labymod.api.util.io.web.request.Request.Method;
+import java.util.Map;
 
 public class VersionGetRequest extends ApiRequest {
 
     private String version;
 
     public VersionGetRequest() {
-        super("GET", "/", null);
+        super(Method.GET, "/", null);
     }
 
     @Override
-    public CompletableFuture<Void> sendAsyncRequest() {
-        return super.sendAsyncRequest().thenRun(() -> {
+    public void sendAsyncRequest(Callback<JsonObject> callback) {
+        super.sendAsyncRequest((response) -> {
             if(isSuccessful()) version = responseBody.version;
+            callback.accept(response);
         });
     }
 
     @Override
-    public RequestBody getBody() {
+    public Map<String, String> getBody() {
         return null;
     }
 

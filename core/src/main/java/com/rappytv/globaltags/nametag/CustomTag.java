@@ -63,7 +63,7 @@ public class CustomTag extends NameTag {
             if(position == PositionType.ABOVE_NAME && !resolving.contains(uuid)) {
                 resolving.add(uuid);
                 InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
-                request.sendAsyncRequest().thenRun(() -> {
+                request.sendAsyncRequest((response) -> {
                     TagCache.add(uuid, new PlayerInfo(
                         translateColorCodes(request.getTag()),
                         request.getPosition(),

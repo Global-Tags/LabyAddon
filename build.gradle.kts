@@ -7,8 +7,6 @@ plugins {
 group = "org.example"
 version = "1.0.0"
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
-
 labyMod {
     defaultPackageName = "com.rappytv.globaltags" //change this to your main package name (used by all modules)
     addonInfo {
@@ -17,7 +15,7 @@ labyMod {
         author = "RappyTV"
         description = "Get yourself a custom Globaltag that's publicly visible to anyone using this addon."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.1.8")
+        version = System.getenv().getOrDefault("VERSION", "1.1.9")
     }
 
     minecraft {
@@ -73,7 +71,7 @@ fun configureRun(provider: net.labymod.gradle.core.minecraft.provider.VersionPro
         args("--addon-dev-environment", "true")
     }
 
-    provider.javaVersion = JavaVersion.VERSION_17
+    provider.javaVersion = JavaVersion.VERSION_21
 
     provider.mixin {
         val mixinMinVersion = when (gameVersion) {

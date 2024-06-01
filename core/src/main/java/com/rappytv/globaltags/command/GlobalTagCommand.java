@@ -8,6 +8,8 @@ import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
 import net.labymod.api.client.component.event.ClickEvent;
 import net.labymod.api.client.component.event.HoverEvent;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.util.I18n;
 
 public class GlobalTagCommand extends Command {
@@ -21,18 +23,19 @@ public class GlobalTagCommand extends Command {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         VersionGetRequest request = new VersionGetRequest();
-        request.sendAsyncRequest().thenRun(() -> {
+        request.sendAsyncRequest((response) -> {
             String version = request.getVersion();
 
             TextComponent clearComponent = TextComponent.builder()
                 .append(GlobalTagAddon.prefix + "§aVersion: §b" + GlobalTagAddon.version + "\n")
                 .append(GlobalTagAddon.prefix + "§aAPI Version: " + (version != null ? "§b" + version : "§c" + I18n.translate("globaltags.messages.offline")) + "\n")
                 .append(GlobalTagAddon.prefix)
-                .append(TextComponent.builder()
-                    .text("§d§n" + I18n.translate("globaltags.messages.clearCache"))
+                .append(Component
+                    .translatable("globaltags.messages.clearCache")
+                    .color(NamedTextColor.LIGHT_PURPLE)
+                    .decorate(TextDecoration.UNDERLINED)
                     .hoverEvent(HoverEvent.showText(Component.text("§b" + I18n.translate("globaltags.messages.hoverClearCache"))))
-                    .clickEvent(ClickEvent.suggestCommand("/" + prefix + " cc"))
-                    .build())
+                    .clickEvent(ClickEvent.suggestCommand("/" + prefix + " cc")))
                 .build();
 
             displayMessage(clearComponent);

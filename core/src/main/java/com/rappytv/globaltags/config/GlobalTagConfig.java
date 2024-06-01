@@ -5,7 +5,6 @@ import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
-import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
@@ -15,13 +14,11 @@ import net.labymod.api.configuration.loader.property.ConfigProperty;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
-    public GlobalTagConfig() {
-        exceptions = displayExceptions.get();
-        displayExceptions.addChangeListener((value) -> exceptions = value);
-    }
+    private static boolean localized;
 
-    @Exclude
-    public static boolean exceptions;
+    public GlobalTagConfig() {
+        localizedResponses.addChangeListener((property, oldValue, newValue) -> localized = newValue);
+    }
 
     @SwitchSetting
     @SpriteSlot(size = 32)
@@ -33,13 +30,13 @@ public class GlobalTagConfig extends AddonConfig {
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
     @IntroducedIn(namespace = "globaltags", value = "1.1.7")
-    @SpriteSlot(size = 32, y = 2, x = 2)
-    @SwitchSetting
-    private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
-    @IntroducedIn(namespace = "globaltags", value = "1.1.0")
     @SpriteSlot(size = 32, y = 2, x = 1)
     @SwitchSetting
-    private final ConfigProperty<Boolean> displayExceptions = new ConfigProperty<>(false);
+    private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
+    @IntroducedIn(namespace = "globaltags", value = "1.1.9")
+    @SpriteSlot(size = 32, y = 2, x = 2)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 1)
     private final TagSubConfig tags = new TagSubConfig();
 
@@ -55,5 +52,8 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return showBackground;
+    }
+    public static boolean localizedResponses() {
+        return localized;
     }
 }
