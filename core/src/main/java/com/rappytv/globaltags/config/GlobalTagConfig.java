@@ -14,6 +14,12 @@ import net.labymod.api.configuration.loader.property.ConfigProperty;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
+    private static boolean localized;
+
+    public GlobalTagConfig() {
+        localizedResponses.addChangeListener((property, oldValue, newValue) -> localized = newValue);
+    }
+
     @SwitchSetting
     @SpriteSlot(size = 32)
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
@@ -27,6 +33,8 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2, x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
+    @SwitchSetting
+    private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 1)
     private final TagSubConfig tags = new TagSubConfig();
 
@@ -42,5 +50,8 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return showBackground;
+    }
+    public static boolean localizedResponses() {
+        return localized;
     }
 }
