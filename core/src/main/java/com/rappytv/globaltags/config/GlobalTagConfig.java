@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.activities.AccountCenterActivity;
+import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -18,10 +19,10 @@ import net.labymod.api.util.MethodOrder;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
-    private static boolean localized;
-
     public GlobalTagConfig() {
-        localizedResponses.addChangeListener((property, oldValue, newValue) -> localized = newValue);
+        localizedResponses.addChangeListener((property, oldValue, newValue) ->
+            ApiRequest.localizedResponses = newValue
+        );
     }
 
     @SwitchSetting
@@ -63,8 +64,5 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return showBackground;
-    }
-    public static boolean localizedResponses() {
-        return localized;
     }
 }

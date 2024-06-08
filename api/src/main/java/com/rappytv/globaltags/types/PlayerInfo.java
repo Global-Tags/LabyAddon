@@ -1,5 +1,6 @@
-package com.rappytv.globaltags.util;
+package com.rappytv.globaltags.types;
 
+import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.icon.Icon;

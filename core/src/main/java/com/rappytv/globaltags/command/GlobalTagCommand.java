@@ -2,6 +2,7 @@ package com.rappytv.globaltags.command;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
@@ -24,7 +25,7 @@ public class GlobalTagCommand extends Command {
     public boolean execute(String prefix, String[] arguments) {
         ApiHandler.getVersion((version) -> {
             TextComponent clearComponent = TextComponent.builder()
-                .append(GlobalTagAddon.prefix + "§aVersion: §b" + GlobalTagAddon.version + "\n")
+                .append(GlobalTagAddon.prefix + "§aVersion: §b" + ApiRequest.version + "\n")
                 .append(GlobalTagAddon.prefix + "§aAPI Version: " + (version != null ? "§b" + version : "§c" + I18n.translate("globaltags.messages.offline")) + "\n")
                 .append(GlobalTagAddon.prefix)
                 .append(Component

@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.activities;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.ApiHandler;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -25,12 +25,10 @@ import java.util.UUID;
 @AutoActivity
 public class BanUUIDActivity extends SimpleActivity {
 
-    private final GlobalTagAddon addon;
     private final UUID uuid;
     private final String username;
 
-    public BanUUIDActivity(GlobalTagAddon addon, UUID uuid, String username) {
-        this.addon = addon;
+    public BanUUIDActivity(UUID uuid, String username) {
         this.uuid = uuid;
         this.username = username;
     }
@@ -53,7 +51,7 @@ public class BanUUIDActivity extends SimpleActivity {
         button.setEnabled(false);
         button.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            addon.getApiHandler().banPlayer(uuid, textField.getText());
+            ApiHandler.banPlayer(uuid, textField.getText(), (response) -> {});
         });
         textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
 

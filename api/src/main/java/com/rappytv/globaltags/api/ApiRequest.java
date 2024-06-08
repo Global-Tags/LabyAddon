@@ -2,8 +2,6 @@ package com.rappytv.globaltags.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.config.GlobalTagConfig;
 import net.labymod.api.Laby;
 import net.labymod.api.util.io.web.request.Callback;
 import net.labymod.api.util.io.web.request.Request;
@@ -12,6 +10,9 @@ import net.labymod.api.util.io.web.request.types.GsonRequest;
 import java.util.Map;
 
 public abstract class ApiRequest {
+
+    public static boolean localizedResponses;
+    public static String version;
 
     private final Gson gson = new Gson();
     private boolean successful;
@@ -22,13 +23,11 @@ public abstract class ApiRequest {
     private final Method method;
     private final String path;
     private final String key;
-    private final boolean localized;
 
     public ApiRequest(Method method, String path, String key) {
         this.method = method;
         this.path = path;
         this.key = key;
-        this.localized = GlobalTagConfig.localizedResponses();
     }
 
     public void sendAsyncRequest(Callback<JsonObject> callback) {
@@ -37,7 +36,7 @@ public abstract class ApiRequest {
             .method(method)
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", key != null ? key : "")
-            .addHeader("X-Addon-Version", GlobalTagAddon.version)
+            .addHeader("X-Addon-Version", version)
             .handleErrorStream()
             .async();
 
@@ -45,7 +44,7 @@ public abstract class ApiRequest {
         if(body != null)
             request.json(body);
 
-        if(localized)
+        if(localizedResponses)
             request.addHeader("X-Minecraft-Language", Laby.labyAPI().minecraft().options().getCurrentLanguage());
 
         request.execute((response) -> {

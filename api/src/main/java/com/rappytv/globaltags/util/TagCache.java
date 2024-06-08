@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.util;
 
 import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.types.PlayerInfo;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

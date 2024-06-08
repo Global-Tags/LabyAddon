@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.util;
+package com.rappytv.globaltags.types;
 
 @SuppressWarnings("unused")
 public enum GlobalIcon {

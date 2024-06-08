@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.api;
 
-import com.rappytv.globaltags.util.GlobalIcon;
-import com.rappytv.globaltags.util.PlayerInfo;
+import com.rappytv.globaltags.types.GlobalIcon;
+import com.rappytv.globaltags.types.PlayerInfo;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;

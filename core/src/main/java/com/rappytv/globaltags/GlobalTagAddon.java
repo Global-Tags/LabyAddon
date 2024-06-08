@@ -1,5 +1,6 @@
 package com.rappytv.globaltags;
 
+import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
 import com.rappytv.globaltags.interaction.ReportBulletPoint;
@@ -20,7 +21,6 @@ import java.util.TimerTask;
 public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
     public static String prefix = "§1§lGlobalTags §8» §f";
-    public static String version;
     private static GlobalTagAddon addon;
 
     @Override
@@ -34,7 +34,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
-        version = addon.addonInfo().getVersion();
+        ApiRequest.version = addon.addonInfo().getVersion();
 
         TagRegistry tagRegistry = labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())
@@ -45,7 +45,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
                 new CustomTag(this, positionType)
             );
         registerListener(new ServerNavigationListener());
-        labyAPI().interactionMenuRegistry().register(new ReportBulletPoint(this));
+        labyAPI().interactionMenuRegistry().register(new ReportBulletPoint());
         registerCommand(new GlobalTagCommand());
 
         // Clear cache every 5 minutes

@@ -2,7 +2,7 @@ package com.rappytv.globaltags.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.config.GlobalTagConfig;
-import com.rappytv.globaltags.util.PlayerInfo;
+import com.rappytv.globaltags.types.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.Entity;
