@@ -88,13 +88,18 @@
             "offline": "Connection failed!"
         },
         "context": {
-            "report": "Report Globaltag"
-        },
-        "report": {
-            "title": "Report %s",
-            "send": "Send report",
             "reason": "Reason",
-            "placeholder": "Please enter a reason..."
+            "placeholder": "Please enter a reason...",
+            "report": {
+                "name": "Report GlobalTag",
+                "title": "Report %s",
+                "send": "Send report"
+            },
+            "ban": {
+                "name": "Ban GlobalTag player",
+                "title": "Ban %s",
+                "send": "Ban"
+            }
         }
     }
 }

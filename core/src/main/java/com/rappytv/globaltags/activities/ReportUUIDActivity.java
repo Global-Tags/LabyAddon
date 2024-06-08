@@ -40,14 +40,14 @@ public class ReportUUIDActivity extends SimpleActivity {
         FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
         HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.report.title", this.username).addId("username");
+        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.report.title", this.username).addId("username");
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
-        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.report.reason").addId("reason");
+        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.reason").addId("reason");
         TextFieldWidget textField = new TextFieldWidget()
-            .placeholder(Component.translatable("globaltags.report.placeholder", NamedTextColor.DARK_GRAY))
+            .placeholder(Component.translatable("globaltags.placeholder", NamedTextColor.DARK_GRAY))
             .addId("text-field");
         ButtonWidget button = new ButtonWidget()
-            .updateComponent(Component.translatable("globaltags.report.send", NamedTextColor.RED))
+            .updateComponent(Component.translatable("globaltags.context.report.send", NamedTextColor.RED))
             .addId("report-button");
         button.setEnabled(false);
         button.setActionListener(() -> {
