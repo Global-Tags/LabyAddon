@@ -2,6 +2,7 @@ package com.rappytv.globaltags.util;
 
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.labyconnect.TokenStorage.Token;
@@ -13,11 +14,18 @@ import org.jetbrains.annotations.Nullable;
 public class Util {
 
     public static void notify(String title, String text) {
-        Notification.Builder builder = Notification.builder()
-            .title(Component.text(title))
-            .text(Component.text(text))
-            .type(Type.SOCIAL);
-        Laby.labyAPI().notificationController().push(builder.build());
+        Notification.builder()
+            .title(net.labymod.api.client.component.Component.text(title))
+            .text(net.labymod.api.client.component.Component.text(text))
+            .type(Type.SOCIAL)
+            .buildAndPush();
+    }
+
+    public static Component translateColorCodes(String string) {
+        if(string == null) return null;
+        return LegacyComponentSerializer
+            .legacyAmpersand()
+            .deserialize(string);
     }
 
     public static boolean clearCache(boolean notify) {

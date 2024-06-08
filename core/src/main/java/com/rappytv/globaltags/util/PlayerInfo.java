@@ -6,19 +6,26 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class PlayerInfo {
 
+    private final UUID uuid;
     private final Component tag;
     private final String position;
     private final String icon;
     private final boolean admin;
 
-    public PlayerInfo(Component tag, String position, String icon, boolean admin) {
+    public PlayerInfo(UUID uuid, Component tag, String position, String icon, boolean admin) {
+        this.uuid = uuid;
         this.tag = tag;
         this.position = position;
         this.icon = icon;
         this.admin = admin;
+    }
+
+    public UUID getUUID() {
+        return uuid;
     }
 
     public Component getTag() {
