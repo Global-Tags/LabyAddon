@@ -99,6 +99,19 @@
                 "name": "Ban GlobalTag player",
                 "title": "Ban %s",
                 "send": "Ban"
+            },
+            "changeTag": {
+                "name": "Change GlobalTag",
+                "title": "Change %s's Tag",
+                "label": "New GlobalTag",
+                "placeholder": "Enter the updated GlobalTag...",
+                "send": "Update Tag"
+            },
+            "clearTag": {
+                "name": "Clear GlobalTag"
+            },
+            "toggleAdmin": {
+                "name": "Toggle GlobalTag Admin"
             }
         }
     }

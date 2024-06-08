@@ -13,7 +13,7 @@ public class ChangeTagBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context.report");
+        return Component.translatable("globaltags.context.changeTag.name");
     }
 
     @Override

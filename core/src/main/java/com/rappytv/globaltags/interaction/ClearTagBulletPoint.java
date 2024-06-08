@@ -14,7 +14,7 @@ public class ClearTagBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context.resetTag");
+        return Component.translatable("globaltags.context.clearTag.name");
     }
 
     @Override
