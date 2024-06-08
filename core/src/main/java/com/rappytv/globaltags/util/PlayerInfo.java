@@ -12,13 +12,15 @@ public class PlayerInfo {
 
     private final UUID uuid;
     private final Component tag;
+    private final String plainTag;
     private final String position;
     private final String icon;
     private final boolean admin;
 
-    public PlayerInfo(UUID uuid, Component tag, String position, String icon, boolean admin) {
+    public PlayerInfo(UUID uuid, String tag, String position, String icon, boolean admin) {
         this.uuid = uuid;
-        this.tag = tag;
+        this.tag = Util.translateColorCodes(tag);
+        this.plainTag = tag;
         this.position = position;
         this.icon = icon;
         this.admin = admin;
@@ -30,6 +32,10 @@ public class PlayerInfo {
 
     public Component getTag() {
         return tag;
+    }
+
+    public String getPlainTag() {
+        return plainTag;
     }
 
     public PositionType getPosition() {
@@ -44,6 +50,10 @@ public class PlayerInfo {
 
     // To reduce object creation. Won't be cleared until restart
     private final Map<String, Icon> iconCache = new HashMap<>();
+
+    public String getIconName() {
+        return icon;
+    }
 
     public Icon getIcon() {
         if(iconCache.containsKey(this.icon.toLowerCase()))

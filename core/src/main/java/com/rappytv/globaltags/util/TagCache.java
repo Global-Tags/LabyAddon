@@ -36,7 +36,7 @@ public class TagCache {
         request.sendAsyncRequest((response) -> {
             add(uuid, new PlayerInfo(
                 uuid,
-                Util.translateColorCodes(request.getTag()),
+                request.getTag(),
                 request.getPosition(),
                 request.getIcon(),
                 request.isAdmin()
