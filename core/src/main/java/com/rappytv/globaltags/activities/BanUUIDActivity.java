@@ -42,9 +42,9 @@ public class BanUUIDActivity extends SimpleActivity {
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
         ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.ban.title", this.username).addId("username");
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
-        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.reason").addId("reason");
+        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.context.reason").addId("reason");
         TextFieldWidget textField = new TextFieldWidget()
-            .placeholder(Component.translatable("globaltags.placeholder", NamedTextColor.DARK_GRAY))
+            .placeholder(Component.translatable("globaltags.context.placeholder", NamedTextColor.DARK_GRAY))
             .addId("text-field");
         ButtonWidget button = new ButtonWidget()
             .updateComponent(Component.translatable("globaltags.context.ban.send", NamedTextColor.RED))

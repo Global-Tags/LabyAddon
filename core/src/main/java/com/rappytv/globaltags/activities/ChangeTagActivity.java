@@ -3,6 +3,7 @@ package com.rappytv.globaltags.activities;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
 import java.util.UUID;
+import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -36,38 +37,41 @@ public class ChangeTagActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
-        HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
-        IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.changeTag.title", this.username).addId("username");
-        VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
-        ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.changeTag.label").addId("reason");
-        TextFieldWidget textField = new TextFieldWidget()
-            .placeholder(Component.translatable("globaltags.context.changeTag.placeholder", NamedTextColor.DARK_GRAY))
-            .addId("text-field");
-        ButtonWidget button = new ButtonWidget()
-            .updateComponent(Component.translatable("globaltags.context.changeTag.send", NamedTextColor.RED))
-            .addId("report-button");
-        button.setEnabled(false);
-        button.setActionListener(() -> {
-            Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            ApiHandler.setTag(uuid, textField.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
-                Component
-                    .text(GlobalTagAddon.prefix)
-                    .append(response.getMessage())
-            ));
+        TagCache.resolve(uuid, (info) -> {
+            FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
+            HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
+            IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
+            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.changeTag.title", this.username).addId("username");
+            VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
+            ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.changeTag.label").addId("reason");
+            TextFieldWidget textField = new TextFieldWidget()
+                .placeholder(Component.translatable("globaltags.context.changeTag.placeholder", NamedTextColor.DARK_GRAY))
+                .addId("text-field");
+            textField.setText(info.getPlainTag() != null ? info.getPlainTag() : "");
+            ButtonWidget button = new ButtonWidget()
+                .updateComponent(Component.translatable("globaltags.context.changeTag.send", NamedTextColor.AQUA))
+                .addId("report-button");
+            button.setEnabled(!textField.getText().isBlank());
+            button.setActionListener(() -> {
+                Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+                ApiHandler.setTag(uuid, textField.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+                    Component
+                        .text(GlobalTagAddon.prefix)
+                        .append(response.getMessage())
+                ));
+            });
+            textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
+
+            profileWrapper.addEntry(headWidget);
+            profileWrapper.addEntry(titleWidget);
+
+            content.addChild(labelWidget);
+            content.addChild(textField);
+            content.addChild(button);
+
+            windowWidget.addContent(profileWrapper);
+            windowWidget.addContent(content);
+            this.document.addChild(windowWidget);
         });
-        textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
-
-        profileWrapper.addEntry(headWidget);
-        profileWrapper.addEntry(titleWidget);
-
-        content.addChild(labelWidget);
-        content.addChild(textField);
-        content.addChild(button);
-
-        windowWidget.addContent(profileWrapper);
-        windowWidget.addContent(content);
-        this.document.addChild(windowWidget);
     }
 }
