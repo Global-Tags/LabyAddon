@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.activities.BanUUIDActivity;
+import com.rappytv.globaltags.activities.ChangeTagActivity;
 import com.rappytv.globaltags.types.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
@@ -9,11 +9,11 @@ import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.interaction.BulletPoint;
 import net.labymod.api.client.gui.icon.Icon;
 
-public class BanBulletPoint implements BulletPoint {
+public class ChangeTagBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context.ban.name");
+        return Component.translatable("globaltags.context.report");
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BanBulletPoint implements BulletPoint {
     @Override
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
-            Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new BanUUIDActivity(player.getUniqueId(), player.getName()))
+            Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ChangeTagActivity(player.getUniqueId(), player.getName()))
         );
     }
 
