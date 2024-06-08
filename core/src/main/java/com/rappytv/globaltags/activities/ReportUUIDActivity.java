@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.activities;
 
+import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -50,7 +51,11 @@ public class ReportUUIDActivity extends SimpleActivity {
         button.setEnabled(false);
         button.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            ApiHandler.reportPlayer(uuid, textField.getText(), (response) -> {});
+            ApiHandler.reportPlayer(uuid, textField.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+                Component
+                    .text(GlobalTagAddon.prefix)
+                    .append(response.getMessage())
+            ));
         });
         textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
 
