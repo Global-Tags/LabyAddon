@@ -104,4 +104,26 @@ public class ApiHandler {
             Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
         });
     }
+
+    public void banPlayer(UUID uuid, String reason) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid + "/ban",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                Map<String, String> body = new HashMap<>();
+                body.put("reason", reason);
+                return body;
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
+                return;
+            }
+            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
+        });
+    }
 }
