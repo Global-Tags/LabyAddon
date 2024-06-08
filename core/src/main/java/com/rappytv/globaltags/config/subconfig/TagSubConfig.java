@@ -1,6 +1,5 @@
 package com.rappytv.globaltags.config.subconfig;
 
-import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.util.GlobalIcon;
 import com.rappytv.globaltags.util.Util;
@@ -10,27 +9,23 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.Butto
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.Setting;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.MethodOrder;
 
+@Deprecated
 public class TagSubConfig extends Config {
 
-    @Exclude
-    private final ApiHandler apiHandler;
-
     public TagSubConfig() {
-        apiHandler = GlobalTagAddon.getAddon().getApiHandler();
         position.addChangeListener((property, oldValue, newValue) -> {
             if(Laby.labyAPI().isFullyInitialized())
-                apiHandler.setPosition(newValue);
+                ApiHandler.setPosition(newValue, (info) -> {});
         });
         globalIcon.addChangeListener((property, oldValue, newValue) -> {
             if(Laby.labyAPI().isFullyInitialized())
-                apiHandler.setIcon(newValue);
+                ApiHandler.setIcon(newValue, (info) -> {});
         });
     }
 
@@ -42,7 +37,7 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
     public void setTag(Setting setting) {
-        apiHandler.setTag(tag.get());
+        ApiHandler.setTag(tag.get(), (info) -> {});
         tag.set("");
         Util.clearCache(false);
     }
@@ -60,7 +55,7 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
-        apiHandler.resetTag();
+        ApiHandler.resetTag((info) -> {});
     }
 
     @MethodOrder(after = "resetTag")

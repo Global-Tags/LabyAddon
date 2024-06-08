@@ -1,6 +1,5 @@
 package com.rappytv.globaltags;
 
-import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
 import com.rappytv.globaltags.interaction.ReportBulletPoint;
@@ -23,14 +22,12 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     public static String prefix = "§1§lGlobalTags §8» §f";
     public static String version;
     private static GlobalTagAddon addon;
-    private ApiHandler apiHandler;
 
     @Override
     protected void preConfigurationLoad() {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.0"), "2023-11-24"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
-        this.apiHandler = new ApiHandler();
         addon = this;
     }
 
@@ -67,8 +64,5 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
     public static GlobalTagAddon getAddon() {
         return addon;
-    }
-    public ApiHandler getApiHandler() {
-        return apiHandler;
     }
 }

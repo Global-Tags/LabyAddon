@@ -1,71 +1,44 @@
 package com.rappytv.globaltags.api;
 
-import com.rappytv.globaltags.api.requests.IconSetRequest;
-import com.rappytv.globaltags.api.requests.PositionSetRequest;
-import com.rappytv.globaltags.api.requests.TagSetRequest;
 import com.rappytv.globaltags.util.GlobalIcon;
+import com.rappytv.globaltags.util.PlayerInfo;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request.Method;
-import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Consumer;
 
-@Singleton
+@SuppressWarnings("unused")
 public class ApiHandler {
 
-    public void setTag(String tag) {
-        TagSetRequest request = new TagSetRequest(
-            Util.getSessionToken(),
-            tag
-        );
-        request.sendAsyncRequest((response -> {
-            if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
-                return;
-            }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
-            Util.clearCache(false);
-        }));
-    }
-
-    public void setPosition(PositionType position) {
-        PositionSetRequest request = new PositionSetRequest(
-            Util.getSessionToken(),
-            position
-        );
-        request.sendAsyncRequest((response -> {
-            if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
-                return;
-            }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
-            Util.clearCache(false);
-        }));
-    }
-
-    public void setIcon(GlobalIcon icon) {
-        IconSetRequest request = new IconSetRequest(
-            Util.getSessionToken(),
-            icon
-        );
-        request.sendAsyncRequest((response -> {
-            if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
-                return;
-            }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
-            Util.clearCache(false);
-        }));
-    }
-
-    public void resetTag() {
+    public static void getVersion(Consumer<String> consumer) {
         ApiRequest request = new ApiRequest(
-            Method.DELETE,
-            "/players/" + Laby.labyAPI().getUniqueId(),
+            Method.GET,
+            "/",
+            null
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return null;
+            }
+        };
+        request.sendAsyncRequest((response) -> consumer.accept(request.responseBody.version));
+    }
+
+    public static void getInfo(Consumer<PlayerInfo> consumer) {
+        getInfo(Laby.labyAPI().getUniqueId(), consumer);
+    }
+
+    public static void getInfo(UUID uuid, Consumer<PlayerInfo> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.GET,
+            "/players/" + uuid,
             Util.getSessionToken()
         ) {
             @Override
@@ -73,17 +46,123 @@ public class ApiHandler {
                 return null;
             }
         };
-        request.sendAsyncRequest((response)-> {
+        request.sendAsyncRequest((response) -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
+                consumer.accept(null);
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
+            consumer.accept(new PlayerInfo(
+                uuid,
+                request.responseBody.tag,
+                request.responseBody.position,
+                request.responseBody.icon,
+                request.responseBody.admin
+            ));
+        });
+    }
+
+    public static void setTag(String tag, Consumer<ApiResponse> consumer) {
+        setTag(Laby.labyAPI().getUniqueId(), tag, consumer);
+    }
+
+    public static void setTag(UUID uuid, String tag, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid,
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return Map.of("tag", tag);
+            }
+        };
+        request.sendAsyncRequest((response -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
+            Util.clearCache(false);
+        }));
+    }
+
+    public static void setPosition(PositionType position, Consumer<ApiResponse> consumer) {
+        setPosition(Laby.labyAPI().getUniqueId(), position, consumer);
+    }
+
+    public static void setPosition(UUID uuid, PositionType position, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid + "/position",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return Map.of("position", position.name().split("_")[0]);
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(false, request.getMessage()));
             Util.clearCache(false);
         });
     }
 
-    public void reportPlayer(UUID uuid, String reason) {
+    public static void setIcon(GlobalIcon icon, Consumer<ApiResponse> consumer) {
+        setIcon(Laby.labyAPI().getUniqueId(), icon, consumer);
+    }
+
+    public static void setIcon(UUID uuid, GlobalIcon icon, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid + "/icon",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return Map.of("icon", icon.name());
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
+            Util.clearCache(false);
+        });
+    }
+
+    public static void resetTag(Consumer<ApiResponse> consumer) {
+        resetTag(Laby.labyAPI().getUniqueId(), consumer);
+    }
+
+    public static void resetTag(UUID uuid, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.DELETE,
+            "/players/" + uuid,
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return null;
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
+            Util.clearCache(false);
+        });
+    }
+
+    public static void reportPlayer(UUID uuid, String reason, Consumer<ApiResponse> consumer) {
         ApiRequest request = new ApiRequest(
             Method.POST,
             "/players/" + uuid + "/report",
@@ -98,14 +177,14 @@ public class ApiHandler {
         };
         request.sendAsyncRequest((response) -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
+                consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
+            consumer.accept(new ApiResponse(true, request.getMessage()));
         });
     }
 
-    public void banPlayer(UUID uuid, String reason) {
+    public static void banPlayer(UUID uuid, String reason, Consumer<ApiResponse> consumer) {
         ApiRequest request = new ApiRequest(
             Method.POST,
             "/players/" + uuid + "/ban",
@@ -120,10 +199,49 @@ public class ApiHandler {
         };
         request.sendAsyncRequest((response) -> {
             if(!request.isSuccessful()) {
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
+                consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            Util.notify(I18n.translate("globaltags.notifications.success"), request.getMessage());
+            consumer.accept(new ApiResponse(true, request.getMessage()));
         });
+    }
+
+    public static void toggleAdmin(UUID uuid, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid + "/admin",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return null;
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
+        });
+    }
+
+    public static class ApiResponse {
+
+        private final boolean successful;
+        private final Component message;
+
+        public ApiResponse(boolean successful, String message) {
+            this.successful = successful;
+            this.message = Component.text(message, successful ? NamedTextColor.GREEN : NamedTextColor.RED);
+        }
+
+        public boolean isSuccessful() {
+            return successful;
+        }
+
+        public Component getMessage() {
+            return message;
+        }
     }
 }

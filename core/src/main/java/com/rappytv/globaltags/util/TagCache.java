@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.util;
 
-import com.rappytv.globaltags.api.requests.InfoGetRequest;
+import com.rappytv.globaltags.api.ApiHandler;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -32,15 +32,8 @@ public class TagCache {
         }
         if(resolving.contains(uuid)) return;
         resolving.add(uuid);
-        InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
-        request.sendAsyncRequest((response) -> {
-            add(uuid, new PlayerInfo(
-                uuid,
-                request.getTag(),
-                request.getPosition(),
-                request.getIcon(),
-                request.isAdmin()
-            ));
+        ApiHandler.getInfo(uuid, (info) -> {
+            add(uuid, info);
             resolving.remove(uuid);
             resolve(uuid, consumer);
         });
