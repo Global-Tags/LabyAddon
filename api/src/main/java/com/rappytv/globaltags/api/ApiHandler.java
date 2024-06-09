@@ -204,7 +204,7 @@ public class ApiHandler {
         });
     }
 
-    public static void unbanPlayer(UUID uuid, String reason, Consumer<ApiResponse> consumer) {
+    public static void unbanPlayer(UUID uuid, Consumer<ApiResponse> consumer) {
         ApiRequest request = new ApiRequest(
             Method.DELETE,
             "/players/" + uuid + "/ban",
@@ -212,7 +212,8 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, String> getBody() {
-                return null;
+                // https://github.com/elysiajs/elysia/issues/495
+                return Map.of("placeholder", "body");
             }
         };
         request.sendAsyncRequest((response) -> {
