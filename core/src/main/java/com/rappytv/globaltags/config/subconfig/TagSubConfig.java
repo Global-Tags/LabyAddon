@@ -1,7 +1,9 @@
 package com.rappytv.globaltags.config.subconfig;
 
 import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.config.widget.TagPreviewWidget.TagPreviewSetting;
 import com.rappytv.globaltags.types.GlobalIcon;
+import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -15,43 +17,38 @@ import net.labymod.api.configuration.settings.Setting;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.MethodOrder;
 
-@Deprecated
 public class TagSubConfig extends Config {
 
-    public TagSubConfig() {
-        position.addChangeListener((property, oldValue, newValue) -> {
-            if(Laby.labyAPI().isFullyInitialized())
-                ApiHandler.setPosition(newValue, (info) -> {});
-        });
-        globalIcon.addChangeListener((property, oldValue, newValue) -> {
-            if(Laby.labyAPI().isFullyInitialized())
-                ApiHandler.setIcon(newValue, (info) -> {});
-        });
+    public void fetchTag() {
+        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> tag.set(info.getPlainTag() != null ? info.getPlainTag() : ""));
     }
+
+    @TagPreviewSetting
+    private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
 
     @TextFieldSetting
     @SpriteSlot(size = 32, y = 1)
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
-    @MethodOrder(after = "tag")
-    @ButtonSetting
-    @SpriteSlot(size = 32, y = 1, x = 1)
-    public void setTag(Setting setting) {
-        ApiHandler.setTag(tag.get(), (info) -> {});
-        tag.set("");
-        Util.clearCache();
-    }
-
     @DropdownSetting
     @SpriteSlot(size = 32, x = 3)
     private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
-
 
     @DropdownSetting
     @SpriteSlot(size = 32, y = 1, x = 2)
     private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
 
     @MethodOrder(after = "globalIcon")
+    @ButtonSetting
+    @SpriteSlot(size = 32, y = 1, x = 1)
+    public void updateSettings(Setting setting) {
+        ApiHandler.setTag(tag.get(), (info) -> {});
+        ApiHandler.setPosition(position.get(), (info) -> {});
+        ApiHandler.setIcon(globalIcon.get(), (info) -> {});
+        Util.clearCache();
+    }
+
+    @MethodOrder(after = "updateSettings")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
