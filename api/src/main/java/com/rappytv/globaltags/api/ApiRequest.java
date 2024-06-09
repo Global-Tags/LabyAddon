@@ -11,8 +11,8 @@ import java.util.Map;
 
 public abstract class ApiRequest {
 
-    public static boolean localizedResponses;
-    public static String version;
+    private static boolean localizedResponses;
+    private static String version;
 
     private final Gson gson = new Gson();
     private boolean successful;
@@ -32,7 +32,7 @@ public abstract class ApiRequest {
 
     public void sendAsyncRequest(Callback<JsonObject> callback) {
         GsonRequest<JsonObject> request = Request.ofGson(JsonObject.class)
-            .url("https://gt.rappytv.com" + path)
+            .url("http://localhost:5000" + path)
             .method(method)
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", key != null ? key : "")
@@ -80,4 +80,14 @@ public abstract class ApiRequest {
         return error;
     }
     public abstract Map<String, String> getBody();
+
+    public static void useLocalizedResponses(boolean value) {
+        localizedResponses = value;
+    }
+    public static void addonVersion(String value) {
+        version = value;
+    }
+    public static String getVersion() {
+        return version;
+    }
 }

@@ -27,7 +27,7 @@ public class GlobalTagCommand extends Command {
             TextComponent clearComponent = TextComponent.builder()
                 .append(GlobalTagAddon.prefix)
                 .append(Component.text("Version: ", NamedTextColor.GREEN))
-                .append(Component.text(ApiRequest.version + "\n", NamedTextColor.AQUA))
+                .append(Component.text(ApiRequest.getVersion() + "\n", NamedTextColor.AQUA))
                 .append(GlobalTagAddon.prefix)
                 .append(Component.text("API Version: ", NamedTextColor.GREEN))
                 .append(version != null ? Component.text(version, NamedTextColor.GREEN) : Component.translatable("globaltags.messages.offline", NamedTextColor.RED))

@@ -43,7 +43,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     @Override
     protected void enable() {
         registerSettingCategory();
-        ApiRequest.version = addon.addonInfo().getVersion();
+        ApiRequest.addonVersion(addon.addonInfo().getVersion());
 
         TagRegistry tagRegistry = labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())

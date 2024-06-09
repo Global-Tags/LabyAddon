@@ -17,7 +17,7 @@ public class GlobalTagConfig extends AddonConfig {
 
     public GlobalTagConfig() {
         localizedResponses.addChangeListener((property, oldValue, newValue) ->
-            ApiRequest.localizedResponses = newValue
+            ApiRequest.useLocalizedResponses(newValue)
         );
     }
 
