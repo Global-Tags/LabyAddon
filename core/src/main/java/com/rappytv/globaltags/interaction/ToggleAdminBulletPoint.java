@@ -35,6 +35,6 @@ public class ToggleAdminBulletPoint implements BulletPoint {
     public boolean isVisible(Player player) {
         PlayerInfo executer = TagCache.get(Laby.labyAPI().getUniqueId());
         PlayerInfo target = TagCache.get(player.getUniqueId());
-        return executer != null && executer.isAdmin() && target != null && target.getTag() != null;
+        return executer != null && executer.isAdmin() && target != null;
     }
 }
