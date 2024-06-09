@@ -9,7 +9,6 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request.Method;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -149,7 +148,8 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, String> getBody() {
-                return null;
+                // https://github.com/elysiajs/elysia/issues/495
+                return Map.of("placeholder", "body");
             }
         };
         request.sendAsyncRequest((response) -> {
@@ -170,9 +170,7 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, String> getBody() {
-                Map<String, String> body = new HashMap<>();
-                body.put("reason", reason);
-                return body;
+                return Map.of("reason", reason);
             }
         };
         request.sendAsyncRequest((response) -> {
@@ -192,9 +190,7 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, String> getBody() {
-                Map<String, String> body = new HashMap<>();
-                body.put("reason", reason);
-                return body;
+                return Map.of("reason", reason);
             }
         };
         request.sendAsyncRequest((response) -> {
