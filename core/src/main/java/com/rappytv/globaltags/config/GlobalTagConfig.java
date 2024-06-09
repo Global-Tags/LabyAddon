@@ -45,12 +45,12 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, x = 1)
     private final TagSubConfig tags = new TagSubConfig();
 
-    @SpriteSlot(size = 32, x = 1)
-    @MethodOrder(after = "localizedResponses")
-    @ActivitySetting
-    public Activity accountCenter() {
-        return new AccountCenterActivity();
-    }
+//    @SpriteSlot(size = 32, x = 1)
+//    @MethodOrder(after = "localizedResponses")
+//    @ActivitySetting
+//    public Activity accountCenter() {
+//        return new AccountCenterActivity();
+//    }
 
     @Override
     public ConfigProperty<Boolean> enabled() {
