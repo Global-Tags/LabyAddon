@@ -16,6 +16,8 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 public class ApiHandler {
 
+    private ApiHandler() {}
+
     public static void getVersion(Consumer<String> consumer) {
         ApiRequest request = new ApiRequest(
             Method.GET,
