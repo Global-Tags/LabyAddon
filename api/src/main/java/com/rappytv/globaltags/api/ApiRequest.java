@@ -52,6 +52,7 @@ public abstract class ApiRequest {
                 successful = false;
                 error = response.exception().getMessage();
                 callback.accept(response);
+                response.exception().printStackTrace();
                 return;
             }
             responseBody = gson.fromJson(response.get(), ResponseBody.class);
