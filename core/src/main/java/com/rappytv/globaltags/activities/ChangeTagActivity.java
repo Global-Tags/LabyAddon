@@ -47,11 +47,12 @@ public class ChangeTagActivity extends SimpleActivity {
             TextFieldWidget textField = new TextFieldWidget()
                 .placeholder(Component.translatable("globaltags.context.changeTag.placeholder", NamedTextColor.DARK_GRAY))
                 .addId("text-field");
-            textField.setText(info.getPlainTag() != null ? info.getPlainTag() : "");
+            boolean hasTag = info.getPlainTag() != null;
+            textField.setText(hasTag ? info.getPlainTag() : "");
             ButtonWidget button = new ButtonWidget()
                 .updateComponent(Component.translatable("globaltags.context.changeTag.send", NamedTextColor.AQUA))
                 .addId("report-button");
-            button.setEnabled(!textField.getText().isBlank());
+            button.setEnabled(!textField.getText().isBlank() && (!hasTag || !textField.getText().equals(info.getPlainTag())));
             button.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
                 ApiHandler.setTag(uuid, textField.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
@@ -60,7 +61,7 @@ public class ChangeTagActivity extends SimpleActivity {
                         .append(response.getMessage())
                 ));
             });
-            textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
+            textField.updateListener((text) -> button.setEnabled(!text.isBlank() && (!hasTag || !textField.getText().equals(info.getPlainTag()))));
 
             profileWrapper.addEntry(headWidget);
             profileWrapper.addEntry(titleWidget);
