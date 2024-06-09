@@ -37,6 +37,7 @@ public class Util {
             return false;
         }
         TagCache.clear();
+        TagCache.resolve(Laby.labyAPI().getUniqueId());
         return true;
     }
 
