@@ -55,7 +55,8 @@ public class ApiHandler {
                 request.responseBody.tag,
                 request.responseBody.position,
                 request.responseBody.icon,
-                request.responseBody.admin
+                request.responseBody.admin,
+                request.responseBody.ban
             ));
         });
     }
@@ -191,6 +192,27 @@ public class ApiHandler {
             @Override
             public Map<String, String> getBody() {
                 return Map.of("reason", reason);
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
+            Util.clearCache(false);
+        });
+    }
+
+    public static void unbanPlayer(UUID uuid, String reason, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.DELETE,
+            "/players/" + uuid + "/ban",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return null;
             }
         };
         request.sendAsyncRequest((response) -> {

@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.types;
 
+import com.rappytv.globaltags.api.ResponseBody.Ban;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -17,14 +18,16 @@ public class PlayerInfo {
     private final String position;
     private final String icon;
     private final boolean admin;
+    private final Ban ban;
 
-    public PlayerInfo(UUID uuid, String tag, String position, String icon, boolean admin) {
+    public PlayerInfo(UUID uuid, String tag, String position, String icon, boolean admin, Ban ban) {
         this.uuid = uuid;
         this.tag = Util.translateColorCodes(tag);
         this.plainTag = tag;
         this.position = position;
         this.icon = icon;
         this.admin = admin;
+        this.ban = ban;
     }
 
     public UUID getUUID() {
@@ -72,5 +75,14 @@ public class PlayerInfo {
 
     public boolean isAdmin() {
         return admin;
+    }
+
+    public boolean isBanned() {
+        return ban != null && ban.active;
+    }
+
+    public String getBanReason() {
+        if(ban == null) return null;
+        return ban.reason;
     }
 }
