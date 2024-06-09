@@ -24,12 +24,12 @@ import java.util.UUID;
 
 @Link("input.lss")
 @AutoActivity
-public class BanUUIDActivity extends SimpleActivity {
+public class BanActivity extends SimpleActivity {
 
     private final UUID uuid;
     private final String username;
 
-    public BanUUIDActivity(UUID uuid, String username) {
+    public BanActivity(UUID uuid, String username) {
         this.uuid = uuid;
         this.username = username;
     }
