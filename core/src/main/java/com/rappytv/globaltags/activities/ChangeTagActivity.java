@@ -22,7 +22,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalLi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 
-@Link("report.lss")
+@Link("input.lss")
 @AutoActivity
 public class ChangeTagActivity extends SimpleActivity {
 
@@ -43,32 +43,32 @@ public class ChangeTagActivity extends SimpleActivity {
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
             ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.changeTag.title", this.username).addId("username");
             VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
-            ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.changeTag.label").addId("reason");
-            TextFieldWidget textField = new TextFieldWidget()
+            ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.changeTag.label").addId("label");
+            TextFieldWidget inputWidget = new TextFieldWidget()
                 .placeholder(Component.translatable("globaltags.context.changeTag.placeholder", NamedTextColor.DARK_GRAY))
-                .addId("text-field");
+                .addId("input");
             boolean hasTag = info.getPlainTag() != null;
-            textField.setText(hasTag ? info.getPlainTag() : "");
-            ButtonWidget button = new ButtonWidget()
+            inputWidget.setText(hasTag ? info.getPlainTag() : "");
+            ButtonWidget sendButton = new ButtonWidget()
                 .updateComponent(Component.translatable("globaltags.context.changeTag.send", NamedTextColor.AQUA))
-                .addId("report-button");
-            button.setEnabled(!textField.getText().isBlank() && (!hasTag || !textField.getText().equals(info.getPlainTag())));
-            button.setActionListener(() -> {
+                .addId("send-button");
+            sendButton.setEnabled(!inputWidget.getText().isBlank() && (!hasTag || !inputWidget.getText().equals(info.getPlainTag())));
+            sendButton.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-                ApiHandler.setTag(uuid, textField.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+                ApiHandler.setTag(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                     Component
                         .text(GlobalTagAddon.prefix)
                         .append(response.getMessage())
                 ));
             });
-            textField.updateListener((text) -> button.setEnabled(!text.isBlank() && (!hasTag || !textField.getText().equals(info.getPlainTag()))));
+            inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank() && (!hasTag || !inputWidget.getText().equals(info.getPlainTag()))));
 
             profileWrapper.addEntry(headWidget);
             profileWrapper.addEntry(titleWidget);
 
             content.addChild(labelWidget);
-            content.addChild(textField);
-            content.addChild(button);
+            content.addChild(inputWidget);
+            content.addChild(sendButton);
 
             windowWidget.addContent(profileWrapper);
             windowWidget.addContent(content);

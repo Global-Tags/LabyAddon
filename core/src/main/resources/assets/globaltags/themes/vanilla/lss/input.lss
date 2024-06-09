@@ -34,22 +34,22 @@
         alignment-y: center;
         overwrite-width: false;
 
-        .reason {
+        .label {
             margin-top: 40;
             alignment-x: center;
             alignment-y: center;
         }
 
-        .text-field {
+        .input {
             margin-top: 6;
             width: 200;
             alignment-x: center;
             alignment-y: center;
         }
 
-        .report-button {
+        .send-button {
             margin-top: 5;
-            width: 50;
+            width: 70;
             height: 20;
             alignment-x: center;
             alignment-y: center;

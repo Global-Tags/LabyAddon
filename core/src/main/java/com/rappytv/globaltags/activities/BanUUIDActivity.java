@@ -22,7 +22,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 
 import java.util.UUID;
 
-@Link("report.lss")
+@Link("input.lss")
 @AutoActivity
 public class BanUUIDActivity extends SimpleActivity {
 
@@ -42,30 +42,30 @@ public class BanUUIDActivity extends SimpleActivity {
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
         ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.ban.title", this.username).addId("username");
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
-        ComponentWidget reasonWidget = ComponentWidget.i18n("globaltags.context.reason").addId("reason");
-        TextFieldWidget textField = new TextFieldWidget()
+        ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.reason").addId("label");
+        TextFieldWidget inputWidget = new TextFieldWidget()
             .placeholder(Component.translatable("globaltags.context.placeholder", NamedTextColor.DARK_GRAY))
-            .addId("text-field");
-        ButtonWidget button = new ButtonWidget()
+            .addId("input");
+        ButtonWidget sendButton = new ButtonWidget()
             .updateComponent(Component.translatable("globaltags.context.ban.send", NamedTextColor.RED))
-            .addId("report-button");
-        button.setEnabled(false);
-        button.setActionListener(() -> {
+            .addId("send-button");
+        sendButton.setEnabled(false);
+        sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            ApiHandler.banPlayer(uuid, textField.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+            ApiHandler.banPlayer(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component
                     .text(GlobalTagAddon.prefix)
                     .append(response.getMessage())
             ));
         });
-        textField.updateListener((text) -> button.setEnabled(!text.isBlank()));
+        inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank()));
 
         profileWrapper.addEntry(headWidget);
         profileWrapper.addEntry(titleWidget);
 
-        content.addChild(reasonWidget);
-        content.addChild(textField);
-        content.addChild(button);
+        content.addChild(labelWidget);
+        content.addChild(inputWidget);
+        content.addChild(sendButton);
 
         windowWidget.addContent(profileWrapper);
         windowWidget.addContent(content);
