@@ -13,7 +13,7 @@ public class ClearCacheCommand extends SubCommand {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        displayMessage(GlobalTagAddon.prefix + (Util.clearCache(false) ? "§a" + I18n.translate("globaltags.notifications.cacheCleared") : "§c" + I18n.translate("globaltags.notifications.cacheEmpty")));
+        displayMessage(GlobalTagAddon.prefix + I18n.translate("globaltags.notifications.cacheCleared"));
         return true;
     }
 }

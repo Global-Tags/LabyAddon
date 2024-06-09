@@ -82,7 +82,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         }));
     }
 
@@ -107,7 +107,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(false, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         });
     }
 
@@ -133,7 +133,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         });
     }
 
@@ -159,7 +159,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         });
     }
 
@@ -200,7 +200,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         });
     }
 
@@ -222,7 +222,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         });
     }
 
@@ -244,7 +244,7 @@ public class ApiHandler {
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache(false);
+            Util.clearCache();
         });
     }
 

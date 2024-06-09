@@ -39,7 +39,7 @@ public class TagSubConfig extends Config {
     public void setTag(Setting setting) {
         ApiHandler.setTag(tag.get(), (info) -> {});
         tag.set("");
-        Util.clearCache(false);
+        Util.clearCache();
     }
 
     @DropdownSetting
@@ -62,10 +62,10 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 2)
     public void clearCache(Setting setting) {
-        if(Util.clearCache(true))
-            Util.notify(
-                I18n.translate("globaltags.notifications.success"),
-                I18n.translate("globaltags.notifications.cacheCleared")
-            );
+        Util.clearCache();
+        Util.notify(
+            I18n.translate("globaltags.notifications.success"),
+            I18n.translate("globaltags.notifications.cacheCleared")
+        );
     }
 }
