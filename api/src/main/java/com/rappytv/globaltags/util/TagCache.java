@@ -11,6 +11,8 @@ import java.util.function.Consumer;
 
 public class TagCache {
 
+    private TagCache() {}
+
     private static final Map<UUID, PlayerInfo> cache = new HashMap<>();
     private static final Set<UUID> resolving = new HashSet<>();
 
@@ -38,9 +40,6 @@ public class TagCache {
             resolving.remove(uuid);
             resolve(uuid, consumer);
         });
-    }
-    public static boolean isEmpty() {
-        return cache.isEmpty();
     }
     public static void clear() {
         cache.clear();
