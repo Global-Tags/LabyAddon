@@ -25,8 +25,13 @@ public class GlobalTagCommand extends Command {
     public boolean execute(String prefix, String[] arguments) {
         ApiHandler.getVersion((version) -> {
             TextComponent clearComponent = TextComponent.builder()
-                .append(GlobalTagAddon.prefix + "§aVersion: §b" + ApiRequest.version + "\n")
-                .append(GlobalTagAddon.prefix + "§aAPI Version: " + (version != null ? "§b" + version : "§c" + I18n.translate("globaltags.messages.offline")) + "\n")
+                .append(GlobalTagAddon.prefix)
+                .append(Component.text("Version: ", NamedTextColor.GREEN))
+                .append(Component.text(ApiRequest.version + "\n", NamedTextColor.AQUA))
+                .append(GlobalTagAddon.prefix)
+                .append(Component.text("API Version: ", NamedTextColor.GREEN))
+                .append(version != null ? Component.text(version, NamedTextColor.GREEN) : Component.translatable("globaltags.messages.offline", NamedTextColor.RED))
+                .append("\n")
                 .append(GlobalTagAddon.prefix)
                 .append(Component
                     .translatable("globaltags.messages.clearCache")

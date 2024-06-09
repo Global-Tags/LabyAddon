@@ -13,6 +13,9 @@ import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.TagRegistry;
 import net.labymod.api.models.addon.annotation.AddonMain;
@@ -24,7 +27,9 @@ import java.util.TimerTask;
 @AddonMain
 public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
-    public static String prefix = "§1§lGlobalTags §8» §f";
+    public static Component prefix = Component.empty()
+        .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
+        .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
     private static GlobalTagAddon addon;
 
     @Override

@@ -1,9 +1,9 @@
 package com.rappytv.globaltags.command.subcommands;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.chat.command.SubCommand;
-import net.labymod.api.util.I18n;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
 
 public class ClearCacheCommand extends SubCommand {
 
@@ -13,7 +13,11 @@ public class ClearCacheCommand extends SubCommand {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        displayMessage(GlobalTagAddon.prefix + I18n.translate("globaltags.notifications.cacheCleared"));
+        displayMessage(
+            Component.empty()
+                .append(GlobalTagAddon.prefix)
+                .append(Component.translatable("globaltags.notifications.cacheCleared", NamedTextColor.GREEN))
+        );
         return true;
     }
 }

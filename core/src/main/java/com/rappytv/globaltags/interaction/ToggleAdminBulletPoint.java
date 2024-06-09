@@ -27,8 +27,8 @@ public class ToggleAdminBulletPoint implements BulletPoint {
     @Override
     public void execute(Player player) {
         ApiHandler.toggleAdmin(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
-            Component
-                .text(GlobalTagAddon.prefix)
+            Component.empty()
+                .append(GlobalTagAddon.prefix)
                 .append(response.getMessage())
         ));
     }

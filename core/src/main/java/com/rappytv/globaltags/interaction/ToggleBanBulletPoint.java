@@ -29,8 +29,8 @@ public class ToggleBanBulletPoint implements BulletPoint {
     public void execute(Player player) {
         if(target.isBanned()) {
             ApiHandler.unbanPlayer(target.getUUID(), (response) -> Laby.references().chatExecutor().displayClientMessage(
-                Component
-                    .text(GlobalTagAddon.prefix)
+                Component.empty()
+                    .append(GlobalTagAddon.prefix)
                     .append(response.getMessage())
             ));
         } else {
