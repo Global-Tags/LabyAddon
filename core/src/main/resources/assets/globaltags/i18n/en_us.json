@@ -73,14 +73,10 @@
                 }
             }
         },
-        "activity": {
-            "newtag": "New Tag"
-        },
         "notifications": {
             "success": "Success!",
             "error": "An error ocurred",
-            "cacheCleared": "The cache was cleared!",
-            "cacheEmpty": "The cache is already empty!"
+            "cacheCleared": "The cache was cleared!"
         },
         "messages": {
             "clearCache": "Clear cache",
@@ -100,6 +96,11 @@
                 "title": "Ban %s",
                 "send": "Ban"
             },
+            "unban": {
+                "name": "Unban GlobalTag player",
+                "title": "Unban %s",
+                "send": "Unban"
+            },
             "changeTag": {
                 "name": "Change GlobalTag",
                 "title": "Change %s's Tag",
@@ -110,8 +111,9 @@
             "clearTag": {
                 "name": "Clear GlobalTag"
             },
-            "toggleAdmin": {
-                "name": "Toggle GlobalTag Admin"
+            "admin": {
+                "set": "Make GlobalTag Admin",
+                "remove": "Remove GlobalTag Admin"
             }
         }
     }
