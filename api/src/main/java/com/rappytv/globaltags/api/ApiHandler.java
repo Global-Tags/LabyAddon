@@ -211,7 +211,8 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, String> getBody() {
-                return null;
+                // https://github.com/elysiajs/elysia/issues/495
+                return Map.of("placeholder", "body");
             }
         };
         request.sendAsyncRequest((response) -> {
