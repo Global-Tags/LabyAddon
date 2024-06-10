@@ -21,7 +21,10 @@
             "tags": {
                 "name": "Tag settings",
                 "tagPreview": {
-                    "name": "Tag Preview"
+                    "name": "Tag Preview",
+                    "banned": "Your account is suspended!\nReason: %s",
+                    "noInfo": "Couldn't fetch account info!",
+                    "labyConnect": "You're not connected to LabyConnect!"
                 },
                 "tag": {
                     "name": "Global tag"
