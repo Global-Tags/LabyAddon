@@ -1,6 +1,8 @@
 package com.rappytv.globaltags.config.widget;
 
+import com.rappytv.globaltags.types.PlayerInfo;
 import com.rappytv.globaltags.util.TagCache;
+import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.gui.icon.Icon;
@@ -36,16 +38,33 @@ public class TagPreviewWidget extends HorizontalListWidget {
     public void initialize(Parent parent) {
         super.initialize(parent);
 
-        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
-            if(info == null) {
-                System.out.println("Info is null");
-                return;
-            }
-            ComponentWidget tag = ComponentWidget.component(info.getTag() != null ? info.getTag() : Component.empty()).addId("tag");
-            if(!info.getIconName().equals("NONE")) this.addEntry(new IconWidget(info.getIcon()).addId("icon"));
-            this.addEntry(tag);
-            if(info.isAdmin()) this.addEntry(new IconWidget(adminIcon).addId("staff-icon"));
-        }));
+        TagCache.resolve(Laby.labyAPI().getUniqueId(),
+            (info) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+                Component error = getError(info);
+                if (error != null) {
+                    ComponentWidget errorComponent = ComponentWidget.component(error)
+                        .addId("error");
+                    this.addEntry(errorComponent);
+                    return;
+                }
+                ComponentWidget tag = ComponentWidget.component(
+                    info.getTag() != null ? info.getTag() : Component.empty()).addId("tag");
+                if (!info.getIconName().equals("NONE"))
+                    this.addEntry(new IconWidget(info.getIcon()).addId("icon"));
+                this.addEntry(tag);
+                if (info.isAdmin())
+                    this.addEntry(new IconWidget(adminIcon).addId("staff-icon"));
+            }));
+    }
+
+    private Component getError(PlayerInfo info) {
+        if(Util.getSessionToken() == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
+        else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
+        else if(info.isBanned()) return Component.translatable(
+            "globaltags.settings.tags.tagPreview.banned",
+            Component.text(info.getBanReason())
+        );
+        return null;
     }
 
     @SettingFactory
