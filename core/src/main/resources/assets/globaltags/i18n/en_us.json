@@ -20,13 +20,11 @@
             },
             "tags": {
                 "name": "Tag settings",
-                "tag": {
-                    "name": "Global tag",
-                    "description": "This tag gets published as soon as you press the button below."
+                "tagPreview": {
+                    "name": "Tag Preview"
                 },
-                "setTag": {
-                    "name": "Set tag you entered in the text field",
-                    "text": "Click"
+                "tag": {
+                    "name": "Global tag"
                 },
                 "position": {
                     "name": "Global position",
@@ -61,6 +59,10 @@
                         "xbox": "Xbox",
                         "youtube": "YouTube"
                     }
+                },
+                "updateSettings": {
+                    "name": "Publish settings",
+                    "text": "Click"
                 },
                 "resetTag": {
                     "name": "Delete global tag",
