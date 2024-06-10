@@ -1,6 +1,11 @@
 TagPreview {
-    height: 20;
+    height: fit-content;
     orientation: horizontal;
+
+    .error {
+        text-color: red;
+        margin-left: 2;
+    }
 
     .icon {
         margin-left: 1;
