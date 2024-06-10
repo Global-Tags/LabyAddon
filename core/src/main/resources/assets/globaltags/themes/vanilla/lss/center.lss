@@ -1,3 +1,17 @@
-.tag {
-    width: 20;
+TagPreview {
+    height: 20;
+    orientation: horizontal;
+
+    .icon {
+        margin-left: 1;
+        margin-right: 3;
+        height: 16;
+        width: height;
+    }
+
+    .staff-icon {
+        margin-left: 2;
+        height: 11;
+        width: height;
+    }
 }
