@@ -22,7 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Link("center.lss")
+@Link("preview.lss")
 @AutoWidget
 @SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
