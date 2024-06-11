@@ -5,9 +5,6 @@ import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.icon.Icon;
-import net.labymod.api.client.resources.ResourceLocation;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class PlayerInfo {
@@ -52,10 +49,7 @@ public class PlayerInfo {
         };
     }
 
-    // To reduce object creation. Won't be cleared until restart
-    private final Map<String, Icon> iconCache = new HashMap<>();
-
-    public GlobalIcon getIconValue() {
+    public GlobalIcon getGlobalIcon() {
         try {
             return GlobalIcon.valueOf(icon);
         } catch (Exception ignored) {
@@ -64,17 +58,7 @@ public class PlayerInfo {
     }
 
     public Icon getIcon() {
-        if(iconCache.containsKey(this.icon.toLowerCase()))
-            return iconCache.get(this.icon.toLowerCase());
-        ResourceLocation location = ResourceLocation.create(
-            "globaltags",
-            "textures/icons/" + this.icon.toLowerCase() + ".png"
-        );
-        iconCache.put(
-            this.icon.toLowerCase(),
-            location.exists() ? Icon.texture(location) : null
-        );
-        return getIcon();
+        return getGlobalIcon().getIcon();
     }
 
     public boolean isAdmin() {
