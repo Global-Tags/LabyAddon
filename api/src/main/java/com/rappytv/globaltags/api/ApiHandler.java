@@ -131,7 +131,6 @@ public class ApiHandler {
         request.sendAsyncRequest((response) -> {
             if(!request.isSuccessful()) {
                 consumer.accept(new ApiResponse(false, request.getError()));
-                Util.notify(I18n.translate("globaltags.notifications.error"), request.getError());
                 return;
             }
             consumer.accept(new ApiResponse(true, request.getMessage()));
