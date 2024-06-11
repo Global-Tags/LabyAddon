@@ -19,6 +19,9 @@ public class TagCache {
     public static void add(UUID uuid, PlayerInfo info) {
         cache.put(uuid, info);
     }
+    public static void remove(UUID uuid) {
+        cache.remove(uuid);
+    }
     public static boolean has(UUID uuid) {
         return cache.containsKey(uuid);
     }
