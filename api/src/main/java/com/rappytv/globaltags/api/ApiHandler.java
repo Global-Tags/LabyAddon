@@ -7,7 +7,6 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.tag.PositionType;
-import net.labymod.api.util.I18n;
 import net.labymod.api.util.io.web.request.Request.Method;
 import java.util.Map;
 import java.util.UUID;
