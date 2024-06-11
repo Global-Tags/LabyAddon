@@ -14,10 +14,21 @@ import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.Setting;
+import net.labymod.api.util.Debounce;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.MethodOrder;
 
 public class TagSubConfig extends Config {
+
+    public TagSubConfig() {
+        Runnable runnable = () -> Debounce.of("globaltags-config-update", 2000, () -> Util.notify(
+            I18n.translate("globaltags.settings.tags.staged.title"),
+            I18n.translate("globaltags.settings.tags.staged.description")
+        ));
+        tag.addChangeListener(runnable);
+        position.addChangeListener(runnable);
+        globalIcon.addChangeListener(runnable);
+    }
 
     public void fetchTag() {
         TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> tag.set(info.getPlainTag() != null ? info.getPlainTag() : ""));
@@ -64,5 +75,16 @@ public class TagSubConfig extends Config {
             I18n.translate("globaltags.notifications.success"),
             I18n.translate("globaltags.notifications.cacheCleared")
         );
+    }
+
+    public ConfigProperty<String> tag() {
+        return tag;
+    }
+    public ConfigProperty<PositionType> position() {
+        return position;
+    }
+
+    public ConfigProperty<GlobalIcon> icon() {
+        return globalIcon;
     }
 }
