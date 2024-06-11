@@ -20,6 +20,10 @@
             },
             "tags": {
                 "name": "Tag settings",
+                "staged": {
+                    "title": "Staged changes.",
+                    "description": "Click on the \"Publish settings\" button to publish changes!"
+                },
                 "tagPreview": {
                     "name": "Tag Preview",
                     "banned": "Your account is suspended!\nReason: %s",
