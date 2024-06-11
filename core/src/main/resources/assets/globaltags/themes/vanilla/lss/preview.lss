@@ -19,4 +19,16 @@ TagPreview {
         height: 11;
         width: height;
     }
+
+    .refresh-button {
+        height: 20;
+        width: height;
+        padding: 0;
+        alignment: right;
+
+        .button-icon {
+            height: 8;
+            width: height;
+        }
+    }
 }
