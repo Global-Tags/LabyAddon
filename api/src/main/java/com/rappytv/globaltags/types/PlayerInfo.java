@@ -55,8 +55,12 @@ public class PlayerInfo {
     // To reduce object creation. Won't be cleared until restart
     private final Map<String, Icon> iconCache = new HashMap<>();
 
-    public String getIconName() {
-        return icon;
+    public GlobalIcon getIconValue() {
+        try {
+            return GlobalIcon.valueOf(icon);
+        } catch (Exception ignored) {
+            return GlobalIcon.NONE;
+        }
     }
 
     public Icon getIcon() {
