@@ -33,10 +33,14 @@ import java.lang.annotation.Target;
 @SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
+    // TODO: The fetching, reloading and the notification are not working properly with eachother
+
     private final Icon adminIcon = Icon.texture(ResourceLocation.create(
         "globaltags",
         "textures/icons/staff.png"
     ));
+    private static boolean refetch = true;
+    private static boolean changed = false;
     private final TagSubConfig config;
 
     private TagPreviewWidget(TagSubConfig config) {
@@ -44,24 +48,38 @@ public class TagPreviewWidget extends HorizontalListWidget {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if(changed) {
+            reload();
+            changed = false;
+        }
+    }
+
+    @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
 
-        TagCache.resolve(Laby.labyAPI().getUniqueId(),
-            (info) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) ->
+            Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                 Component error = getError(info);
                 if (error != null) {
                     ComponentWidget errorComponent = ComponentWidget.component(error)
                         .addId("error");
                     this.addEntry(errorComponent);
                 } else {
-                    config.tag().set(info.getPlainTag());
-                    config.position().set(info.getPosition());
-                    config.icon().set(info.getIconValue());
+                    if(refetch) {
+                        config.tag().set(info.getPlainTag());
+                        config.position().set(info.getPosition());
+                        config.icon().set(info.getGlobalIcon());
+                    }
                     ComponentWidget tag = ComponentWidget.component(
-                        info.getTag() != null ? info.getTag() : Component.text("Empty")).addId("tag");
-                    if (info.getIconValue() != GlobalIcon.NONE)
-                        this.addEntry(new IconWidget(info.getIcon()).addId("icon"));
+                        info.getTag() != null
+                            ? Util.translateColorCodes(config.tag().get())
+                            : Component.text("Empty")
+                    ).addId("tag");
+                    if (info.getGlobalIcon() != GlobalIcon.NONE)
+                        this.addEntry(new IconWidget(config.icon().get().getIcon()).addId("icon"));
                     this.addEntry(tag);
                     if (info.isAdmin())
                         this.addEntry(new IconWidget(adminIcon).addId("staff-icon"));
@@ -72,8 +90,25 @@ public class TagPreviewWidget extends HorizontalListWidget {
             }));
     }
 
+    public void reload() {
+        refetch(false);
+    }
+
     public void refetch() {
-        TagCache.remove(Laby.labyAPI().getUniqueId());
+        refetch(true);
+    }
+
+    public static boolean change() {
+        changed = true;
+        return !refetch;
+    }
+
+    private void refetch(boolean refetch) {
+        TagPreviewWidget.refetch = refetch;
+        if(TagPreviewWidget.refetch) {
+            TagCache.remove(Laby.labyAPI().getUniqueId());
+            TagPreviewWidget.refetch = false;
+        }
         this.reInitialize();
     }
 

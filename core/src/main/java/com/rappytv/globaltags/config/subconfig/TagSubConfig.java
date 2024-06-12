@@ -1,11 +1,10 @@
 package com.rappytv.globaltags.config.subconfig;
 
 import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.config.widget.TagPreviewWidget;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget.TagPreviewSetting;
 import com.rappytv.globaltags.types.GlobalIcon;
-import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
-import net.labymod.api.Laby;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
@@ -21,17 +20,16 @@ import net.labymod.api.util.MethodOrder;
 public class TagSubConfig extends Config {
 
     public TagSubConfig() {
-        Runnable runnable = () -> Debounce.of("globaltags-config-update", 2000, () -> Util.notify(
-            I18n.translate("globaltags.settings.tags.staged.title"),
-            I18n.translate("globaltags.settings.tags.staged.description")
-        ));
+        Runnable runnable = () -> Debounce.of("globaltags-config-update", 1000, () -> {
+            if(TagPreviewWidget.change())
+                Util.notify(
+                    I18n.translate("globaltags.settings.tags.staged.title"),
+                    I18n.translate("globaltags.settings.tags.staged.description")
+                );
+        });
         tag.addChangeListener(runnable);
         position.addChangeListener(runnable);
         globalIcon.addChangeListener(runnable);
-    }
-
-    public void fetchTag() {
-        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> tag.set(info.getPlainTag() != null ? info.getPlainTag() : ""));
     }
 
     @TagPreviewSetting
