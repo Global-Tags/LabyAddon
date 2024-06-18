@@ -20,7 +20,9 @@ import net.labymod.api.util.MethodOrder;
 public class TagSubConfig extends Config {
 
     public TagSubConfig() {
-        Runnable runnable = () -> Debounce.of("globaltags-config-update", 1000,
+        Runnable runnable = () -> Debounce.of(
+            "globaltags-config-update",
+            1000,
             TagPreviewWidget::change
         );
         tag.addChangeListener(runnable);
