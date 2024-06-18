@@ -8,6 +8,7 @@ import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.labyconnect.TokenStorage.Token;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Util {
@@ -20,8 +21,9 @@ public class Util {
             .buildAndPush();
     }
 
+    @NotNull
     public static Component translateColorCodes(String string) {
-        if(string == null) return null;
+        if(string == null) string = "";
         return LegacyComponentSerializer
             .legacyAmpersand()
             .deserialize(string);

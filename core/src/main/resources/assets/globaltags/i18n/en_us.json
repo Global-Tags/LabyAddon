@@ -28,7 +28,9 @@
                     "name": "Tag Preview",
                     "banned": "Your account is suspended!\nReason: %s",
                     "noInfo": "Couldn't fetch account info!",
-                    "labyConnect": "You're not connected to LabyConnect!"
+                    "labyConnect": "You're not connected to LabyConnect!",
+                    "empty": "<Empty Tag>",
+                    "emptyReason": "No reason provided"
                 },
                 "tag": {
                     "name": "Global tag"

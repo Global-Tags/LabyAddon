@@ -8,6 +8,7 @@ import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
@@ -87,9 +88,12 @@ public class TagPreviewWidget extends HorizontalListWidget {
                         );
                     }
                     ComponentWidget tag = ComponentWidget.component(
-                        config.tag().get() != null
-                            ? Util.translateColorCodes(config.tag().get())
-                            : Component.text("Empty")
+                        config.tag().get().isBlank()
+                            ? Component.translatable(
+                                "globaltags.settings.tags.tagPreview.empty",
+                                NamedTextColor.RED
+                            )
+                            : Util.translateColorCodes(config.tag().get())
                     ).addId("text");
                     if (config.icon().get() != GlobalIcon.NONE)
                         this.addEntry(new IconWidget(config.icon().get().getIcon()).addId("icon"));
@@ -117,7 +121,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
         else if(info.isBanned()) return Component.translatable(
             "globaltags.settings.tags.tagPreview.banned",
-            Component.text(info.getBanReason())
+            Component.text(
+                info.getBanReason() != null
+                    ? info.getBanReason()
+                    : I18n.translate("globaltags.settings.tags.tagPreview.emptyReason")
+            )
         );
         return null;
     }

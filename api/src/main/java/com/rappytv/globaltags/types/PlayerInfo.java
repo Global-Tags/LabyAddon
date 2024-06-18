@@ -5,6 +5,8 @@ import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.icon.Icon;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class PlayerInfo {
@@ -20,7 +22,7 @@ public class PlayerInfo {
     public PlayerInfo(UUID uuid, String tag, String position, String icon, boolean admin, Ban ban) {
         this.uuid = uuid;
         this.tag = Util.translateColorCodes(tag);
-        this.plainTag = tag;
+        this.plainTag = tag != null ? tag : "";
         this.position = position;
         this.icon = icon;
         this.admin = admin;
@@ -31,10 +33,12 @@ public class PlayerInfo {
         return uuid;
     }
 
+    @NotNull
     public Component getTag() {
         return tag;
     }
 
+    @NotNull
     public String getPlainTag() {
         return plainTag;
     }
@@ -69,6 +73,7 @@ public class PlayerInfo {
         return ban != null && ban.active;
     }
 
+    @Nullable
     public String getBanReason() {
         if(ban == null) return null;
         return ban.reason;
