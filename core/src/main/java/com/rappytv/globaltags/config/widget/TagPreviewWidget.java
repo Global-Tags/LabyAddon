@@ -23,6 +23,7 @@ import net.labymod.api.configuration.settings.annotation.SettingElement;
 import net.labymod.api.configuration.settings.annotation.SettingFactory;
 import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
+import net.labymod.api.util.I18n;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -32,8 +33,6 @@ import java.lang.annotation.Target;
 @AutoWidget
 @SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
-
-    // TODO: The fetching, reloading and the notification are not working properly with eachother
 
     private final Icon adminIcon = Icon.texture(ResourceLocation.create(
         "globaltags",
@@ -50,16 +49,21 @@ public class TagPreviewWidget extends HorizontalListWidget {
     @Override
     public void tick() {
         super.tick();
-        if(changed) {
-            reload();
-            changed = false;
-        }
+        if(!refetch && !changed) return;
+        if(refetch)
+            TagCache.remove(Laby.labyAPI().getUniqueId());
+        reInitialize();
+        refetch = false;
+        changed = false;
     }
 
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
+        initialize(refetch);
+    }
 
+    public void initialize(boolean refetched) {
         TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) ->
             Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                 Component error = getError(info);
@@ -68,10 +72,19 @@ public class TagPreviewWidget extends HorizontalListWidget {
                         .addId("error");
                     this.addEntry(errorComponent);
                 } else {
-                    if(refetch) {
+                    if(refetched) {
                         config.tag().set(info.getPlainTag());
                         config.position().set(info.getPosition());
                         config.icon().set(info.getGlobalIcon());
+                    }
+                    boolean updated = !config.tag().get().equals(info.getPlainTag())
+                        || !config.position().get().equals(info.getPosition())
+                        || !config.icon().get().equals(info.getGlobalIcon());
+                    if(changed && updated) {
+                        Util.notify(
+                            I18n.translate("globaltags.settings.tags.staged.title"),
+                            I18n.translate("globaltags.settings.tags.staged.description")
+                        );
                     }
                     ComponentWidget tag = ComponentWidget.component(
                         info.getTag() != null
@@ -90,26 +103,12 @@ public class TagPreviewWidget extends HorizontalListWidget {
             }));
     }
 
-    public void reload() {
-        refetch(false);
+    public static void change() {
+        TagPreviewWidget.changed = true;
     }
 
     public void refetch() {
-        refetch(true);
-    }
-
-    public static boolean change() {
-        changed = true;
-        return !refetch;
-    }
-
-    private void refetch(boolean refetch) {
-        TagPreviewWidget.refetch = refetch;
-        if(TagPreviewWidget.refetch) {
-            TagCache.remove(Laby.labyAPI().getUniqueId());
-            TagPreviewWidget.refetch = false;
-        }
-        this.reInitialize();
+        refetch = true;
     }
 
     private Component getError(PlayerInfo info) {

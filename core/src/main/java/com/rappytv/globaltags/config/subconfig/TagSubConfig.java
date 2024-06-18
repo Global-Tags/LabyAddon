@@ -20,13 +20,9 @@ import net.labymod.api.util.MethodOrder;
 public class TagSubConfig extends Config {
 
     public TagSubConfig() {
-        Runnable runnable = () -> Debounce.of("globaltags-config-update", 1000, () -> {
-            if(TagPreviewWidget.change())
-                Util.notify(
-                    I18n.translate("globaltags.settings.tags.staged.title"),
-                    I18n.translate("globaltags.settings.tags.staged.description")
-                );
-        });
+        Runnable runnable = () -> Debounce.of("globaltags-config-update", 1000,
+            TagPreviewWidget::change
+        );
         tag.addChangeListener(runnable);
         position.addChangeListener(runnable);
         globalIcon.addChangeListener(runnable);
