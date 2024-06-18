@@ -69,7 +69,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 Component error = getError(info);
                 if (error != null) {
                     ComponentWidget errorComponent = ComponentWidget.component(error)
-                        .addId("error");
+                        .addId("text", "error");
                     this.addEntry(errorComponent);
                 } else {
                     if(refetched) {
@@ -87,11 +87,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
                         );
                     }
                     ComponentWidget tag = ComponentWidget.component(
-                        info.getTag() != null
+                        config.tag().get() != null
                             ? Util.translateColorCodes(config.tag().get())
                             : Component.text("Empty")
-                    ).addId("tag");
-                    if (info.getGlobalIcon() != GlobalIcon.NONE)
+                    ).addId("text");
+                    if (config.icon().get() != GlobalIcon.NONE)
                         this.addEntry(new IconWidget(config.icon().get().getIcon()).addId("icon"));
                     this.addEntry(tag);
                     if (info.isAdmin())
