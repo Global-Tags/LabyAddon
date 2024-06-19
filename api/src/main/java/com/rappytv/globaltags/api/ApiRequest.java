@@ -32,7 +32,7 @@ public abstract class ApiRequest {
 
     public void sendAsyncRequest(Callback<JsonObject> callback) {
         GsonRequest<JsonObject> request = Request.ofGson(JsonObject.class)
-            .url("http://localhost:5000" + path)
+            .url(getApiBase() + path)
             .method(method)
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", key != null ? key : "")
@@ -89,5 +89,8 @@ public abstract class ApiRequest {
     }
     public static String getVersion() {
         return version;
+    }
+    private String getApiBase() {
+        return "https://gt.rappytv.com";
     }
 }
