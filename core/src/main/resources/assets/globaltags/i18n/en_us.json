@@ -24,7 +24,8 @@
                 "name": "Tag size"
             },
             "showBackground": {
-                "name": "Show background"
+                "name": "Show background",
+                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
             },
             "tags": {
                 "name": "Tag settings",
