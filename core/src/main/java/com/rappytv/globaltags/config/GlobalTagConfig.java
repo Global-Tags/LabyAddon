@@ -48,7 +48,7 @@ public class GlobalTagConfig extends AddonConfig {
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
 
     @SettingSection("tags")
-    @SpriteSlot(size = 32, x = 1)
+    @SpriteSlot(size = 32, y = 1)
     private final TagSubConfig tags = new TagSubConfig();
 
     @MethodOrder(after = "tags")

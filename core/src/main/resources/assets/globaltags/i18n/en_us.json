@@ -28,7 +28,7 @@
                 "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
             },
             "tags": {
-                "name": "Tag settings",
+                "name": "Global tag settings",
                 "staged": {
                     "title": "Staged changes.",
                     "description": "Click on the \"Publish settings\" button to publish changes!"
