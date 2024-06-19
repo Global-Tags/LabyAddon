@@ -2,8 +2,20 @@
     "globaltags": {
         "settings": {
             "name": "Global Tags",
+            "header": {
+                "display": {
+                    "name": "Display settings"
+                },
+                "tags": {
+                    "name": "Tag settings"
+                }
+            },
             "enabled": {
                 "name": "Enabled"
+            },
+            "localizedResponses": {
+                "name": "Localize API responses",
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
             },
             "showOwnTag": {
                 "name": "Show own tag"
@@ -13,10 +25,6 @@
             },
             "showBackground": {
                 "name": "Show background"
-            },
-            "localizedResponses": {
-                "name": "Localize API responses",
-                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
             },
             "tags": {
                 "name": "Tag settings",
@@ -46,7 +54,7 @@
                     }
                 },
                 "globalIcon": {
-                    "name": "Global Icon",
+                    "name": "Global icon",
                     "entries": {
                         "none": "None",
                         "discord": "Discord",
@@ -78,12 +86,12 @@
                 "resetTag": {
                     "name": "Delete global tag",
                     "text": "Delete"
-                },
-                "clearCache": {
-                    "name": "Clear cache",
-                    "text": "Clear",
-                    "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f."
                 }
+            },
+            "clearCache": {
+                "name": "Clear cache",
+                "text": "Clear",
+                "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f.\nYou can additionally clear the cache with §b/gt cc§f."
             }
         },
         "notifications": {

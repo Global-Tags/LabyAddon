@@ -15,11 +15,11 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.Butto
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.Setting;
 import net.labymod.api.util.Debounce;
-import net.labymod.api.util.I18n;
 import net.labymod.api.util.MethodOrder;
 
 public class TagSubConfig extends Config {
@@ -35,6 +35,8 @@ public class TagSubConfig extends Config {
         globalIcon.addChangeListener(runnable);
     }
 
+    @SpriteSlot(size = 32, x = 1)
+    @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @TagPreviewSetting
     private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
 
@@ -78,17 +80,6 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
         ApiHandler.resetTag((info) -> {});
-    }
-
-    @MethodOrder(after = "resetTag")
-    @ButtonSetting
-    @SpriteSlot(size = 32, y = 2)
-    public void clearCache(Setting setting) {
-        Util.clearCache();
-        Util.notify(
-            I18n.translate("globaltags.notifications.success"),
-            I18n.translate("globaltags.notifications.cacheCleared")
-        );
     }
 
     public ConfigProperty<String> tag() {
