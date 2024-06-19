@@ -2,7 +2,9 @@ package com.rappytv.globaltags.util;
 
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
+import net.labymod.api.client.gui.screen.widget.widgets.popup.SimpleAdvancedPopup;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.labyconnect.TokenStorage.Token;
@@ -13,12 +15,53 @@ import org.jetbrains.annotations.Nullable;
 
 public class Util {
 
+    public static final Component unchanged = Component.translatable(
+        "globaltags.settings.tags.updateSettings.unchanged",
+        NamedTextColor.DARK_GRAY
+    );
+    private static Component tagResponse = null;
+    private static Component positionResponse = null;
+    private static Component iconResponse = null;
+
     public static void notify(String title, String text) {
         Notification.builder()
             .title(net.labymod.api.client.component.Component.text(title))
             .text(net.labymod.api.client.component.Component.text(text))
             .type(Type.SOCIAL)
             .buildAndPush();
+    }
+
+    public static void update(ResultType type, Component component) {
+        switch (type) {
+            case TAG -> tagResponse = component;
+            case POSITION -> positionResponse = component;
+            case ICON -> iconResponse = component;
+        }
+        if(tagResponse == null || positionResponse == null || iconResponse == null) return;
+        SimpleAdvancedPopup popup = SimpleAdvancedPopup
+            .builder()
+            .title(Component.text("Update result", NamedTextColor.AQUA))
+            .description(Component.translatable(
+                "globaltags.settings.tags.updateSettings.result",
+                tagResponse,
+                positionResponse,
+                iconResponse
+            ))
+            .build();
+
+        Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+            popup.displayInOverlay();
+            Util.clearCache();
+            tagResponse = null;
+            positionResponse = null;
+            iconResponse = null;
+        });
+    }
+
+    public enum ResultType {
+        TAG,
+        POSITION,
+        ICON
     }
 
     @NotNull

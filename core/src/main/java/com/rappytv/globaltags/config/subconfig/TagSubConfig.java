@@ -4,7 +4,12 @@ import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget.TagPreviewSetting;
 import com.rappytv.globaltags.types.GlobalIcon;
+import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
+import com.rappytv.globaltags.util.Util.ResultType;
+import net.labymod.api.Laby;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
@@ -49,10 +54,23 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
     public void updateSettings(Setting setting) {
-        ApiHandler.setTag(tag.get(), (info) -> {});
-        ApiHandler.setPosition(position.get(), (info) -> {});
-        ApiHandler.setIcon(globalIcon.get(), (info) -> {});
-        Util.clearCache();
+        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> {
+            if(!info.getPlainTag().equals(tag.get())) ApiHandler.setTag(tag.get(), (response) -> {
+                if(response.isSuccessful()) Util.update(ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(ResultType.TAG, response.getMessage());
+            });
+            else Util.update(ResultType.TAG, Util.unchanged);
+            if(!info.getPosition().equals(position.get())) ApiHandler.setPosition(position.get(), (response) -> {
+                if(response.isSuccessful()) Util.update(ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(ResultType.POSITION, response.getMessage());
+            });
+            else Util.update(ResultType.POSITION, Util.unchanged);
+            if(!info.getGlobalIcon().equals(globalIcon.get())) ApiHandler.setIcon(globalIcon.get(), (response) -> {
+                if(response.isSuccessful()) Util.update(ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(ResultType.ICON, response.getMessage());
+            });
+            else Util.update(ResultType.ICON, Util.unchanged);
+        });
     }
 
     @MethodOrder(after = "updateSettings")

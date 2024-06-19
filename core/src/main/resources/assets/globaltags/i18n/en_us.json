@@ -71,7 +71,9 @@
                 },
                 "updateSettings": {
                     "name": "Publish settings",
-                    "text": "Click"
+                    "text": "Update",
+                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
+                    "unchanged": "Unchanged"
                 },
                 "resetTag": {
                     "name": "Delete global tag",
