@@ -107,7 +107,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(false, request.getMessage()));
+            consumer.accept(new ApiResponse(true, request.getMessage()));
             Util.clearCache();
         });
     }
