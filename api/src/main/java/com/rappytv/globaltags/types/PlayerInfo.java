@@ -17,7 +17,7 @@ public class PlayerInfo {
     private final String position;
     private final String icon;
     private final boolean admin;
-    private final Ban ban;
+    private final Suspension suspension;
 
     public PlayerInfo(UUID uuid, String tag, String position, String icon, boolean admin, Ban ban) {
         this.uuid = uuid;
@@ -26,23 +26,35 @@ public class PlayerInfo {
         this.position = position;
         this.icon = icon;
         this.admin = admin;
-        this.ban = ban;
+        this.suspension = new Suspension(ban);
     }
 
+    /**
+     * Returns the player's uuid
+     */
     public UUID getUUID() {
         return uuid;
     }
 
+    /**
+     * Returns the player's GlobalTag as a colored component
+     */
     @NotNull
     public Component getTag() {
         return tag;
     }
 
+    /**
+     * Returns the player's GlobalTag as a plain string - with color codes
+     */
     @NotNull
     public String getPlainTag() {
         return plainTag;
     }
 
+    /**
+     * Returns the player's GlobalTag position
+     */
     public PositionType getPosition() {
         if(position == null) return PositionType.ABOVE_NAME;
         return switch(position) {
@@ -53,6 +65,9 @@ public class PlayerInfo {
         };
     }
 
+    /**
+     * Returns the {@link GlobalIcon} enum value which the player has selected
+     */
     public GlobalIcon getGlobalIcon() {
         try {
             return GlobalIcon.valueOf(icon);
@@ -61,21 +76,104 @@ public class PlayerInfo {
         }
     }
 
+    /**
+     * Returns the global icon of the player
+     */
     public Icon getIcon() {
         return getGlobalIcon().getIcon();
     }
 
+    /**
+     * Returns if the player is a GlobalTag admin
+     */
     public boolean isAdmin() {
         return admin;
     }
 
+    /**
+     * Use {@link PlayerInfo#isSuspended()} instead
+     */
+    @Deprecated(forRemoval = true)
     public boolean isBanned() {
-        return ban != null && ban.active;
+        return isSuspended();
     }
 
+    /**
+     * Use {@link PlayerInfo#getSuspension()} instead
+     */
+    @Deprecated(forRemoval = true)
     @Nullable
     public String getBanReason() {
-        if(ban == null) return null;
-        return ban.reason;
+        return suspension.reason;
+    }
+
+    /**
+     * Shortcut to check if the player suspension is active
+     */
+    public boolean isSuspended() {
+        return suspension.active;
+    }
+
+    /**
+     * Gets the suspension object from a player
+     */
+    public Suspension getSuspension() {
+        return suspension;
+    }
+
+    public static class Suspension {
+
+        private final boolean active;
+        private final String reason;
+        private final boolean appealable;
+
+        /**
+         * Creates a suspension from a {@link Ban} object
+         */
+        protected Suspension(Ban ban) {
+            this.active = ban.active;
+            this.reason = ban.reason;
+            this.appealable = ban.appealable;
+        }
+
+        /**
+         * Creates an inactive suspension
+         */
+        protected Suspension() {
+            this.active = false;
+            this.reason = null;
+            this.appealable = false;
+        }
+
+        /**
+         * Creates an active suspension
+         */
+        protected Suspension(String reason, boolean appealable) {
+            this.active = true;
+            this.reason = reason;
+            this.appealable = appealable;
+        }
+
+        /**
+         * Returns if the suspension is active or not
+         */
+        public boolean isActive() {
+            return active;
+        }
+
+        /**
+         * Returns the suspension reason
+         */
+        @Nullable
+        public String getReason() {
+            return reason;
+        }
+
+        /**
+         * Returns if the suspension can be appealed
+         */
+        public boolean isAppealable() {
+            return appealable;
+        }
     }
 }
