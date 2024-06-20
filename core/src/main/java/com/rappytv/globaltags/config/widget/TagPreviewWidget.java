@@ -108,7 +108,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, this::refetch)
                     .addId("refresh-button");
                 addEntry(refreshButton);
-                if(info.isBanned()) {
+                if(info.isSuspended()) {
                     // TODO: Implement appeal functionality
                     ButtonWidget appealButton = ButtonWidget.i18n(
                         "globaltags.settings.tags.tagPreview.appeal.name",
@@ -118,7 +118,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                         "globaltags.settings.tags.tagPreview.appeal.description",
                         NamedTextColor.GOLD
                     ));
-                    appealButton.setEnabled(false); // TODO: Remove this when functionality is implemented
+                    appealButton.setEnabled(info.getSuspension().isAppealable());
                     addEntry(appealButton);
                 }
             }));
@@ -136,11 +136,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
         String session = Util.getSessionToken();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-        else if(info.isBanned()) return Component.translatable(
+        else if(info.isSuspended()) return Component.translatable(
             "globaltags.settings.tags.tagPreview.banned",
             Component.text(
-                info.getBanReason() != null
-                    ? info.getBanReason()
+                info.getSuspension().getReason() != null
+                    ? info.getSuspension().getReason()
                     : I18n.translate("globaltags.settings.tags.tagPreview.emptyReason")
             )
         );

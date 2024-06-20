@@ -17,7 +17,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context." + (target.isBanned() ? "unban" : "ban") + ".name");
+        return Component.translatable("globaltags.context." + (target.isSuspended() ? "unban" : "ban") + ".name");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public void execute(Player player) {
-        if(target.isBanned()) {
+        if(target.isSuspended()) {
             ApiHandler.unbanPlayer(target.getUUID(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
                     .append(GlobalTagAddon.prefix)
