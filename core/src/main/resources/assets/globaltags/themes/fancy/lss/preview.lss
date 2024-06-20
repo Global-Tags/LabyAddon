@@ -23,6 +23,13 @@ TagPreview {
         width: height;
     }
 
+    .appeal-button {
+        height: 20;
+        width: fit-content;
+        # padding: 0;
+        alignment: right;
+    }
+
     .refresh-button {
         height: 20;
         width: height;

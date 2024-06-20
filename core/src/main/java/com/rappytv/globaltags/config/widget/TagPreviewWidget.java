@@ -108,6 +108,19 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, this::refetch)
                     .addId("refresh-button");
                 addEntry(refreshButton);
+                if(info.isBanned()) {
+                    // TODO: Implement appeal functionality
+                    ButtonWidget appealButton = ButtonWidget.i18n(
+                        "globaltags.settings.tags.tagPreview.appeal.name",
+                        () -> {}
+                    ).addId("appeal-button");
+                    appealButton.setHoverComponent(Component.translatable(
+                        "globaltags.settings.tags.tagPreview.appeal.description",
+                        NamedTextColor.GOLD
+                    ));
+                    appealButton.setEnabled(false); // TODO: Remove this when functionality is implemented
+                    addEntry(appealButton);
+                }
             }));
     }
 

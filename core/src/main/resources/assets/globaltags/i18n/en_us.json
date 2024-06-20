@@ -39,7 +39,11 @@
                     "noInfo": "Couldn't fetch account info!",
                     "labyConnect": "You're not connected to LabyConnect!",
                     "empty": "<Empty Tag>",
-                    "emptyReason": "No reason provided"
+                    "emptyReason": "No reason provided",
+                    "appeal": {
+                        "name": "Appeal",
+                        "description": "⚠ This button will only be clickable if your suspension is appealable."
+                    }
                 },
                 "tag": {
                     "name": "Global tag"
