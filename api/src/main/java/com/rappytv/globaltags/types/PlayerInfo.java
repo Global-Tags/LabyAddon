@@ -39,9 +39,9 @@ public class PlayerInfo {
     /**
      * Returns the player's GlobalTag as a colored component
      */
-    @NotNull
+    @Nullable
     public Component getTag() {
-        return tag;
+        return !plainTag.isEmpty() ? tag : null;
     }
 
     /**
