@@ -121,6 +121,7 @@ public class PlayerInfo {
         return suspension;
     }
 
+    @SuppressWarnings("unused")
     public static class Suspension {
 
         private final boolean active;
@@ -130,16 +131,16 @@ public class PlayerInfo {
         /**
          * Creates a suspension from a {@link Ban} object
          */
-        protected Suspension(Ban ban) {
+        public Suspension(Ban ban) {
             this.active = ban.active;
             this.reason = ban.reason;
-            this.appealable = ban.appealable;
+            this.appealable = ban.appealable == null || ban.appealable;
         }
 
         /**
          * Creates an inactive suspension
          */
-        protected Suspension() {
+        public Suspension() {
             this.active = false;
             this.reason = null;
             this.appealable = false;
@@ -148,7 +149,7 @@ public class PlayerInfo {
         /**
          * Creates an active suspension
          */
-        protected Suspension(String reason, boolean appealable) {
+        public Suspension(String reason, boolean appealable) {
             this.active = true;
             this.reason = reason;
             this.appealable = appealable;
