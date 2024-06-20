@@ -108,11 +108,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, this::refetch)
                     .addId("refresh-button");
                 addEntry(refreshButton);
-                if(info.isSuspended()) {
+                if(info != null && info.isSuspended()) {
                     // TODO: Implement appeal functionality
                     ButtonWidget appealButton = ButtonWidget.i18n(
                         "globaltags.settings.tags.tagPreview.appeal.name",
-                        () -> {}
+                        () -> Util.notify("Not implemented", "Wait for next release candidate")
                     ).addId("appeal-button");
                     appealButton.setHoverComponent(Component.translatable(
                         "globaltags.settings.tags.tagPreview.appeal.description",
