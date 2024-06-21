@@ -227,6 +227,26 @@ public class ApiHandler {
         });
     }
 
+    public static void appealBan(String reason, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + Laby.labyAPI().getUniqueId() + "/ban/appeal",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, String> getBody() {
+                return Map.of("reason", reason);
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
+        });
+    }
+
     public static void toggleAdmin(UUID uuid, Consumer<ApiResponse> consumer) {
         ApiRequest request = new ApiRequest(
             Method.POST,
