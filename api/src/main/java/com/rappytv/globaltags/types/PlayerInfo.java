@@ -134,7 +134,7 @@ public class PlayerInfo {
         public Suspension(Ban ban) {
             this.active = ban.active;
             this.reason = ban.reason;
-            this.appealable = ban.appealable == null || ban.appealable;
+            this.appealable = ban.appealable;
         }
 
         /**

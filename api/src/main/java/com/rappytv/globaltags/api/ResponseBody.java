@@ -19,6 +19,6 @@ public class ResponseBody {
     public static class Ban {
         public boolean active;
         public String reason;
-        public Boolean appealable;
+        public boolean appealable;
     }
 }
