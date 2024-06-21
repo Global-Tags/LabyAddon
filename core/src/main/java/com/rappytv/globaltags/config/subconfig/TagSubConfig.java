@@ -55,8 +55,21 @@ public class TagSubConfig extends Config {
     @MethodOrder(after = "globalIcon")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
+    @SuppressWarnings("ConstantConditions")
     public void updateSettings(Setting setting) {
         TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> {
+            Component error = null;
+            if(Util.getSessionToken() == null)
+                error = Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
+            else if(info == null)
+                error = Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
+            if(error != null) {
+                Util.notify(
+                    Component.translatable("globaltags.notifications.error"),
+                    error
+                );
+                return;
+            }
             if(!info.getPlainTag().equals(tag.get())) ApiHandler.setTag(tag.get(), (response) -> {
                 if(response.isSuccessful()) Util.update(ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(ResultType.TAG, response.getMessage());
