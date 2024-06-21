@@ -105,7 +105,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                     if (info.isAdmin())
                         this.addEntry(new IconWidget(adminIcon).addId("staff-icon"));
                 }
-                ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, this::refetch)
+                ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
                     .addId("refresh-button");
                 addEntry(refreshButton);
                 if(info != null && info.isSuspended()) {
@@ -128,7 +128,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         TagPreviewWidget.changed = true;
     }
 
-    public void refetch() {
+    public static void refetch() {
         refetch = true;
     }
 
