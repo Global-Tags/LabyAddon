@@ -2,6 +2,7 @@ package com.rappytv.globaltags.util;
 
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.types.PlayerInfo;
+import net.labymod.api.Laby;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -45,6 +46,10 @@ public class TagCache {
         });
     }
     public static void clear() {
+        clear((info) -> {});
+    }
+    public static void clear(Consumer<PlayerInfo> consumer) {
         cache.clear();
+        TagCache.resolve(Laby.labyAPI().getUniqueId(), consumer);
     }
 }

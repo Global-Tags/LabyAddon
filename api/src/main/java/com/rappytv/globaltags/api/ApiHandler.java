@@ -2,6 +2,7 @@ package com.rappytv.globaltags.api;
 
 import com.rappytv.globaltags.types.GlobalIcon;
 import com.rappytv.globaltags.types.PlayerInfo;
+import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -82,8 +83,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         }));
     }
 
@@ -107,8 +107,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -132,8 +131,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -158,8 +156,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -199,8 +196,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -221,8 +217,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -243,8 +238,7 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            consumer.accept(new ApiResponse(true, request.getMessage()));
-            Util.clearCache();
+            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 

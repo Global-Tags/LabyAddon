@@ -24,9 +24,16 @@ public class Util {
     private static Component iconResponse = null;
 
     public static void notify(String title, String text) {
+        notify(
+            Component.text(title),
+            Component.text(text)
+        );
+    }
+
+    public static void notify(Component title, Component description) {
         Notification.builder()
-            .title(net.labymod.api.client.component.Component.text(title))
-            .text(net.labymod.api.client.component.Component.text(text))
+            .title(title)
+            .text(description)
             .type(Type.SOCIAL)
             .buildAndPush();
     }
@@ -51,7 +58,7 @@ public class Util {
 
         Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
             popup.displayInOverlay();
-            Util.clearCache();
+            TagCache.clear();
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;
@@ -70,11 +77,6 @@ public class Util {
         return LegacyComponentSerializer
             .legacyAmpersand()
             .deserialize(string);
-    }
-
-    public static void clearCache() {
-        TagCache.clear();
-        TagCache.resolve(Laby.labyAPI().getUniqueId());
     }
 
     public static @Nullable String getSessionToken() {
