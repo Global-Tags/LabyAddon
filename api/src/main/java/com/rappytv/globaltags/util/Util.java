@@ -34,7 +34,7 @@ public class Util {
         Notification.builder()
             .title(title)
             .text(description)
-            .type(Type.SOCIAL)
+            .type(Type.SYSTEM)
             .buildAndPush();
     }
 
