@@ -79,7 +79,16 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
-        ApiHandler.resetTag((info) -> {});
+        ApiHandler.resetTag((info) -> {
+            if(info.isSuccessful()) TagPreviewWidget.refetch();
+            Util.notify(
+                Component.translatable(info.isSuccessful()
+                    ? "globaltags.notifications.success"
+                    : "globaltags.notifications.error"
+                ),
+                info.getMessage().color(NamedTextColor.WHITE)
+            );
+        });
     }
 
     public ConfigProperty<String> tag() {
