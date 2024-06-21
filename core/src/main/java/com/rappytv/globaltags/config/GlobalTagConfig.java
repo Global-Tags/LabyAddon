@@ -2,6 +2,7 @@ package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
@@ -55,7 +56,7 @@ public class GlobalTagConfig extends AddonConfig {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 2)
     public void clearCache(Setting setting) {
-        Util.clearCache();
+        TagCache.clear();
         Util.notify(
             I18n.translate("globaltags.notifications.success"),
             I18n.translate("globaltags.notifications.cacheCleared")

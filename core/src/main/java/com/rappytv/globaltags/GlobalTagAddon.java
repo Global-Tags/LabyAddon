@@ -10,7 +10,7 @@ import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.interaction.ToggleAdminBulletPoint;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
-import com.rappytv.globaltags.util.Util;
+import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
@@ -66,7 +66,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                Util.clearCache();
+                TagCache.clear();
             }
         }, 1000 * 10, 1000 * 60 * 5);
     }
