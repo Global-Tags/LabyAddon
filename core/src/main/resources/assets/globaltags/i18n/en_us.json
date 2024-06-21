@@ -42,7 +42,12 @@
                     "emptyReason": "No reason provided",
                     "appeal": {
                         "name": "Appeal",
-                        "description": "⚠ This button will only be clickable if your suspension is appealable."
+                        "description": "⚠ This button will only be clickable if your suspension is appealable.",
+                        "popup": {
+                            "label": "Why should we unban you?",
+                            "placeholder": "Please enter a reason...",
+                            "button": "Send appeal"
+                        }
                     }
                 },
                 "tag": {

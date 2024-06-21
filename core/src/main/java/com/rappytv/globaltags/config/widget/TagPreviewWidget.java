@@ -109,10 +109,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
                     .addId("refresh-button");
                 addEntry(refreshButton);
                 if(info != null && info.isSuspended()) {
-                    // TODO: Implement appeal functionality
                     ButtonWidget appealButton = ButtonWidget.i18n(
                         "globaltags.settings.tags.tagPreview.appeal.name",
-                        () -> Util.notify("Not implemented", "Wait for next release candidate")
+                        () -> new AppealPopup().displayInOverlay()
                     ).addId("appeal-button");
                     appealButton.setHoverComponent(Component.translatable(
                         "globaltags.settings.tags.tagPreview.appeal.description",
