@@ -29,6 +29,9 @@ public class TagCache {
     public static PlayerInfo get(UUID uuid) {
         return cache.get(uuid);
     }
+    public static void resolveSelf(Consumer<PlayerInfo> consumer) {
+        resolve(Laby.labyAPI().getUniqueId(), consumer);
+    }
     public static void resolve(UUID uuid) {
         resolve(uuid, (info) -> {});
     }
@@ -46,10 +49,6 @@ public class TagCache {
         });
     }
     public static void clear() {
-        clear((info) -> {});
-    }
-    public static void clear(Consumer<PlayerInfo> consumer) {
         cache.clear();
-        TagCache.resolve(Laby.labyAPI().getUniqueId(), consumer);
     }
 }

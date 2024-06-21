@@ -83,7 +83,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         }));
     }
 
@@ -107,7 +108,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -131,7 +133,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -156,7 +159,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -196,7 +200,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -217,7 +222,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 
@@ -238,7 +244,8 @@ public class ApiHandler {
                 consumer.accept(new ApiResponse(false, request.getError()));
                 return;
             }
-            TagCache.clear((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         });
     }
 

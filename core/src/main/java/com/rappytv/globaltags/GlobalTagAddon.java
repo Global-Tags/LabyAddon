@@ -67,6 +67,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
             @Override
             public void run() {
                 TagCache.clear();
+                TagCache.resolveSelf((info) -> {});
             }
         }, 1000 * 10, 1000 * 60 * 5);
     }
