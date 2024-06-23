@@ -4,6 +4,7 @@ import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
@@ -35,6 +36,12 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2, x = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
+    @MethodOrder(after = "localizedResponses")
+    @SpriteSlot(size = 32, y = 2, x = 3)
+    @ButtonSetting
+    public void joinDiscord(Setting setting) {
+        Laby.references().chatExecutor().openUrl("https://gt.rappytv.com/discord");
+    }
 
     @SettingSection("display")
     @SwitchSetting
