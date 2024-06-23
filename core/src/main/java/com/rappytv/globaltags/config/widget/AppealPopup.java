@@ -4,7 +4,6 @@ import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
@@ -34,7 +33,7 @@ public class AppealPopup extends AdvancedPopup {
             ))
             .addId("send-button", "popup-description");
         sendButton.setEnabled(false);
-        sendButton.setActionListener(() -> {
+        sendButton.setActionListener(() ->
             ApiHandler.appealBan(inputWidget.getText(), (response) ->
                 Util.notify(
                     Component.translatable(response.isSuccessful()
@@ -43,8 +42,8 @@ public class AppealPopup extends AdvancedPopup {
                     ),
                     response.getMessage().color(NamedTextColor.WHITE)
                 )
-            );
-        });
+            )
+        );
         inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank()));
 
         content.addChild(labelWidget);

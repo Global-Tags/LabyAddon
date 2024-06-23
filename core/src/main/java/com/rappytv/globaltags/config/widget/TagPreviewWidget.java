@@ -68,7 +68,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
     }
 
     public void initialize(boolean refetched) {
-        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) ->
+        TagCache.resolveSelf((info) ->
             Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                 Component error = getError(info);
                 if (error != null) {

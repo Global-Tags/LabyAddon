@@ -7,7 +7,6 @@ import com.rappytv.globaltags.types.GlobalIcon;
 import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import com.rappytv.globaltags.util.Util.ResultType;
-import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -57,7 +56,7 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, y = 1, x = 1)
     @SuppressWarnings("ConstantConditions")
     public void updateSettings(Setting setting) {
-        TagCache.resolve(Laby.labyAPI().getUniqueId(), (info) -> {
+        TagCache.resolveSelf((info) -> {
             Component error = null;
             if(Util.getSessionToken() == null)
                 error = Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
