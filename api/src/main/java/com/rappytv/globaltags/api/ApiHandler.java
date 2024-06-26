@@ -2,6 +2,7 @@ package com.rappytv.globaltags.api;
 
 import com.rappytv.globaltags.types.GlobalIcon;
 import com.rappytv.globaltags.types.PlayerInfo;
+import com.rappytv.globaltags.types.PlayerInfo.Suspension;
 import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
@@ -10,6 +11,7 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.util.io.web.request.Request.Method;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -215,6 +217,28 @@ public class ApiHandler {
             public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
                 return Map.of("placeholder", "body");
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+        });
+    }
+
+    public static void editBan(UUID uuid, Suspension suspension, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.PUT,
+            "/players/" + uuid + "/ban",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, Object> getBody() {
+                Objects.requireNonNull(suspension.getReason(), "Reason must not be null");
+                return Map.of("reason", suspension.getReason(), "appealable", suspension.isAppealable());
             }
         };
         request.sendAsyncRequest((response) -> {
