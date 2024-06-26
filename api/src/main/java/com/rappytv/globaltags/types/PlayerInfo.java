@@ -32,6 +32,7 @@ public class PlayerInfo {
     /**
      * Returns the player's uuid
      */
+    @NotNull
     public UUID getUUID() {
         return uuid;
     }
@@ -55,6 +56,7 @@ public class PlayerInfo {
     /**
      * Returns the player's GlobalTag position
      */
+    @NotNull
     public PositionType getPosition() {
         if(position == null) return PositionType.ABOVE_NAME;
         return switch(position) {
@@ -68,6 +70,7 @@ public class PlayerInfo {
     /**
      * Returns the {@link GlobalIcon} enum value which the player has selected
      */
+    @NotNull
     public GlobalIcon getGlobalIcon() {
         try {
             return GlobalIcon.valueOf(icon);
@@ -117,6 +120,7 @@ public class PlayerInfo {
     /**
      * Gets the suspension object from a player
      */
+    @NotNull
     public Suspension getSuspension() {
         return suspension;
     }
