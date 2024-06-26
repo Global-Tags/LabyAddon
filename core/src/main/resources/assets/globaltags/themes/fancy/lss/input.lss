@@ -47,6 +47,17 @@
             alignment-y: center;
         }
 
+        .appealable-label {
+            margin-top: 8;
+            alignment-x: center;
+            alignment-y: center;
+        }
+
+        .check-box {
+            margin-top: 5;
+            alignment-x: center;
+        }
+
         .send-button {
             margin-top: 5;
             width: 50;

@@ -136,6 +136,12 @@
                 "title": "Unban %s",
                 "send": "Unban"
             },
+            "editBan": {
+                "name": "Edit GlobalTag ban",
+                "title": "Edit %s's ban",
+                "send": "Submit changes",
+                "appealable": "Appealable"
+            },
             "changeTag": {
                 "name": "Change GlobalTag",
                 "title": "Change %s's Tag",
