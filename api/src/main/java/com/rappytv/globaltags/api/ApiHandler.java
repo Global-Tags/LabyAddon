@@ -25,7 +25,7 @@ public class ApiHandler {
             null
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return null;
             }
         };
@@ -43,7 +43,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return null;
             }
         };
@@ -74,7 +74,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return Map.of("tag", tag);
             }
         };
@@ -99,7 +99,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return Map.of("position", position.name().split("_")[0]);
             }
         };
@@ -124,7 +124,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return Map.of("icon", icon.name());
             }
         };
@@ -149,7 +149,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
                 return Map.of("placeholder", "body");
             }
@@ -171,7 +171,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return Map.of("reason", reason);
             }
         };
@@ -191,7 +191,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return Map.of("reason", reason);
             }
         };
@@ -212,7 +212,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
                 return Map.of("placeholder", "body");
             }
@@ -234,7 +234,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 return Map.of("reason", reason);
             }
         };
@@ -254,7 +254,7 @@ public class ApiHandler {
             Util.getSessionToken()
         ) {
             @Override
-            public Map<String, String> getBody() {
+            public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
                 return Map.of("placeholder", "body");
             }

@@ -40,7 +40,7 @@ public abstract class ApiRequest {
             .handleErrorStream()
             .async();
 
-        Map<String, String> body = getBody();
+        Map<String, Object> body = getBody();
         if(body != null)
             request.json(body);
 
@@ -79,7 +79,7 @@ public abstract class ApiRequest {
     public String getError() {
         return error;
     }
-    public abstract Map<String, String> getBody();
+    public abstract Map<String, Object> getBody();
 
     public static void useLocalizedResponses(boolean value) {
         localizedResponses = value;
