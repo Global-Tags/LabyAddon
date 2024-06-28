@@ -75,7 +75,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                     ComponentWidget errorComponent = ComponentWidget.component(error)
                         .addId("text", "error");
                     errorComponent.setSize(SizeType.MAX, WidgetSide.WIDTH, WidgetSize.fixed(500));
-                    this.addEntry(errorComponent);
+                    this.addEntryInitialized(errorComponent);
                 } else {
                     if(refetched) {
                         config.tag().set(info.getPlainTag());
@@ -100,14 +100,14 @@ public class TagPreviewWidget extends HorizontalListWidget {
                             : Util.translateColorCodes(config.tag().get())
                     ).addId("text");
                     if (config.icon().get() != GlobalIcon.NONE)
-                        this.addEntry(new IconWidget(config.icon().get().getIcon()).addId("icon"));
-                    this.addEntry(tag);
+                        this.addEntryInitialized(new IconWidget(config.icon().get().getIcon()).addId("icon"));
+                    this.addEntryInitialized(tag);
                     if (info.isAdmin())
-                        this.addEntry(new IconWidget(adminIcon).addId("staff-icon"));
+                        this.addEntryInitialized(new IconWidget(adminIcon).addId("staff-icon"));
                 }
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
                     .addId("refresh-button");
-                addEntry(refreshButton);
+                addEntryInitialized(refreshButton);
                 if(info != null && info.isSuspended()) {
                     ButtonWidget appealButton = ButtonWidget.i18n(
                         "globaltags.settings.tags.tagPreview.appeal.name",
@@ -118,7 +118,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                         NamedTextColor.GOLD
                     ));
                     appealButton.setEnabled(info.getSuspension().isAppealable());
-                    addEntry(appealButton);
+                    addEntryInitialized(appealButton);
                 }
             }));
     }
