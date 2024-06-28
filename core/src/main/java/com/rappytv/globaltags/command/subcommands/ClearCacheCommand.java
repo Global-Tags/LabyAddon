@@ -15,6 +15,7 @@ public class ClearCacheCommand extends SubCommand {
     @Override
     public boolean execute(String prefix, String[] arguments) {
         TagCache.clear();
+        TagCache.resolveSelf();
         displayMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)

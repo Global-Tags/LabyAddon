@@ -64,6 +64,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2)
     public void clearCache(Setting setting) {
         TagCache.clear();
+        TagCache.resolveSelf();
         Util.notify(
             I18n.translate("globaltags.notifications.success"),
             I18n.translate("globaltags.notifications.cacheCleared")

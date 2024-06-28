@@ -59,6 +59,7 @@ public class Util {
         Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
             popup.displayInOverlay();
             TagCache.clear();
+            TagCache.resolveSelf();
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;
