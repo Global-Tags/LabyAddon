@@ -7,6 +7,7 @@ import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.icon.Icon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import java.util.Objects;
 import java.util.UUID;
 
 public class PlayerInfo {
@@ -26,7 +27,7 @@ public class PlayerInfo {
         this.position = position;
         this.icon = icon;
         this.admin = admin;
-        this.suspension = new Suspension(ban);
+        this.suspension = ban != null ? new Suspension(ban) : new Suspension();
     }
 
     /**
@@ -136,6 +137,7 @@ public class PlayerInfo {
          * Creates a suspension from a {@link Ban} object
          */
         public Suspension(Ban ban) {
+            Objects.requireNonNull(ban, "Ban must not be null");
             this.active = ban.active;
             this.reason = ban.reason;
             this.appealable = ban.appealable;
