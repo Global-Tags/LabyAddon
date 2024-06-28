@@ -45,7 +45,7 @@ public class Util {
             case ICON -> iconResponse = component;
         }
         if(tagResponse == null || positionResponse == null || iconResponse == null) return;
-        SimpleAdvancedPopup popup = SimpleAdvancedWidePopup
+        SimpleAdvancedPopup popup = SimpleAdvancedPopup
             .builder()
             .title(Component.text("Update result", NamedTextColor.AQUA))
             .description(Component.translatable(

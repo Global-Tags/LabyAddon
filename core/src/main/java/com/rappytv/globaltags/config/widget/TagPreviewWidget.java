@@ -13,9 +13,6 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.Link;
-import net.labymod.api.client.gui.screen.widget.size.SizeType;
-import net.labymod.api.client.gui.screen.widget.size.WidgetSide;
-import net.labymod.api.client.gui.screen.widget.size.WidgetSize;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
@@ -74,7 +71,6 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 if (error != null) {
                     ComponentWidget errorComponent = ComponentWidget.component(error)
                         .addId("text", "error");
-                    errorComponent.setSize(SizeType.MAX, WidgetSide.WIDTH, WidgetSize.fixed(500));
                     this.addEntryInitialized(errorComponent);
                 } else {
                     if(refetched) {
