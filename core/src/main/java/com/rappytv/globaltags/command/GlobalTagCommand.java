@@ -4,6 +4,8 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
+import com.rappytv.globaltags.command.subcommands.LinkDiscordSubcommand;
+import com.rappytv.globaltags.command.subcommands.UnlinkDiscordSubcommand;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
@@ -19,6 +21,8 @@ public class GlobalTagCommand extends Command {
         super("globaltags", "globaltag", "gt");
 
         withSubCommand(new ClearCacheCommand());
+        withSubCommand(new LinkDiscordSubcommand());
+        withSubCommand(new UnlinkDiscordSubcommand());
     }
 
     @Override
