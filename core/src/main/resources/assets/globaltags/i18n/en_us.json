@@ -116,7 +116,8 @@
         "messages": {
             "clearCache": "Clear cache",
             "hoverClearCache": "Click here to clear the tag cache!",
-            "offline": "Connection failed!"
+            "offline": "Connection failed!",
+            "code": "The code was copied to your clipboard!"
         },
         "context": {
             "reason": "Reason",
