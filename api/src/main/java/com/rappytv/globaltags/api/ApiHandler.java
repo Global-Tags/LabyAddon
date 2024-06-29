@@ -293,6 +293,50 @@ public class ApiHandler {
         });
     }
 
+    public static void linkDiscord(Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + Laby.labyAPI().getUniqueId() + "/connections/discord",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, Object> getBody() {
+                // https://github.com/elysiajs/elysia/issues/495
+                return Map.of("placeholder", "body");
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.responseBody.code)));
+        });
+    }
+
+    public static void unlinkDiscord(Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.DELETE,
+            "/players/" + Laby.labyAPI().getUniqueId() + "/connections/discord",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, Object> getBody() {
+                // https://github.com/elysiajs/elysia/issues/495
+                return Map.of("placeholder", "body");
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+        });
+    }
+
     public static class ApiResponse {
 
         private final boolean successful;
