@@ -13,8 +13,9 @@ public class ResponseBody {
     // For errors
     public String error;
 
-    // Version
+    // Other
     public String version;
+    public String code;
 
     public static class Ban {
         public boolean active;
