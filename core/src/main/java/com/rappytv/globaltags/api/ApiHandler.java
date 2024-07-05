@@ -70,7 +70,7 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, String> getBody() {
-                return null;
+                return Map.of("placeholder", "body");
             }
         };
         request.sendAsyncRequest((response)-> {
