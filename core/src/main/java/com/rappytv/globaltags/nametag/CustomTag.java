@@ -64,12 +64,16 @@ public class CustomTag extends NameTag {
                 resolving.add(uuid);
                 InfoGetRequest request = new InfoGetRequest(uuid, Util.getSessionToken());
                 request.sendAsyncRequest((response) -> {
-                    TagCache.add(uuid, new PlayerInfo(
-                        translateColorCodes(request.getTag()),
-                        request.getPosition(),
-                        request.getIcon(),
-                        request.isAdmin()
-                    ));
+                    if(!request.isSuccessful()) {
+                        TagCache.add(uuid, null);
+                    } else {
+                        TagCache.add(uuid, new PlayerInfo(
+                            translateColorCodes(request.getTag()),
+                            request.getPosition(),
+                            request.getIcon(),
+                            request.isAdmin()
+                        ));
+                    }
                     resolving.remove(uuid);
                 });
             }
@@ -110,6 +114,7 @@ public class CustomTag extends NameTag {
     }
 
     private Component translateColorCodes(String string) {
+        if(string == null) return null;
         return LegacyComponentSerializer
             .legacyAmpersand()
             .deserialize(string);
