@@ -31,7 +31,6 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     public static Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
-    private static GlobalTagAddon addon;
 
     @Override
     protected void preConfigurationLoad() {
@@ -39,13 +38,12 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-06"));
-        addon = this;
     }
 
     @Override
     protected void enable() {
         registerSettingCategory();
-        ApiRequest.addonVersion(addon.addonInfo().getVersion());
+        ApiRequest.addonVersion(addonInfo().getVersion());
 
         TagRegistry tagRegistry = labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())
