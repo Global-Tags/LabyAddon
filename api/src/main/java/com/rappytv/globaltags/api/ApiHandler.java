@@ -18,6 +18,8 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 public class ApiHandler {
 
+    private static final Map<String, Object> emptyBody = Map.of("body", "placeholder body");
+
     private ApiHandler() {}
 
     public static void getVersion(Consumer<String> consumer) {
@@ -153,7 +155,7 @@ public class ApiHandler {
             @Override
             public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
-                return Map.of("placeholder", "body");
+                return emptyBody;
             }
         };
         request.sendAsyncRequest((response) -> {
@@ -216,7 +218,7 @@ public class ApiHandler {
             @Override
             public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
-                return Map.of("placeholder", "body");
+                return emptyBody;
             }
         };
         request.sendAsyncRequest((response) -> {
@@ -280,7 +282,7 @@ public class ApiHandler {
             @Override
             public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
-                return Map.of("placeholder", "body");
+                return emptyBody;
             }
         };
         request.sendAsyncRequest((response) -> {
@@ -302,7 +304,7 @@ public class ApiHandler {
             @Override
             public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
-                return Map.of("placeholder", "body");
+                return emptyBody;
             }
         };
         request.sendAsyncRequest((response) -> {
@@ -324,7 +326,7 @@ public class ApiHandler {
             @Override
             public Map<String, Object> getBody() {
                 // https://github.com/elysiajs/elysia/issues/495
-                return Map.of("placeholder", "body");
+                return emptyBody;
             }
         };
         request.sendAsyncRequest((response) -> {
