@@ -1,7 +1,12 @@
 package com.rappytv.globaltags.config;
 
+import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.util.TagCache;
+import com.rappytv.globaltags.util.Util;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
+import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
@@ -9,20 +14,36 @@ import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
+import net.labymod.api.configuration.settings.Setting;
+import net.labymod.api.configuration.settings.annotation.SettingSection;
+import net.labymod.api.util.I18n;
+import net.labymod.api.util.MethodOrder;
 
 @ConfigName("settings")
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
-    private static boolean localized;
-
     public GlobalTagConfig() {
-        localizedResponses.addChangeListener((property, oldValue, newValue) -> localized = newValue);
+        localizedResponses.addChangeListener((property, oldValue, newValue) ->
+            ApiRequest.useLocalizedResponses(newValue)
+        );
     }
 
     @SwitchSetting
     @SpriteSlot(size = 32)
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+    @IntroducedIn(namespace = "globaltags", value = "1.1.9")
+    @SpriteSlot(size = 32, y = 2, x = 2)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
+    @MethodOrder(after = "localizedResponses")
+    @SpriteSlot(size = 32, y = 2, x = 3)
+    @ButtonSetting
+    public void joinDiscord(Setting setting) {
+        Laby.references().chatExecutor().openUrl("https://gt.rappytv.com/discord");
+    }
+
+    @SettingSection("display")
     @SwitchSetting
     @SpriteSlot(size = 32, x = 1)
     private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(false);
@@ -33,12 +54,22 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2, x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
-    @IntroducedIn(namespace = "globaltags", value = "1.1.9")
-    @SpriteSlot(size = 32, y = 2, x = 2)
-    @SwitchSetting
-    private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
-    @SpriteSlot(size = 32, x = 1)
+
+    @SettingSection("tags")
+    @SpriteSlot(size = 32, y = 1)
     private final TagSubConfig tags = new TagSubConfig();
+
+    @MethodOrder(after = "tags")
+    @ButtonSetting
+    @SpriteSlot(size = 32, y = 2)
+    public void clearCache(Setting setting) {
+        TagCache.clear();
+        TagCache.resolveSelf();
+        Util.notify(
+            I18n.translate("globaltags.notifications.success"),
+            I18n.translate("globaltags.notifications.cacheCleared")
+        );
+    }
 
     @Override
     public ConfigProperty<Boolean> enabled() {
@@ -52,8 +83,5 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return showBackground;
-    }
-    public static boolean localizedResponses() {
-        return localized;
     }
 }

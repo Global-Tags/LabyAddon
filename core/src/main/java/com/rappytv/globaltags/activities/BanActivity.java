@@ -19,16 +19,17 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
+
 import java.util.UUID;
 
 @Link("input.lss")
 @AutoActivity
-public class ReportUUIDActivity extends SimpleActivity {
+public class BanActivity extends SimpleActivity {
 
     private final UUID uuid;
     private final String username;
 
-    public ReportUUIDActivity(UUID uuid, String username) {
+    public BanActivity(UUID uuid, String username) {
         this.uuid = uuid;
         this.username = username;
     }
@@ -39,19 +40,19 @@ public class ReportUUIDActivity extends SimpleActivity {
         FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
         HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.report.title", this.username).addId("username");
+        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.ban.title", this.username).addId("username");
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
         ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.reason").addId("label");
         TextFieldWidget inputWidget = new TextFieldWidget()
             .placeholder(Component.translatable("globaltags.context.placeholder", NamedTextColor.DARK_GRAY))
             .addId("input");
         ButtonWidget sendButton = new ButtonWidget()
-            .updateComponent(Component.translatable("globaltags.context.report.send", NamedTextColor.RED))
+            .updateComponent(Component.translatable("globaltags.context.ban.send", NamedTextColor.RED))
             .addId("send-button");
         sendButton.setEnabled(false);
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            ApiHandler.reportPlayer(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+            ApiHandler.banPlayer(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
                     .append(GlobalTagAddon.prefix)
                     .append(response.getMessage())

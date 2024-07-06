@@ -1,0 +1,44 @@
+TagPreview {
+    height: fit-content;
+    orientation: horizontal;
+
+    .text {
+        margin-left: 2;
+    }
+
+    .error {
+        text-color: red;
+    }
+
+    .icon {
+        margin-left: 1;
+        margin-right: 1;
+        height: 16;
+        width: height;
+    }
+
+    .staff-icon {
+        margin-left: 2;
+        height: 11;
+        width: height;
+    }
+
+    .appeal-button {
+        height: 20;
+        width: fit-content;
+        # padding: 0;
+        alignment: right;
+    }
+
+    .refresh-button {
+        height: 20;
+        width: height;
+        padding: 0;
+        alignment: right;
+
+        .button-icon {
+            height: 8;
+            width: height;
+        }
+    }
+}

@@ -1,8 +1,11 @@
 package com.rappytv.globaltags.command;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.api.requests.VersionGetRequest;
+import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.api.ApiRequest;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
+import com.rappytv.globaltags.command.subcommands.LinkDiscordSubcommand;
+import com.rappytv.globaltags.command.subcommands.UnlinkDiscordSubcommand;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
@@ -18,17 +21,21 @@ public class GlobalTagCommand extends Command {
         super("globaltags", "globaltag", "gt");
 
         withSubCommand(new ClearCacheCommand());
+        withSubCommand(new LinkDiscordSubcommand());
+        withSubCommand(new UnlinkDiscordSubcommand());
     }
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        VersionGetRequest request = new VersionGetRequest();
-        request.sendAsyncRequest((response) -> {
-            String version = request.getVersion();
-
+        ApiHandler.getVersion((version) -> {
             TextComponent clearComponent = TextComponent.builder()
-                .append(GlobalTagAddon.prefix + "§aVersion: §b" + GlobalTagAddon.version + "\n")
-                .append(GlobalTagAddon.prefix + "§aAPI Version: " + (version != null ? "§b" + version : "§c" + I18n.translate("globaltags.messages.offline")) + "\n")
+                .append(GlobalTagAddon.prefix)
+                .append(Component.text("Version: ", NamedTextColor.GREEN))
+                .append(Component.text(ApiRequest.getVersion() + "\n", NamedTextColor.AQUA))
+                .append(GlobalTagAddon.prefix)
+                .append(Component.text("API Version: ", NamedTextColor.GREEN))
+                .append(version != null ? Component.text(version, NamedTextColor.AQUA) : Component.translatable("globaltags.messages.offline", NamedTextColor.RED))
+                .append("\n")
                 .append(GlobalTagAddon.prefix)
                 .append(Component
                     .translatable("globaltags.messages.clearCache")

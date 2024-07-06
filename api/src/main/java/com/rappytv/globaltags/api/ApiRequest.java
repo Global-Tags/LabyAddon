@@ -2,8 +2,6 @@ package com.rappytv.globaltags.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.config.GlobalTagConfig;
 import net.labymod.api.Laby;
 import net.labymod.api.util.io.web.request.Callback;
 import net.labymod.api.util.io.web.request.Request;
@@ -12,6 +10,9 @@ import net.labymod.api.util.io.web.request.types.GsonRequest;
 import java.util.Map;
 
 public abstract class ApiRequest {
+
+    private static boolean localizedResponses;
+    private static String version;
 
     private final Gson gson = new Gson();
     private boolean successful;
@@ -22,30 +23,28 @@ public abstract class ApiRequest {
     private final Method method;
     private final String path;
     private final String key;
-    private final boolean localized;
 
     public ApiRequest(Method method, String path, String key) {
         this.method = method;
         this.path = path;
         this.key = key;
-        this.localized = GlobalTagConfig.localizedResponses();
     }
 
     public void sendAsyncRequest(Callback<JsonObject> callback) {
         GsonRequest<JsonObject> request = Request.ofGson(JsonObject.class)
-            .url("https://gt.rappytv.com" + path)
+            .url(getApiBase() + path)
             .method(method)
             .addHeader("Content-Type", "application/json")
             .addHeader("Authorization", key != null ? key : "")
-            .addHeader("X-Addon-Version", GlobalTagAddon.version)
+            .addHeader("X-Addon-Version", version)
             .handleErrorStream()
             .async();
 
-        Map<String, String> body = getBody();
+        Map<String, Object> body = getBody();
         if(body != null)
             request.json(body);
 
-        if(localized)
+        if(localizedResponses)
             request.addHeader("X-Minecraft-Language", Laby.labyAPI().minecraft().options().getCurrentLanguage());
 
         request.execute((response) -> {
@@ -53,6 +52,7 @@ public abstract class ApiRequest {
                 successful = false;
                 error = response.exception().getMessage();
                 callback.accept(response);
+                response.exception().printStackTrace();
                 return;
             }
             responseBody = gson.fromJson(response.get(), ResponseBody.class);
@@ -79,5 +79,18 @@ public abstract class ApiRequest {
     public String getError() {
         return error;
     }
-    public abstract Map<String, String> getBody();
+    public abstract Map<String, Object> getBody();
+
+    public static void useLocalizedResponses(boolean value) {
+        localizedResponses = value;
+    }
+    public static void addonVersion(String value) {
+        version = value;
+    }
+    public static String getVersion() {
+        return version;
+    }
+    private String getApiBase() {
+        return "https://gt.rappytv.com";
+    }
 }

@@ -2,8 +2,24 @@
     "globaltags": {
         "settings": {
             "name": "Global Tags",
+            "header": {
+                "display": {
+                    "name": "Display settings"
+                },
+                "tags": {
+                    "name": "Tag settings"
+                }
+            },
             "enabled": {
                 "name": "Enabled"
+            },
+            "localizedResponses": {
+                "name": "Localize API responses",
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
+            },
+            "joinDiscord": {
+                "name": "Discord Server",
+                "text": "Join"
             },
             "showOwnTag": {
                 "name": "Show own tag"
@@ -12,21 +28,34 @@
                 "name": "Tag size"
             },
             "showBackground": {
-                "name": "Show background"
-            },
-            "localizedResponses": {
-                "name": "Localize API responses",
-                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
+                "name": "Show background",
+                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
             },
             "tags": {
-                "name": "Tag settings",
-                "tag": {
-                    "name": "Global tag",
-                    "description": "This tag gets published as soon as you press the button below."
+                "name": "Global tag settings",
+                "staged": {
+                    "title": "Staged changes.",
+                    "description": "Click on the \"Publish settings\" button to publish changes!"
                 },
-                "setTag": {
-                    "name": "Set tag you entered in the text field",
-                    "text": "Click"
+                "tagPreview": {
+                    "name": "Tag Preview",
+                    "banned": "Your account is suspended!\nReason: %s",
+                    "noInfo": "Couldn't fetch account info!",
+                    "labyConnect": "You're not connected to LabyConnect!",
+                    "empty": "<Empty Tag>",
+                    "emptyReason": "No reason provided",
+                    "appeal": {
+                        "name": "Appeal",
+                        "description": "⚠ This button will only be clickable if your suspension is appealable.",
+                        "popup": {
+                            "label": "Why should we unban you?",
+                            "placeholder": "Please enter a reason...",
+                            "button": "Send appeal"
+                        }
+                    }
+                },
+                "tag": {
+                    "name": "Global tag"
                 },
                 "position": {
                     "name": "Global position",
@@ -39,7 +68,7 @@
                     }
                 },
                 "globalIcon": {
-                    "name": "Global Icon",
+                    "name": "Global icon",
                     "entries": {
                         "none": "None",
                         "discord": "Discord",
@@ -62,39 +91,72 @@
                         "youtube": "YouTube"
                     }
                 },
+                "updateSettings": {
+                    "name": "Publish settings",
+                    "text": "Update",
+                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
+                    "unchanged": "Unchanged"
+                },
                 "resetTag": {
                     "name": "Delete global tag",
                     "text": "Delete"
-                },
-                "clearCache": {
-                    "name": "Clear cache",
-                    "text": "Clear",
-                    "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f."
                 }
+            },
+            "clearCache": {
+                "name": "Clear cache",
+                "text": "Clear",
+                "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f.\nYou can additionally clear the cache with §b/gt cc§f."
             }
-        },
-        "activity": {
-            "newtag": "New Tag"
         },
         "notifications": {
             "success": "Success!",
             "error": "An error ocurred",
-            "cacheCleared": "The cache was cleared!",
-            "cacheEmpty": "The cache is already empty!"
+            "cacheCleared": "The cache was cleared!"
         },
         "messages": {
             "clearCache": "Clear cache",
             "hoverClearCache": "Click here to clear the tag cache!",
-            "offline": "Connection failed!"
+            "offline": "Connection failed!",
+            "code": "The code was copied to your clipboard!"
         },
         "context": {
-            "report": "Report Globaltag"
-        },
-        "report": {
-            "title": "Report %s",
-            "send": "Send report",
             "reason": "Reason",
-            "placeholder": "Please enter a reason..."
+            "placeholder": "Please enter a reason...",
+            "report": {
+                "name": "Report GlobalTag",
+                "title": "Report %s",
+                "send": "Send report"
+            },
+            "ban": {
+                "name": "Ban GlobalTag player",
+                "title": "Ban %s",
+                "send": "Ban"
+            },
+            "unban": {
+                "name": "Unban GlobalTag player",
+                "title": "Unban %s",
+                "send": "Unban"
+            },
+            "editBan": {
+                "name": "Edit GlobalTag ban",
+                "title": "Edit %s's ban",
+                "send": "Submit changes",
+                "appealable": "Appealable"
+            },
+            "changeTag": {
+                "name": "Change GlobalTag",
+                "title": "Change %s's Tag",
+                "label": "New GlobalTag",
+                "placeholder": "Enter the updated GlobalTag...",
+                "send": "Update Tag"
+            },
+            "clearTag": {
+                "name": "Clear GlobalTag"
+            },
+            "admin": {
+                "set": "Make GlobalTag Admin",
+                "remove": "Remove GlobalTag Admin"
+            }
         }
     }
 }
