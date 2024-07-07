@@ -133,7 +133,7 @@
         "send": "Bannen"
       },
       "unban": {
-        "name": "Bann des GlobalTag-Spielers aufheben",
+        "name": "GlobalTag-Spielers entbannen",
         "title": "%s entbannen",
         "send": "Ban aufheben"
       },
