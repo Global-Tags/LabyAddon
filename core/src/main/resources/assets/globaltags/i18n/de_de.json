@@ -154,7 +154,7 @@
         "name": "GlobalTag löschen"
       },
       "admin": {
-        "set": "Zum GlobalTag Admin benennen",
+        "set": "GlobalTag Admin machen",
         "remove": "GlobalTag Admin entfernen"
       }
     }
