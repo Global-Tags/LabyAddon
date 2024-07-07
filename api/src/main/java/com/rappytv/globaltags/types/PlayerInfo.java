@@ -79,7 +79,7 @@ public class PlayerInfo {
         try {
             return GlobalFont.valueOf(font);
         } catch (Exception ignored) {
-            return GlobalFont.DEFAULT;
+            return GlobalFont.VANILLA;
         }
     }
 
