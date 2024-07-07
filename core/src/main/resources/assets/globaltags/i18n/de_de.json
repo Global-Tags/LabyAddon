@@ -121,7 +121,7 @@
     },
     "context": {
       "reason": "Grund",
-      "placeholder": "Bitte gebe einen Grund an...",
+      "placeholder": "Bitte gib einen Grund an...",
       "report": {
         "name": "GlobalTag melden",
         "title": "%s melden",
