@@ -35,11 +35,11 @@
                 "name": "Globale Tag-Einstellungen",
                 "staged": {
                     "title": "Ausstehende Änderungen",
-                    "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen zu anwenden!"
+                    "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen anzuwenden!"
                 },
                 "tagPreview": {
                     "name": "Tag-Vorschau",
-                    "banned": "Dein Account wurde gesperrt!\nGrund %s",
+                    "banned": "Dein Account wurde gesperrt!\nGrund: %s",
                     "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
                     "labyConnect": "Du bist nicht mit LabyConnect verbunden!",
                     "empty": "<Leerer Tag>",
@@ -140,7 +140,7 @@
                 "send": "Bannen"
             },
             "unban": {
-                "name": "GlobalTag-Spielers entbannen",
+                "name": "GlobalTag-Spieler entbannen",
                 "title": "%s entbannen",
                 "send": "Entbannen"
             },
