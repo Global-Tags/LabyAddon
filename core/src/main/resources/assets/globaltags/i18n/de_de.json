@@ -18,7 +18,7 @@
         "description": "Wenn diese Option aktiviert ist, sendet das Addon auch deine Minecraft-Sprache an die API. Wenn die Übersetzungen vorhanden sind, erhältst du lokalisierte Antworten. Deine Minecraft-Sprache wird nirgendwo gespeichert."
       },
       "joinDiscord": {
-        "name": "Discord-Server",
+        "name": "Discord Server",
         "text": "Beitreten"
       },
       "showOwnTag": {
