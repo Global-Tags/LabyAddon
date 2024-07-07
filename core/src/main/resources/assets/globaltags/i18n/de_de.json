@@ -141,7 +141,7 @@
         "name": "GlobalTag-Ban bearbeiten",
         "title": "Bearbeite den Ban von %s",
         "send": "Änderungen speichern",
-        "appealable": "Entbannbar"
+        "appealable": "Darf Entbannungsantrag stellen"
       },
       "changeTag": {
         "name": "GlobalTag ändern",
