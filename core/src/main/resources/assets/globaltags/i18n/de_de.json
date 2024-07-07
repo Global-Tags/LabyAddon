@@ -92,7 +92,7 @@
           }
         },
         "updateSettings": {
-          "name": "Veröffentlichungseinstellungen",
+          "name": "Einstellungen anwenden",
           "text": "Aktualisieren",
           "result": "Tag: %s\nPosition: %s\nIcon: %s",
           "unchanged": "Unverändert"
