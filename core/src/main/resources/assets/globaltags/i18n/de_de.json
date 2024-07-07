@@ -1,0 +1,162 @@
+{
+  "globaltags": {
+    "settings": {
+      "name": "Global Tags",
+      "header": {
+        "display": {
+          "name": "Anzeigeeinstellungen"
+        },
+        "tags": {
+          "name": "Tag-Einstellungen"
+        }
+      },
+      "enabled": {
+        "name": "Aktiviert"
+      },
+      "localizedResponses": {
+        "name": "API-Antworten lokalisieren",
+        "description": "Wenn diese Option aktiviert ist, sendet das Addon auch deine Minecraft-Sprache an die API. Wenn die Übersetzungen vorhanden sind, erhältst du lokalisierte Antworten. Deine Minecraft-Sprache wird nirgendwo gespeichert."
+      },
+      "joinDiscord": {
+        "name": "Discord Server",
+        "text": "Beitreten"
+      },
+      "showOwnTag": {
+        "name": "Eigenen Tag anzeigen"
+      },
+      "tagSize": {
+        "name": "Tag Größe"
+      },
+      "showBackground": {
+        "name": "Hintergrund anzeigen",
+        "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Global Tags."
+      },
+      "tags": {
+        "name": "Globale Tag-Einstellungen",
+        "staged": {
+          "title": "Ausstehende Änderungen",
+          "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen zu anwenden!"
+        },
+        "tagPreview": {
+          "name": "Tag-Vorschau",
+          "banned": "Dein Account wurde gesperrt!\nGrund %s",
+          "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
+          "labyConnect": "Du bist nicht mit LabyConnect verbunden!",
+          "empty": "<Leerer Tag>",
+          "emptyReason": "Kein Grund angegeben",
+          "appeal": {
+            "name": "Entbannung",
+            "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
+            "popup": {
+              "label": "Warum sollten wir dich entbannen?",
+              "placeholder": "Bitte gebe einen Grund an...",
+              "button": "Antrag senden"
+            }
+          }
+        },
+        "tag": {
+          "name": "Global Tag"
+        },
+        "position": {
+          "name": "Globale Position",
+          "description": "Dein Tag ist an dieser Position für alle sichtbar.",
+          "entries": {
+            "aboveName": "Über dem Namen",
+            "belowName": "Unten dem Namen",
+            "rightToName": "Rechts vom Namen",
+            "leftToName": "Links vom Namen"
+          }
+        },
+        "globalIcon": {
+          "name": "Globales Icon",
+          "entries": {
+            "none": "Keins",
+            "discord": "Discord",
+            "bereal": "BeReal.",
+            "ebio": "e.bio",
+            "epicgames": "Epic Games",
+            "github": "GitHub",
+            "gitlab": "GitLab",
+            "instagram": "Instagram",
+            "kick": "Kick",
+            "pinterest": "Pinterest",
+            "playstation": "Playstation",
+            "snapchat": "Snapchat",
+            "steam": "Steam",
+            "threads": "Threads",
+            "tiktok": "TikTok",
+            "twitch": "Twitch",
+            "x": "x",
+            "xbox": "Xbox",
+            "youtube": "YouTube"
+          }
+        },
+        "updateSettings": {
+          "name": "Einstellungen anwenden",
+          "text": "Aktualisieren",
+          "result": "Tag: %s\nPosition: %s\nIcon: %s",
+          "unchanged": "Unverändert"
+        },
+        "resetTag": {
+          "name": "Global Tag löschen",
+          "text": "Löschen"
+        }
+      },
+      "clearCache": {
+        "name": "Cache leeren",
+        "text": "Leeren",
+        "description": "Löscht den Tag-Cache manuell.\nDer Cache wird automatisch alle §b5 Minuten§f geleert.\nDu kannst den Cache auch mit §b/gt cc§f löschen."
+      }
+    },
+    "notifications": {
+      "success": "Erfolg!",
+      "error": "Es ist ein Fehler aufgetreten",
+      "cacheCleared": "Der Cache wurde geleert!"
+    },
+    "messages": {
+      "clearCache": "Cache leeren",
+      "hoverClearCache": "Klicke hier, um den Tag-Cache zu leeren!",
+      "offline": "Verbindung fehlgeschlagen!",
+      "code": "Der Code wurde in deine Zwischenablage kopiert!"
+    },
+    "context": {
+      "reason": "Grund",
+      "placeholder": "Bitte gib einen Grund an...",
+      "report": {
+        "name": "GlobalTag melden",
+        "title": "%s melden",
+        "send": "Meldung senden"
+      },
+      "ban": {
+        "name": "GlobalTag-Spieler bannen",
+        "title": "%s bannen",
+        "send": "Bannen"
+      },
+      "unban": {
+        "name": "GlobalTag-Spielers entbannen",
+        "title": "%s entbannen",
+        "send": "Entbannen"
+      },
+      "editBan": {
+        "name": "GlobalTag-Ban bearbeiten",
+        "title": "Bearbeite den Ban von %s",
+        "send": "Änderungen speichern",
+        "appealable": "Darf Entbannungsantrag stellen"
+      },
+      "changeTag": {
+        "name": "GlobalTag ändern",
+        "title": "Ändere den Tag von %s",
+        "label": "Neuer GlobalTag",
+        "placeholder": "Gib den aktualisierten GlobalTag ein...",
+        "send": "Tag aktualisieren"
+      },
+      "clearTag": {
+        "name": "GlobalTag löschen"
+      },
+      "admin": {
+        "set": "GlobalTag Admin machen",
+        "remove": "GlobalTag Admin entfernen"
+      }
+    }
+  }
+}
