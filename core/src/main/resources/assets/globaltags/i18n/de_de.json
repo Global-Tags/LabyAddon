@@ -109,7 +109,7 @@
       }
     },
     "notifications": {
-      "success": "Erfolgreich geleert!",
+      "success": "Erfolg!",
       "error": "Es ist ein Fehler aufgetreten",
       "cacheCleared": "Der Cache wurde geleert!"
     },
