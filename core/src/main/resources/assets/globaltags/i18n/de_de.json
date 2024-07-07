@@ -29,7 +29,7 @@
       },
       "showBackground": {
         "name": "Hintergrund anzeigen",
-        "description": "Wenn diese Option aktiviert ist, siehst du den grauen Vanilla-Hintergrund der Nametags hinter den globalen Tags."
+        "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Global Tags."
       },
       "tags": {
         "name": "Globale Tag-Einstellungen",
