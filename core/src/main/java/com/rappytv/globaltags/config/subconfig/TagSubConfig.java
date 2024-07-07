@@ -3,6 +3,7 @@ package com.rappytv.globaltags.config.subconfig;
 import com.rappytv.globaltags.api.ApiHandler;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget.TagPreviewSetting;
+import com.rappytv.globaltags.types.GlobalFont;
 import com.rappytv.globaltags.types.GlobalIcon;
 import com.rappytv.globaltags.util.TagCache;
 import com.rappytv.globaltags.util.Util;
@@ -32,6 +33,7 @@ public class TagSubConfig extends Config {
         tag.addChangeListener(runnable);
         position.addChangeListener(runnable);
         globalIcon.addChangeListener(runnable);
+        font.addChangeListener(runnable);
     }
 
     @SpriteSlot(size = 32, x = 1)
@@ -42,6 +44,9 @@ public class TagSubConfig extends Config {
     @TextFieldSetting
     @SpriteSlot(size = 32, y = 1)
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
+
+    @DropdownSetting
+    private final ConfigProperty<GlobalFont> font = new ConfigProperty<>(GlobalFont.VANILLA);
 
     @DropdownSetting
     @SpriteSlot(size = 32, x = 3)
@@ -74,6 +79,11 @@ public class TagSubConfig extends Config {
                 else Util.update(ResultType.TAG, response.getMessage());
             });
             else Util.update(ResultType.TAG, Util.unchanged);
+            if(!info.getFont().equals(font.get())) ApiHandler.setFont(font.get(), (response) -> {
+                if(response.isSuccessful()) Util.update(ResultType.FONT, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(ResultType.FONT, response.getMessage());
+            });
+            else Util.update(ResultType.FONT, Util.unchanged);
             if(!info.getPosition().equals(position.get())) ApiHandler.setPosition(position.get(), (response) -> {
                 if(response.isSuccessful()) Util.update(ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(ResultType.POSITION, response.getMessage());
@@ -106,10 +116,12 @@ public class TagSubConfig extends Config {
     public ConfigProperty<String> tag() {
         return tag;
     }
+    public ConfigProperty<GlobalFont> font() {
+        return font;
+    }
     public ConfigProperty<PositionType> position() {
         return position;
     }
-
     public ConfigProperty<GlobalIcon> icon() {
         return globalIcon;
     }

@@ -75,10 +75,12 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 } else {
                     if(refetched) {
                         config.tag().set(info.getPlainTag());
+                        config.font().set(info.getFont());
                         config.position().set(info.getPosition());
                         config.icon().set(info.getGlobalIcon());
                     }
                     boolean updated = !config.tag().get().equals(info.getPlainTag())
+                        || !config.font().get().equals(info.getFont())
                         || !config.position().get().equals(info.getPosition())
                         || !config.icon().get().equals(info.getGlobalIcon());
                     if(changed && updated) {

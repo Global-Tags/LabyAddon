@@ -20,6 +20,7 @@ public class Util {
         NamedTextColor.DARK_GRAY
     );
     private static Component tagResponse = null;
+    private static Component fontResponse = null;
     private static Component positionResponse = null;
     private static Component iconResponse = null;
 
@@ -41,6 +42,7 @@ public class Util {
     public static void update(ResultType type, Component component) {
         switch (type) {
             case TAG -> tagResponse = component;
+            case FONT -> fontResponse = component;
             case POSITION -> positionResponse = component;
             case ICON -> iconResponse = component;
         }
@@ -51,6 +53,7 @@ public class Util {
             .description(Component.translatable(
                 "globaltags.settings.tags.updateSettings.result",
                 tagResponse,
+                fontResponse,
                 positionResponse,
                 iconResponse
             ))
@@ -61,6 +64,7 @@ public class Util {
             TagCache.clear();
             TagCache.resolveSelf();
             tagResponse = null;
+            fontResponse = null;
             positionResponse = null;
             iconResponse = null;
         });
@@ -68,6 +72,7 @@ public class Util {
 
     public enum ResultType {
         TAG,
+        FONT,
         POSITION,
         ICON
     }
