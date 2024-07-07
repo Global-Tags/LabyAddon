@@ -45,7 +45,7 @@
           "empty": "<Leerer Tag>",
           "emptyReason": "Kein Grund angegeben",
           "appeal": {
-            "name": "Entbannung ",
+            "name": "Entbannung",
             "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
             "popup": {
               "label": "Warum sollten wir dich entbannen?",
