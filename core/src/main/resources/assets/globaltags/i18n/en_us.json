@@ -57,6 +57,13 @@
                 "tag": {
                     "name": "Global tag"
                 },
+                "font": {
+                    "name": "Global font",
+                    "entries": {
+                        "vanilla": "Vanilla",
+                        "fancy": "Fancy"
+                    }
+                },
                 "position": {
                     "name": "Global position",
                     "description": "Your tag is visible in this position to everyone.",
@@ -94,7 +101,7 @@
                 "updateSettings": {
                     "name": "Publish settings",
                     "text": "Update",
-                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
+                    "result": "Tag: %s\nFont: %s\nPosition: %s\nIcon: %s",
                     "unchanged": "Unchanged"
                 },
                 "resetTag": {
