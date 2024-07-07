@@ -46,7 +46,7 @@
           "emptyReason": "Kein Grund angegeben",
           "appeal": {
             "name": "Entbannung ",
-            "description": "⚠ Diese Schaltfläche kann nur angeklickt werden, wenn dein Ban aufgehoben werden kann.",
+            "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
             "popup": {
               "label": "Warum sollten wir dich entbannen?",
               "placeholder": "Bitte gebe einen Grund an...",
