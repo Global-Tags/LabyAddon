@@ -4,6 +4,7 @@ public class ResponseBody {
 
     // For success
     public String tag;
+    public String font;
     public String position;
     public String icon;
     public boolean admin;

@@ -59,6 +59,7 @@ public class ApiHandler {
             consumer.accept(new PlayerInfo(
                 uuid,
                 request.responseBody.tag,
+                request.responseBody.font,
                 request.responseBody.position,
                 request.responseBody.icon,
                 request.responseBody.admin,
