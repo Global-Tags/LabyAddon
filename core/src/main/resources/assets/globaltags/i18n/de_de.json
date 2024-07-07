@@ -125,7 +125,7 @@
       "report": {
         "name": "GlobalTag melden",
         "title": "%s melden",
-        "send": "Bericht senden"
+        "send": "Meldung senden"
       },
       "ban": {
         "name": "GlobalTag-Spieler bannen",
