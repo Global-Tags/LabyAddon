@@ -42,7 +42,7 @@
           "banned": "Dein Account wurde gesperrt!\n",
           "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
           "labyConnect": "Du bist nicht mit LabyConnect verbunden!",
-          "empty": "<Empty Tag>",
+          "empty": "<Leerer Tag>",
           "emptyReason": "Kein Grund angegeben",
           "appeal": {
             "name": "Entbannung ",
