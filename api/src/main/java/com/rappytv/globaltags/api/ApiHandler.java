@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.api;
 
+import com.rappytv.globaltags.types.GlobalFont;
 import com.rappytv.globaltags.types.GlobalIcon;
 import com.rappytv.globaltags.types.PlayerInfo;
 import com.rappytv.globaltags.types.PlayerInfo.Suspension;
@@ -91,6 +92,31 @@ public class ApiHandler {
             TagCache.clear();
             TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
         }));
+    }
+
+    public static void setFont(GlobalFont font, Consumer<ApiResponse> consumer) {
+        setFont(Laby.labyAPI().getUniqueId(), font, consumer);
+    }
+
+    public static void setFont(UUID uuid, GlobalFont font, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid + "/font",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, Object> getBody() {
+                return Map.of("font", font.name());
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            TagCache.clear();
+            TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+        });
     }
 
     public static void setPosition(PositionType position, Consumer<ApiResponse> consumer) {
