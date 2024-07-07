@@ -39,7 +39,7 @@
         },
         "tagPreview": {
           "name": "Tag-Vorschau",
-          "banned": "Dein Account wurde gesperrt!\n",
+          "banned": "Dein Account wurde gesperrt!\nGrund %s",
           "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
           "labyConnect": "Du bist nicht mit LabyConnect verbunden!",
           "empty": "<Leerer Tag>",
