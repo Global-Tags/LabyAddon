@@ -135,7 +135,7 @@
       "unban": {
         "name": "GlobalTag-Spielers entbannen",
         "title": "%s entbannen",
-        "send": "Ban aufheben"
+        "send": "Entbannen"
       },
       "editBan": {
         "name": "GlobalTag-Ban bearbeiten",
