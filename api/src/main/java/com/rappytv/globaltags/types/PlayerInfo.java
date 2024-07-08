@@ -24,8 +24,7 @@ public class PlayerInfo {
     public PlayerInfo(UUID uuid, String tag, String font, String position, String icon, boolean admin, Ban ban) {
         this.uuid = uuid;
         this.font = font;
-        this.tag = Util.translateColorCodes(tag);
-        if(getFont() != GlobalFont.DEFAULT) this.tag.style(getFont().getFontStyle());
+        this.tag = Util.formatTag(tag, getFont());
         this.plainTag = tag != null ? tag : "";
         this.position = position;
         this.icon = icon;
@@ -65,7 +64,7 @@ public class PlayerInfo {
         try {
             return GlobalFont.valueOf(font);
         } catch (Exception ignored) {
-            return GlobalFont.VANILLA;
+            return GlobalFont.DEFAULT;
         }
     }
 

@@ -1,30 +1,27 @@
 package com.rappytv.globaltags.types;
 
-import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
 public enum GlobalFont {
     DEFAULT,
-    VANILLA,
-    FANCY,
     UNICODE;
 
-    private static final Map<GlobalFont, Style> fontStyles = new HashMap<>();
+    private static final Map<GlobalFont, ResourceLocation> locations = new HashMap<>();
 
-    public Style getFontStyle() {
-        if(fontStyles.containsKey(this)) return fontStyles.get(this);
-        fontStyles.put(this, Style.empty().font(getResourceLocation()));
-        return getFontStyle();
+    @Nullable
+    public ResourceLocation getCachedLocation() {
+        if(locations.containsKey(this)) return locations.get(this);
+        locations.put(this, getResourceLocation());
+        return getCachedLocation();
     }
 
+    @Nullable
     private ResourceLocation getResourceLocation() {
         return switch (this) {
-            case VANILLA -> ResourceLocation.create(
-                "minecraft",
-                "default"
-            );
+            case DEFAULT -> null;
             case UNICODE -> ResourceLocation.create(
                 "minecraft",
                 "uniform"

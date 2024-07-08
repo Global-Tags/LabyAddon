@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.util;
 
+import com.rappytv.globaltags.types.GlobalFont;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -78,11 +79,14 @@ public class Util {
     }
 
     @NotNull
-    public static Component translateColorCodes(String string) {
-        if(string == null) string = "";
-        return LegacyComponentSerializer
+    public static Component formatTag(String tag, GlobalFont font) {
+        if(tag == null) tag = "";
+        Component component = LegacyComponentSerializer
             .legacyAmpersand()
-            .deserialize(string);
+            .deserialize(tag);
+        if(font.getCachedLocation() != null)
+            component.style(component.style().font(font.getCachedLocation()));
+        return component;
     }
 
     public static @Nullable String getSessionToken() {

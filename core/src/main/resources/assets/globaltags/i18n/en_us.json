@@ -60,8 +60,10 @@
                 "font": {
                     "name": "Global font",
                     "entries": {
+                        "default": "Matching theme",
                         "vanilla": "Vanilla",
-                        "fancy": "Fancy"
+                        "fancy": "Fancy",
+                        "unicode": "Unicode"
                     }
                 },
                 "position": {

@@ -95,7 +95,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                                 "globaltags.settings.tags.tagPreview.empty",
                                 NamedTextColor.RED
                             )
-                            : Util.translateColorCodes(config.tag().get())
+                            : Util.formatTag(config.tag().get(), config.font().get())
                     ).addId("text");
                     if (config.icon().get() != GlobalIcon.NONE)
                         this.addEntryInitialized(new IconWidget(config.icon().get().getIcon()).addId("icon"));
