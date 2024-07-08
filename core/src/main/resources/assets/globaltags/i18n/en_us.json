@@ -62,6 +62,9 @@
                     "entries": {
                         "default": "Matching theme",
                         "unicode": "Unicode",
+                        "alagard": "Alagard",
+                        "glacialIndifference": "Glacial Indifference",
+                        "superRpg": "Super RPG",
                         "darkSouls": "Dark Souls"
                     }
                 },

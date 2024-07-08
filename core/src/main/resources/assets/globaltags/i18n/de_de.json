@@ -62,6 +62,9 @@
                     "entries": {
                         "default": "Zum theme passend",
                         "unicode": "Unicode",
+                        "alagard": "Alagard",
+                        "glacialIndifference": "Glacial Indifference",
+                        "superRpg": "Super RPG",
                         "darkSouls": "Dark Souls"
                     }
                 },

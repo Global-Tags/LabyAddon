@@ -1,0 +1,15 @@
+{
+    "providers": [
+        {
+            "type": "ttf",
+            "file": "globaltags:glacial_indifference.ttf",
+            "shift": [
+                0,
+                0.5
+            ],
+            "size": 12.0,
+            "oversample": 6.0,
+            "skip": ""
+        }
+    ]
+}
