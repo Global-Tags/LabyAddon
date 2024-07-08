@@ -7,7 +7,8 @@ import java.util.Map;
 
 public enum GlobalFont {
     DEFAULT,
-    UNICODE;
+    UNICODE,
+    DARK_SOULS;
 
     private static final Map<GlobalFont, ResourceLocation> locations = new HashMap<>();
 

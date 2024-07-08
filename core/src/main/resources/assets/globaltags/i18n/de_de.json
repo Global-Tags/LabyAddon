@@ -61,9 +61,8 @@
                     "name": "Globale Schriftart",
                     "entries": {
                         "default": "Zum theme passend",
-                        "vanilla": "Vanilla",
-                        "fancy": "Fancy",
-                        "unicode": "Unicode"
+                        "unicode": "Unicode",
+                        "darkSouls": "Dark Souls"
                     }
                 },
                 "position": {

@@ -1,0 +1,14 @@
+{
+    "providers": [
+        {
+            "type": "ttf",
+            "file": "globaltags:dark_souls.ttf",
+            "shift": [
+                0,
+                0.4
+            ],
+            "size": 11.0,
+            "oversample": 11.0
+        }
+    ]
+}

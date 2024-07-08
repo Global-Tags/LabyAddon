@@ -61,9 +61,8 @@
                     "name": "Global font",
                     "entries": {
                         "default": "Matching theme",
-                        "vanilla": "Vanilla",
-                        "fancy": "Fancy",
-                        "unicode": "Unicode"
+                        "unicode": "Unicode",
+                        "darkSouls": "Dark Souls"
                     }
                 },
                 "position": {
