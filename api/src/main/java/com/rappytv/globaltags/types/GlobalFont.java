@@ -31,7 +31,7 @@ public enum GlobalFont {
             );
             default -> ResourceLocation.create(
                 "globaltags",
-                "fonts/" + this.name().toLowerCase()
+                this.name().toLowerCase()
             );
         };
     }
