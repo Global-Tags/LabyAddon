@@ -31,9 +31,9 @@ public class TagSubConfig extends Config {
             TagPreviewWidget::change
         );
         tag.addChangeListener(runnable);
-        position.addChangeListener(runnable);
-        globalIcon.addChangeListener(runnable);
         font.addChangeListener(runnable);
+        position.addChangeListener(runnable);
+        icon.addChangeListener(runnable);
     }
 
     @SpriteSlot(size = 32, x = 1)
@@ -47,7 +47,7 @@ public class TagSubConfig extends Config {
 
     @IntroducedIn(namespace = "globaltags", value = "1.2.1")
     @DropdownSetting
-    private final ConfigProperty<GlobalFont> font = new ConfigProperty<>(GlobalFont.VANILLA);
+    private final ConfigProperty<GlobalFont> font = new ConfigProperty<>(GlobalFont.DEFAULT);
 
     @DropdownSetting
     @SpriteSlot(size = 32, x = 3)
@@ -55,7 +55,7 @@ public class TagSubConfig extends Config {
 
     @DropdownSetting
     @SpriteSlot(size = 32, y = 1, x = 2)
-    private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
+    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
     @MethodOrder(after = "globalIcon")
     @ButtonSetting
@@ -90,7 +90,7 @@ public class TagSubConfig extends Config {
                 else Util.update(ResultType.POSITION, response.getMessage());
             });
             else Util.update(ResultType.POSITION, Util.unchanged);
-            if(!info.getGlobalIcon().equals(globalIcon.get())) ApiHandler.setIcon(globalIcon.get(), (response) -> {
+            if(!info.getGlobalIcon().equals(icon.get())) ApiHandler.setIcon(icon.get(), (response) -> {
                 if(response.isSuccessful()) Util.update(ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(ResultType.ICON, response.getMessage());
             });
@@ -124,6 +124,6 @@ public class TagSubConfig extends Config {
         return position;
     }
     public ConfigProperty<GlobalIcon> icon() {
-        return globalIcon;
+        return icon;
     }
 }

@@ -74,7 +74,7 @@
                         "leftToName": "Links vom Namen"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Globales Icon",
                     "entries": {
                         "none": "Keins",

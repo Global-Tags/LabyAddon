@@ -3,20 +3,14 @@ package com.rappytv.globaltags.types;
 import com.rappytv.globaltags.api.ResponseBody.Ban;
 import com.rappytv.globaltags.util.Util;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.icon.Icon;
-import net.labymod.api.client.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 public class PlayerInfo {
-
-    private static final Map<GlobalFont, Style> fontStyles = new HashMap<>();
 
     private final UUID uuid;
     private final Component tag;
@@ -30,21 +24,13 @@ public class PlayerInfo {
     public PlayerInfo(UUID uuid, String tag, String font, String position, String icon, boolean admin, Ban ban) {
         this.uuid = uuid;
         this.font = font;
-        this.tag = Util.translateColorCodes(tag).style(getFontStyle(getFont()));
+        this.tag = Util.translateColorCodes(tag);
+        if(getFont() != GlobalFont.DEFAULT) this.tag.style(getFont().getFontStyle());
         this.plainTag = tag != null ? tag : "";
         this.position = position;
         this.icon = icon;
         this.admin = admin;
         this.suspension = ban != null ? new Suspension(ban) : new Suspension();
-    }
-
-    private Style getFontStyle(GlobalFont font) {
-        if(fontStyles.containsKey(font)) return fontStyles.get(font);
-        fontStyles.put(font, Style.empty().font(ResourceLocation.create(
-            "globaltags",
-            "fonts/" + font.name().toLowerCase()
-        )));
-        return getFontStyle(font);
     }
 
     /**
