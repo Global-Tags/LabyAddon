@@ -84,9 +84,7 @@ public class Util {
         Component component = LegacyComponentSerializer
             .legacyAmpersand()
             .deserialize(tag);
-        if(font.getCachedLocation() != null)
-            component.style(component.style().font(font.getCachedLocation()));
-        return component;
+        return component.style(component.style().font(font.getCachedLocation()));
     }
 
     public static @Nullable String getSessionToken() {
