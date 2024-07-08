@@ -11,14 +11,11 @@ import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.interaction.ToggleAdminBulletPoint;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
-import com.rappytv.globaltags.types.GlobalFont;
 import com.rappytv.globaltags.util.TagCache;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
-import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.component.format.Style;
 import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.TagRegistry;
@@ -65,16 +62,6 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         labyAPI().interactionMenuRegistry().register(new ToggleAdminBulletPoint());
         labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
         registerCommand(new GlobalTagCommand());
-
-        registerCommand(new Command("test") {
-            @Override
-            public boolean execute(String prefix, String[] arguments) {
-                Component component = Component.text("lol")
-                    .style(Style.empty().font(GlobalFont.DARK_SOULS.getCachedLocation()));
-                displayMessage(component);
-                return true;
-            }
-        });
 
         // Clear cache every 5 minutes
         new Timer().scheduleAtFixedRate(new TimerTask() {
