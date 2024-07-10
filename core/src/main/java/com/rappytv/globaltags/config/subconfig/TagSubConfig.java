@@ -57,7 +57,7 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, y = 1, x = 2)
     private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
-    @MethodOrder(after = "globalIcon")
+    @MethodOrder(after = "icon")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
     @SuppressWarnings("ConstantConditions")
