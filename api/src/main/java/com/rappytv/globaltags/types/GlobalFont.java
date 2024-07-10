@@ -9,9 +9,9 @@ public enum GlobalFont {
     DEFAULT,
     UNICODE,
     ALAGARD(3),
+    DARK_SOULS,
     GLACIAL_INDIFFERENCE,
-    SUPER_RPG,
-    DARK_SOULS;
+    SUPER_RPG;
 
     private static final Map<GlobalFont, ResourceLocation> locations = new HashMap<>();
 
