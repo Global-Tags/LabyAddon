@@ -89,7 +89,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                             I18n.translate("globaltags.settings.tags.staged.description")
                         );
                     }
-                    setVariable("--staff-margin", config.font().get().getStaffMargin());
+                    setVariable("--staff-margin", 2 + config.font().get().getStaffMargin());
                     ComponentWidget tag = ComponentWidget.component(
                         config.tag().get().isBlank()
                             ? Component.translatable(
