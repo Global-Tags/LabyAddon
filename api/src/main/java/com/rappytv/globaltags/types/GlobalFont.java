@@ -6,20 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum GlobalFont {
-    DEFAULT,
-    UNICODE,
+    DEFAULT(0),
+    UNICODE(-10),
     ALAGARD(3),
-    DARK_SOULS,
-    GLACIAL_INDIFFERENCE,
-    SUPER_RPG;
+    DARK_SOULS(22),
+    GLACIAL_INDIFFERENCE(18),
+    SUPER_RPG(10);
 
     private static final Map<GlobalFont, ResourceLocation> locations = new HashMap<>();
 
     private final double staffMargin;
-
-    GlobalFont() {
-        this(0);
-    }
 
     GlobalFont(double staffMargin) {
         this.staffMargin = staffMargin;
