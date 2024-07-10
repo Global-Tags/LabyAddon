@@ -8,7 +8,7 @@ import java.util.Map;
 public enum GlobalFont {
     DEFAULT,
     UNICODE,
-    ALAGARD,
+    ALAGARD(3),
     GLACIAL_INDIFFERENCE,
     SUPER_RPG,
     DARK_SOULS;

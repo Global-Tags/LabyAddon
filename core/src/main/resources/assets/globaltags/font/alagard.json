@@ -5,9 +5,9 @@
             "file": "globaltags:alagard.ttf",
             "shift": [
                 0,
-                0.8
+                1.6
             ],
-            "size": 11.0,
+            "size": 8.0,
             "oversample": 10.0
         }
     ]
