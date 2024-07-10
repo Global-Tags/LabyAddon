@@ -46,6 +46,7 @@ public class TagSubConfig extends Config {
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
     @IntroducedIn(namespace = "globaltags", value = "1.2.1")
+    @SpriteSlot(size = 32, y = 3)
     @DropdownSetting
     private final ConfigProperty<GlobalFont> font = new ConfigProperty<>(GlobalFont.DEFAULT);
 
