@@ -15,6 +15,20 @@ public enum GlobalFont {
 
     private static final Map<GlobalFont, ResourceLocation> locations = new HashMap<>();
 
+    private final double staffMargin;
+
+    GlobalFont() {
+        this(0);
+    }
+
+    GlobalFont(double staffMargin) {
+        this.staffMargin = staffMargin;
+    }
+
+    public double getStaffMargin() {
+        return staffMargin;
+    }
+
     @Nullable
     public ResourceLocation getCachedLocation() {
         if(locations.containsKey(this)) return locations.get(this);

@@ -70,7 +70,13 @@ public class CustomTag extends NameTag {
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
             if(info.getIcon() != null) info.getIcon().render(stack, -11, 0, 9, 9);
-            if(info.isAdmin()) admin.render(stack, getWidth() + 0.9F, -1.2F, 11, 11);
+            if(info.isAdmin()) admin.render(
+                stack,
+                getWidth() + 0.9F + (float) info.getFont().getStaffMargin(),
+                -1.2F,
+                11,
+                11
+            );
         });
     }
 
