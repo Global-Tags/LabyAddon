@@ -35,10 +35,6 @@ import java.lang.annotation.Target;
 @SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
-    private final Icon adminIcon = Icon.texture(ResourceLocation.create(
-        "globaltags",
-        "textures/icons/staff.png"
-    ));
     private static boolean refetch = true;
     private static boolean changed = false;
     private final TagSubConfig config;
@@ -98,8 +94,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
                     if (config.icon().get() != GlobalIcon.NONE)
                         this.addEntryInitialized(new IconWidget(config.icon().get().getIcon()).addId("icon"));
                     this.addEntryInitialized(tag);
-                    if (info.isAdmin())
-                        this.addEntryInitialized(new IconWidget(adminIcon).addId("staff-icon"));
+                    if (info.getHighestRole() != null)
+                        this.addEntryInitialized(new IconWidget(info.getHighestRole().getIcon())
+                            .addId("staff-icon"));
                 }
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
                     .addId("refresh-button");
