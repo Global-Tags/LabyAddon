@@ -13,7 +13,7 @@ public enum GlobalRole {
     GlobalRole(String color) {
         this.location = ResourceLocation.create(
             "globaltags",
-            "textures/icon/staff/" + color + ".png"
+            "textures/icon/roles/" + color + ".png"
         );
     }
 
