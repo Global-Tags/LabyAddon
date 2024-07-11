@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.types;
 
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 
 public enum GlobalRole {
@@ -8,16 +9,16 @@ public enum GlobalRole {
     MODERATOR("orange"),
     SUPPORTER("green");
 
-    private final ResourceLocation location;
+    private final Icon icon;
 
     GlobalRole(String color) {
-        this.location = ResourceLocation.create(
+        this.icon = Icon.texture(ResourceLocation.create(
             "globaltags",
             "textures/icon/roles/" + color + ".png"
-        );
+        ));
     }
 
-    public ResourceLocation getLocation() {
-        return location;
+    public Icon getIcon() {
+        return icon;
     }
 }
