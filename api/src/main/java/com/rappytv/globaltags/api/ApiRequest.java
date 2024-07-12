@@ -35,7 +35,7 @@ public abstract class ApiRequest {
             .url(getApiBase() + path)
             .method(method)
             .addHeader("Content-Type", "application/json")
-            .addHeader("Authorization", key != null ? key : "")
+            .addHeader("Authorization", key != null ? "LabyConnect " + key : "")
             .addHeader("X-Addon-Version", version)
             .handleErrorStream()
             .async();
