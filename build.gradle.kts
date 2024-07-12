@@ -15,7 +15,7 @@ labyMod {
         author = "RappyTV"
         description = "Get yourself a custom Globaltag that's publicly visible to anyone using this addon."
         minecraftVersion = "*"
-        version = System.getenv().getOrDefault("VERSION", "1.2.0")
+        version = System.getenv().getOrDefault("VERSION", "1.2.1")
     }
 
     minecraft {
