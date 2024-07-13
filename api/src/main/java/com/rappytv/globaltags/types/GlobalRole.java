@@ -14,7 +14,7 @@ public enum GlobalRole {
     GlobalRole(String color) {
         this.icon = Icon.texture(ResourceLocation.create(
             "globaltags",
-            "textures/icon/roles/" + color + ".png"
+            "textures/icons/roles/" + color + ".png"
         ));
     }
 
