@@ -26,20 +26,16 @@ public enum GlobalIcon {
     XBOX,
     YOUTUBE;
 
-    private final Map<String, Icon> iconCache = new HashMap<>();
+    private final Icon icon;
+
+    GlobalIcon() {
+        this.icon = Icon.texture(ResourceLocation.create(
+            "globaltags",
+            "textures/icons/" + this.name().toLowerCase() + ".png"
+        ));
+    }
 
     public Icon getIcon() {
-        String name = name().toLowerCase();
-        if(iconCache.containsKey(name))
-            return iconCache.get(name);
-        ResourceLocation location = ResourceLocation.create(
-            "globaltags",
-            "textures/icons/" + name + ".png"
-        );
-        iconCache.put(
-            name,
-            location.exists() ? Icon.texture(location) : null
-        );
-        return getIcon();
+        return icon;
     }
 }
