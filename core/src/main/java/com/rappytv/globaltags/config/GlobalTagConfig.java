@@ -36,6 +36,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2, x = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
+    @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @MethodOrder(after = "localizedResponses")
     @SpriteSlot(size = 32, y = 2, x = 3)
     @ButtonSetting

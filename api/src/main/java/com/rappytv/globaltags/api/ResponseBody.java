@@ -6,7 +6,7 @@ public class ResponseBody {
     public String tag;
     public String position;
     public String icon;
-    public boolean admin;
+    public String[] roles;
     public String message;
     public Ban ban;
 

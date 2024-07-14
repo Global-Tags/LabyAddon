@@ -10,18 +10,14 @@ import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
 import net.labymod.api.client.entity.player.tag.tags.NameTagBackground;
-import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
-import net.labymod.api.client.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.util.UUID;
 
-@SuppressWarnings("deprecation")
 public class CustomTag extends NameTag {
 
-    private final Icon admin;
     private final int black = new Color(0, 0, 0, 70).getRGB();
     private final GlobalTagConfig config;
     private final PositionType position;
@@ -30,10 +26,6 @@ public class CustomTag extends NameTag {
     public CustomTag(GlobalTagAddon addon, PositionType position) {
         this.config = addon.configuration();
         this.position = position;
-        admin = Icon.texture(ResourceLocation.create(
-            "globaltags",
-            "textures/icons/staff.png"
-        ));
     }
 
     @Override
@@ -63,6 +55,7 @@ public class CustomTag extends NameTag {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void render(Stack stack, Entity entity) {
         super.render(stack, entity);
         if(this.getRenderableComponent() == null) return;
@@ -70,7 +63,13 @@ public class CustomTag extends NameTag {
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
             if(info.getIcon() != null) info.getIcon().render(stack, -11, 0, 9, 9);
-            if(info.isAdmin()) admin.render(stack, getWidth() + 0.9F, -1.2F, 11, 11);
+            if(info.getHighestRole() != null) info.getHighestRole().getIcon().render(
+                stack,
+                getWidth() + 0.9F,
+                -1.2F,
+                11,
+                11
+            );
         });
     }
 

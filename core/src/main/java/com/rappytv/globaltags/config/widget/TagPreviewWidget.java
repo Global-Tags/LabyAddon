@@ -9,7 +9,6 @@ import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.Link;
@@ -17,7 +16,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
-import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.configuration.settings.Setting;
 import net.labymod.api.configuration.settings.accessor.SettingAccessor;
 import net.labymod.api.configuration.settings.annotation.SettingElement;
@@ -35,10 +33,6 @@ import java.lang.annotation.Target;
 @SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
-    private final Icon adminIcon = Icon.texture(ResourceLocation.create(
-        "globaltags",
-        "textures/icons/staff.png"
-    ));
     private static boolean refetch = true;
     private static boolean changed = false;
     private final TagSubConfig config;
@@ -98,8 +92,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
                     if (config.icon().get() != GlobalIcon.NONE)
                         this.addEntryInitialized(new IconWidget(config.icon().get().getIcon()).addId("icon"));
                     this.addEntryInitialized(tag);
-                    if (info.isAdmin())
-                        this.addEntryInitialized(new IconWidget(adminIcon).addId("staff-icon"));
+                    if (info.getHighestRole() != null)
+                        this.addEntryInitialized(new IconWidget(info.getHighestRole().getIcon())
+                            .addId("staff-icon"));
                 }
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
                     .addId("refresh-button");

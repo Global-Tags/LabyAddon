@@ -61,7 +61,7 @@ public class ApiHandler {
                 request.responseBody.tag,
                 request.responseBody.position,
                 request.responseBody.icon,
-                request.responseBody.admin,
+                request.responseBody.roles,
                 request.responseBody.ban
             ));
         });

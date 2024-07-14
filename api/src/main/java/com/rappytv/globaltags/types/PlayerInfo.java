@@ -7,6 +7,8 @@ import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.icon.Icon;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,16 +19,21 @@ public class PlayerInfo {
     private final String plainTag;
     private final String position;
     private final String icon;
-    private final boolean admin;
+    private final List<GlobalRole> roles;
     private final Suspension suspension;
 
-    public PlayerInfo(UUID uuid, String tag, String position, String icon, boolean admin, Ban ban) {
+    public PlayerInfo(UUID uuid, String tag, String position, String icon, String[] roles, Ban ban) {
         this.uuid = uuid;
         this.tag = Util.translateColorCodes(tag);
         this.plainTag = tag != null ? tag : "";
         this.position = position;
         this.icon = icon;
-        this.admin = admin;
+        this.roles = new ArrayList<>();
+        for(String role : roles) {
+            try {
+                this.roles.add(GlobalRole.valueOf(role.toUpperCase()));
+            } catch (Exception ignored) {}
+        }
         this.suspension = ban != null ? new Suspension(ban) : new Suspension();
     }
 
@@ -81,7 +88,7 @@ public class PlayerInfo {
     }
 
     /**
-     * Returns the global icon of the player
+     * Returns the global icon of the player. See {@link GlobalIcon#getIcon()}
      */
     public Icon getIcon() {
         return getGlobalIcon().getIcon();
@@ -91,7 +98,26 @@ public class PlayerInfo {
      * Returns if the player is a GlobalTag admin
      */
     public boolean isAdmin() {
-        return admin;
+        return roles.contains(GlobalRole.ADMIN);
+    }
+
+    /**
+     * Returns all of the players roles
+     */
+    @NotNull
+    public List<GlobalRole> getRoles() {
+        return roles;
+    }
+
+    /**
+     * Returns the players highest role
+     */
+    @Nullable
+    public GlobalRole getHighestRole() {
+        for(GlobalRole role : GlobalRole.values()) {
+            if(roles.contains(role)) return role;
+        }
+        return null;
     }
 
     /**
