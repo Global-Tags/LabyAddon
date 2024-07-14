@@ -2,8 +2,6 @@ package com.rappytv.globaltags.types;
 
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
-import java.util.HashMap;
-import java.util.Map;
 
 @SuppressWarnings("unused")
 public enum GlobalIcon {
