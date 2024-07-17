@@ -19,15 +19,28 @@ public class PlayerInfo {
     private final String plainTag;
     private final String position;
     private final String icon;
+    private final boolean referred;
+    private final int referrals;
     private final List<GlobalRole> roles;
     private final Suspension suspension;
 
-    public PlayerInfo(UUID uuid, String tag, String position, String icon, String[] roles, Ban ban) {
+    public PlayerInfo(
+        UUID uuid,
+        String tag,
+        String position,
+        String icon,
+        boolean referred,
+        int referrals,
+        String[] roles,
+        Ban ban
+    ) {
         this.uuid = uuid;
         this.tag = Util.translateColorCodes(tag);
         this.plainTag = tag != null ? tag : "";
         this.position = position;
         this.icon = icon;
+        this.referred = referred;
+        this.referrals = referrals;
         this.roles = new ArrayList<>();
         for(String role : roles) {
             try {
@@ -99,6 +112,20 @@ public class PlayerInfo {
      */
     public boolean isAdmin() {
         return roles.contains(GlobalRole.ADMIN);
+    }
+
+    /**
+     * Returns if the player has referred to another player for inviting them
+     */
+    public boolean hasReferred() {
+        return referred;
+    }
+
+    /**
+     * Returns how many other players were invited by the player
+     */
+    public int getReferrals() {
+        return referrals;
     }
 
     /**
