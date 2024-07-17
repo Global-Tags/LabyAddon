@@ -18,6 +18,7 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 public class ApiHandler {
 
+    // https://github.com/elysiajs/elysia/issues/495
     private static final Map<String, Object> emptyBody = Map.of("body", "placeholder body");
 
     private ApiHandler() {}
@@ -61,6 +62,8 @@ public class ApiHandler {
                 request.responseBody.tag,
                 request.responseBody.position,
                 request.responseBody.icon,
+                request.responseBody.referred,
+                request.responseBody.referrals,
                 request.responseBody.roles,
                 request.responseBody.ban
             ));
@@ -154,7 +157,6 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, Object> getBody() {
-                // https://github.com/elysiajs/elysia/issues/495
                 return emptyBody;
             }
         };
@@ -165,6 +167,26 @@ public class ApiHandler {
             }
             TagCache.clear();
             TagCache.resolveSelf((info) -> consumer.accept(new ApiResponse(true, request.getMessage())));
+        });
+    }
+
+    public static void referPlayer(UUID uuid, Consumer<ApiResponse> consumer) {
+        ApiRequest request = new ApiRequest(
+            Method.POST,
+            "/players/" + uuid + "/referral",
+            Util.getSessionToken()
+        ) {
+            @Override
+            public Map<String, Object> getBody() {
+                return emptyBody;
+            }
+        };
+        request.sendAsyncRequest((response) -> {
+            if(!request.isSuccessful()) {
+                consumer.accept(new ApiResponse(false, request.getError()));
+                return;
+            }
+            consumer.accept(new ApiResponse(true, request.getMessage()));
         });
     }
 
@@ -217,7 +239,6 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, Object> getBody() {
-                // https://github.com/elysiajs/elysia/issues/495
                 return emptyBody;
             }
         };
@@ -281,7 +302,6 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, Object> getBody() {
-                // https://github.com/elysiajs/elysia/issues/495
                 return emptyBody;
             }
         };
@@ -303,7 +323,6 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, Object> getBody() {
-                // https://github.com/elysiajs/elysia/issues/495
                 return emptyBody;
             }
         };
@@ -325,7 +344,6 @@ public class ApiHandler {
         ) {
             @Override
             public Map<String, Object> getBody() {
-                // https://github.com/elysiajs/elysia/issues/495
                 return emptyBody;
             }
         };
