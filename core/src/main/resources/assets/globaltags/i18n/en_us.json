@@ -122,6 +122,9 @@
         "context": {
             "reason": "Reason",
             "placeholder": "Please enter a reason...",
+            "referral": {
+                "name": "This player invited me to GlobalTags"
+            },
             "report": {
                 "name": "Report GlobalTag",
                 "title": "Report %s",
