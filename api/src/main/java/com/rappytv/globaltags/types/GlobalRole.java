@@ -2,6 +2,7 @@ package com.rappytv.globaltags.types;
 
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 public enum GlobalRole {
     ADMIN("purple"),
@@ -18,6 +19,7 @@ public enum GlobalRole {
         ));
     }
 
+    @NotNull
     public Icon getIcon() {
         return icon;
     }

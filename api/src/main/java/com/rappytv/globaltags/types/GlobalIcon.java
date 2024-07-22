@@ -2,6 +2,7 @@ package com.rappytv.globaltags.types;
 
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public enum GlobalIcon {
@@ -33,7 +34,12 @@ public enum GlobalIcon {
         ));
     }
 
+    /**
+     * Get the {@link Icon} of the {@link GlobalIcon}
+     * @return The {@link Icon} or null if the {@link GlobalIcon} equals {@link GlobalIcon#NONE}
+     */
+    @Nullable
     public Icon getIcon() {
-        return icon;
+        return this != NONE ? icon : null;
     }
 }

@@ -103,6 +103,7 @@ public class PlayerInfo {
     /**
      * Returns the global icon of the player. See {@link GlobalIcon#getIcon()}
      */
+    @Nullable
     public Icon getIcon() {
         return getGlobalIcon().getIcon();
     }
