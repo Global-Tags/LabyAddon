@@ -122,6 +122,9 @@
     "context": {
       "reason": "Grund",
       "placeholder": "Bitte gib einen Grund an...",
+      "referral": {
+        "name": "Dieser Spieler hat mich zu GlobalTags eingeladen"
+      }
       "report": {
         "name": "GlobalTag melden",
         "title": "%s melden",
