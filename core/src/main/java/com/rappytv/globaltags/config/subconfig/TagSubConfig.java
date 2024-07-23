@@ -57,15 +57,10 @@ public class TagSubConfig extends Config {
     @SuppressWarnings("ConstantConditions")
     public void updateSettings(Setting setting) {
         TagCache.resolveSelf((info) -> {
-            Component error = null;
-            if(Util.getSessionToken() == null)
-                error = Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
-            else if(info == null)
-                error = Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-            if(error != null) {
+            if(Util.getSessionToken() == null) {
                 Util.notify(
                     Component.translatable("globaltags.notifications.error"),
-                    error
+                    Component.translatable("globaltags.settings.tags.tagPreview.labyConnect")
                 );
                 return;
             }
