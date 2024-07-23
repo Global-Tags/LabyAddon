@@ -64,17 +64,17 @@ public class TagSubConfig extends Config {
                 );
                 return;
             }
-            if(!info.getPlainTag().equals(tag.get())) ApiHandler.setTag(tag.get(), (response) -> {
+            if(info == null || !info.getPlainTag().equals(tag.get())) ApiHandler.setTag(tag.get(), (response) -> {
                 if(response.isSuccessful()) Util.update(ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(ResultType.TAG, response.getMessage());
             });
             else Util.update(ResultType.TAG, Util.unchanged);
-            if(!info.getPosition().equals(position.get())) ApiHandler.setPosition(position.get(), (response) -> {
+            if(info != null && !info.getPosition().equals(position.get())) ApiHandler.setPosition(position.get(), (response) -> {
                 if(response.isSuccessful()) Util.update(ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(ResultType.POSITION, response.getMessage());
             });
             else Util.update(ResultType.POSITION, Util.unchanged);
-            if(!info.getGlobalIcon().equals(globalIcon.get())) ApiHandler.setIcon(globalIcon.get(), (response) -> {
+            if(info != null && !info.getGlobalIcon().equals(globalIcon.get())) ApiHandler.setIcon(globalIcon.get(), (response) -> {
                 if(response.isSuccessful()) Util.update(ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(ResultType.ICON, response.getMessage());
             });
