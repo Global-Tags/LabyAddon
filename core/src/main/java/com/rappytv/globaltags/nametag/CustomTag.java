@@ -28,7 +28,7 @@ public class CustomTag extends NameTag {
     private PlayerInfo<Component> info;
 
     public CustomTag(GlobalTagAddon addon, PositionType position) {
-        this.api = addon.getAPI();
+        this.api = GlobalTagAddon.getAPI();
         this.config = addon.configuration();
         this.position = position;
     }
