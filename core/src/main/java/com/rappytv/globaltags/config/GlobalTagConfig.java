@@ -51,7 +51,7 @@ public class GlobalTagConfig extends AddonConfig {
 
     @SettingSection("tags")
     @SpriteSlot(size = 32, y = 1)
-    private final TagSubConfig tags = new TagSubConfig(GlobalTagAddon.getAPI());
+    private final TagSubConfig tags = new TagSubConfig();
 
     @MethodOrder(after = "tags")
     @ButtonSetting

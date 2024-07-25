@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.config.subconfig;
 
+import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
@@ -24,8 +25,8 @@ public class TagSubConfig extends Config {
 
     private final GlobalTagAPI api;
 
-    public TagSubConfig(GlobalTagAPI api) {
-        this.api = api;
+    public TagSubConfig() {
+        this.api = GlobalTagAddon.getAPI();
         Runnable runnable = () -> Debounce.of(
             "globaltags-config-update",
             1000,
