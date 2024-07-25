@@ -1,14 +1,14 @@
 package com.rappytv.globaltags.config.widget;
 
+import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
-import com.rappytv.globaltags.types.GlobalIcon;
-import com.rappytv.globaltags.types.PlayerInfo;
-import com.rappytv.globaltags.util.TagCache;
-import com.rappytv.globaltags.util.Util;
+import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.Link;
@@ -35,9 +35,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
     private static boolean refetch = true;
     private static boolean changed = false;
+    private final GlobalTagAPI api;
     private final TagSubConfig config;
 
     private TagPreviewWidget(TagSubConfig config) {
+        this.api = config.getAPI();
         this.config = config;
     }
 
@@ -46,7 +48,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         super.tick();
         if(!refetch && !changed) return;
         if(refetch)
-            TagCache.remove(Laby.labyAPI().getUniqueId());
+            api.getCache().remove(Laby.labyAPI().getUniqueId());
         reInitialize();
         refetch = false;
         changed = false;
@@ -59,7 +61,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
     }
 
     public void initialize(boolean refetched) {
-        TagCache.resolveSelf((info) ->
+        api.getCache().resolveSelf((info) ->
             Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                 Component error = getError(info);
                 if (error != null) {
@@ -87,14 +89,20 @@ public class TagPreviewWidget extends HorizontalListWidget {
                                 "globaltags.settings.tags.tagPreview.empty",
                                 NamedTextColor.RED
                             )
-                            : Util.translateColorCodes(config.tag().get())
+                            : api.translateColorCodes(config.tag().get())
                     ).addId("text");
-                    if (config.icon().get() != GlobalIcon.NONE)
-                        this.addEntryInitialized(new IconWidget(config.icon().get().getIcon()).addId("icon"));
+                    String iconUrl = config.icon().get().getIconUrl();
+                    if (iconUrl != null)
+                        this.addEntryInitialized(
+                            new IconWidget(Icon.url(iconUrl))
+                                .addId("icon")
+                        );
                     this.addEntryInitialized(tag);
                     if (info.getHighestRole() != null)
-                        this.addEntryInitialized(new IconWidget(info.getHighestRole().getIcon())
-                            .addId("staff-icon"));
+                        this.addEntryInitialized(
+                            new IconWidget(Icon.url(info.getHighestRole().getIconUrl()))
+                                .addId("staff-icon")
+                        );
                 }
                 ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
                     .addId("refresh-button");
@@ -102,7 +110,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 if(info != null && info.isSuspended()) {
                     ButtonWidget appealButton = ButtonWidget.i18n(
                         "globaltags.settings.tags.tagPreview.appeal.name",
-                        () -> new AppealPopup().displayInOverlay()
+                        () -> new AppealPopup(api).displayInOverlay()
                     ).addId("appeal-button");
                     appealButton.setHoverComponent(Component.translatable(
                         "globaltags.settings.tags.tagPreview.appeal.description",
@@ -122,8 +130,8 @@ public class TagPreviewWidget extends HorizontalListWidget {
         refetch = true;
     }
 
-    private Component getError(PlayerInfo info) {
-        String session = Util.getSessionToken();
+    private Component getError(PlayerInfo<Component> info) {
+        String session = api.getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
         else if(info.isSuspended()) return Component.translatable(

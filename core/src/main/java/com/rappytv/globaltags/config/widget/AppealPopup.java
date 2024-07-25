@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.config.widget;
 
-import com.rappytv.globaltags.api.ApiHandler;
-import com.rappytv.globaltags.util.Util;
+import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.Util;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.widget.Widget;
@@ -13,6 +13,12 @@ import net.labymod.api.client.gui.screen.widget.widgets.popup.AdvancedPopup;
 import org.jetbrains.annotations.Nullable;
 
 public class AppealPopup extends AdvancedPopup {
+
+    private final GlobalTagAPI api;
+
+    public AppealPopup(GlobalTagAPI api) {
+        this.api = api;
+    }
 
     @Override
     public @Nullable Widget initialize() {
@@ -34,13 +40,13 @@ public class AppealPopup extends AdvancedPopup {
             .addId("send-button", "popup-description");
         sendButton.setEnabled(false);
         sendButton.setActionListener(() ->
-            ApiHandler.appealBan(inputWidget.getText(), (response) ->
+            api.getApiHandler().appealBan(inputWidget.getText(), (response) ->
                 Util.notify(
-                    Component.translatable(response.isSuccessful()
+                    Component.translatable(response.successful()
                         ? "globaltags.notifications.success"
                         : "globaltags.notifications.error"
                     ),
-                    response.getMessage().color(NamedTextColor.WHITE)
+                    Component.text(response.data(), NamedTextColor.WHITE)
                 )
             )
         );

@@ -1,11 +1,11 @@
 package com.rappytv.globaltags.activities;
 
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.api.ApiHandler;
 import java.util.UUID;
 import java.util.function.Consumer;
-import com.rappytv.globaltags.types.PlayerInfo.Suspension;
-import com.rappytv.globaltags.util.TagCache;
+import com.rappytv.globaltags.api.Util;
+import com.rappytv.globaltags.wrapper.model.PlayerInfo.Suspension;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -30,10 +30,12 @@ import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 @AutoActivity
 public class EditBanActivity extends SimpleActivity {
 
+    private final GlobalTagAPI api;
     private final UUID uuid;
     private final String username;
 
-    public EditBanActivity(UUID uuid, String username) {
+    public EditBanActivity(GlobalTagAPI api, UUID uuid, String username) {
+        this.api = api;
         this.uuid = uuid;
         this.username = username;
     }
@@ -41,7 +43,7 @@ public class EditBanActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        TagCache.resolve(uuid, (info) -> {
+        api.getCache().resolve(uuid, (info) -> {
             Suspension suspension = info.getSuspension();
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
@@ -79,11 +81,11 @@ public class EditBanActivity extends SimpleActivity {
                     inputWidget.getText(),
                     checkBoxWidget.state() == State.CHECKED
                 );
-                ApiHandler.editBan(uuid, editedSuspension, (response) ->
+                api.getApiHandler().editBan(uuid, editedSuspension, (response) ->
                     Laby.references().chatExecutor().displayClientMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)
-                            .append(response.getMessage())
+                            .append(Util.getResponseComponent(response))
                     )
                 );
             });
