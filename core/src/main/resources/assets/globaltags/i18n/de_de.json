@@ -61,10 +61,10 @@
           "name": "Globale Position",
           "description": "Dein Tag ist an dieser Position für alle sichtbar.",
           "entries": {
-            "aboveName": "Über dem Namen",
-            "belowName": "Unten dem Namen",
-            "rightToName": "Rechts vom Namen",
-            "leftToName": "Links vom Namen"
+            "above": "Über dem Namen",
+            "below": "Unten dem Namen",
+            "right": "Rechts vom Namen",
+            "left": "Links vom Namen"
           }
         },
         "globalIcon": {

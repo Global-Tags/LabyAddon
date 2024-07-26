@@ -61,10 +61,10 @@
                     "name": "Global position",
                     "description": "Your tag is visible in this position to everyone.",
                     "entries": {
-                        "aboveName": "Above name",
-                        "belowName": "Below name",
-                        "rightToName": "Right to name",
-                        "leftToName": "Left to name"
+                        "above": "Above name",
+                        "below": "Below name",
+                        "right": "Right to name",
+                        "left": "Left to name"
                     }
                 },
                 "globalIcon": {
