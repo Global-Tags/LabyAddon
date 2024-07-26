@@ -49,7 +49,7 @@ public class ChangeTagActivity extends SimpleActivity {
             TextFieldWidget inputWidget = new TextFieldWidget()
                 .placeholder(Component.translatable("globaltags.context.changeTag.placeholder", NamedTextColor.DARK_GRAY))
                 .addId("input");
-            boolean hasTag = info.getPlainTag() != null;
+            boolean hasTag = !info.getPlainTag().isBlank();
             inputWidget.setText(hasTag ? info.getPlainTag() : "");
             ButtonWidget sendButton = new ButtonWidget()
                 .updateComponent(Component.translatable("globaltags.context.changeTag.send", NamedTextColor.AQUA))
