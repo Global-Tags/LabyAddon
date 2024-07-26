@@ -69,6 +69,7 @@
                 },
                 "globalIcon": {
                     "name": "Global icon",
+                    "description": "This icon will be displayed left to your tag globally.",
                     "entries": {
                         "none": "None",
                         "discord": "Discord",
