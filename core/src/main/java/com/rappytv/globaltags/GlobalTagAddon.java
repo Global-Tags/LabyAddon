@@ -25,7 +25,7 @@ import net.labymod.api.util.version.SemanticVersion;
 @AddonMain
 public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
-    public static Component prefix = Component.empty()
+    public static final Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
 
