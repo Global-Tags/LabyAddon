@@ -54,7 +54,7 @@ public class GlobalTagAPI implements GlobalTagsAPI<Component> {
 
     @Override
     public @Nullable UUID getClientUUID() {
-        return null;
+        return Laby.labyAPI().getUniqueId();
     }
 
     @NotNull
