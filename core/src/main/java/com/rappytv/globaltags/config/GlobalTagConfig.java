@@ -40,7 +40,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SettingSection("display")
     @SwitchSetting
     @SpriteSlot(size = 32, x = 1)
-    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(false);
+    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
