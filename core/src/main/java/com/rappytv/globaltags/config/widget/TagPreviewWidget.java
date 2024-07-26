@@ -1,5 +1,6 @@
 package com.rappytv.globaltags.config.widget;
 
+import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
@@ -35,11 +36,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
     private static boolean refetch = true;
     private static boolean changed = false;
-    private final GlobalTagAPI api;
     private final TagSubConfig config;
 
     private TagPreviewWidget(TagSubConfig config) {
-        this.api = config.getAPI();
         this.config = config;
     }
 
@@ -48,7 +47,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         super.tick();
         if(!refetch && !changed) return;
         if(refetch)
-            api.getCache().remove(Laby.labyAPI().getUniqueId());
+            GlobalTagAddon.getAPI().getCache().remove(GlobalTagAddon.getAPI().getClientUUID());
         reInitialize();
         refetch = false;
         changed = false;
@@ -60,7 +59,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
         initialize(refetch);
     }
 
+    @SuppressWarnings("ConstantConditions")
     public void initialize(boolean refetched) {
+        GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getCache().resolveSelf((info) ->
             Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                 Component error = getError(info);
@@ -131,7 +132,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
     }
 
     private Component getError(PlayerInfo<Component> info) {
-        String session = api.getAuthorization();
+        String session = GlobalTagAddon.getAPI().getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
         else if(info.isSuspended()) return Component.translatable(

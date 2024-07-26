@@ -23,10 +23,7 @@ import net.labymod.api.util.MethodOrder;
 
 public class TagSubConfig extends Config {
 
-    private final GlobalTagAPI api;
-
     public TagSubConfig() {
-        this.api = GlobalTagAddon.getAPI();
         Runnable runnable = () -> Debounce.of(
             "globaltags-config-update",
             1000,
@@ -58,6 +55,7 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
     public void updateSettings(Setting setting) {
+        GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getCache().resolveSelf((info) -> {
             if(api.getAuthorization() == null) {
                 Util.notify(
@@ -88,6 +86,7 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
+        GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getApiHandler().resetTag((info) -> {
             if(info.successful()) TagPreviewWidget.refetch();
             Util.notify(
@@ -108,8 +107,5 @@ public class TagSubConfig extends Config {
     }
     public ConfigProperty<GlobalIcon> icon() {
         return globalIcon;
-    }
-    public GlobalTagAPI getAPI() {
-        return api;
     }
 }
