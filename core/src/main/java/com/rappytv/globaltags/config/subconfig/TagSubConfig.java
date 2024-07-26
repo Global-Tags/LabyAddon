@@ -57,7 +57,6 @@ public class TagSubConfig extends Config {
     @MethodOrder(after = "globalIcon")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
-    @SuppressWarnings("ConstantConditions")
     public void updateSettings(Setting setting) {
         api.getCache().resolveSelf((info) -> {
             if(api.getAuthorization() == null) {
