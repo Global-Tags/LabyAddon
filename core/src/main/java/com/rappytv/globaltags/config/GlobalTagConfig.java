@@ -1,9 +1,8 @@
 package com.rappytv.globaltags.config;
 
-import com.rappytv.globaltags.api.ApiRequest;
+import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
-import com.rappytv.globaltags.util.TagCache;
-import com.rappytv.globaltags.util.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
@@ -23,12 +22,6 @@ import net.labymod.api.util.MethodOrder;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
-    public GlobalTagConfig() {
-        localizedResponses.addChangeListener((property, oldValue, newValue) ->
-            ApiRequest.useLocalizedResponses(newValue)
-        );
-    }
-
     @SwitchSetting
     @SpriteSlot(size = 32)
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
@@ -47,7 +40,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SettingSection("display")
     @SwitchSetting
     @SpriteSlot(size = 32, x = 1)
-    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(false);
+    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
@@ -64,8 +57,8 @@ public class GlobalTagConfig extends AddonConfig {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 2)
     public void clearCache(Setting setting) {
-        TagCache.clear();
-        TagCache.resolveSelf();
+        GlobalTagAddon.getAPI().getCache().clear();
+        GlobalTagAddon.getAPI().getCache().resolveSelf();
         Util.notify(
             I18n.translate("globaltags.notifications.success"),
             I18n.translate("globaltags.notifications.cacheCleared")
@@ -75,6 +68,9 @@ public class GlobalTagConfig extends AddonConfig {
     @Override
     public ConfigProperty<Boolean> enabled() {
         return enabled;
+    }
+    public ConfigProperty<Boolean> localizedResponses() {
+        return localizedResponses;
     }
     public ConfigProperty<Boolean> showOwnTag() {
         return showOwnTag;

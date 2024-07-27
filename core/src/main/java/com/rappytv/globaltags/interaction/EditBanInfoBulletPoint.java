@@ -1,11 +1,9 @@
 package com.rappytv.globaltags.interaction;
 
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.BanActivity;
 import com.rappytv.globaltags.activities.EditBanActivity;
-import com.rappytv.globaltags.api.ApiHandler;
-import com.rappytv.globaltags.types.PlayerInfo;
-import com.rappytv.globaltags.util.TagCache;
+import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.Player;
@@ -14,7 +12,11 @@ import net.labymod.api.client.gui.icon.Icon;
 
 public class EditBanInfoBulletPoint implements BulletPoint {
 
-    private PlayerInfo target;
+    private final GlobalTagAPI api;
+
+    public EditBanInfoBulletPoint() {
+        this.api = GlobalTagAddon.getAPI();
+    }
 
     @Override
     public Component getTitle() {
@@ -30,6 +32,7 @@ public class EditBanInfoBulletPoint implements BulletPoint {
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new EditBanActivity(
+                api,
                 player.getUniqueId(),
                 player.getName()
             ))
@@ -38,8 +41,8 @@ public class EditBanInfoBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo executer = TagCache.get(Laby.labyAPI().getUniqueId());
-        target = TagCache.get(player.getUniqueId());
+        PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
+        PlayerInfo<Component> target = api.getCache().get(player.getUniqueId());
         return executer != null && executer.isAdmin() && target != null && target.isSuspended();
     }
 }

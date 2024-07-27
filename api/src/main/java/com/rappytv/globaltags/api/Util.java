@@ -1,17 +1,12 @@
-package com.rappytv.globaltags.util;
+package com.rappytv.globaltags.api;
 
+import com.rappytv.globaltags.wrapper.http.ApiHandler.ApiResponse;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
 import net.labymod.api.client.gui.screen.widget.widgets.popup.SimpleAdvancedPopup;
-import net.labymod.api.labyconnect.LabyConnectSession;
-import net.labymod.api.labyconnect.TokenStorage.Purpose;
-import net.labymod.api.labyconnect.TokenStorage.Token;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class Util {
 
@@ -23,22 +18,7 @@ public class Util {
     private static Component positionResponse = null;
     private static Component iconResponse = null;
 
-    public static void notify(String title, String text) {
-        notify(
-            Component.text(title),
-            Component.text(text)
-        );
-    }
-
-    public static void notify(Component title, Component description) {
-        Notification.builder()
-            .title(title)
-            .text(description)
-            .type(Type.SYSTEM)
-            .buildAndPush();
-    }
-
-    public static void update(ResultType type, Component component) {
+    public static void update(GlobalTagAPI api, ResultType type, Component component) {
         switch (type) {
             case TAG -> tagResponse = component;
             case POSITION -> positionResponse = component;
@@ -58,8 +38,8 @@ public class Util {
 
         Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
             popup.displayInOverlay();
-            TagCache.clear();
-            TagCache.resolveSelf();
+            api.getCache().clear();
+            api.getCache().resolveSelf();
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;
@@ -72,25 +52,25 @@ public class Util {
         ICON
     }
 
-    @NotNull
-    public static Component translateColorCodes(String string) {
-        if(string == null) string = "";
-        return LegacyComponentSerializer
-            .legacyAmpersand()
-            .deserialize(string);
+    public static void notify(String title, String text) {
+        notify(
+            Component.text(title),
+            Component.text(text)
+        );
     }
 
-    public static @Nullable String getSessionToken() {
-        LabyConnectSession session = Laby.labyAPI().labyConnect().getSession();
-        if(session == null) return null;
+    public static void notify(Component title, Component description) {
+        Notification.builder()
+            .title(title)
+            .text(description)
+            .type(Type.SYSTEM)
+            .buildAndPush();
+    }
 
-        Token token = session.tokenStorage().getToken(
-            Purpose.JWT,
-            session.self().getUniqueId()
+    public static Component getResponseComponent(ApiResponse<String> response) {
+        return Component.text(
+            response.data(),
+            response.successful() ? NamedTextColor.GREEN : NamedTextColor.RED
         );
-
-        if(token == null || token.isExpired()) return null;
-
-        return token.getToken();
     }
 }

@@ -1,7 +1,8 @@
 package com.rappytv.globaltags.activities;
 
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.api.Util;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -26,10 +27,12 @@ import java.util.UUID;
 @AutoActivity
 public class BanActivity extends SimpleActivity {
 
+    private final GlobalTagAPI api;
     private final UUID uuid;
     private final String username;
 
-    public BanActivity(UUID uuid, String username) {
+    public BanActivity(GlobalTagAPI api, UUID uuid, String username) {
+        this.api = api;
         this.uuid = uuid;
         this.username = username;
     }
@@ -52,10 +55,10 @@ public class BanActivity extends SimpleActivity {
         sendButton.setEnabled(false);
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            ApiHandler.banPlayer(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+            api.getApiHandler().banPlayer(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
                     .append(GlobalTagAddon.prefix)
-                    .append(response.getMessage())
+                    .append(Util.getResponseComponent(response))
             ));
         });
         inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank()));

@@ -1,30 +1,35 @@
 package com.rappytv.globaltags.command.subcommands;
 
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.api.ApiHandler;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.component.TextComponent;
 import net.labymod.api.client.component.format.NamedTextColor;
 
 public class LinkDiscordSubcommand extends SubCommand {
 
-    public LinkDiscordSubcommand() {
+    private final GlobalTagAPI api;
+
+    public LinkDiscordSubcommand(GlobalTagAPI api) {
         super("link");
+        this.api = api;
     }
 
     @Override
     public boolean execute(String s, String[] strings) {
-        ApiHandler.linkDiscord((info) -> {
-            if(info.isSuccessful()) {
-                String code = ((TextComponent) info.getMessage()).getText();
+        api.getApiHandler().linkDiscord((info) -> {
+            if(info.successful()) {
+                String code = info.data();
                 Laby.references().chatExecutor().copyToClipboard(code);
                 displayMessage(GlobalTagAddon.prefix.copy().append(
                     Component.translatable("globaltags.messages.code", NamedTextColor.GREEN)
                 ));
             } else displayMessage(
-                GlobalTagAddon.prefix.copy().append(info.getMessage())
+                GlobalTagAddon.prefix.copy().append(Component.text(
+                    info.data(),
+                    NamedTextColor.RED
+                ))
             );
         });
         return true;

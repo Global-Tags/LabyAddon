@@ -1,7 +1,7 @@
 rootProject.name = "GlobalTags"
 
 pluginManagement {
-    val labyGradlePluginVersion = "0.4.1"
+    val labyGradlePluginVersion = "0.4.5"
     plugins {
         id("net.labymod.gradle") version (labyGradlePluginVersion)
     }

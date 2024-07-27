@@ -1,15 +1,15 @@
 package com.rappytv.globaltags.config.subconfig;
 
-import com.rappytv.globaltags.api.ApiHandler;
+import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.Util;
+import com.rappytv.globaltags.api.Util.ResultType;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget;
 import com.rappytv.globaltags.config.widget.TagPreviewWidget.TagPreviewSetting;
-import com.rappytv.globaltags.types.GlobalIcon;
-import com.rappytv.globaltags.util.TagCache;
-import com.rappytv.globaltags.util.Util;
-import com.rappytv.globaltags.util.Util.ResultType;
+import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
+import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
-import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
@@ -45,7 +45,7 @@ public class TagSubConfig extends Config {
 
     @DropdownSetting
     @SpriteSlot(size = 32, x = 3)
-    private final ConfigProperty<PositionType> position = new ConfigProperty<>(PositionType.ABOVE_NAME);
+    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(GlobalPosition.ABOVE);
 
     @DropdownSetting
     @SpriteSlot(size = 32, y = 1, x = 2)
@@ -54,31 +54,31 @@ public class TagSubConfig extends Config {
     @MethodOrder(after = "globalIcon")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
-    @SuppressWarnings("ConstantConditions")
     public void updateSettings(Setting setting) {
-        TagCache.resolveSelf((info) -> {
-            if(Util.getSessionToken() == null) {
+        GlobalTagAPI api = GlobalTagAddon.getAPI();
+        api.getCache().resolveSelf((info) -> {
+            if(api.getAuthorization() == null) {
                 Util.notify(
                     Component.translatable("globaltags.notifications.error"),
                     Component.translatable("globaltags.settings.tags.tagPreview.labyConnect")
                 );
                 return;
             }
-            if(info == null || !info.getPlainTag().equals(tag.get())) ApiHandler.setTag(tag.get(), (response) -> {
-                if(response.isSuccessful()) Util.update(ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(ResultType.TAG, response.getMessage());
+            if(info == null || !info.getPlainTag().equals(tag.get())) api.getApiHandler().setTag(tag.get(), (response) -> {
+                if(response.successful()) Util.update(api, ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(api, ResultType.TAG, Component.text(response.data(), NamedTextColor.RED));
             });
-            else Util.update(ResultType.TAG, Util.unchanged);
-            if(info != null && !info.getPosition().equals(position.get())) ApiHandler.setPosition(position.get(), (response) -> {
-                if(response.isSuccessful()) Util.update(ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(ResultType.POSITION, response.getMessage());
+            else Util.update(api, ResultType.TAG, Util.unchanged);
+            if(info != null && !info.getPosition().equals(position.get())) api.getApiHandler().setPosition(position.get(), (response) -> {
+                if(response.successful()) Util.update(api, ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(api, ResultType.POSITION, Component.text(response.data(), NamedTextColor.RED));
             });
-            else Util.update(ResultType.POSITION, Util.unchanged);
-            if(info != null && !info.getGlobalIcon().equals(globalIcon.get())) ApiHandler.setIcon(globalIcon.get(), (response) -> {
-                if(response.isSuccessful()) Util.update(ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(ResultType.ICON, response.getMessage());
+            else Util.update(api, ResultType.POSITION, Util.unchanged);
+            if(info != null && !info.getGlobalIcon().equals(globalIcon.get())) api.getApiHandler().setIcon(globalIcon.get(), (response) -> {
+                if(response.successful()) Util.update(api, ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(api, ResultType.ICON, Component.text(response.data(), NamedTextColor.RED));
             });
-            else Util.update(ResultType.ICON, Util.unchanged);
+            else Util.update(api, ResultType.ICON, Util.unchanged);
         });
     }
 
@@ -86,14 +86,15 @@ public class TagSubConfig extends Config {
     @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 3)
     public void resetTag(Setting setting) {
-        ApiHandler.resetTag((info) -> {
-            if(info.isSuccessful()) TagPreviewWidget.refetch();
+        GlobalTagAPI api = GlobalTagAddon.getAPI();
+        api.getApiHandler().resetTag((info) -> {
+            if(info.successful()) TagPreviewWidget.refetch();
             Util.notify(
-                Component.translatable(info.isSuccessful()
+                Component.translatable(info.successful()
                     ? "globaltags.notifications.success"
                     : "globaltags.notifications.error"
                 ),
-                info.getMessage().color(NamedTextColor.WHITE)
+                Component.text(info.data(), NamedTextColor.WHITE)
             );
         });
     }
@@ -101,10 +102,9 @@ public class TagSubConfig extends Config {
     public ConfigProperty<String> tag() {
         return tag;
     }
-    public ConfigProperty<PositionType> position() {
+    public ConfigProperty<GlobalPosition> position() {
         return position;
     }
-
     public ConfigProperty<GlobalIcon> icon() {
         return globalIcon;
     }

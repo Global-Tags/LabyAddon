@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     labyApi("api")
+    maven(mavenCentral(), "com.rappytv.globaltags:GlobalTagsJava:1.0.3")
 
     // If you want to use external libraries, you can do that here.
     // The dependencies that are specified here are loaded into your project but will also

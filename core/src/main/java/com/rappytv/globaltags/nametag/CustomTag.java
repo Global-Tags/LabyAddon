@@ -1,15 +1,18 @@
 package com.rappytv.globaltags.nametag;
 
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.config.GlobalTagConfig;
-import com.rappytv.globaltags.types.PlayerInfo;
-import com.rappytv.globaltags.util.TagCache;
+import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
+import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
+import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.tags.NameTag;
 import net.labymod.api.client.entity.player.tag.tags.NameTagBackground;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
 import org.jetbrains.annotations.Nullable;
@@ -19,11 +22,13 @@ import java.util.UUID;
 public class CustomTag extends NameTag {
 
     private final int black = new Color(0, 0, 0, 70).getRGB();
+    private final GlobalTagAPI api;
     private final GlobalTagConfig config;
     private final PositionType position;
-    private PlayerInfo info;
+    private PlayerInfo<Component> info;
 
     public CustomTag(GlobalTagAddon addon, PositionType position) {
+        this.api = GlobalTagAddon.getAPI();
         this.config = addon.configuration();
         this.position = position;
     }
@@ -42,14 +47,14 @@ public class CustomTag extends NameTag {
             return null;
 
         info = null;
-        if(TagCache.has(uuid))
-            info = TagCache.get(uuid);
+        if(api.getCache().has(uuid))
+            info = api.getCache().get(uuid);
         else {
             if(position == PositionType.ABOVE_NAME)
-                TagCache.resolve(uuid);
+                api.getCache().resolve(uuid);
         }
         if(info == null || info.getTag() == null) return null;
-        if(!position.equals(info.getPosition())) return null;
+        if(!getGlobalPosition(position).equals(info.getPosition())) return null;
 
         return RenderableComponent.of(info.getTag());
     }
@@ -62,8 +67,14 @@ public class CustomTag extends NameTag {
         if(info == null) return;
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            if(info.getIcon() != null) info.getIcon().render(stack, -11, 0, 9, 9);
-            if(info.getHighestRole() != null) info.getHighestRole().getIcon().render(
+            if(info.getIconUrl() != null) Icon.url(info.getIconUrl()).render(
+                stack,
+                -11,
+                0,
+                9,
+                9
+            );
+            if(info.getHighestRole() != null) Icon.url(info.getHighestRole().getIconUrl()).render(
                 stack,
                 getWidth() + 0.9F,
                 -1.2F,
@@ -71,6 +82,14 @@ public class CustomTag extends NameTag {
                 11
             );
         });
+    }
+
+    private GlobalPosition getGlobalPosition(PositionType type) {
+        try {
+            return GlobalPosition.valueOf(type.name().split("_")[0]);
+        } catch (Exception e) {
+            return GlobalPosition.ABOVE;
+        }
     }
 
     @Override
