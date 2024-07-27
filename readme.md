@@ -1,16 +1,16 @@
 # Global Tags
 ![Downloads](https://labybadges-delta.vercel.app/api/downloads/globaltags/formatted)<br>
 With this addon you can set custom public tags to appear whereever you want.
-The [API](https://github.com/RappyLabyAddons/GlobalTagAPI) for the storage of the tags is ofcourse public to avoid misuse of the session tokens
+The [API](https://github.com/Global-Tags/API) for the storage of the tags is ofcourse public to avoid misuse of the session tokens
 
 ### Installation
 1. Press `Win` + `R`
 2. Paste this into the window that popped up: `%appdata%/.minecraft/LabyMod-neo/addons` and press enter
-3. It should open your Labymod addon directory; Paste the [Global-Tags.jar](https://github.com/RappyLabyAddons/GlobalTags/releases/latest/download/Global-Tags.jar) in there.
+3. It should open your Labymod addon directory; Paste the [Global-Tags.jar](https://github.com/Global-Tags/LabyAddon/releases/latest/download/Global-Tags.jar) in there.
 4. Launch your Labymod client.
 
 If you have any problems with the addon/have update ideas, feel free to
-- Open an Issue [here](https://github.com/RappyLabyAddons/GlobalTags/issues/new/choose)
+- Open an Issue [here](https://github.com/Global-Tags/LabyAddon/issues/new/choose)
   or
 - Open a ticket on my [Discord Server](https://rappytv.com/server) in [this](https://discord.com/channels/815912035124248587/840285653946204181) channel
 
