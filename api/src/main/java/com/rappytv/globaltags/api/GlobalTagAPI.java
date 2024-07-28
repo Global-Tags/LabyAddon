@@ -21,22 +21,17 @@ public class GlobalTagAPI implements GlobalTagsAPI<Component> {
     private final Cache<Component> cache = new Cache<>(this);
     private final ApiHandler<Component> apiHandler = new ApiHandler<>(this);
 
-    private final Supplier<String> addonVersion;
+    private final Agent agent;
     private final Supplier<String> language;
 
-    public GlobalTagAPI(Supplier<String> addonVersion, Supplier<String> language) {
-        this.addonVersion = addonVersion;
+    public GlobalTagAPI(Agent agent, Supplier<String> language) {
+        this.agent = agent;
         this.language = language;
     }
 
     @Override
-    public @NotNull String getApiBase() {
-        return "https://gt.rappytv.com";
-    }
-
-    @Override
-    public @NotNull String getAgent() {
-        return "LabyAddon v" + addonVersion.get();
+    public @NotNull Agent getAgent() {
+        return agent;
     }
 
     @Override

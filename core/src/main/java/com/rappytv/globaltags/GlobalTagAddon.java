@@ -11,6 +11,7 @@ import com.rappytv.globaltags.interaction.ClearTagBulletPoint;
 import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
+import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
@@ -43,7 +44,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     protected void enable() {
         registerSettingCategory();
         api = new GlobalTagAPI(
-            () -> addonInfo().getVersion(),
+            new Agent("LabyAddon", addonInfo().getVersion(), Laby.labyAPI().minecraft().getVersion()),
             () -> configuration().localizedResponses().get()
                 ? Laby.labyAPI().minecraft().options().getCurrentLanguage()
                 : "en_us"
