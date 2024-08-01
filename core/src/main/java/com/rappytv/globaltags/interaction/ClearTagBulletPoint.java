@@ -3,6 +3,7 @@ package com.rappytv.globaltags.interaction;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.Util;
+import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -41,6 +42,6 @@ public class ClearTagBulletPoint implements BulletPoint {
     public boolean isVisible(Player player) {
         PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
         PlayerInfo<Component> target = api.getCache().get(player.getUniqueId());
-        return executer != null && executer.isAdmin() && target != null && target.getTag() != null;
+        return executer != null && executer.hasPermission(GlobalPermission.MANAGE_TAGS) && target != null && target.getTag() != null;
     }
 }
