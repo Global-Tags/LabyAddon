@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
     api(project(":api"))
-    maven(mavenCentral(), "com.rappytv.globaltags:GlobalTagsJava:1.0.6")
+    maven(mavenCentral(), "com.rappytv.globaltags:GlobalTagsJava:1.0.8")
 
     // If you want to use external libraries, you can do that here.
     // The dependencies that are specified here are loaded into your project but will also
