@@ -3,10 +3,15 @@ package com.rappytv.globaltags.nametag;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.nametag.RainbowTagOptions.RainbowDirection;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.TextComponent;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextColor;
+import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.client.entity.Entity;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
@@ -17,10 +22,14 @@ import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
 import org.jetbrains.annotations.Nullable;
 import java.awt.*;
+import java.util.List;
 import java.util.UUID;
 
 public class CustomTag extends NameTag {
 
+    private static final List<TextColor> colors = List.of(NamedTextColor.RED, NamedTextColor.GOLD, NamedTextColor.YELLOW, NamedTextColor.GREEN, NamedTextColor.AQUA);
+    public static int ticks = 0;
+    private int stage = 0;
     private final int black = new Color(0, 0, 0, 70).getRGB();
     private final GlobalTagAPI api;
     private final GlobalTagConfig config;
@@ -56,7 +65,43 @@ public class CustomTag extends NameTag {
         if(info == null || info.getTag() == null) return null;
         if(!getGlobalPosition(position).equals(info.getPosition())) return null;
 
-        return RenderableComponent.of(info.getTag());
+        RainbowTagOptions options = new RainbowTagOptions();
+        Component component = info.getTag();
+        if(options.isEnabled() && !colors.isEmpty()) {
+            component = getRainbowTag((TextComponent) component, options);
+            if(options.isBold()) component.decorate(TextDecoration.BOLD);
+            if(options.isItalic()) component.decorate(TextDecoration.ITALIC);
+            if(options.isUnderscored()) component.decorate(TextDecoration.UNDERLINED);
+            if(options.isStrikethrough()) component.decorate(TextDecoration.STRIKETHROUGH);
+            if(ticks >= 5) {
+                ticks = 0;
+                if(options.getDirection() == RainbowDirection.LEFT_TO_RIGHT) {
+                    if(--stage <= 0) stage = colors.size() - 1;
+                } else {
+                    if(++stage >= colors.size()) stage = 0;
+                }
+            }
+        }
+
+        return RenderableComponent.of(component);
+    }
+
+    private Component getRainbowTag(TextComponent component, RainbowTagOptions options) {
+        return switch (options.getMode()) {
+            case FULL_TAG -> component.color(colors.get(stage));
+            case SEPERATE_LETTERS -> {
+                String currentTag = component.getText();
+                Component rainbowTag = Component.empty();
+                int colorIndex = stage;
+                for(int i = 0; i < currentTag.toCharArray().length; i++) {
+                    Component letter = Component.text(currentTag.charAt(i)).color(colors.get(colorIndex));
+                    rainbowTag.append(letter);
+                    if(++colorIndex >= colors.size()) colorIndex = 0;
+                }
+
+                yield rainbowTag;
+            }
+        };
     }
 
     @Override
