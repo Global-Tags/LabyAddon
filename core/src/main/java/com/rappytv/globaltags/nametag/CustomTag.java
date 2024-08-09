@@ -3,7 +3,8 @@ package com.rappytv.globaltags.nametag;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.config.GlobalTagConfig;
-import com.rappytv.globaltags.nametag.RainbowTagOptions.RainbowDirection;
+import com.rappytv.globaltags.config.subconfig.RainbowTagSubconfig;
+import com.rappytv.globaltags.config.subconfig.RainbowTagSubconfig.RainbowDirection;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
@@ -65,17 +66,17 @@ public class CustomTag extends NameTag {
         if(info == null || info.getTag() == null) return null;
         if(!getGlobalPosition(position).equals(info.getPosition())) return null;
 
-        RainbowTagOptions options = new RainbowTagOptions();
-        Component component = info.getTag();
-        if(options.isEnabled() && !colors.isEmpty()) {
+        RainbowTagSubconfig options = this.config.rainbowTags();
+        Component component = info.getTag().copy();
+        if(options.enabled() && !colors.isEmpty()) {
             component = getRainbowTag((TextComponent) component, options);
-            if(options.isBold()) component.decorate(TextDecoration.BOLD);
-            if(options.isItalic()) component.decorate(TextDecoration.ITALIC);
-            if(options.isUnderscored()) component.decorate(TextDecoration.UNDERLINED);
-            if(options.isStrikethrough()) component.decorate(TextDecoration.STRIKETHROUGH);
+            if(options.bold()) component.decorate(TextDecoration.BOLD);
+            if(options.italic()) component.decorate(TextDecoration.ITALIC);
+            if(options.underscored()) component.decorate(TextDecoration.UNDERLINED);
+            if(options.strikethrough()) component.decorate(TextDecoration.STRIKETHROUGH);
             if(ticks >= 5) {
                 ticks = 0;
-                if(options.getDirection() == RainbowDirection.LEFT_TO_RIGHT) {
+                if(options.direction() == RainbowDirection.LEFT_TO_RIGHT) {
                     if(--stage <= 0) stage = colors.size() - 1;
                 } else {
                     if(++stage >= colors.size()) stage = 0;
@@ -86,8 +87,8 @@ public class CustomTag extends NameTag {
         return RenderableComponent.of(component);
     }
 
-    private Component getRainbowTag(TextComponent component, RainbowTagOptions options) {
-        return switch (options.getMode()) {
+    private Component getRainbowTag(TextComponent component, RainbowTagSubconfig options) {
+        return switch (options.mode()) {
             case FULL_TAG -> component.color(colors.get(stage));
             case SEPERATE_LETTERS -> {
                 String currentTag = component.getText();

@@ -2,6 +2,7 @@ package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.Util;
+import com.rappytv.globaltags.config.subconfig.RainbowTagSubconfig;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
@@ -53,6 +54,8 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 1)
     private final TagSubConfig tags = new TagSubConfig();
 
+    private final RainbowTagSubconfig rainbowTags = new RainbowTagSubconfig();
+
     @MethodOrder(after = "tags")
     @ButtonSetting
     @SpriteSlot(size = 32, y = 2)
@@ -80,5 +83,9 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return showBackground;
+    }
+
+    public RainbowTagSubconfig rainbowTags() {
+        return rainbowTags;
     }
 }
