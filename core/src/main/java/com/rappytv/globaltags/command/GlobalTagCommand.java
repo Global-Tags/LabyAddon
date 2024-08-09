@@ -12,7 +12,6 @@ import net.labymod.api.client.component.event.ClickEvent;
 import net.labymod.api.client.component.event.HoverEvent;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.TextDecoration;
-import net.labymod.api.util.I18n;
 
 public class GlobalTagCommand extends Command {
 
@@ -34,18 +33,33 @@ public class GlobalTagCommand extends Command {
         api.getApiHandler().getVersion((version) -> {
             TextComponent clearComponent = TextComponent.builder()
                 .append(GlobalTagAddon.prefix)
-                .append(Component.text("Version: ", NamedTextColor.GREEN))
-                .append(Component.text(this.version + "\n", NamedTextColor.AQUA))
+                .append(Component.translatable(
+                    "globaltags.commands.base.version",
+                    NamedTextColor.GREEN,
+                    Component.text(this.version, NamedTextColor.AQUA)
+                ))
+                .append("\n")
                 .append(GlobalTagAddon.prefix)
-                .append(Component.text("API Version: ", NamedTextColor.GREEN))
-                .append(version != null ? Component.text(version, NamedTextColor.AQUA) : Component.translatable("globaltags.messages.offline", NamedTextColor.RED))
+                .append(Component.translatable(
+                    "globaltags.commands.base.api.version",
+                    NamedTextColor.GREEN,
+                    version != null && version.successful()
+                        ? Component.text(version.data(), NamedTextColor.AQUA)
+                        : Component.translatable(
+                            "globaltags.commands.base.api.offline",
+                            NamedTextColor.RED
+                        )
+                ))
                 .append("\n")
                 .append(GlobalTagAddon.prefix)
                 .append(Component
-                    .translatable("globaltags.messages.clearCache")
+                    .translatable("globaltags.commands.base.clear_cache.label")
                     .color(NamedTextColor.LIGHT_PURPLE)
                     .decorate(TextDecoration.UNDERLINED)
-                    .hoverEvent(HoverEvent.showText(Component.text("§b" + I18n.translate("globaltags.messages.hoverClearCache"))))
+                    .hoverEvent(HoverEvent.showText(Component.translatable(
+                        "globaltags.commands.base.clear_cache.hover",
+                        NamedTextColor.AQUA
+                    )))
                     .clickEvent(ClickEvent.suggestCommand("/" + prefix + " cc")))
                 .build();
 

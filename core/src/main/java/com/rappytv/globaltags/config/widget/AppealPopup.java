@@ -43,8 +43,8 @@ public class AppealPopup extends AdvancedPopup {
             api.getApiHandler().appealBan(inputWidget.getText(), (response) ->
                 Util.notify(
                     Component.translatable(response.successful()
-                        ? "globaltags.notifications.success"
-                        : "globaltags.notifications.error"
+                        ? "globaltags.general.success"
+                        : "globaltags.general.error"
                     ),
                     Component.text(response.data(), NamedTextColor.WHITE)
                 )

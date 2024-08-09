@@ -22,9 +22,10 @@ public class LinkDiscordSubcommand extends SubCommand {
             if(info.successful()) {
                 String code = info.data();
                 Laby.references().chatExecutor().copyToClipboard(code);
-                displayMessage(GlobalTagAddon.prefix.copy().append(
-                    Component.translatable("globaltags.messages.code", NamedTextColor.GREEN)
-                ));
+                displayMessage(GlobalTagAddon.prefix.copy().append(Component.translatable(
+                    "globaltags.commands.link.discord.copied",
+                    NamedTextColor.GREEN
+                )));
             } else displayMessage(
                 GlobalTagAddon.prefix.copy().append(Component.text(
                     info.data(),

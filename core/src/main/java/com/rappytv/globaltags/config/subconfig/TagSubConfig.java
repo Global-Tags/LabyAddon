@@ -59,7 +59,7 @@ public class TagSubConfig extends Config {
         api.getCache().resolveSelf((info) -> {
             if(api.getAuthorization() == null) {
                 Util.notify(
-                    Component.translatable("globaltags.notifications.error"),
+                    Component.translatable("globaltags.general.error"),
                     Component.translatable("globaltags.settings.tags.tagPreview.labyConnect")
                 );
                 return;
@@ -91,8 +91,8 @@ public class TagSubConfig extends Config {
             if(info.successful()) TagPreviewWidget.refetch();
             Util.notify(
                 Component.translatable(info.successful()
-                    ? "globaltags.notifications.success"
-                    : "globaltags.notifications.error"
+                    ? "globaltags.general.success"
+                    : "globaltags.general.error"
                 ),
                 Component.text(info.data(), NamedTextColor.WHITE)
             );

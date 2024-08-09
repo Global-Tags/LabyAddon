@@ -22,7 +22,10 @@ public class ClearCacheCommand extends SubCommand {
         displayMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)
-                .append(Component.translatable("globaltags.notifications.cacheCleared", NamedTextColor.GREEN))
+                .append(Component.translatable(
+                    "globaltags.commands.clear_cache.success",
+                    NamedTextColor.GREEN
+                ))
         );
         return true;
     }

@@ -123,16 +123,30 @@
                 "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f.\nYou can additionally clear the cache with §b/gt cc§f."
             }
         },
-        "notifications": {
+        "general": {
             "success": "Success!",
-            "error": "An error ocurred",
-            "cacheCleared": "The cache was cleared!"
+            "error": "An error ocurred"
         },
-        "messages": {
-            "clearCache": "Clear cache",
-            "hoverClearCache": "Click here to clear the tag cache!",
-            "offline": "Connection failed!",
-            "code": "The code was copied to your clipboard!"
+        "commands": {
+            "base": {
+                "version": "Addon Version: %s",
+                "api": {
+                    "version": "API Version: %s",
+                    "offline": "Connection failed!"
+                },
+                "clear_cache": {
+                    "label": "Clear cache",
+                    "hover": "Click here to clear the tag cache!"
+                }
+            },
+            "clear_cache": {
+                "success": "The cache was cleared!"
+            },
+            "link": {
+                "discord": {
+                    "copied": "The code was copied to your clipboard!"
+                }
+            }
         },
         "context": {
             "reason": "Reason",
@@ -170,10 +184,6 @@
             },
             "clearTag": {
                 "name": "Clear GlobalTag"
-            },
-            "admin": {
-                "set": "Make GlobalTag Admin",
-                "remove": "Remove GlobalTag Admin"
             }
         }
     }
