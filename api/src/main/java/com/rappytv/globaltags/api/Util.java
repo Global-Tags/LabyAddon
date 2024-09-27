@@ -38,8 +38,7 @@ public class Util {
 
         Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
             popup.displayInOverlay();
-            api.getCache().clear();
-            api.getCache().resolveSelf();
+            api.getCache().renewSelf();
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;

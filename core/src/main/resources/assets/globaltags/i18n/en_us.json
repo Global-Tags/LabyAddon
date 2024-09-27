@@ -142,6 +142,9 @@
             "clear_cache": {
                 "success": "The cache was cleared!"
             },
+            "renew_cache": {
+                "success": "The cache was renewed!"
+            },
             "link": {
                 "discord": {
                     "copied": "The code was copied to your clipboard!"

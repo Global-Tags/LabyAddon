@@ -2,9 +2,6 @@ package com.rappytv.globaltags.api;
 
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI;
 import com.rappytv.globaltags.wrapper.enums.AuthProvider;
-import com.rappytv.globaltags.wrapper.http.ApiHandler;
-import com.rappytv.globaltags.wrapper.model.PlayerInfo;
-import com.rappytv.globaltags.wrapper.model.PlayerInfo.Cache;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
@@ -16,10 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class GlobalTagAPI implements GlobalTagsAPI<Component> {
-
-    private final Cache<Component> cache = new Cache<>(this);
-    private final ApiHandler<Component> apiHandler = new ApiHandler<>(this);
+public class GlobalTagAPI extends GlobalTagsAPI<Component> {
 
     private final Agent agent;
     private final Supplier<String> language;
@@ -50,17 +44,6 @@ public class GlobalTagAPI implements GlobalTagsAPI<Component> {
     @Override
     public @Nullable UUID getClientUUID() {
         return Laby.labyAPI().getUniqueId();
-    }
-
-    @NotNull
-    @Override
-    public PlayerInfo.Cache<Component> getCache() {
-        return cache;
-    }
-
-    @Override
-    public @NotNull ApiHandler<Component> getApiHandler() {
-        return apiHandler;
     }
 
     @Override
