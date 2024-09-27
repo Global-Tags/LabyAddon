@@ -4,6 +4,7 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
 import com.rappytv.globaltags.command.subcommands.LinkDiscordSubcommand;
+import com.rappytv.globaltags.command.subcommands.RenewCacheCommand;
 import com.rappytv.globaltags.command.subcommands.UnlinkDiscordSubcommand;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.client.component.Component;
@@ -25,6 +26,7 @@ public class GlobalTagCommand extends Command {
 
         withSubCommand(new ClearCacheCommand(api));
         withSubCommand(new LinkDiscordSubcommand(api));
+        withSubCommand(new RenewCacheCommand(api));
         withSubCommand(new UnlinkDiscordSubcommand(api));
     }
 
@@ -38,7 +40,7 @@ public class GlobalTagCommand extends Command {
                     NamedTextColor.GREEN,
                     Component.text(this.version, NamedTextColor.AQUA)
                 ))
-                .append("\n")
+                .append(Component.newline())
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(
                     "globaltags.commands.base.api.version",
@@ -50,7 +52,7 @@ public class GlobalTagCommand extends Command {
                             NamedTextColor.RED
                         )
                 ))
-                .append("\n")
+                .append(Component.newline())
                 .append(GlobalTagAddon.prefix)
                 .append(Component
                     .translatable("globaltags.commands.base.clear_cache.label")
