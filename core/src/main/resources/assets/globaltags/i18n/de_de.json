@@ -142,6 +142,9 @@
             "clear_cache": {
                 "success": "Der Cache wurde geleert!"
             },
+            "renew_cache": {
+                "success": "Der Cache wurde erneuert!"
+            },
             "link": {
                 "discord": {
                     "copied": "Der Code wurde in deine Zwischenablage kopiert!"
