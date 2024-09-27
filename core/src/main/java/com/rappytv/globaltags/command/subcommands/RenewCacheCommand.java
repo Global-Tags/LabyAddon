@@ -11,13 +11,13 @@ public class RenewCacheCommand extends SubCommand {
     private final GlobalTagAPI api;
 
     public RenewCacheCommand(GlobalTagAPI api) {
-        super("renewcache", "rc");
+        super("renewcache", "renew", "rc");
         this.api = api;
     }
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        api.getCache().renew();
+        api.getCache().renewAll();
         displayMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)
