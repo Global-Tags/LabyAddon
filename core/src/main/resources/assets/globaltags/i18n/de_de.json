@@ -128,6 +128,7 @@
             "error": "Es ist ein Fehler aufgetreten"
         },
         "commands": {
+            "usage": "Benutzung: %s",
             "base": {
                 "version": "Addon Version: %s",
                 "api": {
@@ -148,6 +149,10 @@
             "link": {
                 "discord": {
                     "copied": "Der Code wurde in deine Zwischenablage kopiert!"
+                },
+                "email": {
+                    "verify": "Email verifizieren",
+                    "hover": "Klicke, um den Verifizierungscode einzugeben"
                 }
             }
         },
