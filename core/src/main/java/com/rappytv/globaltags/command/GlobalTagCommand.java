@@ -3,7 +3,7 @@ package com.rappytv.globaltags.command;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
-import com.rappytv.globaltags.command.subcommands.LinkDiscordSubcommand;
+import com.rappytv.globaltags.command.subcommands.LinkSubcommand;
 import com.rappytv.globaltags.command.subcommands.RenewCacheCommand;
 import com.rappytv.globaltags.command.subcommands.UnlinkSubcommand;
 import com.rappytv.globaltags.command.subcommands.VerifyCommand;
@@ -26,7 +26,7 @@ public class GlobalTagCommand extends Command {
         this.version = addon.addonInfo().getVersion();
 
         withSubCommand(new ClearCacheCommand(api));
-        withSubCommand(new LinkDiscordSubcommand(api));
+        withSubCommand(new LinkSubcommand(api));
         withSubCommand(new RenewCacheCommand(api));
         withSubCommand(new UnlinkSubcommand(api));
         withSubCommand(new VerifyCommand(api));

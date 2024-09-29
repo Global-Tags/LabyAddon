@@ -10,11 +10,11 @@ import net.labymod.api.client.component.event.HoverEvent;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.TextDecoration;
 
-public class LinkDiscordSubcommand extends SubCommand {
+public class LinkSubcommand extends SubCommand {
 
     private final GlobalTagAPI api;
 
-    public LinkDiscordSubcommand(GlobalTagAPI api) {
+    public LinkSubcommand(GlobalTagAPI api) {
         super("link");
         this.api = api;
     }

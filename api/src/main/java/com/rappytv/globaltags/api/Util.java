@@ -1,12 +1,16 @@
 package com.rappytv.globaltags.api;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import com.rappytv.globaltags.wrapper.http.ApiHandler.ApiResponse;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.widget.widgets.popup.SimpleAdvancedPopup;
+import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
+import java.util.UUID;
 
 public class Util {
 
@@ -39,6 +43,7 @@ public class Util {
         Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
             popup.displayInOverlay();
             api.getCache().renewSelf();
+            broadcastTagUpdate();
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;
@@ -71,5 +76,17 @@ public class Util {
             response.data(),
             response.successful() ? NamedTextColor.GREEN : NamedTextColor.RED
         );
+    }
+
+    public static void broadcastTagUpdate() {
+        broadcastTagUpdate(null);
+    }
+
+    public static void broadcastTagUpdate(UUID uuid) {
+        JsonObject object = new JsonObject();
+        if(uuid != null) object.add("uuid", new JsonPrimitive(uuid.toString()));
+        LabyConnectSession session = Laby.labyAPI().labyConnect().getSession();
+        if(session == null) return;
+        session.sendBroadcastPayload("globaltags", object);
     }
 }
