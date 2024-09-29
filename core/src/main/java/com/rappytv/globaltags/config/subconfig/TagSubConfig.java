@@ -88,7 +88,10 @@ public class TagSubConfig extends Config {
     public void resetTag(Setting setting) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getApiHandler().resetTag((info) -> {
-            if(info.successful()) TagPreviewWidget.refetch();
+            if(info.successful()) {
+                Util.broadcastTagUpdate();
+                TagPreviewWidget.refetch();
+            }
             Util.notify(
                 Component.translatable(info.successful()
                     ? "globaltags.general.success"

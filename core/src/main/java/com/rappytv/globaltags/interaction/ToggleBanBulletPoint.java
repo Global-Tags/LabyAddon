@@ -34,11 +34,14 @@ public class ToggleBanBulletPoint implements BulletPoint {
     @Override
     public void execute(Player player) {
         if(target.isSuspended()) {
-            api.getApiHandler().unbanPlayer(target.getUUID(), (response) -> Laby.references().chatExecutor().displayClientMessage(
-                Component.empty()
-                    .append(GlobalTagAddon.prefix)
-                    .append(Util.getResponseComponent(response))
-            ));
+            api.getApiHandler().unbanPlayer(target.getUUID(), (response) -> {
+                if(response.successful()) Util.broadcastTagUpdate(target.getUUID());
+                Laby.references().chatExecutor().displayClientMessage(
+                    Component.empty()
+                        .append(GlobalTagAddon.prefix)
+                        .append(Util.getResponseComponent(response))
+                );
+            });
         } else {
             Laby.labyAPI().minecraft().executeNextTick(() ->
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new BanActivity(

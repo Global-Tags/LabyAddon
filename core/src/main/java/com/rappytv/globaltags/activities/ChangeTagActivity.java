@@ -57,11 +57,14 @@ public class ChangeTagActivity extends SimpleActivity {
             sendButton.setEnabled(!inputWidget.getText().isBlank() && (!hasTag || !inputWidget.getText().equals(info.getPlainTag())));
             sendButton.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-                api.getApiHandler().setTag(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
-                    Component.empty()
-                        .append(GlobalTagAddon.prefix)
-                        .append(Util.getResponseComponent(response))
-                ));
+                api.getApiHandler().setTag(uuid, inputWidget.getText(), (response) -> {
+                    if(response.successful()) Util.broadcastTagUpdate(uuid);
+                    Laby.references().chatExecutor().displayClientMessage(
+                        Component.empty()
+                            .append(GlobalTagAddon.prefix)
+                            .append(Util.getResponseComponent(response))
+                    );
+                });
             });
             inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank() && (!hasTag || !inputWidget.getText().equals(info.getPlainTag()))));
 
