@@ -11,9 +11,9 @@ labyMod {
     defaultPackageName = "com.rappytv.globaltags" //change this to your main package name (used by all modules)
     addonInfo {
         namespace = "globaltags"
-        displayName = "Global Tags"
+        displayName = "GlobalTags"
         author = "RappyTV"
-        description = "Get yourself a custom Globaltag that's publicly visible to anyone using this addon."
+        description = "Get yourself a custom GlobalTag that's publicly visible to anyone using this addon."
         minecraftVersion = "*"
         version = rootProject.version.toString()
     }
