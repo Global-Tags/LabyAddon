@@ -34,7 +34,7 @@
             "tags": {
                 "name": "Globale Tag-Einstellungen",
                 "staged": {
-                    "title": "Ausstehende Änderungen",
+                    "title": "Ausstehende Änderungen.",
                     "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen anzuwenden!"
                 },
                 "tagPreview": {
@@ -75,7 +75,7 @@
                         "android": "Android",
                         "apple": "Apple",
                         "bereal": "BeReal.",
-                        "crown": "Crown",
+                        "crown": "Krone",
                         "discord": "Discord",
                         "duolingo": "Luodingo",
                         "ebio": "e.bio",
@@ -83,7 +83,7 @@
                         "gamescom": "Gamescom",
                         "github": "GitHub",
                         "gitlab": "GitLab",
-                        "heart": "Heart",
+                        "heart": "Herz",
                         "instagram": "Instagram",
                         "kick": "Kick",
                         "labynet": "laby.net",
@@ -94,7 +94,7 @@
                         "snapchat": "Snapchat",
                         "soundcloud": "Soundcloud",
                         "spotify": "Spotify",
-                        "star": "Star",
+                        "star": "Stern",
                         "statsfm": "StatsFM",
                         "steam": "Steam",
                         "telegram": "Telegram",
