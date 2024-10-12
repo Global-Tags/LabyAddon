@@ -1,1 +1,198 @@
-{}
+{
+    "globaltags": {
+        "settings": {
+            "header": {
+                "display": {
+                    "name": "Display settings"
+                },
+                "tags": {
+                    "name": "Tag settings"
+                }
+            },
+            "localizedResponses": {
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere.",
+                "name": "Localize API responses"
+            },
+            "tags": {
+                "tagPreview": {
+                    "appeal": {
+                        "description": "⚠ This button will only be clickable if your suspension is appealable.",
+                        "name": "Appeal",
+                        "popup": {
+                            "label": "Why should we unban you?",
+                            "placeholder": "Please enter a reason…",
+                            "button": "Send appeal"
+                        }
+                    },
+                    "name": "Tag Preview",
+                    "banned": "Your account is suspended!\nReason: %s",
+                    "noInfo": "Couldn't fetch account info!",
+                    "labyConnect": "You're not connected to LabyConnect!",
+                    "empty": "<Empty Tag>",
+                    "emptyReason": "No reason provided"
+                },
+                "globalIcon": {
+                    "description": "This icon will be displayed left to your tag globally.",
+                    "entries": {
+                        "ebio": "e.bio",
+                        "github": "GitHub",
+                        "threads": "Threads",
+                        "none": "None",
+                        "android": "Android",
+                        "apple": "Apple",
+                        "bereal": "BeReal.",
+                        "crown": "Crown",
+                        "discord": "Discord",
+                        "duolingo": "Luodingo",
+                        "epicgames": "Epic Games",
+                        "gamescom": "Gamescom",
+                        "gitlab": "GitLab",
+                        "heart": "Heart",
+                        "instagram": "Instagram",
+                        "kick": "Kick",
+                        "labynet": "laby.net",
+                        "paypal": "PayPal",
+                        "pinterest": "Pinterest",
+                        "playstation": "Playstation",
+                        "reddit": "Reddit",
+                        "snapchat": "Snapchat",
+                        "soundcloud": "Soundcloud",
+                        "spotify": "Spotify",
+                        "star": "Star",
+                        "statsfm": "StatsFM",
+                        "steam": "Steam",
+                        "telegram": "Telegram",
+                        "tiktok": "TikTok",
+                        "twitch": "Twitch",
+                        "x": "x",
+                        "xbox": "Xbox",
+                        "youtube": "YouTube"
+                    },
+                    "name": "Global icon"
+                },
+                "name": "Global tag settings",
+                "staged": {
+                    "title": "Staged changes.",
+                    "description": "Click on the \"Publish settings\" button to publish changes!"
+                },
+                "tag": {
+                    "name": "Global tag"
+                },
+                "position": {
+                    "name": "Global position",
+                    "description": "Your tag is visible in this position to everyone.",
+                    "entries": {
+                        "above": "Above name",
+                        "below": "Below name",
+                        "right": "Right to name",
+                        "left": "Left to name"
+                    }
+                },
+                "updateSettings": {
+                    "name": "Publish settings",
+                    "text": "Update",
+                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
+                    "unchanged": "Unchanged"
+                },
+                "resetTag": {
+                    "name": "Delete global tag",
+                    "text": "Delete"
+                }
+            },
+            "clearCache": {
+                "description": "Clears the tag-cache manually.\nThe cache get's cleared automatically every §b5 minutes§f.\nYou can additionally clear the cache with §b/gt cc§f.",
+                "name": "Clear cache",
+                "text": "Clear"
+            },
+            "name": "Global Tags",
+            "enabled": {
+                "name": "Enabled"
+            },
+            "joinDiscord": {
+                "name": "Discord Server",
+                "text": "Join"
+            },
+            "showOwnTag": {
+                "name": "Show own tag"
+            },
+            "tagSize": {
+                "name": "Tag size"
+            },
+            "showBackground": {
+                "name": "Show background",
+                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
+            }
+        },
+        "commands": {
+            "link": {
+                "discord": {
+                    "copied": "The code was copied to your clipboard!"
+                },
+                "email": {
+                    "verify": "Verify email",
+                    "hover": "Click to enter verification code"
+                }
+            },
+            "usage": "Usage: %s",
+            "base": {
+                "version": "Addon Version: %s",
+                "api": {
+                    "version": "API Version: %s",
+                    "offline": "Connection failed!"
+                },
+                "clear_cache": {
+                    "label": "Clear cache",
+                    "hover": "Click here to clear the tag cache!"
+                }
+            },
+            "clear_cache": {
+                "success": "The cache was cleared!"
+            },
+            "renew_cache": {
+                "success": "The cache was renewed!"
+            }
+        },
+        "context": {
+            "placeholder": "Please enter a reason…",
+            "editBan": {
+                "send": "Submit changes",
+                "name": "Edit GlobalTag ban",
+                "title": "Edit %s's ban",
+                "appealable": "Appealable"
+            },
+            "reason": "Reason",
+            "referral": {
+                "name": "This player invited me to GlobalTags"
+            },
+            "report": {
+                "name": "Report GlobalTag",
+                "title": "Report %s",
+                "send": "Send report"
+            },
+            "ban": {
+                "name": "Ban GlobalTag player",
+                "title": "Ban %s",
+                "send": "Ban"
+            },
+            "unban": {
+                "name": "Unban GlobalTag player",
+                "title": "Unban %s",
+                "send": "Unban"
+            },
+            "changeTag": {
+                "name": "Change GlobalTag",
+                "title": "Change %s's Tag",
+                "label": "New GlobalTag",
+                "placeholder": "Enter the updated GlobalTag…",
+                "send": "Update Tag"
+            },
+            "clearTag": {
+                "name": "Clear GlobalTag"
+            }
+        },
+        "general": {
+            "success": "Success!",
+            "error": "An error ocurred"
+        }
+    }
+}
