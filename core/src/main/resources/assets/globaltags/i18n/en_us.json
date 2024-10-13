@@ -72,6 +72,7 @@
                     "description": "This icon will be displayed left to your tag globally.",
                     "entries": {
                         "none": "None",
+                        "custom": "Custom",
                         "android": "Android",
                         "apple": "Apple",
                         "bereal": "BeReal.",
