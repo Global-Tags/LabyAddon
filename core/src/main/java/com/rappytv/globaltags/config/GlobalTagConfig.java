@@ -34,7 +34,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2, x = 3)
     @ButtonSetting
     public void joinDiscord(Setting setting) {
-        Laby.references().chatExecutor().openUrl("https://gt.rappytv.com/discord");
+        Laby.references().chatExecutor().openUrl("https://globaltags.xyz/discord");
     }
 
     @SettingSection("display")
