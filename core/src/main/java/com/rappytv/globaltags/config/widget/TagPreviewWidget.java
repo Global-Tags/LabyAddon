@@ -4,6 +4,7 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
@@ -92,16 +93,20 @@ public class TagPreviewWidget extends HorizontalListWidget {
                             )
                             : api.translateColorCodes(config.tag().get())
                     ).addId("text");
-                    String iconUrl = config.icon().get().getIconUrl();
-                    if (iconUrl != null)
+
+                    if (config.icon().get() != GlobalIcon.NONE) {
+                        String iconUrl = config.icon().get() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
+                            ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
+                            : api.getUrls().getDefaultIcon(config.icon().get());
                         this.addEntryInitialized(
                             new IconWidget(Icon.url(iconUrl))
                                 .addId("icon")
                         );
+                    }
                     this.addEntryInitialized(tag);
-                    if (info.getHighestRole() != null)
+                    if (info.getHighestRoleIcon() != null)
                         this.addEntryInitialized(
-                            new IconWidget(Icon.url(info.getHighestRole().getIconUrl()))
+                            new IconWidget(Icon.url(info.getHighestRoleIcon()))
                                 .addId("staff-icon")
                         );
                 }
