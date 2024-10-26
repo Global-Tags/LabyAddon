@@ -3,6 +3,7 @@ package com.rappytv.globaltags.nametag;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
@@ -67,14 +68,14 @@ public class CustomTag extends NameTag {
         if(info == null) return;
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            if(info.getIconUrl() != null) Icon.url(info.getIconUrl()).render(
+            if(info.getGlobalIcon() != GlobalIcon.NONE) Icon.url(info.getIconUrl()).render(
                 stack,
                 -11,
                 0,
                 9,
                 9
             );
-            if(info.getHighestRole() != null) Icon.url(info.getHighestRole().getIconUrl()).render(
+            if(info.getHighestRoleIcon() != null) Icon.url(info.getHighestRoleIcon()).render(
                 stack,
                 getWidth() + 0.9F,
                 -1.2F,
