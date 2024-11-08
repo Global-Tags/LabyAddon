@@ -1,7 +1,7 @@
-rootProject.name = "GlobalTags"
+rootProject.name = "globaltags"
 
 pluginManagement {
-    val labyGradlePluginVersion = "0.5.3"
+    val labyGradlePluginVersion = "0.5.6"
 
     buildscript {
         repositories {
