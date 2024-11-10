@@ -49,7 +49,7 @@
                         "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
                         "popup": {
                             "label": "Warum sollten wir dich entbannen?",
-                            "placeholder": "Bitte gebe einen Grund an...",
+                            "placeholder": "Bitte gebe einen Grund an…",
                             "button": "Antrag senden"
                         }
                     }
@@ -134,7 +134,7 @@
                 "version": "Addon Version: %s",
                 "api": {
                     "version": "API Version: %s",
-                    "offline": "Verbindung Fehlgeschlagen!"
+                    "offline": "Verbindung fehlgeschlagen!"
                 },
                 "clear_cache": {
                     "label": "Cache leeren",
@@ -159,7 +159,7 @@
         },
         "context": {
             "reason": "Grund",
-            "placeholder": "Bitte gib einen Grund an...",
+            "placeholder": "Bitte gib einen Grund an…",
             "referral": {
                 "name": "Dieser Spieler hat mich zu GlobalTags eingeladen"
             },
@@ -188,7 +188,7 @@
                 "name": "GlobalTag ändern",
                 "title": "Ändere den Tag von %s",
                 "label": "Neuer GlobalTag",
-                "placeholder": "Gib den aktualisierten GlobalTag ein...",
+                "placeholder": "Gib den aktualisierten GlobalTag ein…",
                 "send": "Tag aktualisieren"
             },
             "clearTag": {

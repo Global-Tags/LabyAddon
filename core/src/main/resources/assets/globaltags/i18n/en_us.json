@@ -34,7 +34,7 @@
             "tags": {
                 "name": "Global tag settings",
                 "staged": {
-                    "title": "Staged changes.",
+                    "title": "Staged changes",
                     "description": "Click on the \"Publish settings\" button to publish changes!"
                 },
                 "tagPreview": {
@@ -49,7 +49,7 @@
                         "description": "⚠ This button will only be clickable if your suspension is appealable.",
                         "popup": {
                             "label": "Why should we unban you?",
-                            "placeholder": "Please enter a reason...",
+                            "placeholder": "Please enter a reason…",
                             "button": "Send appeal"
                         }
                     }
@@ -159,7 +159,7 @@
         },
         "context": {
             "reason": "Reason",
-            "placeholder": "Please enter a reason...",
+            "placeholder": "Please enter a reason…",
             "referral": {
                 "name": "This player invited me to GlobalTags"
             },
@@ -188,7 +188,7 @@
                 "name": "Change GlobalTag",
                 "title": "Change %s's Tag",
                 "label": "New GlobalTag",
-                "placeholder": "Enter the updated GlobalTag...",
+                "placeholder": "Enter the updated GlobalTag…",
                 "send": "Update Tag"
             },
             "clearTag": {
