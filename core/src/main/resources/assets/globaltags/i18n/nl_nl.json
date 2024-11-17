@@ -1,43 +1,5 @@
 {
     "globaltags": {
-        "context": {
-            "ban": {
-                "send": "Ban",
-                "title": "Ban %s",
-                "name": "Ban GlobalTag player"
-            },
-            "editBan": {
-                "appealable": "Appealable",
-                "name": "Edit GlobalTag ban",
-                "send": "Submit changes",
-                "title": "Edit %s's ban"
-            },
-            "report": {
-                "send": "Send report",
-                "name": "Report GlobalTag",
-                "title": "Report %s"
-            },
-            "reason": "Reason",
-            "changeTag": {
-                "placeholder": "Enter the updated GlobalTag...",
-                "name": "Change GlobalTag",
-                "label": "New GlobalTag",
-                "send": "Update Tag",
-                "title": "Change %s's Tag"
-            },
-            "unban": {
-                "title": "Unban %s",
-                "name": "Unban GlobalTag player",
-                "send": "Unban"
-            },
-            "clearTag": {
-                "name": "Clear GlobalTag"
-            },
-            "referral": {
-                "name": "This player invited me to GlobalTags"
-            },
-            "placeholder": "Please enter a reason..."
-        },
         "settings": {
             "tags": {
                 "globalIcon": {
@@ -94,7 +56,7 @@
                     "appeal": {
                         "popup": {
                             "label": "Why should we unban you?",
-                            "placeholder": "Please enter a reason...",
+                            "placeholder": "Please enter a reason…",
                             "button": "Send appeal"
                         },
                         "description": "⚠ This button will only be clickable if your suspension is appealable.",
@@ -122,7 +84,7 @@
                 },
                 "name": "Global tag settings",
                 "staged": {
-                    "title": "Staged changes.",
+                    "title": "Staged changes",
                     "description": "Click on the \"Publish settings\" button to publish changes!"
                 }
             },
@@ -160,6 +122,44 @@
             "enabled": {
                 "name": "Enabled"
             }
+        },
+        "context": {
+            "ban": {
+                "send": "Ban",
+                "title": "Ban %s",
+                "name": "Ban GlobalTag player"
+            },
+            "editBan": {
+                "appealable": "Appealable",
+                "name": "Edit GlobalTag ban",
+                "send": "Submit changes",
+                "title": "Edit %s's ban"
+            },
+            "report": {
+                "send": "Send report",
+                "name": "Report GlobalTag",
+                "title": "Report %s"
+            },
+            "reason": "Reason",
+            "changeTag": {
+                "placeholder": "Enter the updated GlobalTag…",
+                "name": "Change GlobalTag",
+                "label": "New GlobalTag",
+                "send": "Update Tag",
+                "title": "Change %s's Tag"
+            },
+            "unban": {
+                "title": "Unban %s",
+                "name": "Unban GlobalTag player",
+                "send": "Unban"
+            },
+            "clearTag": {
+                "name": "Clear GlobalTag"
+            },
+            "referral": {
+                "name": "This player invited me to GlobalTags"
+            },
+            "placeholder": "Please enter a reason…"
         },
         "commands": {
             "link": {

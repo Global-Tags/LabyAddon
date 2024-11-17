@@ -102,26 +102,25 @@
                 "name": "Discord Server"
             },
             "showBackground": {
-                "name": "Show background",
+                "name": "Vis bakgrunn",
                 "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
             },
             "header": {
                 "tags": {
-                    "name": "Tag settings"
+                    "name": "Taginnstillinger"
                 },
                 "display": {
-                    "name": "Display settings"
+                    "name": "Visningsinnstillinger"
                 }
             },
             "tagSize": {
-                "name": "Tag size"
+                "name": "Tagstørrelse"
             },
-            "name": "Global Tags",
             "showOwnTag": {
                 "name": "Show own tag"
             },
             "enabled": {
-                "name": "Enabled"
+                "name": "Aktivert"
             }
         },
         "context": {
@@ -165,8 +164,8 @@
         "commands": {
             "link": {
                 "email": {
-                    "verify": "Verify email",
-                    "hover": "Click to enter verification code"
+                    "verify": "Bekreft e-post",
+                    "hover": "Klikk for å skrive inn bekreftelsekode"
                 },
                 "discord": {
                     "copied": "The code was copied to your clipboard!"
@@ -179,11 +178,11 @@
                 },
                 "version": "Addon Version: %s",
                 "api": {
-                    "offline": "Connection failed!",
-                    "version": "API Version: %s"
+                    "offline": "Koblingsfeil!",
+                    "version": "API Versjon: %s"
                 }
             },
-            "usage": "Usage: %s",
+            "usage": "Bruk: %s",
             "clear_cache": {
                 "success": "The cache was cleared!"
             },
