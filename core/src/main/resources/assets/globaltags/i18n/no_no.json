@@ -116,7 +116,6 @@
             "tagSize": {
                 "name": "Tagstørrelse"
             },
-            "name": "Global Tags",
             "showOwnTag": {
                 "name": "Show own tag"
             },
