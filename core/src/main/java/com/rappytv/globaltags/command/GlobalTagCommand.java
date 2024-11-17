@@ -34,7 +34,7 @@ public class GlobalTagCommand extends Command {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        api.getApiHandler().getVersion((version) -> {
+        api.getApiHandler().getApiInfo((response) -> {
             TextComponent clearComponent = TextComponent.builder()
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(
@@ -47,8 +47,8 @@ public class GlobalTagCommand extends Command {
                 .append(Component.translatable(
                     "globaltags.commands.base.api.version",
                     NamedTextColor.GREEN,
-                    version != null && version.successful()
-                        ? Component.text(version.data(), NamedTextColor.AQUA)
+                    response != null && response.successful()
+                        ? Component.text(response.data(), NamedTextColor.AQUA)
                         : Component.translatable(
                             "globaltags.commands.base.api.offline",
                             NamedTextColor.RED
