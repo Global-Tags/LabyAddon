@@ -32,6 +32,11 @@ labyMod {
 subprojects {
     plugins.apply("net.labymod.labygradle")
     plugins.apply("net.labymod.labygradle.addon")
+
     group = rootProject.group
     version = rootProject.version
+
+    repositories {
+        maven("https://repo.rappytv.com/public/")
+    }
 }
