@@ -192,6 +192,10 @@
             },
             "clearTag": {
                 "name": "Clear GlobalTag"
+            },
+            "staff_notes": {
+                "name": "Manage GlobalTags notes",
+                "title": "%s's notes"
             }
         }
     }
