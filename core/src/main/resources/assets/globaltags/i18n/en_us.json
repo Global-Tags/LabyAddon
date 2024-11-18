@@ -195,7 +195,12 @@
             },
             "staff_notes": {
                 "name": "Manage GlobalTags notes",
-                "title": "%s's notes"
+                "title": "%s's notes",
+                "description": "created at %s (#%s)",
+                "hover": {
+                    "delete": "Click to delete",
+                    "deleted": "Successfully deleted!"
+                }
             }
         }
     }
