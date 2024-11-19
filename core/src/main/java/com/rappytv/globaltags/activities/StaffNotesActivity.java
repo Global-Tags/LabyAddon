@@ -10,10 +10,12 @@ import net.labymod.api.client.component.TextComponent;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.screen.Parent;
+import net.labymod.api.client.gui.screen.ScreenInstance;
 import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.ScrollWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
@@ -47,16 +49,24 @@ public class StaffNotesActivity extends SimpleActivity {
                         .append(Component.text(response.error(), NamedTextColor.RED))
                         .build()
                 );
+                Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
                 return;
             }
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
             ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
-            VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("note-list");
+            VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
             for (PlayerNote note : response.data()) {
                 notes.addChild(new StaffNoteWidget(uuid, api, note));
             }
+            // TODO: Actually show that button somewhere
+            ButtonWidget createButton = ButtonWidget
+                .text("+", () -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(
+                    new CreateNoteActivity(api, uuid, username)
+                ))
+                .addId("create-button");
+            createButton.setHoverComponent(Component.translatable("globaltags.context.staff_notes.hover.create"));
 
             profileWrapper.addEntryInitialized(headWidget);
             profileWrapper.addEntryInitialized(titleWidget);
