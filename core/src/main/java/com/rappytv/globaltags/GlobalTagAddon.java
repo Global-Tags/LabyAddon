@@ -6,6 +6,7 @@ import com.rappytv.globaltags.config.GlobalTagConfig;
 import com.rappytv.globaltags.interaction.EditBanInfoBulletPoint;
 import com.rappytv.globaltags.interaction.ReferPlayerBulletPoint;
 import com.rappytv.globaltags.interaction.StaffNotesBulletPoint;
+import com.rappytv.globaltags.interaction.TagHistoryBulletPoint;
 import com.rappytv.globaltags.interaction.ToggleBanBulletPoint;
 import com.rappytv.globaltags.interaction.ChangeTagBulletPoint;
 import com.rappytv.globaltags.interaction.ClearTagBulletPoint;
@@ -68,6 +69,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint());
         labyAPI().interactionMenuRegistry().register(new ReportBulletPoint());
         labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint());
+        labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint());
         labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
         registerCommand(new GlobalTagCommand(this));
     }
