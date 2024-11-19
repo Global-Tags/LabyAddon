@@ -198,9 +198,21 @@
                 "title": "%s's notes",
                 "description": "created at %s (#%s)",
                 "hover": {
+                    "create": "Add note",
                     "delete": "Click to delete",
                     "deleted": "Successfully deleted!"
+                },
+                "create": {
+                    "title": "Add note for %s",
+                    "label": "Note",
+                    "placeholder": "Enter a note…",
+                    "send": "Create"
                 }
+            },
+            "tag_history": {
+                "name": "Show GlobalTag history",
+                "title": "%s's tag history",
+                "flagged_words": "Flagged words:"
             }
         }
     }
