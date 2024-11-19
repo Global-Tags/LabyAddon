@@ -1,7 +1,6 @@
 package com.rappytv.globaltags.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.StaffNotesActivity;
 import com.rappytv.globaltags.activities.TagHistoryActivity;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
