@@ -25,16 +25,28 @@
         .username {
             alignment: center;
         }
+
+        #.create-button {
+        #    left: 50%;
+        #    margin-top: 5;
+        #    width: 20;
+        #    height: width;
+        #    alignment-x: center;
+        #    alignment-y: center;
+        #    padding: 0;
+        #}
     }
 
     Scroll {
+        top: calc(50% + 10);
         width: 100%;
-        height: 90%;
+        max-height: 90%;
+        height: fit-content;
         alignment-x: center;
         alignment-y: center;
         overwrite-width: false;
 
-        .note-list {
+        .item-list {
             left: 0;
             top: 0;
             height: fit-content;
@@ -90,6 +102,32 @@ StaffNote {
     padding: 0;
 
     margin-top: 2;
+  }
+
+  &:selected {
+    padding: 0;
+    border: 1 gray;
+    background-color: black;
+  }
+}
+
+TagHistoryEntry {
+  width: 100%;
+  height: 15;
+  padding: 1;
+
+  .text-component {
+    max-width: 80%;
+    scale-to-fit: true;
+    max-lines: 1;
+    left: 5;
+    #top: 2;
+    alignment-y: center;
+  }
+
+  .flagged-words {
+    right: 5;
+    top: 3;
   }
 
   &:selected {
