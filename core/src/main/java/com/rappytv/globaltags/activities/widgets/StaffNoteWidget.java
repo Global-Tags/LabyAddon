@@ -2,6 +2,7 @@ package com.rappytv.globaltags.activities.widgets;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.model.PlayerNote;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -79,13 +80,13 @@ public class StaffNoteWidget extends SimpleWidget {
     private void delete() {
         deleteButton.setEnabled(false);
         api.getApiHandler().deleteNote(holder, note.getId(), (response) -> {
+            Laby.references().chatExecutor().displayClientMessage(
+                TextComponent.builder()
+                    .append(GlobalTagAddon.prefix)
+                    .append(Util.getResponseComponent(response))
+                    .build()
+            );
             if(!response.successful()) {
-                Laby.references().chatExecutor().displayClientMessage(
-                    TextComponent.builder()
-                        .append(GlobalTagAddon.prefix)
-                        .append(Component.text(response.error(), NamedTextColor.RED))
-                        .build()
-                );
                 deleteButton.setEnabled(true);
                 return;
             }
