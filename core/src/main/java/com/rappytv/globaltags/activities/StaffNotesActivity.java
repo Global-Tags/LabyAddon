@@ -54,22 +54,22 @@ public class StaffNotesActivity extends SimpleActivity {
             }
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
-            IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
-            VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
-            for (PlayerNote note : response.data()) {
-                notes.addChild(new StaffNoteWidget(uuid, api, note));
-            }
-            // TODO: Actually show that button somewhere
             ButtonWidget createButton = ButtonWidget
                 .text("+", () -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(
                     new CreateNoteActivity(api, uuid, username)
                 ))
                 .addId("create-button");
             createButton.setHoverComponent(Component.translatable("globaltags.context.staff_notes.hover.create"));
+            IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
+            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
+            VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
+            for (PlayerNote note : response.data()) {
+                notes.addChild(new StaffNoteWidget(uuid, api, note));
+            }
 
             profileWrapper.addEntryInitialized(headWidget);
             profileWrapper.addEntryInitialized(titleWidget);
+            profileWrapper.addEntryInitialized(createButton);
 
             windowWidget.addContentInitialized(profileWrapper);
             windowWidget.addContentInitialized(new ScrollWidget(notes));

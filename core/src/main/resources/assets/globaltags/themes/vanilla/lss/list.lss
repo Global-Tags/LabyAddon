@@ -16,6 +16,13 @@
         space-between-entries: 2;
         background-color: rgba(10, 10, 10, 0.4);
 
+        .create-button {
+            margin-left: 1;
+            width: 16;
+            height: width;
+            padding: 0;
+        }
+
         .head {
             width: 16;
             height: width;
@@ -25,16 +32,6 @@
         .username {
             alignment: center;
         }
-
-        #.create-button {
-        #    left: 50%;
-        #    margin-top: 5;
-        #    width: 20;
-        #    height: width;
-        #    alignment-x: center;
-        #    alignment-y: center;
-        #    padding: 0;
-        #}
     }
 
     Scroll {
