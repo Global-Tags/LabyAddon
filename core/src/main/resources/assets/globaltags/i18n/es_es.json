@@ -1,1 +1,54 @@
-{}
+{
+    "globaltags": {
+        "settings": {
+            "tags": {
+                "staged": {
+                    "description": "¡Haz clic en el botón «Publicar ajustes» para publicar los cambios!",
+                    "title": "Cambios pendientes"
+                },
+                "tagPreview": {
+                    "emptyReason": "No se da ninguna razón",
+                    "name": "Vista previa de tu Tag",
+                    "banned": "¡Tu cuenta está suspendida!\nRazón: %s",
+                    "noInfo": "¡No se ha podido obtener la info de la cuenta!",
+                    "labyConnect": "¡No estás conectado a LabyConnect!",
+                    "empty": "<Tag vació>",
+                    "appeal": {
+                        "name": "Apelación"
+                    }
+                },
+                "name": "Configuración global de tu tag",
+                "updateSettings": {
+                    "name": "Publicar ajustes"
+                }
+            },
+            "showBackground": {
+                "name": "Mostrar fondo"
+            },
+            "joinDiscord": {
+                "name": "Servidor de Discord",
+                "text": "Únete"
+            },
+            "showOwnTag": {
+                "name": "Mostrar tag propio"
+            },
+            "tagSize": {
+                "name": "Tamaño de tags"
+            },
+            "header": {
+                "display": {
+                    "name": "Configuración de visualización"
+                },
+                "tags": {
+                    "name": "Configuración de tags"
+                }
+            },
+            "enabled": {
+                "name": "Activado"
+            },
+            "localizedResponses": {
+                "name": "Localizar respuestas de la API"
+            }
+        }
+    }
+}

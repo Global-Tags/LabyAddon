@@ -33,7 +33,7 @@
             "tags": {
                 "name": "Global tag settings",
                 "staged": {
-                    "title": "Staged changes",
+                    "title": "Pending changes",
                     "description": "Click on the \"Publish settings\" button to publish changes!"
                 },
                 "tagPreview": {
@@ -45,7 +45,7 @@
                     "emptyReason": "No reason provided",
                     "appeal": {
                         "name": "Appeal",
-                        "description": "⚠ This button will only be clickable if your suspension is appealable.",
+                        "description": "⚠️ This button will only be clickable if your suspension is appealable.",
                         "popup": {
                             "label": "Why should we unban you?",
                             "placeholder": "Please enter a reason…",

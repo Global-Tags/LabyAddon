@@ -2,7 +2,8 @@
     "globaltags": {
         "settings": {
             "showBackground": {
-                "name": "Vis bakgrunn"
+                "name": "Vis bakgrunn",
+                "description": "Når dette valgmulighet er aktivert, vil du se den grå vaniljenavnemerkebakgrunnen bak globale tagger."
             },
             "header": {
                 "tags": {
@@ -17,6 +18,40 @@
             },
             "enabled": {
                 "name": "Aktivert"
+            },
+            "localizedResponses": {
+                "name": "Lokaliser API-svar",
+                "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt vil ikke bli lagret noe sted."
+            },
+            "tags": {
+                "staged": {
+                    "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!"
+                },
+                "tagPreview": {
+                    "noInfo": "Kunne ikke hente kontoinformasjon!",
+                    "appeal": {
+                        "popup": {
+                            "placeholder": "Venligst skriv inn en grunn…",
+                            "label": "Hvorfor burde vi oppheve forbudet ditt?",
+                            "button": "Send en anke"
+                        },
+                        "name": "Anke",
+                        "description": "⚠ Denne knappen kan bare klikkes hvis suspensjonen din kan ankes."
+                    },
+                    "name": "Tag Forhåndsvisning",
+                    "banned": "Kontoen din ble suspendert!\nGrunn: %s",
+                    "labyConnect": "Du er ikke koblet til LabyConnect!",
+                    "empty": "<Tøm Tag>",
+                    "emptyReason": "Ingen grunn oppgitt"
+                },
+                "name": "Global tag-instillinger"
+            },
+            "joinDiscord": {
+                "name": "Discord Server",
+                "text": "Bli med"
+            },
+            "showOwnTag": {
+                "name": "Vis egen tag"
             }
         },
         "commands": {
