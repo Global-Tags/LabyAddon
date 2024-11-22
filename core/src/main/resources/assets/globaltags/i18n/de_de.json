@@ -192,6 +192,27 @@
             },
             "clearTag": {
                 "name": "GlobalTag löschen"
+            },
+            "staff_notes": {
+                "name": "GlobalTags Notizen verwalten",
+                "title": "%s's Notizen",
+                "description": "erstellt am %s (#%s)",
+                "hover": {
+                    "create": "Notiz erstellen",
+                    "delete": "Klicke, um zu löschen",
+                    "deleted": "Erfolgreich gelöscht!"
+                },
+                "create": {
+                    "title": "Notiz für %s erstellen",
+                    "label": "Notiz",
+                    "placeholder": "Notiz eingeben…",
+                    "send": "Erstellen"
+                }
+            },
+            "tag_history": {
+                "name": "GlobalTag-Verlauf anzeigen",
+                "title": "%s's Tag-Verlauf",
+                "flagged_words": "Geflaggte Wörter:"
             }
         }
     }
