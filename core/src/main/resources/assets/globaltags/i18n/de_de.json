@@ -14,7 +14,7 @@
             },
             "localizedResponses": {
                 "name": "API-Antworten lokalisieren",
-                "description": "Wenn diese Option aktiviert ist, sendet das Addon auch deine Minecraft-Sprache an die API. Wenn die Übersetzungen vorhanden sind, erhältst du lokalisierte Antworten. Deine Minecraft-Sprache wird nirgendwo gespeichert."
+                "description": "Wenn diese Option aktiviert ist, sendet das Addon auch deine Minecraft-Sprache an die API. Wenn die Übersetzungen vorhanden sind, erhältst du lokalisierte Antworten. Deine Minecraft-Sprache wird für lokalisierte Emails gespeichert."
             },
             "joinDiscord": {
                 "name": "Discord Server",
@@ -28,7 +28,7 @@
             },
             "showBackground": {
                 "name": "Hintergrund anzeigen",
-                "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Global Tags."
+                "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den GlobalTags."
             },
             "tags": {
                 "name": "Globale Tag-Einstellungen",
@@ -113,7 +113,7 @@
                     "unchanged": "Unverändert"
                 },
                 "resetTag": {
-                    "name": "Global Tag löschen",
+                    "name": "GlobalTag löschen",
                     "text": "Löschen"
                 }
             },

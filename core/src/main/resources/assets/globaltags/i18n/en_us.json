@@ -14,7 +14,7 @@
             },
             "localizedResponses": {
                 "name": "Localize API responses",
-                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will be saved for localized emails."
             },
             "joinDiscord": {
                 "name": "Discord Server",
@@ -28,7 +28,7 @@
             },
             "showBackground": {
                 "name": "Show background",
-                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
+                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind GlobalTags."
             },
             "tags": {
                 "name": "Global tag settings",

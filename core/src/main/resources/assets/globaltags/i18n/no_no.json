@@ -37,7 +37,7 @@
                             "button": "Send en anke"
                         },
                         "name": "Anke",
-                        "description": "⚠ Denne knappen kan bare klikkes hvis suspensjonen din kan ankes."
+                        "description": "⚠️ Denne knappen kan bare klikkes hvis suspensjonen din kan ankes."
                     },
                     "name": "Tag Forhåndsvisning",
                     "banned": "Kontoen din ble suspendert!\nGrunn: %s",
@@ -124,7 +124,9 @@
         },
         "context": {
             "unban": {
-                "name": "Opphev utestengelsen av GlobalTag-spiller"
+                "name": "Opphev utestengelsen av GlobalTag-spiller",
+                "title": "Opphev utestengelsen av %s",
+                "send": "Opphev utestengelsen"
             },
             "reason": "Grunn",
             "placeholder": "Vennligst skriv inn en grunn…",
@@ -140,6 +142,10 @@
                 "name": "Utesteng GlobalTag-spiller",
                 "title": "Utesteng %s",
                 "send": "Utesteng"
+            },
+            "editBan": {
+                "name": "Endre GlobalTag utestengelse",
+                "title": "Endre utestengelsen til %s"
             }
         },
         "general": {

@@ -59,7 +59,8 @@
                 }
             },
             "showBackground": {
-                "name": "Mostrar fondo"
+                "name": "Mostrar fondo",
+                "description": "Cuando esta opción está activada, verás un fondo gris detrás de GlobalTags."
             },
             "joinDiscord": {
                 "name": "Servidor de Discord",
@@ -83,11 +84,13 @@
                 "name": "Activado"
             },
             "localizedResponses": {
-                "name": "Localizar respuestas de la API"
+                "name": "Localizar respuestas de la API",
+                "description": "Si esta opción está activada, el addon también envía tu idioma de Minecraft a la API. Si las traducciones existen, recibirás respuestas localizadas. Tu idioma de Minecraft se guardará para los correos electrónicos localizados."
             },
             "clearCache": {
                 "name": "Limpiar caché",
-                "text": "Limpiar"
+                "text": "Limpiar",
+                "description": "Limpia manualmente el caché de tags.\nEl caché se borra automáticamente cada §b5 minutos§f.\nTambién se puede borrar el caché con §b/gt cc§f."
             }
         },
         "commands": {
