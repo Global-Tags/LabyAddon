@@ -113,7 +113,7 @@
                     "unchanged": "Unchanged"
                 },
                 "resetTag": {
-                    "name": "Delete global tag",
+                    "name": "Delete GlobalTag",
                     "text": "Delete"
                 }
             },

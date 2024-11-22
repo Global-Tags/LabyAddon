@@ -25,14 +25,15 @@
             },
             "tags": {
                 "staged": {
-                    "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!"
+                    "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!",
+                    "title": "Ventende endringer"
                 },
                 "tagPreview": {
                     "noInfo": "Kunne ikke hente kontoinformasjon!",
                     "appeal": {
                         "popup": {
                             "placeholder": "Venligst skriv inn en grunn…",
-                            "label": "Hvorfor burde vi oppheve forbudet ditt?",
+                            "label": "Hvorfor burde vi oppheve utestengelsen din?",
                             "button": "Send en anke"
                         },
                         "name": "Anke",
@@ -44,7 +45,40 @@
                     "empty": "<Tøm Tag>",
                     "emptyReason": "Ingen grunn oppgitt"
                 },
-                "name": "Global tag-instillinger"
+                "name": "Global tag-instillinger",
+                "updateSettings": {
+                    "name": "Publiser innstillinger",
+                    "text": "Oppdater",
+                    "result": "Tagg: %s\nPosisjon: %s\nIkon: %s",
+                    "unchanged": "Uendret"
+                },
+                "tag": {
+                    "name": "Global Tagg"
+                },
+                "position": {
+                    "name": "Global posisjon",
+                    "description": "Taggen din er synlig i denne posisjonen for alle.",
+                    "entries": {
+                        "above": "Over navnet",
+                        "below": "Under navnet",
+                        "right": "Høyre til navnet",
+                        "left": "Venstre til navnet"
+                    }
+                },
+                "globalIcon": {
+                    "name": "Global ikon",
+                    "description": "Dette ikonet vil vises til venstre til taggen din globalt.",
+                    "entries": {
+                        "none": "Ingen",
+                        "custom": "Egendefinert",
+                        "heart": "Hjerte",
+                        "star": "Stjerne"
+                    }
+                },
+                "resetTag": {
+                    "name": "Slett GlobalTag",
+                    "text": "Slett"
+                }
             },
             "joinDiscord": {
                 "name": "Discord Server",
@@ -52,6 +86,11 @@
             },
             "showOwnTag": {
                 "name": "Vis egen tag"
+            },
+            "clearCache": {
+                "description": "Tømmer tag-cachen manuelt.\nCachen tømmes automatisk hvert §b5 minutter§f.\nDu kan i tillegg tømme cachen med §b/gt cc§f.",
+                "text": "Tøm",
+                "name": "Tøm cachen"
             }
         },
         "commands": {
@@ -59,15 +98,53 @@
                 "email": {
                     "verify": "Bekreft e-post",
                     "hover": "Klikk for å skrive inn bekreftelsekode"
+                },
+                "discord": {
+                    "copied": "Koden ble kopiert til utklippstavlen din!"
                 }
             },
             "base": {
                 "api": {
                     "offline": "Koblingsfeil!",
                     "version": "API Versjon: %s"
+                },
+                "version": "Tillegg Versjon: %s",
+                "clear_cache": {
+                    "label": "Tøm cachen",
+                    "hover": "Klikk her for å tømme cachen!"
                 }
             },
-            "usage": "Bruk: %s"
+            "usage": "Bruk: %s",
+            "clear_cache": {
+                "success": "Cachen ble tømt!"
+            },
+            "renew_cache": {
+                "success": "Cachen ble fornyet!"
+            }
+        },
+        "context": {
+            "unban": {
+                "name": "Opphev utestengelsen av GlobalTag-spiller"
+            },
+            "reason": "Grunn",
+            "placeholder": "Vennligst skriv inn en grunn…",
+            "referral": {
+                "name": "Denne spilleren inviterte meg til GlobalTags"
+            },
+            "report": {
+                "name": "Rapporter GlobalTag",
+                "title": "Rapporter %s",
+                "send": "Send rapporten"
+            },
+            "ban": {
+                "name": "Utesteng GlobalTag-spiller",
+                "title": "Utesteng %s",
+                "send": "Utesteng"
+            }
+        },
+        "general": {
+            "success": "Suksess!",
+            "error": "Det oppstod en feil"
         }
     }
 }

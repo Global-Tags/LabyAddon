@@ -14,12 +14,48 @@
                     "labyConnect": "¡No estás conectado a LabyConnect!",
                     "empty": "<Tag vació>",
                     "appeal": {
-                        "name": "Apelación"
+                        "name": "Apelación",
+                        "description": "⚠️ Este botón sólo se podrá pulsar si tu suspensión es apelable.",
+                        "popup": {
+                            "label": "¿Por qué deberíamos desbanearte?",
+                            "placeholder": "Por favor, escriba una razón…",
+                            "button": "Enviar apelación"
+                        }
                     }
                 },
                 "name": "Configuración global de tu tag",
                 "updateSettings": {
-                    "name": "Publicar ajustes"
+                    "name": "Publicar ajustes",
+                    "text": "Actualizar",
+                    "result": "Tag: %s\nPosición: %s\nIcono: %s",
+                    "unchanged": "Sin cambios"
+                },
+                "position": {
+                    "entries": {
+                        "right": "A la derecha",
+                        "above": "Sobre el nombre",
+                        "below": "Debajo del nombre",
+                        "left": "A la izquierda"
+                    },
+                    "name": "Posición global",
+                    "description": "Tu tag es visible en esta posición para todo el mundo."
+                },
+                "resetTag": {
+                    "text": "Borrar",
+                    "name": "Borrar GlobalTag"
+                },
+                "globalIcon": {
+                    "name": "Icono global",
+                    "description": "Este icono se muestra globalmente a la izquierda de tu tag.",
+                    "entries": {
+                        "none": "Ningún",
+                        "custom": "Personalizado",
+                        "heart": "Corazón",
+                        "star": "Estrella"
+                    }
+                },
+                "tag": {
+                    "name": "Tag global"
                 }
             },
             "showBackground": {
@@ -48,7 +84,103 @@
             },
             "localizedResponses": {
                 "name": "Localizar respuestas de la API"
+            },
+            "clearCache": {
+                "name": "Limpiar caché",
+                "text": "Limpiar"
             }
+        },
+        "commands": {
+            "link": {
+                "email": {
+                    "verify": "Verificar correo electrónico",
+                    "hover": "Haz clic para introducir el código de verificación"
+                },
+                "discord": {
+                    "copied": "¡El código se ha copiado en tu portapapeles!"
+                }
+            },
+            "base": {
+                "clear_cache": {
+                    "hover": "¡Haz clic aquí para limpiar el caché de etiquetas!",
+                    "label": "Limpiar caché"
+                },
+                "version": "Versión del Addon: %s",
+                "api": {
+                    "version": "Versión de la API: %s",
+                    "offline": "¡Conexión fallida!"
+                }
+            },
+            "usage": "Uso: %s",
+            "renew_cache": {
+                "success": "¡El caché se ha renovado!"
+            },
+            "clear_cache": {
+                "success": "¡Se ha limpiado el caché!"
+            }
+        },
+        "context": {
+            "editBan": {
+                "name": "Editar ban de GlobalTags",
+                "title": "Editar el ban de %s",
+                "send": "Enviar cambios",
+                "appealable": "Apelable"
+            },
+            "staff_notes": {
+                "hover": {
+                    "deleted": "¡Eliminado con éxito!",
+                    "create": "Crear nota",
+                    "delete": "Haz clic para borrar"
+                },
+                "name": "Gestionar notas de GlobalTags",
+                "title": "Notas de %s",
+                "description": "creado el %s (#%s)",
+                "create": {
+                    "title": "Crear nota para %s",
+                    "label": "Nota",
+                    "placeholder": "Introduzca una nota…",
+                    "send": "Crear"
+                }
+            },
+            "changeTag": {
+                "placeholder": "Introduzca el GlobalTag actualizado…",
+                "name": "Cambiar GlobalTag",
+                "title": "Cambiar GlobalTag de %s",
+                "label": "Nuevo GlobalTag",
+                "send": "Actualizar Tag"
+            },
+            "reason": "Razón",
+            "placeholder": "Por favor, introduzca una razón…",
+            "referral": {
+                "name": "Este jugador me invitó a GlobalTags"
+            },
+            "report": {
+                "name": "Denunciar GlobalTag",
+                "title": "Denunciar %s",
+                "send": "Enviar informe"
+            },
+            "ban": {
+                "name": "Banear el jugador de GlobalTags",
+                "title": "Banear %s",
+                "send": "Banear"
+            },
+            "unban": {
+                "name": "Desbanear el jugador de GlobalTags",
+                "title": "Desbanear %s",
+                "send": "Desbanear"
+            },
+            "clearTag": {
+                "name": "Borrar GlobalTag"
+            },
+            "tag_history": {
+                "name": "Mostrar historia de GlobalTags",
+                "title": "Historia de GlobalTags de %s",
+                "flagged_words": "Palabras marcadas:"
+            }
+        },
+        "general": {
+            "success": "¡Éxito!",
+            "error": "Ha ocurrido un error"
         }
     }
 }
