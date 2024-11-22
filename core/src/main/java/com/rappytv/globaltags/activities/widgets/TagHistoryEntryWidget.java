@@ -30,7 +30,8 @@ public class TagHistoryEntryWidget extends SimpleWidget {
         ComponentWidget text = ComponentWidget
             .component(
                 Component
-                    .text(number + ". ", NamedTextColor.AQUA)
+                    .empty()
+                    .append(Component.text(number + ". ", NamedTextColor.AQUA))
                     .append(api.translateColorCodes(entry.tag()))
             )
             .addId("text-component");
