@@ -60,7 +60,7 @@
             },
             "showBackground": {
                 "name": "Mostrar fondo",
-                "description": "Cuando esta opción está activada, verás un fondo gris detrás de GlobalTags."
+                "description": "Cuando esta opción está activada, verás un fondo gris detrás de tags."
             },
             "joinDiscord": {
                 "name": "Servidor de Discord",

@@ -28,7 +28,7 @@
             },
             "showBackground": {
                 "name": "Hintergrund anzeigen",
-                "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den GlobalTags."
+                "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Tags."
             },
             "tags": {
                 "name": "Globale Tag-Einstellungen",

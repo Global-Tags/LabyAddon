@@ -28,7 +28,7 @@
             },
             "showBackground": {
                 "name": "Show background",
-                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind GlobalTags."
+                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind tags."
             },
             "tags": {
                 "name": "Global tag settings",

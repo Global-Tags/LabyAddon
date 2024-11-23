@@ -3,7 +3,7 @@
         "settings": {
             "showBackground": {
                 "name": "Vis bakgrunn",
-                "description": "Når dette valgmulighet er aktivert, vil du se den grå vaniljenavnemerkebakgrunnen bak globale tagger."
+                "description": "Når dette valgmulighet er aktivert, vil du se den grå vaniljenavnemerkebakgrunnen bak tagger."
             },
             "header": {
                 "tags": {
@@ -21,7 +21,7 @@
             },
             "localizedResponses": {
                 "name": "Lokaliser API-svar",
-                "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt vil ikke bli lagret noe sted."
+                "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt blir lagret for lokaliserte e-poster."
             },
             "tags": {
                 "staged": {
@@ -145,7 +145,40 @@
             },
             "editBan": {
                 "name": "Endre GlobalTag utestengelse",
-                "title": "Endre utestengelsen til %s"
+                "title": "Endre utestengelsen til %s",
+                "send": "Send inn endringer",
+                "appealable": "Kan ankes"
+            },
+            "changeTag": {
+                "name": "Endre GlobalTag",
+                "title": "Endre Taggen til %s",
+                "label": "Ny GlobalTag",
+                "placeholder": "Skrivv inn den oppdatert GlobalTag…",
+                "send": "Oppdater Tagg"
+            },
+            "clearTag": {
+                "name": "Tøm GlobalTag"
+            },
+            "staff_notes": {
+                "name": "Administrer GlobalTags-notater",
+                "title": "Notater til %s",
+                "description": "oppretet på %s (#%s)",
+                "hover": {
+                    "create": "Legg til notat",
+                    "delete": "Klikk for å slette",
+                    "deleted": "Sletting suksessfult!"
+                },
+                "create": {
+                    "title": "Legg til notat for %s",
+                    "label": "Notat",
+                    "placeholder": "Skriv inn et notat…",
+                    "send": "Opprett"
+                }
+            },
+            "tag_history": {
+                "name": "Vis GlobalTag-historikk",
+                "title": "Tag-historikk til %s",
+                "flagged_words": "Flaggede ord:"
             }
         },
         "general": {
