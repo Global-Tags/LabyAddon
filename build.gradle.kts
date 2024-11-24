@@ -5,7 +5,7 @@ plugins {
 
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
 group = "org.example"
-version = providers.environmentVariable("VERSION").getOrElse("1.3.3")
+version = providers.environmentVariable("VERSION").getOrElse("1.3.4")
 
 labyMod {
     defaultPackageName = "com.rappytv.globaltags" //change this to your main package name (used by all modules)
@@ -32,6 +32,11 @@ labyMod {
 subprojects {
     plugins.apply("net.labymod.labygradle")
     plugins.apply("net.labymod.labygradle.addon")
+
     group = rootProject.group
     version = rootProject.version
+
+    repositories {
+        maven("https://repo.rappytv.com/public/")
+    }
 }

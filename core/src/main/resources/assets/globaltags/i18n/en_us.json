@@ -1,7 +1,6 @@
 {
     "globaltags": {
         "settings": {
-            "name": "Global Tags",
             "header": {
                 "display": {
                     "name": "Display settings"
@@ -15,7 +14,7 @@
             },
             "localizedResponses": {
                 "name": "Localize API responses",
-                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will not be stored anywhere."
+                "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will be saved for localized emails."
             },
             "joinDiscord": {
                 "name": "Discord Server",
@@ -29,12 +28,12 @@
             },
             "showBackground": {
                 "name": "Show background",
-                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind global tags."
+                "description": "When this option is enabled, you'll see the gray vanilla nametag background behind tags."
             },
             "tags": {
                 "name": "Global tag settings",
                 "staged": {
-                    "title": "Staged changes.",
+                    "title": "Pending changes",
                     "description": "Click on the \"Publish settings\" button to publish changes!"
                 },
                 "tagPreview": {
@@ -46,16 +45,16 @@
                     "emptyReason": "No reason provided",
                     "appeal": {
                         "name": "Appeal",
-                        "description": "⚠ This button will only be clickable if your suspension is appealable.",
+                        "description": "⚠️ This button will only be clickable if your suspension is appealable.",
                         "popup": {
                             "label": "Why should we unban you?",
-                            "placeholder": "Please enter a reason...",
+                            "placeholder": "Please enter a reason…",
                             "button": "Send appeal"
                         }
                     }
                 },
                 "tag": {
-                    "name": "Global tag"
+                    "name": "Global Tag"
                 },
                 "position": {
                     "name": "Global position",
@@ -114,7 +113,7 @@
                     "unchanged": "Unchanged"
                 },
                 "resetTag": {
-                    "name": "Delete global tag",
+                    "name": "Delete GlobalTag",
                     "text": "Delete"
                 }
             },
@@ -159,7 +158,7 @@
         },
         "context": {
             "reason": "Reason",
-            "placeholder": "Please enter a reason...",
+            "placeholder": "Please enter a reason…",
             "referral": {
                 "name": "This player invited me to GlobalTags"
             },
@@ -188,11 +187,32 @@
                 "name": "Change GlobalTag",
                 "title": "Change %s's Tag",
                 "label": "New GlobalTag",
-                "placeholder": "Enter the updated GlobalTag...",
+                "placeholder": "Enter the updated GlobalTag…",
                 "send": "Update Tag"
             },
             "clearTag": {
                 "name": "Clear GlobalTag"
+            },
+            "staff_notes": {
+                "name": "Manage GlobalTags notes",
+                "title": "%s's notes",
+                "description": "created at %s (#%s)",
+                "hover": {
+                    "create": "Add note",
+                    "delete": "Click to delete",
+                    "deleted": "Successfully deleted!"
+                },
+                "create": {
+                    "title": "Add note for %s",
+                    "label": "Note",
+                    "placeholder": "Enter a note…",
+                    "send": "Create"
+                }
+            },
+            "tag_history": {
+                "name": "Show GlobalTag history",
+                "title": "%s's tag history",
+                "flagged_words": "Flagged words:"
             }
         }
     }

@@ -1,0 +1,189 @@
+{
+    "globaltags": {
+        "settings": {
+            "showBackground": {
+                "name": "Vis bakgrunn",
+                "description": "Når dette valgmulighet er aktivert, vil du se den grå vaniljenavnemerkebakgrunnen bak tagger."
+            },
+            "header": {
+                "tags": {
+                    "name": "Taginnstillinger"
+                },
+                "display": {
+                    "name": "Visningsinnstillinger"
+                }
+            },
+            "tagSize": {
+                "name": "Tagstørrelse"
+            },
+            "enabled": {
+                "name": "Aktivert"
+            },
+            "localizedResponses": {
+                "name": "Lokaliser API-svar",
+                "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt blir lagret for lokaliserte e-poster."
+            },
+            "tags": {
+                "staged": {
+                    "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!",
+                    "title": "Ventende endringer"
+                },
+                "tagPreview": {
+                    "noInfo": "Kunne ikke hente kontoinformasjon!",
+                    "appeal": {
+                        "popup": {
+                            "placeholder": "Venligst skriv inn en grunn…",
+                            "label": "Hvorfor burde vi oppheve utestengelsen din?",
+                            "button": "Send en anke"
+                        },
+                        "name": "Anke",
+                        "description": "⚠️ Denne knappen kan bare klikkes hvis suspensjonen din kan ankes."
+                    },
+                    "name": "Tag Forhåndsvisning",
+                    "banned": "Kontoen din ble suspendert!\nGrunn: %s",
+                    "labyConnect": "Du er ikke koblet til LabyConnect!",
+                    "empty": "<Tøm Tag>",
+                    "emptyReason": "Ingen grunn oppgitt"
+                },
+                "name": "Global tag-instillinger",
+                "updateSettings": {
+                    "name": "Publiser innstillinger",
+                    "text": "Oppdater",
+                    "result": "Tagg: %s\nPosisjon: %s\nIkon: %s",
+                    "unchanged": "Uendret"
+                },
+                "tag": {
+                    "name": "Global Tagg"
+                },
+                "position": {
+                    "name": "Global posisjon",
+                    "description": "Taggen din er synlig i denne posisjonen for alle.",
+                    "entries": {
+                        "above": "Over navnet",
+                        "below": "Under navnet",
+                        "right": "Høyre til navnet",
+                        "left": "Venstre til navnet"
+                    }
+                },
+                "globalIcon": {
+                    "name": "Global ikon",
+                    "description": "Dette ikonet vil vises til venstre til taggen din globalt.",
+                    "entries": {
+                        "none": "Ingen",
+                        "custom": "Egendefinert",
+                        "heart": "Hjerte",
+                        "star": "Stjerne"
+                    }
+                },
+                "resetTag": {
+                    "name": "Slett GlobalTag",
+                    "text": "Slett"
+                }
+            },
+            "joinDiscord": {
+                "name": "Discord Server",
+                "text": "Bli med"
+            },
+            "showOwnTag": {
+                "name": "Vis egen tag"
+            },
+            "clearCache": {
+                "description": "Tømmer tag-cachen manuelt.\nCachen tømmes automatisk hvert §b5 minutter§f.\nDu kan i tillegg tømme cachen med §b/gt cc§f.",
+                "text": "Tøm",
+                "name": "Tøm cachen"
+            }
+        },
+        "commands": {
+            "link": {
+                "email": {
+                    "verify": "Bekreft e-post",
+                    "hover": "Klikk for å skrive inn bekreftelsekode"
+                },
+                "discord": {
+                    "copied": "Koden ble kopiert til utklippstavlen din!"
+                }
+            },
+            "base": {
+                "api": {
+                    "offline": "Koblingsfeil!",
+                    "version": "API Versjon: %s"
+                },
+                "version": "Tillegg Versjon: %s",
+                "clear_cache": {
+                    "label": "Tøm cachen",
+                    "hover": "Klikk her for å tømme cachen!"
+                }
+            },
+            "usage": "Bruk: %s",
+            "clear_cache": {
+                "success": "Cachen ble tømt!"
+            },
+            "renew_cache": {
+                "success": "Cachen ble fornyet!"
+            }
+        },
+        "context": {
+            "unban": {
+                "name": "Opphev utestengelsen av GlobalTag-spiller",
+                "title": "Opphev utestengelsen av %s",
+                "send": "Opphev utestengelsen"
+            },
+            "reason": "Grunn",
+            "placeholder": "Vennligst skriv inn en grunn…",
+            "referral": {
+                "name": "Denne spilleren inviterte meg til GlobalTags"
+            },
+            "report": {
+                "name": "Rapporter GlobalTag",
+                "title": "Rapporter %s",
+                "send": "Send rapporten"
+            },
+            "ban": {
+                "name": "Utesteng GlobalTag-spiller",
+                "title": "Utesteng %s",
+                "send": "Utesteng"
+            },
+            "editBan": {
+                "name": "Endre GlobalTag utestengelse",
+                "title": "Endre utestengelsen til %s",
+                "send": "Send inn endringer",
+                "appealable": "Kan ankes"
+            },
+            "changeTag": {
+                "name": "Endre GlobalTag",
+                "title": "Endre Taggen til %s",
+                "label": "Ny GlobalTag",
+                "placeholder": "Skrivv inn den oppdatert GlobalTag…",
+                "send": "Oppdater Tagg"
+            },
+            "clearTag": {
+                "name": "Tøm GlobalTag"
+            },
+            "staff_notes": {
+                "name": "Administrer GlobalTags-notater",
+                "title": "Notater til %s",
+                "description": "oppretet på %s (#%s)",
+                "hover": {
+                    "create": "Legg til notat",
+                    "delete": "Klikk for å slette",
+                    "deleted": "Sletting suksessfult!"
+                },
+                "create": {
+                    "title": "Legg til notat for %s",
+                    "label": "Notat",
+                    "placeholder": "Skriv inn et notat…",
+                    "send": "Opprett"
+                }
+            },
+            "tag_history": {
+                "name": "Vis GlobalTag-historikk",
+                "title": "Tag-historikk til %s",
+                "flagged_words": "Flaggede ord:"
+            }
+        },
+        "general": {
+            "success": "Suksess!",
+            "error": "Det oppstod en feil"
+        }
+    }
+}

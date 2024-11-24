@@ -1,7 +1,6 @@
 {
     "globaltags": {
         "settings": {
-            "name": "Global Tags",
             "header": {
                 "display": {
                     "name": "Anzeigeeinstellungen"
@@ -15,7 +14,7 @@
             },
             "localizedResponses": {
                 "name": "API-Antworten lokalisieren",
-                "description": "Wenn diese Option aktiviert ist, sendet das Addon auch deine Minecraft-Sprache an die API. Wenn die Übersetzungen vorhanden sind, erhältst du lokalisierte Antworten. Deine Minecraft-Sprache wird nirgendwo gespeichert."
+                "description": "Wenn diese Option aktiviert ist, sendet das Addon auch deine Minecraft-Sprache an die API. Wenn die Übersetzungen vorhanden sind, erhältst du lokalisierte Antworten. Deine Minecraft-Sprache wird für lokalisierte Emails gespeichert."
             },
             "joinDiscord": {
                 "name": "Discord Server",
@@ -29,7 +28,7 @@
             },
             "showBackground": {
                 "name": "Hintergrund anzeigen",
-                "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Global Tags."
+                "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Tags."
             },
             "tags": {
                 "name": "Globale Tag-Einstellungen",
@@ -49,13 +48,13 @@
                         "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
                         "popup": {
                             "label": "Warum sollten wir dich entbannen?",
-                            "placeholder": "Bitte gebe einen Grund an...",
+                            "placeholder": "Bitte gebe einen Grund an…",
                             "button": "Antrag senden"
                         }
                     }
                 },
                 "tag": {
-                    "name": "Global Tag"
+                    "name": "Globaler Tag"
                 },
                 "position": {
                     "name": "Globale Position",
@@ -71,40 +70,40 @@
                     "name": "Globales Icon",
                     "description": "Dieses Icon wird global links neben deinem Tag angezeigt.",
                     "entries": {
-                        "none": "None",
-                        "custom": "Eigenes Icon",
-                        "android": "Android",
-                        "apple": "Apple",
-                        "bereal": "BeReal.",
-                        "crown": "Crown",
-                        "discord": "Discord",
-                        "duolingo": "Luodingo",
-                        "ebio": "e.bio",
-                        "epicgames": "Epic Games",
-                        "gamescom": "Gamescom",
-                        "github": "GitHub",
-                        "gitlab": "GitLab",
-                        "heart": "Heart",
-                        "instagram": "Instagram",
-                        "kick": "Kick",
-                        "labynet": "laby.net",
-                        "paypal": "PayPal",
-                        "pinterest": "Pinterest",
-                        "playstation": "Playstation",
-                        "reddit": "Reddit",
-                        "snapchat": "Snapchat",
-                        "soundcloud": "Soundcloud",
-                        "spotify": "Spotify",
-                        "star": "Star",
-                        "statsfm": "StatsFM",
-                        "steam": "Steam",
+                        "none": "Kein Icon",
+                        "custom": "Custom",
+                        "android": "",
+                        "apple": "",
+                        "bereal": "",
+                        "crown": "Krone",
+                        "discord": "",
+                        "duolingo": "",
+                        "ebio": "",
+                        "epicgames": "",
+                        "gamescom": "",
+                        "github": "",
+                        "gitlab": "",
+                        "heart": "Herz",
+                        "instagram": "",
+                        "kick": "",
+                        "labynet": "",
+                        "paypal": "",
+                        "pinterest": "",
+                        "playstation": "",
+                        "reddit": "",
+                        "snapchat": "",
+                        "soundcloud": "",
+                        "spotify": "",
+                        "star": "Stern",
+                        "statsfm": "",
+                        "steam": "",
                         "telegram": "Telegram",
-                        "threads": "Threads",
-                        "tiktok": "TikTok",
-                        "twitch": "Twitch",
-                        "x": "x",
-                        "xbox": "Xbox",
-                        "youtube": "YouTube"
+                        "threads": "",
+                        "tiktok": "",
+                        "twitch": "",
+                        "x": "",
+                        "xbox": "",
+                        "youtube": ""
                     }
                 },
                 "updateSettings": {
@@ -114,7 +113,7 @@
                     "unchanged": "Unverändert"
                 },
                 "resetTag": {
-                    "name": "Global Tag löschen",
+                    "name": "GlobalTag löschen",
                     "text": "Löschen"
                 }
             },
@@ -134,7 +133,7 @@
                 "version": "Addon Version: %s",
                 "api": {
                     "version": "API Version: %s",
-                    "offline": "Verbindung Fehlgeschlagen!"
+                    "offline": "Verbindung fehlgeschlagen!"
                 },
                 "clear_cache": {
                     "label": "Cache leeren",
@@ -159,7 +158,7 @@
         },
         "context": {
             "reason": "Grund",
-            "placeholder": "Bitte gib einen Grund an...",
+            "placeholder": "Bitte gib einen Grund an…",
             "referral": {
                 "name": "Dieser Spieler hat mich zu GlobalTags eingeladen"
             },
@@ -188,11 +187,32 @@
                 "name": "GlobalTag ändern",
                 "title": "Ändere den Tag von %s",
                 "label": "Neuer GlobalTag",
-                "placeholder": "Gib den aktualisierten GlobalTag ein...",
+                "placeholder": "Gib den aktualisierten GlobalTag ein…",
                 "send": "Tag aktualisieren"
             },
             "clearTag": {
                 "name": "GlobalTag löschen"
+            },
+            "staff_notes": {
+                "name": "GlobalTags Notizen verwalten",
+                "title": "%s's Notizen",
+                "description": "erstellt am %s (#%s)",
+                "hover": {
+                    "create": "Notiz erstellen",
+                    "delete": "Klicke, um zu löschen",
+                    "deleted": "Erfolgreich gelöscht!"
+                },
+                "create": {
+                    "title": "Notiz für %s erstellen",
+                    "label": "Notiz",
+                    "placeholder": "Notiz eingeben…",
+                    "send": "Erstellen"
+                }
+            },
+            "tag_history": {
+                "name": "GlobalTag-Verlauf anzeigen",
+                "title": "%s's Tag-Verlauf",
+                "flagged_words": "Geflaggte Wörter:"
             }
         }
     }
