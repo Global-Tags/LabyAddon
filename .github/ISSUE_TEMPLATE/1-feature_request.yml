@@ -5,7 +5,7 @@ assignees:
 labels:
   - "feature"
   - "pending"
-title: "bug: "
+title: "feat: "
 body:
   - type: textarea
     attributes:
