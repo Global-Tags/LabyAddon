@@ -1,0 +1,14 @@
+name: "💡 Feature request"
+description: Suggest an idea for this project
+labels: [
+  "feature",
+  "pending"
+]
+body:
+  - type: textarea
+    attributes:
+      label: "Tell us about your concept"
+      description: "Provide a small description of the feature you want to have added."
+      placeholder: "My idea is ..."
+    validations:
+      required: true
