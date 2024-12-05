@@ -3,7 +3,7 @@ description: Create a report to help us improve
 assignees:
   - "RappyTV"
 labels:
-  - "bug",
+  - "bug"
   - "pending"
 title: "bug: "
 body:
