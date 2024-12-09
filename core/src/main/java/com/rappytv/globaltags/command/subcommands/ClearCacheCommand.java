@@ -17,9 +17,9 @@ public class ClearCacheCommand extends SubCommand {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        api.getCache().clear();
-        api.getCache().resolveSelf();
-        displayMessage(
+        this.api.getCache().clear();
+        this.api.getCache().resolveSelf();
+        this.displayMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(

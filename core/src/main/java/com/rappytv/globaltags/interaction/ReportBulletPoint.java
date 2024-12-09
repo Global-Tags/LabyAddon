@@ -32,7 +32,7 @@ public class ReportBulletPoint implements BulletPoint {
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ReportUUIDActivity(
-                api,
+                this.api,
                 player.getUniqueId(),
                 player.getName()
             ))
@@ -41,7 +41,7 @@ public class ReportBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> playerInfo = api.getCache().get(player.getUniqueId());
+        PlayerInfo<Component> playerInfo = this.api.getCache().get(player.getUniqueId());
         return playerInfo != null && playerInfo.getTag() != null;
     }
 }

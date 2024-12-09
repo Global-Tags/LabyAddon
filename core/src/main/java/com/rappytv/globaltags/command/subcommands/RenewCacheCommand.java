@@ -17,8 +17,8 @@ public class RenewCacheCommand extends SubCommand {
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        api.getCache().renewAll();
-        displayMessage(
+        this.api.getCache().renewAll();
+        this.displayMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(

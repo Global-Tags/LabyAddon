@@ -23,16 +23,16 @@ public class LinkSubcommand extends SubCommand {
     public boolean execute(String prefix, String[] arguments) {
         switch (arguments.length > 0 ? arguments[0].toLowerCase() : "none") {
             case "discord":
-                api.getApiHandler().linkDiscord((info) -> {
+                this.api.getApiHandler().linkDiscord((info) -> {
                     if (info.successful()) {
                         String code = info.data();
                         Laby.references().chatExecutor().copyToClipboard(code);
-                        displayMessage(GlobalTagAddon.prefix.copy().append(Component.translatable(
+                        this.displayMessage(GlobalTagAddon.prefix.copy().append(Component.translatable(
                             "globaltags.commands.link.discord.copied",
                             NamedTextColor.GREEN
                         )));
                     } else {
-                        displayMessage(
+                        this.displayMessage(
                             GlobalTagAddon.prefix.copy().append(Component.text(
                                 info.data(),
                                 NamedTextColor.RED
@@ -43,7 +43,7 @@ public class LinkSubcommand extends SubCommand {
                 break;
             case "email":
                 if (arguments.length < 2) {
-                    displayMessage(
+                    this.displayMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)
                             .append(Component.translatable(
@@ -55,9 +55,9 @@ public class LinkSubcommand extends SubCommand {
                     return true;
                 }
 
-                api.getApiHandler().linkEmail(arguments[1], (info) -> {
+                this.api.getApiHandler().linkEmail(arguments[1], (info) -> {
                     if (info.successful()) {
-                        displayMessage(
+                        this.displayMessage(
                             Component.empty()
                                 .append(GlobalTagAddon.prefix)
                                 .append(Component.text(info.data(), NamedTextColor.GREEN))
@@ -77,7 +77,7 @@ public class LinkSubcommand extends SubCommand {
                                 )
                         );
                     } else {
-                        displayMessage(
+                        this.displayMessage(
                             Component.empty()
                                 .append(GlobalTagAddon.prefix)
                                 .append(Component.text(info.data(), NamedTextColor.RED))
@@ -86,7 +86,7 @@ public class LinkSubcommand extends SubCommand {
                 });
                 break;
             default:
-                displayMessage(
+                this.displayMessage(
                     Component.empty()
                         .append(GlobalTagAddon.prefix)
                         .append(Component.translatable(

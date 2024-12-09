@@ -20,17 +20,17 @@ public class UnlinkSubcommand extends SubCommand {
     public boolean execute(String prefix, String[] arguments) {
         switch (arguments.length > 0 ? arguments[0].toLowerCase() : "none") {
             case "discord":
-                api.getApiHandler().unlinkDiscord((response) -> displayMessage(
+                this.api.getApiHandler().unlinkDiscord((response) -> this.displayMessage(
                     GlobalTagAddon.prefix.copy().append(Util.getResponseComponent(response)))
                 );
                 break;
             case "email":
-                api.getApiHandler().unlinkEmail((response) -> displayMessage(
+                this.api.getApiHandler().unlinkEmail((response) -> this.displayMessage(
                     GlobalTagAddon.prefix.copy().append(Util.getResponseComponent(response)))
                 );
                 break;
             default:
-                displayMessage(
+                this.displayMessage(
                     Component.empty()
                         .append(GlobalTagAddon.prefix)
                         .append(Component.translatable(

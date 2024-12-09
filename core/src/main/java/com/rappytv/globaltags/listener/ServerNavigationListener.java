@@ -16,7 +16,7 @@ public class ServerNavigationListener {
 
     @Subscribe
     public void onLeave(ServerDisconnectEvent event) {
-        cache.clear();
-        cache.resolveSelf();
+        this.cache.clear();
+        this.cache.resolveSelf();
     }
 }

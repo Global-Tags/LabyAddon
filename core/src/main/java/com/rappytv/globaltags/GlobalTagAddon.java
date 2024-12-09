@@ -45,15 +45,15 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
     @Override
     protected void enable() {
-        registerSettingCategory();
+        this.registerSettingCategory();
         api = new GlobalTagAPI(
-            new Agent("LabyAddon", addonInfo().getVersion(), Laby.labyAPI().minecraft().getVersion()),
-            () -> configuration().localizedResponses().get()
+            new Agent("LabyAddon", this.addonInfo().getVersion(), Laby.labyAPI().minecraft().getVersion()),
+            () -> this.configuration().localizedResponses().get()
                 ? Laby.labyAPI().minecraft().options().getCurrentLanguage()
                 : "en_us"
         );
 
-        TagRegistry tagRegistry = labyAPI().tagRegistry();
+        TagRegistry tagRegistry = this.labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())
             tagRegistry.registerBefore(
                 "friendtags_tag",
@@ -61,17 +61,17 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
                 positionType,
                 new CustomTag(this, positionType)
             );
-        registerListener(new BroadcastListener(api));
-        registerListener(new ServerNavigationListener());
-        labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new ReportBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint());
-        labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
-        registerCommand(new GlobalTagCommand(this));
+        this.registerListener(new BroadcastListener(api));
+        this.registerListener(new ServerNavigationListener());
+        this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new ReportBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
+        this.registerCommand(new GlobalTagCommand(this));
     }
 
     @Override

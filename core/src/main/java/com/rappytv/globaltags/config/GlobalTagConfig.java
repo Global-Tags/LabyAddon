@@ -67,18 +67,18 @@ public class GlobalTagConfig extends AddonConfig {
 
     @Override
     public ConfigProperty<Boolean> enabled() {
-        return enabled;
+        return this.enabled;
     }
     public ConfigProperty<Boolean> localizedResponses() {
-        return localizedResponses;
+        return this.localizedResponses;
     }
     public ConfigProperty<Boolean> showOwnTag() {
-        return showOwnTag;
+        return this.showOwnTag;
     }
     public ConfigProperty<Integer> tagSize() {
-        return tagSize;
+        return this.tagSize;
     }
     public ConfigProperty<Boolean> showBackground() {
-        return showBackground;
+        return this.showBackground;
     }
 }

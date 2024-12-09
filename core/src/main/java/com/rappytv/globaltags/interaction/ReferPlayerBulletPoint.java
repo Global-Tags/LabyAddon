@@ -30,7 +30,7 @@ public class ReferPlayerBulletPoint implements BulletPoint {
 
     @Override
     public void execute(Player player) {
-        api.getApiHandler().referPlayer(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+        this.api.getApiHandler().referPlayer(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)
                 .append(Util.getResponseComponent(response))
@@ -39,7 +39,7 @@ public class ReferPlayerBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
+        PlayerInfo<Component> executer = this.api.getCache().get(Laby.labyAPI().getUniqueId());
         return executer != null && !executer.hasReferred();
     }
 }

@@ -40,8 +40,8 @@ public class StaffNotesActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getApiHandler().getNotes(uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
-            if(document.getChild("window") != null) return;
+        this.api.getApiHandler().getNotes(this.uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+            if(this.document.getChild("window") != null) return;
             if(!response.successful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
@@ -56,7 +56,7 @@ public class StaffNotesActivity extends SimpleActivity {
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             ButtonWidget createButton = ButtonWidget
                 .text("+", () -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(
-                    new CreateNoteActivity(api, uuid, username)
+                    new CreateNoteActivity(this.api, this.uuid, this.username)
                 ))
                 .addId("create-button");
             createButton.setHoverComponent(Component.translatable("globaltags.context.staff_notes.hover.create"));
@@ -64,7 +64,7 @@ public class StaffNotesActivity extends SimpleActivity {
             ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
             VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
             for (PlayerNote note : response.data()) {
-                notes.addChild(new StaffNoteWidget(uuid, api, note));
+                notes.addChild(new StaffNoteWidget(this.uuid, this.api, note));
             }
 
             profileWrapper.addEntryInitialized(headWidget);

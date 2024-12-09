@@ -33,7 +33,7 @@ public class EditBanInfoBulletPoint implements BulletPoint {
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new EditBanActivity(
-                api,
+                this.api,
                 player.getUniqueId(),
                 player.getName()
             ))
@@ -42,8 +42,8 @@ public class EditBanInfoBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
-        PlayerInfo<Component> target = api.getCache().get(player.getUniqueId());
+        PlayerInfo<Component> executer = this.api.getCache().get(Laby.labyAPI().getUniqueId());
+        PlayerInfo<Component> target = this.api.getCache().get(player.getUniqueId());
         return executer != null && executer.hasPermission(GlobalPermission.MANAGE_BANS) && target != null && target.isSuspended();
     }
 }

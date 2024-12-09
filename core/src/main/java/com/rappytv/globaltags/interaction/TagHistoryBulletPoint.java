@@ -33,7 +33,7 @@ public class TagHistoryBulletPoint implements BulletPoint {
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new TagHistoryActivity(
-                api,
+                this.api,
                 player.getUniqueId(),
                 player.getName()
             ))
@@ -42,7 +42,8 @@ public class TagHistoryBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
-        return executer != null && executer.hasPermission(GlobalPermission.MANAGE_TAGS) && api.getCache().get(player.getUniqueId()) != null;
+        PlayerInfo<Component> executer = this.api.getCache().get(Laby.labyAPI().getUniqueId());
+        return executer != null && executer.hasPermission(GlobalPermission.MANAGE_TAGS) &&
+            this.api.getCache().get(player.getUniqueId()) != null;
     }
 }

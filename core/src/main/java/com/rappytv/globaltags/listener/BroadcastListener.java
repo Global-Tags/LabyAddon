@@ -25,12 +25,12 @@ public class BroadcastListener {
                 try {
                     UUID uuid = UUID.fromString(object.get("uuid").getAsString());
 
-                    api.getCache().renew(uuid);
+                    this.api.getCache().renew(uuid);
                     return;
                 } catch (IllegalStateException e) {}
             }
         }
 
-        api.getCache().renew(event.getSender());
+        this.api.getCache().renew(event.getSender());
     }
 }

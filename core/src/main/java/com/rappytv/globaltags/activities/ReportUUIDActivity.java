@@ -54,7 +54,8 @@ public class ReportUUIDActivity extends SimpleActivity {
         sendButton.setEnabled(false);
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-            api.getApiHandler().reportPlayer(uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+            this.api.getApiHandler().reportPlayer(
+                this.uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
                     .append(GlobalTagAddon.prefix)
                     .append(Util.getResponseComponent(response))

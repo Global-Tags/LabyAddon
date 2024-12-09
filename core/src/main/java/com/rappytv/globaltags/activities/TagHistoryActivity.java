@@ -39,8 +39,8 @@ public class TagHistoryActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getApiHandler().getTagHistory(uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
-            if(document.getChild("window") != null) return;
+        this.api.getApiHandler().getTagHistory(this.uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+            if(this.document.getChild("window") != null) return;
             System.out.println(response.data());
             if(!response.successful()) {
                 Laby.references().chatExecutor().displayClientMessage(
@@ -58,7 +58,7 @@ public class TagHistoryActivity extends SimpleActivity {
             ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.tag_history.title", this.username).addId("username");
             VerticalListWidget<TagHistoryEntryWidget> notes = new VerticalListWidget<>().addId("item-list");
             for(int i = 0; i < response.data().size(); i++) {
-                notes.addChild(new TagHistoryEntryWidget(i + 1, api, response.data().get(i)));
+                notes.addChild(new TagHistoryEntryWidget(i + 1, this.api, response.data().get(i)));
             }
 
             profileWrapper.addEntryInitialized(headWidget);

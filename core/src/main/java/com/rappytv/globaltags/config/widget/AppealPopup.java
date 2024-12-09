@@ -40,7 +40,7 @@ public class AppealPopup extends AdvancedPopup {
             .addId("send-button", "popup-description");
         sendButton.setEnabled(false);
         sendButton.setActionListener(() ->
-            api.getApiHandler().appealBan(inputWidget.getText(), (response) ->
+            this.api.getApiHandler().appealBan(inputWidget.getText(), (response) ->
                 Util.notify(
                     Component.translatable(response.successful()
                         ? "globaltags.general.success"

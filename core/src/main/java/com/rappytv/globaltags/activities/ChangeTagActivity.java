@@ -39,7 +39,7 @@ public class ChangeTagActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getCache().resolve(uuid, (info) -> {
+        this.api.getCache().resolve(this.uuid, (info) -> {
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
@@ -57,8 +57,8 @@ public class ChangeTagActivity extends SimpleActivity {
             sendButton.setEnabled(!inputWidget.getText().isBlank() && (!hasTag || !inputWidget.getText().equals(info.getPlainTag())));
             sendButton.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-                api.getApiHandler().setTag(uuid, inputWidget.getText(), (response) -> {
-                    if(response.successful()) Util.broadcastTagUpdate(uuid);
+                this.api.getApiHandler().setTag(this.uuid, inputWidget.getText(), (response) -> {
+                    if(response.successful()) Util.broadcastTagUpdate(this.uuid);
                     Laby.references().chatExecutor().displayClientMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)

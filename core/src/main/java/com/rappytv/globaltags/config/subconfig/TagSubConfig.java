@@ -29,9 +29,9 @@ public class TagSubConfig extends Config {
             1000,
             TagPreviewWidget::change
         );
-        tag.addChangeListener(runnable);
-        position.addChangeListener(runnable);
-        globalIcon.addChangeListener(runnable);
+        this.tag.addChangeListener(runnable);
+        this.position.addChangeListener(runnable);
+        this.globalIcon.addChangeListener(runnable);
     }
 
     @SpriteSlot(size = 32, x = 1)
@@ -64,17 +64,20 @@ public class TagSubConfig extends Config {
                 );
                 return;
             }
-            if(info == null || !info.getPlainTag().equals(tag.get())) api.getApiHandler().setTag(tag.get(), (response) -> {
+            if(info == null || !info.getPlainTag().equals(this.tag.get())) api.getApiHandler().setTag(
+                this.tag.get(), (response) -> {
                 if(response.successful()) Util.update(api, ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(api, ResultType.TAG, Component.text(response.data(), NamedTextColor.RED));
             });
             else Util.update(api, ResultType.TAG, Util.unchanged);
-            if(info != null && !info.getPosition().equals(position.get())) api.getApiHandler().setPosition(position.get(), (response) -> {
+            if(info != null && !info.getPosition().equals(this.position.get())) api.getApiHandler().setPosition(
+                this.position.get(), (response) -> {
                 if(response.successful()) Util.update(api, ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(api, ResultType.POSITION, Component.text(response.data(), NamedTextColor.RED));
             });
             else Util.update(api, ResultType.POSITION, Util.unchanged);
-            if(info != null && !info.getGlobalIcon().equals(globalIcon.get())) api.getApiHandler().setIcon(globalIcon.get(), (response) -> {
+            if(info != null && !info.getGlobalIcon().equals(this.globalIcon.get())) api.getApiHandler().setIcon(
+                this.globalIcon.get(), (response) -> {
                 if(response.successful()) Util.update(api, ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
                 else Util.update(api, ResultType.ICON, Component.text(response.data(), NamedTextColor.RED));
             });
@@ -103,12 +106,12 @@ public class TagSubConfig extends Config {
     }
 
     public ConfigProperty<String> tag() {
-        return tag;
+        return this.tag;
     }
     public ConfigProperty<GlobalPosition> position() {
-        return position;
+        return this.position;
     }
     public ConfigProperty<GlobalIcon> icon() {
-        return globalIcon;
+        return this.globalIcon;
     }
 }

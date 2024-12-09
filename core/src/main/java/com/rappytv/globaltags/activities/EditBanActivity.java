@@ -43,7 +43,7 @@ public class EditBanActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getCache().resolve(uuid, (info) -> {
+        this.api.getCache().resolve(this.uuid, (info) -> {
             Suspension suspension = info.getSuspension();
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
@@ -81,7 +81,7 @@ public class EditBanActivity extends SimpleActivity {
                     inputWidget.getText(),
                     checkBoxWidget.state() == State.CHECKED
                 );
-                api.getApiHandler().editBan(uuid, editedSuspension, (response) ->
+                this.api.getApiHandler().editBan(this.uuid, editedSuspension, (response) ->
                     Laby.references().chatExecutor().displayClientMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)
