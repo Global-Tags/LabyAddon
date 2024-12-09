@@ -42,8 +42,8 @@ public class TagHistoryBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executer = this.api.getCache().get(Laby.labyAPI().getUniqueId());
-        return executer != null && executer.hasPermission(GlobalPermission.MANAGE_TAGS) &&
+        PlayerInfo<Component> executor = this.api.getCache().get(Laby.labyAPI().getUniqueId());
+        return executor != null && executor.hasPermission(GlobalPermission.MANAGE_TAGS) &&
             this.api.getCache().get(player.getUniqueId()) != null;
     }
 }
