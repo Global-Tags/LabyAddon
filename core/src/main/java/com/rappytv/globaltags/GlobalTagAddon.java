@@ -3,14 +3,14 @@ package com.rappytv.globaltags;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.interaction.ChangeTagBulletPoint;
+import com.rappytv.globaltags.interaction.ClearTagBulletPoint;
 import com.rappytv.globaltags.interaction.EditBanInfoBulletPoint;
 import com.rappytv.globaltags.interaction.ReferPlayerBulletPoint;
+import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.interaction.StaffNotesBulletPoint;
 import com.rappytv.globaltags.interaction.TagHistoryBulletPoint;
 import com.rappytv.globaltags.interaction.ToggleBanBulletPoint;
-import com.rappytv.globaltags.interaction.ChangeTagBulletPoint;
-import com.rappytv.globaltags.interaction.ClearTagBulletPoint;
-import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.listener.BroadcastListener;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
@@ -41,6 +41,8 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-14"));
+        Laby.references().revisionRegistry()
+            .register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-09"));
     }
 
     @Override
