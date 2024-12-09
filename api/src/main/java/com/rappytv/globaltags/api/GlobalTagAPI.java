@@ -2,16 +2,15 @@ package com.rappytv.globaltags.api;
 
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI;
 import com.rappytv.globaltags.wrapper.enums.AuthProvider;
+import java.util.UUID;
+import java.util.function.Supplier;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.labyconnect.TokenStorage.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.UUID;
-import java.util.function.Supplier;
 
 public class GlobalTagAPI extends GlobalTagsAPI<Component> {
 
@@ -25,20 +24,21 @@ public class GlobalTagAPI extends GlobalTagsAPI<Component> {
 
     @Override
     public @NotNull Agent getAgent() {
-        return agent;
+        return this.agent;
     }
 
     @Override
     public @NotNull String getLanguageCode() {
-        return language.get();
+        return this.language.get();
     }
 
     @Override
     public @NotNull Component translateColorCodes(@Nullable String string) {
-        if(string == null) string = "";
-        return LegacyComponentSerializer
-            .legacyAmpersand()
-            .deserialize(string);
+        if (string == null || string.isEmpty()) {
+            return Component.empty();
+        }
+
+        return GlobalTagDeserializer.deserialize(string);
     }
 
     @Override

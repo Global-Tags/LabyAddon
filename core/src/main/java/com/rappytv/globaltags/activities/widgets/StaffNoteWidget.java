@@ -37,32 +37,32 @@ public class StaffNoteWidget extends SimpleWidget {
 
     @Override
     public void initialize(Parent parent) {
-        if(isInitialized()) return;
+        if(this.isInitialized()) return;
         super.initialize(parent);
 
-        IconWidget headWidget = new IconWidget(Icon.head(note.getAuthor()))
+        IconWidget headWidget = new IconWidget(Icon.head(this.note.getAuthor()))
             .addId("author-head");
 
         ComponentWidget text = ComponentWidget
-            .text(note.getText())
+            .text(this.note.getText())
             .addId("text-component");
-        text.setHoverComponent(Component.text(note.getText()));
+        text.setHoverComponent(Component.text(this.note.getText()));
 
         ComponentWidget description = ComponentWidget
             .text(
                 I18n.translate(
                     "globaltags.context.staff_notes.description",
-                    formatDate(note.getCreatedAt()),
-                    note.getId()
+                    this.formatDate(this.note.getCreatedAt()),
+                    this.note.getId()
                 ),
                 NamedTextColor.DARK_GRAY
             )
             .addId("description-component");
 
-        deleteButton = ButtonWidget
+        this.deleteButton = ButtonWidget
             .component(Component.text("✗", NamedTextColor.RED), this::delete)
             .addId("delete-button");
-        deleteButton.setHoverComponent(Component.translatable(
+        this.deleteButton.setHoverComponent(Component.translatable(
             "globaltags.context.staff_notes.hover.delete",
             NamedTextColor.RED
         ));
@@ -70,7 +70,7 @@ public class StaffNoteWidget extends SimpleWidget {
         this.addChild(headWidget);
         this.addChild(text);
         this.addChild(description);
-        this.addChild(deleteButton);
+        this.addChild(this.deleteButton);
     }
 
     private String formatDate(Date date) {
@@ -78,21 +78,21 @@ public class StaffNoteWidget extends SimpleWidget {
     }
 
     private void delete() {
-        deleteButton.setEnabled(false);
-        api.getApiHandler().deleteNote(holder, note.getId(), (response) -> {
+        this.deleteButton.setEnabled(false);
+        this.api.getApiHandler().deleteNote(this.holder, this.note.getId(), (response) -> {
             Laby.references().chatExecutor().displayClientMessage(
                 TextComponent.builder()
                     .append(GlobalTagAddon.prefix)
                     .append(Util.getResponseComponent(response))
                     .build()
             );
-            if(!response.successful()) {
-                deleteButton.setEnabled(true);
+            if(!response.isSuccessful()) {
+                this.deleteButton.setEnabled(true);
                 return;
             }
             Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
-                deleteButton.updateComponent(Component.text("✓", NamedTextColor.GREEN));
-                deleteButton.setHoverComponent(Component.translatable(
+                this.deleteButton.updateComponent(Component.text("✓", NamedTextColor.GREEN));
+                this.deleteButton.setHoverComponent(Component.translatable(
                     "globaltags.context.staff_notes.hover.deleted",
                     NamedTextColor.GREEN
                 ));

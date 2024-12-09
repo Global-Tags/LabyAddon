@@ -1,9 +1,9 @@
 package com.rappytv.globaltags.activities;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
-import java.util.UUID;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
+import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -39,7 +39,11 @@ public class ChangeTagActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getCache().resolve(uuid, (info) -> {
+        this.api.getCache().resolve(this.uuid, (info) -> {
+            if (info == null) {
+                Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+                return;
+            }
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
@@ -57,8 +61,8 @@ public class ChangeTagActivity extends SimpleActivity {
             sendButton.setEnabled(!inputWidget.getText().isBlank() && (!hasTag || !inputWidget.getText().equals(info.getPlainTag())));
             sendButton.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-                api.getApiHandler().setTag(uuid, inputWidget.getText(), (response) -> {
-                    if(response.successful()) Util.broadcastTagUpdate(uuid);
+                this.api.getApiHandler().setTag(this.uuid, inputWidget.getText(), (response) -> {
+                    if(response.isSuccessful()) Util.broadcastTagUpdate(this.uuid);
                     Laby.references().chatExecutor().displayClientMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)

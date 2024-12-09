@@ -1,10 +1,13 @@
 package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
+import net.labymod.api.client.gui.screen.activity.Activity;
+import net.labymod.api.client.gui.screen.widget.widgets.activity.settings.ActivitySettingWidget.ActivitySetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
@@ -25,10 +28,12 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     @SpriteSlot(size = 32)
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+
     @IntroducedIn(namespace = "globaltags", value = "1.1.9")
     @SpriteSlot(size = 32, y = 2, x = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
+
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @MethodOrder(after = "localizedResponses")
     @SpriteSlot(size = 32, y = 2, x = 3)
@@ -37,13 +42,22 @@ public class GlobalTagConfig extends AddonConfig {
         Laby.references().chatExecutor().openUrl("https://globaltags.xyz/discord");
     }
 
+    @IntroducedIn(namespace = "globaltags", value = "1.3.5")
+    @MethodOrder(after = "joinDiscord")
+    @ActivitySetting
+    public Activity referralLeaderboards() {
+        return new ReferralLeaderboardActivity();
+    }
+
     @SettingSection("display")
     @SwitchSetting
     @SpriteSlot(size = 32, x = 1)
     private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
+
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
     private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
+
     @IntroducedIn(namespace = "globaltags", value = "1.1.7")
     @SpriteSlot(size = 32, y = 2, x = 1)
     @SwitchSetting
@@ -67,18 +81,18 @@ public class GlobalTagConfig extends AddonConfig {
 
     @Override
     public ConfigProperty<Boolean> enabled() {
-        return enabled;
+        return this.enabled;
     }
     public ConfigProperty<Boolean> localizedResponses() {
-        return localizedResponses;
+        return this.localizedResponses;
     }
     public ConfigProperty<Boolean> showOwnTag() {
-        return showOwnTag;
+        return this.showOwnTag;
     }
     public ConfigProperty<Integer> tagSize() {
-        return tagSize;
+        return this.tagSize;
     }
     public ConfigProperty<Boolean> showBackground() {
-        return showBackground;
+        return this.showBackground;
     }
 }

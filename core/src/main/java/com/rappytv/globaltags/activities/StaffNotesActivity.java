@@ -40,13 +40,13 @@ public class StaffNotesActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getApiHandler().getNotes(uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
-            if(document.getChild("window") != null) return;
-            if(!response.successful()) {
+        this.api.getApiHandler().getNotes(this.uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+            if(this.document.getChild("window") != null) return;
+            if(!response.isSuccessful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
                         .append(GlobalTagAddon.prefix)
-                        .append(Component.text(response.error(), NamedTextColor.RED))
+                        .append(Component.text(response.getError(), NamedTextColor.RED))
                         .build()
                 );
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
@@ -56,15 +56,15 @@ public class StaffNotesActivity extends SimpleActivity {
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             ButtonWidget createButton = ButtonWidget
                 .text("+", () -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(
-                    new CreateNoteActivity(api, uuid, username)
+                    new CreateNoteActivity(this.api, this.uuid, this.username)
                 ))
                 .addId("create-button");
             createButton.setHoverComponent(Component.translatable("globaltags.context.staff_notes.hover.create"));
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
             ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
             VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
-            for (PlayerNote note : response.data()) {
-                notes.addChild(new StaffNoteWidget(uuid, api, note));
+            for (PlayerNote note : response.getData()) {
+                notes.addChild(new StaffNoteWidget(this.uuid, this.api, note));
             }
 
             profileWrapper.addEntryInitialized(headWidget);

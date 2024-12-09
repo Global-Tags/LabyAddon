@@ -52,7 +52,7 @@ public class CreateNoteActivity extends SimpleActivity {
             .updateComponent(Component.translatable("globaltags.context.staff_notes.create.send", NamedTextColor.AQUA))
             .addId("send-button");
         sendButton.setEnabled(false);
-        sendButton.setActionListener(() -> api.getApiHandler().createNote(uuid, inputWidget.getText(), (response) -> {
+        sendButton.setActionListener(() -> this.api.getApiHandler().createNote(this.uuid, inputWidget.getText(), (response) -> {
             Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
                     .append(GlobalTagAddon.prefix)
