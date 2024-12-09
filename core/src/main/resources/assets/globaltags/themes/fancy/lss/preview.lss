@@ -3,10 +3,14 @@ TagPreview {
     orientation: horizontal;
 
     .text {
+        max-width: 75%;
+        scale-to-fit: false;
+        max-lines: 1;
         margin-left: 2;
     }
 
     .error {
+        max-lines: 2 !important;
         text-color: red;
     }
 
@@ -26,7 +30,6 @@ TagPreview {
     .appeal-button {
         height: 20;
         width: fit-content;
-        # padding: 0;
         alignment: right;
     }
 
