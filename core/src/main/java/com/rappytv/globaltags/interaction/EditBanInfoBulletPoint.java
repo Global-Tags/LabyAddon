@@ -26,7 +26,7 @@ public class EditBanInfoBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return null;
+        return GlobalTagAddon.roundIcon;
     }
 
     @Override

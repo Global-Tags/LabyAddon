@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.activities.ReportUUIDActivity;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -25,7 +25,7 @@ public class ReportBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return null;
+        return GlobalTagAddon.roundIcon;
     }
 
     @Override
