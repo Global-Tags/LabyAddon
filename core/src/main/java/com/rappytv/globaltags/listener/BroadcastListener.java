@@ -3,9 +3,9 @@ package com.rappytv.globaltags.listener;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.rappytv.globaltags.api.GlobalTagAPI;
+import java.util.UUID;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.labymod.labyconnect.session.LabyConnectBroadcastEvent;
-import java.util.UUID;
 
 public class BroadcastListener {
 
@@ -27,7 +27,8 @@ public class BroadcastListener {
 
                     this.api.getCache().renew(uuid);
                     return;
-                } catch (IllegalStateException e) {}
+                } catch (IllegalStateException ignored) {
+                }
             }
         }
 
