@@ -73,8 +73,8 @@ public class Util {
 
     public static Component getResponseComponent(ApiResponse<String> response) {
         return Component.text(
-            response.data(),
-            response.successful() ? NamedTextColor.GREEN : NamedTextColor.RED
+            response.getData(),
+            response.isSuccessful() ? NamedTextColor.GREEN : NamedTextColor.RED
         );
     }
 

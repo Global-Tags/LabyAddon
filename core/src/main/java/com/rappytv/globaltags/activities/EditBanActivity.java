@@ -1,11 +1,11 @@
 package com.rappytv.globaltags.activities;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
-import java.util.UUID;
-import java.util.function.Consumer;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo.Suspension;
+import java.util.UUID;
+import java.util.function.Consumer;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -43,7 +43,11 @@ public class EditBanActivity extends SimpleActivity {
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        api.getCache().resolve(uuid, (info) -> {
+        this.api.getCache().resolve(this.uuid, (info) -> {
+            if (info == null) {
+                Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+                return;
+            }
             Suspension suspension = info.getSuspension();
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
@@ -81,7 +85,7 @@ public class EditBanActivity extends SimpleActivity {
                     inputWidget.getText(),
                     checkBoxWidget.state() == State.CHECKED
                 );
-                api.getApiHandler().editBan(uuid, editedSuspension, (response) ->
+                this.api.getApiHandler().editBan(this.uuid, editedSuspension, (response) ->
                     Laby.references().chatExecutor().displayClientMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)

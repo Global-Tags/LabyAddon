@@ -21,7 +21,7 @@ public class VerifyCommand extends SubCommand {
         switch (arguments.length > 0 ? arguments[0].toLowerCase() : "none") {
             case "email":
                 if(arguments.length < 2) {
-                    displayMessage(
+                    this.displayMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)
                             .append(Component.translatable(
@@ -33,12 +33,12 @@ public class VerifyCommand extends SubCommand {
                     return true;
                 }
 
-                api.getApiHandler().verifyEmail(arguments[1], (response) -> displayMessage(
+                this.api.getApiHandler().verifyEmail(arguments[1], (response) -> this.displayMessage(
                         GlobalTagAddon.prefix.copy().append(Util.getResponseComponent(response))
                 ));
                 break;
             default:
-                displayMessage(
+                this.displayMessage(
                     Component.empty()
                         .append(GlobalTagAddon.prefix)
                         .append(Component.translatable(

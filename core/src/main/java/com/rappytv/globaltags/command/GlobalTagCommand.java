@@ -25,16 +25,16 @@ public class GlobalTagCommand extends Command {
         this.api = GlobalTagAddon.getAPI();
         this.version = addon.addonInfo().getVersion();
 
-        withSubCommand(new ClearCacheCommand(api));
-        withSubCommand(new LinkSubcommand(api));
-        withSubCommand(new RenewCacheCommand(api));
-        withSubCommand(new UnlinkSubcommand(api));
-        withSubCommand(new VerifyCommand(api));
+        this.withSubCommand(new ClearCacheCommand(this.api));
+        this.withSubCommand(new LinkSubcommand(this.api));
+        this.withSubCommand(new RenewCacheCommand(this.api));
+        this.withSubCommand(new UnlinkSubcommand(this.api));
+        this.withSubCommand(new VerifyCommand(this.api));
     }
 
     @Override
     public boolean execute(String prefix, String[] arguments) {
-        api.getApiHandler().getApiInfo((response) -> {
+        this.api.getApiHandler().getApiInfo((response) -> {
             TextComponent clearComponent = TextComponent.builder()
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(
@@ -47,8 +47,8 @@ public class GlobalTagCommand extends Command {
                 .append(Component.translatable(
                     "globaltags.commands.base.api.version",
                     NamedTextColor.GREEN,
-                    response != null && response.successful()
-                        ? Component.text(response.data(), NamedTextColor.AQUA)
+                    response != null && response.isSuccessful()
+                        ? Component.text(response.getData(), NamedTextColor.AQUA)
                         : Component.translatable(
                             "globaltags.commands.base.api.offline",
                             NamedTextColor.RED
@@ -67,7 +67,7 @@ public class GlobalTagCommand extends Command {
                     .clickEvent(ClickEvent.suggestCommand("/" + prefix + " cc")))
                 .build();
 
-            displayMessage(clearComponent);
+            this.displayMessage(clearComponent);
         });
         return true;
     }

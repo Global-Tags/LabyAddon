@@ -67,6 +67,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
     @SuppressWarnings("ConstantConditions")
     public void initialize(boolean refetched) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
+
+        this.addEntry(ButtonWidget
+            .icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
+            .addId("refresh-button")
+        );
         api.getCache().resolveSelf((info) -> {
             if (ThreadSafe.isRenderThread()) {
                 this.initializeWithInfo(info, refetched, false);
@@ -112,12 +117,8 @@ public class TagPreviewWidget extends HorizontalListWidget {
             ).addId("text");
 
             if (this.config.icon().get() != GlobalIcon.NONE) {
-                String iconUrl =
-                    this.config.icon().get() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
-                        ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
-                        : api.getUrls().getDefaultIcon(this.config.icon().get());
                 addEntry.accept(
-                    new IconWidget(Icon.url(iconUrl))
+                    new IconWidget(Icon.url(this.getIconUrl(api, info)))
                         .addId("icon")
                 );
             }
@@ -129,10 +130,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 );
             }
         }
-        ButtonWidget refreshButton = ButtonWidget.icon(SpriteCommon.REFRESH,
-                TagPreviewWidget::refetch)
-            .addId("refresh-button");
-        addEntry.accept(refreshButton);
+
         if (info != null && info.isSuspended()) {
             ButtonWidget appealButton = ButtonWidget.i18n(
                 "globaltags.settings.tags.tagPreview.appeal.name",
@@ -147,13 +145,18 @@ public class TagPreviewWidget extends HorizontalListWidget {
         }
     }
 
-
     public static void change() {
         TagPreviewWidget.changed = true;
     }
 
     public static void refetch() {
-        refetch = true;
+        TagPreviewWidget.refetch = true;
+    }
+
+    private String getIconUrl(GlobalTagAPI api, PlayerInfo<?> info) {
+        return this.config.icon().get() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
+            ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
+            : api.getUrls().getDefaultIcon(this.config.icon().get());
     }
 
     private Component getError(PlayerInfo<Component> info) {

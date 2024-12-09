@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
@@ -26,12 +26,12 @@ public class ClearTagBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return null;
+        return GlobalTagAddon.roundIcon;
     }
 
     @Override
     public void execute(Player player) {
-        api.getApiHandler().resetTag(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+        this.api.getApiHandler().resetTag(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
                 .append(GlobalTagAddon.prefix)
                 .append(Util.getResponseComponent(response))
@@ -40,8 +40,9 @@ public class ClearTagBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
-        PlayerInfo<Component> target = api.getCache().get(player.getUniqueId());
-        return executer != null && executer.hasPermission(GlobalPermission.MANAGE_TAGS) && target != null && target.getTag() != null;
+        PlayerInfo<Component> executor = this.api.getCache().get(Laby.labyAPI().getUniqueId());
+        PlayerInfo<Component> target = this.api.getCache().get(player.getUniqueId());
+        return executor != null && executor.hasPermission(GlobalPermission.MANAGE_TAGS)
+            && target != null && target.getTag() != null;
     }
 }

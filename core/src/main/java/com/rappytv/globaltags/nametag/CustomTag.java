@@ -36,28 +36,28 @@ public class CustomTag extends NameTag {
 
     @Override
     public float getScale() {
-        return (float) config.tagSize().get() / 10;
+        return (float) this.config.tagSize().get() / 10;
     }
 
     @Override
     protected @Nullable RenderableComponent getRenderableComponent() {
-        if(!config.enabled().get()) return null;
-        if(entity == null || !(entity instanceof Player)) return null;
-        UUID uuid = entity.getUniqueId();
-        if(!config.showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
+        if(!this.config.enabled().get()) return null;
+        if(this.entity == null || !(this.entity instanceof Player)) return null;
+        UUID uuid = this.entity.getUniqueId();
+        if(!this.config.showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
             return null;
 
-        info = null;
-        if(api.getCache().has(uuid))
-            info = api.getCache().get(uuid);
+        this.info = null;
+        if(this.api.getCache().has(uuid))
+            this.info = this.api.getCache().get(uuid);
         else {
-            if(position == PositionType.ABOVE_NAME)
-                api.getCache().resolve(uuid);
+            if(this.position == PositionType.ABOVE_NAME)
+                this.api.getCache().resolve(uuid);
         }
-        if(info == null || info.getTag() == null) return null;
-        if(!getGlobalPosition(position).equals(info.getPosition())) return null;
+        if(this.info == null || this.info.getTag() == null) return null;
+        if(!this.getGlobalPosition(this.position).equals(this.info.getPosition())) return null;
 
-        return RenderableComponent.of(info.getTag());
+        return RenderableComponent.of(this.info.getTag());
     }
 
     @Override
@@ -65,19 +65,19 @@ public class CustomTag extends NameTag {
     public void render(Stack stack, Entity entity) {
         super.render(stack, entity);
         if(this.getRenderableComponent() == null) return;
-        if(info == null) return;
+        if(this.info == null) return;
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            if(info.getGlobalIcon() != GlobalIcon.NONE) Icon.url(info.getIconUrl()).render(
+            if(this.info.getGlobalIcon() != GlobalIcon.NONE) Icon.url(this.info.getIconUrl()).render(
                 stack,
                 -11,
                 0,
                 9,
                 9
             );
-            if(info.getHighestRoleIcon() != null) Icon.url(info.getHighestRoleIcon()).render(
+            if(this.info.getHighestRoleIcon() != null) Icon.url(this.info.getHighestRoleIcon()).render(
                 stack,
-                getWidth() + 0.9F,
+                this.getWidth() + 0.9F,
                 -1.2F,
                 11,
                 11
@@ -95,11 +95,11 @@ public class CustomTag extends NameTag {
 
     @Override
     protected NameTagBackground getCustomBackground() {
-        boolean enabled = config.showBackground().get();
+        boolean enabled = this.config.showBackground().get();
         NameTagBackground background = super.getCustomBackground();
 
         if (background == null)
-            background = NameTagBackground.custom(enabled, black);
+            background = NameTagBackground.custom(enabled, this.black);
 
         background.setEnabled(enabled);
         return background;

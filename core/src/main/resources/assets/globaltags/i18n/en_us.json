@@ -20,6 +20,17 @@
                 "name": "Discord Server",
                 "text": "Join"
             },
+            "referralLeaderboards": {
+                "name": "Referral leaderboards",
+                "description": "Displays a leaderboard of players who invited the most players to GlobalTags.",
+                "text": "View",
+                "activity": {
+                    "total": "Total",
+                    "current_month": "This month",
+                    "open": "Open laby.net profile",
+                    "loading": "Loading..."
+                }
+            },
             "showOwnTag": {
                 "name": "Show own tag"
             },

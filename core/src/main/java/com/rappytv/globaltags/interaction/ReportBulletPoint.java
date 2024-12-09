@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.activities.ReportUUIDActivity;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -25,14 +25,14 @@ public class ReportBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return null;
+        return GlobalTagAddon.roundIcon;
     }
 
     @Override
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ReportUUIDActivity(
-                api,
+                this.api,
                 player.getUniqueId(),
                 player.getName()
             ))
@@ -41,7 +41,7 @@ public class ReportBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> playerInfo = api.getCache().get(player.getUniqueId());
+        PlayerInfo<Component> playerInfo = this.api.getCache().get(player.getUniqueId());
         return playerInfo != null && playerInfo.getTag() != null;
     }
 }

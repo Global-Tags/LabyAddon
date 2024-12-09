@@ -2,6 +2,8 @@ package com.rappytv.globaltags.api;
 
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI;
 import com.rappytv.globaltags.wrapper.enums.AuthProvider;
+import java.util.UUID;
+import java.util.function.Supplier;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.labyconnect.LabyConnectSession;
@@ -9,9 +11,6 @@ import net.labymod.api.labyconnect.TokenStorage.Purpose;
 import net.labymod.api.labyconnect.TokenStorage.Token;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
-import java.util.function.Supplier;
 
 public class GlobalTagAPI extends GlobalTagsAPI<Component> {
 

@@ -24,25 +24,25 @@ public class TagHistoryEntryWidget extends SimpleWidget {
 
     @Override
     public void initialize(Parent parent) {
-        if(isInitialized()) return;
+        if(this.isInitialized()) return;
         super.initialize(parent);
 
         ComponentWidget text = ComponentWidget
             .component(
                 Component
                     .empty()
-                    .append(Component.text(number + ". ", NamedTextColor.AQUA))
-                    .append(api.translateColorCodes(entry.tag()))
+                    .append(Component.text(this.number + ". ", NamedTextColor.AQUA))
+                    .append(this.api.translateColorCodes(this.entry.getTag()))
             )
             .addId("text-component");
 
         this.addChild(text);
-        if(!entry.flaggedWords().isEmpty()) {
+        if(!this.entry.getFlaggedWords().isEmpty()) {
             Component hoverComponent = Component.translatable(
                 "globaltags.context.tag_history.flagged_words",
                 NamedTextColor.GOLD
             );
-            for(String word : entry.flaggedWords()) {
+            for(String word : this.entry.getFlaggedWords()) {
                 hoverComponent
                     .append(Component.newline())
                     .append(Component.text(

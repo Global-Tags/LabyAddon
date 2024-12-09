@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.activities.BanActivity;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
@@ -23,19 +23,19 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context." + (target.isSuspended() ? "unban" : "ban") + ".name");
+        return Component.translatable("globaltags.context." + (this.target.isSuspended() ? "unban" : "ban") + ".name");
     }
 
     @Override
     public Icon getIcon() {
-        return null;
+        return GlobalTagAddon.roundIcon;
     }
 
     @Override
     public void execute(Player player) {
-        if(target.isSuspended()) {
-            api.getApiHandler().unbanPlayer(target.getUUID(), (response) -> {
-                if(response.successful()) Util.broadcastTagUpdate(target.getUUID());
+        if(this.target.isSuspended()) {
+            this.api.getApiHandler().unbanPlayer(this.target.getUUID(), (response) -> {
+                if(response.isSuccessful()) Util.broadcastTagUpdate(this.target.getUUID());
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
                         .append(GlobalTagAddon.prefix)
@@ -45,7 +45,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
         } else {
             Laby.labyAPI().minecraft().executeNextTick(() ->
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new BanActivity(
-                    api,
+                    this.api,
                     player.getUniqueId(),
                     player.getName()
                 ))
@@ -55,8 +55,9 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executer = api.getCache().get(Laby.labyAPI().getUniqueId());
-        target = api.getCache().get(player.getUniqueId());
-        return executer != null && executer.hasPermission(GlobalPermission.MANAGE_BANS) && target != null;
+        PlayerInfo<Component> executor = this.api.getCache().get(Laby.labyAPI().getUniqueId());
+        this.target = this.api.getCache().get(player.getUniqueId());
+        return executor != null && executor.hasPermission(GlobalPermission.MANAGE_BANS) &&
+            this.target != null;
     }
 }
