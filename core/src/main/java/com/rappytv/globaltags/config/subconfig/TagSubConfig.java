@@ -66,20 +66,20 @@ public class TagSubConfig extends Config {
             }
             if(info == null || !info.getPlainTag().equals(this.tag.get())) api.getApiHandler().setTag(
                 this.tag.get(), (response) -> {
-                if(response.successful()) Util.update(api, ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(api, ResultType.TAG, Component.text(response.data(), NamedTextColor.RED));
+                if(response.isSuccessful()) Util.update(api, ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(api, ResultType.TAG, Component.text(response.getData(), NamedTextColor.RED));
             });
             else Util.update(api, ResultType.TAG, Util.unchanged);
             if(info != null && !info.getPosition().equals(this.position.get())) api.getApiHandler().setPosition(
                 this.position.get(), (response) -> {
-                if(response.successful()) Util.update(api, ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(api, ResultType.POSITION, Component.text(response.data(), NamedTextColor.RED));
+                if(response.isSuccessful()) Util.update(api, ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(api, ResultType.POSITION, Component.text(response.getData(), NamedTextColor.RED));
             });
             else Util.update(api, ResultType.POSITION, Util.unchanged);
             if(info != null && !info.getGlobalIcon().equals(this.globalIcon.get())) api.getApiHandler().setIcon(
                 this.globalIcon.get(), (response) -> {
-                if(response.successful()) Util.update(api, ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(api, ResultType.ICON, Component.text(response.data(), NamedTextColor.RED));
+                if(response.isSuccessful()) Util.update(api, ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
+                else Util.update(api, ResultType.ICON, Component.text(response.getData(), NamedTextColor.RED));
             });
             else Util.update(api, ResultType.ICON, Util.unchanged);
         });
@@ -91,16 +91,16 @@ public class TagSubConfig extends Config {
     public void resetTag(Setting setting) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getApiHandler().resetTag((info) -> {
-            if(info.successful()) {
+            if(info.isSuccessful()) {
                 Util.broadcastTagUpdate();
                 TagPreviewWidget.refetch();
             }
             Util.notify(
-                Component.translatable(info.successful()
+                Component.translatable(info.isSuccessful()
                     ? "globaltags.general.success"
                     : "globaltags.general.error"
                 ),
-                Component.text(info.data(), NamedTextColor.WHITE)
+                Component.text(info.getData(), NamedTextColor.WHITE)
             );
         });
     }

@@ -42,11 +42,11 @@ public class AppealPopup extends AdvancedPopup {
         sendButton.setActionListener(() ->
             this.api.getApiHandler().appealBan(inputWidget.getText(), (response) ->
                 Util.notify(
-                    Component.translatable(response.successful()
+                    Component.translatable(response.isSuccessful()
                         ? "globaltags.general.success"
                         : "globaltags.general.error"
                     ),
-                    Component.text(response.data(), NamedTextColor.WHITE)
+                    Component.text(response.getData(), NamedTextColor.WHITE)
                 )
             )
         );

@@ -86,7 +86,7 @@ public class StaffNoteWidget extends SimpleWidget {
                     .append(Util.getResponseComponent(response))
                     .build()
             );
-            if(!response.successful()) {
+            if(!response.isSuccessful()) {
                 this.deleteButton.setEnabled(true);
                 return;
             }

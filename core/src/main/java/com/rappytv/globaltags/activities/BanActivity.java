@@ -56,7 +56,7 @@ public class BanActivity extends SimpleActivity {
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
             this.api.getApiHandler().banPlayer(this.uuid, inputWidget.getText(), (response) -> {
-                if(response.successful()) Util.broadcastTagUpdate(this.uuid);
+                if(response.isSuccessful()) Util.broadcastTagUpdate(this.uuid);
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
                         .append(GlobalTagAddon.prefix)

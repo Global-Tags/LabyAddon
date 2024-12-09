@@ -24,6 +24,16 @@ public class GlobalTagAPI extends GlobalTagsAPI<Component> {
     }
 
     @Override
+    public @NotNull Urls getUrls() {
+        return new Urls() {
+            @Override
+            public @NotNull String getApiBase() {
+                return "http://localhost:5500";
+            }
+        };
+    }
+
+    @Override
     public @NotNull Agent getAgent() {
         return this.agent;
     }

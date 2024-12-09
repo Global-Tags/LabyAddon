@@ -42,11 +42,11 @@ public class StaffNotesActivity extends SimpleActivity {
         super.initialize(parent);
         this.api.getApiHandler().getNotes(this.uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
             if(this.document.getChild("window") != null) return;
-            if(!response.successful()) {
+            if(!response.isSuccessful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
                         .append(GlobalTagAddon.prefix)
-                        .append(Component.text(response.error(), NamedTextColor.RED))
+                        .append(Component.text(response.getError(), NamedTextColor.RED))
                         .build()
                 );
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
@@ -63,7 +63,7 @@ public class StaffNotesActivity extends SimpleActivity {
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
             ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
             VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
-            for (PlayerNote note : response.data()) {
+            for (PlayerNote note : response.getData()) {
                 notes.addChild(new StaffNoteWidget(this.uuid, this.api, note));
             }
 

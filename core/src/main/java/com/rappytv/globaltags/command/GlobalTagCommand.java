@@ -47,8 +47,8 @@ public class GlobalTagCommand extends Command {
                 .append(Component.translatable(
                     "globaltags.commands.base.api.version",
                     NamedTextColor.GREEN,
-                    response != null && response.successful()
-                        ? Component.text(response.data(), NamedTextColor.AQUA)
+                    response != null && response.isSuccessful()
+                        ? Component.text(response.getData(), NamedTextColor.AQUA)
                         : Component.translatable(
                             "globaltags.commands.base.api.offline",
                             NamedTextColor.RED

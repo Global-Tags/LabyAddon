@@ -32,17 +32,17 @@ public class TagHistoryEntryWidget extends SimpleWidget {
                 Component
                     .empty()
                     .append(Component.text(this.number + ". ", NamedTextColor.AQUA))
-                    .append(this.api.translateColorCodes(this.entry.tag()))
+                    .append(this.api.translateColorCodes(this.entry.getTag()))
             )
             .addId("text-component");
 
         this.addChild(text);
-        if(!this.entry.flaggedWords().isEmpty()) {
+        if(!this.entry.getFlaggedWords().isEmpty()) {
             Component hoverComponent = Component.translatable(
                 "globaltags.context.tag_history.flagged_words",
                 NamedTextColor.GOLD
             );
-            for(String word : this.entry.flaggedWords()) {
+            for(String word : this.entry.getFlaggedWords()) {
                 hoverComponent
                     .append(Component.newline())
                     .append(Component.text(

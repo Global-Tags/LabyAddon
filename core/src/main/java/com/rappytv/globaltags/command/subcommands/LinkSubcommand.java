@@ -24,8 +24,8 @@ public class LinkSubcommand extends SubCommand {
         switch (arguments.length > 0 ? arguments[0].toLowerCase() : "none") {
             case "discord":
                 this.api.getApiHandler().linkDiscord((info) -> {
-                    if (info.successful()) {
-                        String code = info.data();
+                    if (info.isSuccessful()) {
+                        String code = info.getData();
                         Laby.references().chatExecutor().copyToClipboard(code);
                         this.displayMessage(GlobalTagAddon.prefix.copy().append(Component.translatable(
                             "globaltags.commands.link.discord.copied",
@@ -34,7 +34,7 @@ public class LinkSubcommand extends SubCommand {
                     } else {
                         this.displayMessage(
                             GlobalTagAddon.prefix.copy().append(Component.text(
-                                info.data(),
+                                info.getData(),
                                 NamedTextColor.RED
                             ))
                         );
@@ -56,11 +56,11 @@ public class LinkSubcommand extends SubCommand {
                 }
 
                 this.api.getApiHandler().linkEmail(arguments[1], (info) -> {
-                    if (info.successful()) {
+                    if (info.isSuccessful()) {
                         this.displayMessage(
                             Component.empty()
                                 .append(GlobalTagAddon.prefix)
-                                .append(Component.text(info.data(), NamedTextColor.GREEN))
+                                .append(Component.text(info.getData(), NamedTextColor.GREEN))
                                 .append(Component.newline())
                                 .append(GlobalTagAddon.prefix)
                                 .append(
@@ -80,7 +80,7 @@ public class LinkSubcommand extends SubCommand {
                         this.displayMessage(
                             Component.empty()
                                 .append(GlobalTagAddon.prefix)
-                                .append(Component.text(info.data(), NamedTextColor.RED))
+                                .append(Component.text(info.getData(), NamedTextColor.RED))
                         );
                     }
                 });

@@ -62,7 +62,7 @@ public class ChangeTagActivity extends SimpleActivity {
             sendButton.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
                 this.api.getApiHandler().setTag(this.uuid, inputWidget.getText(), (response) -> {
-                    if(response.successful()) Util.broadcastTagUpdate(this.uuid);
+                    if(response.isSuccessful()) Util.broadcastTagUpdate(this.uuid);
                     Laby.references().chatExecutor().displayClientMessage(
                         Component.empty()
                             .append(GlobalTagAddon.prefix)

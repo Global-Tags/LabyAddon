@@ -35,7 +35,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
     public void execute(Player player) {
         if(this.target.isSuspended()) {
             this.api.getApiHandler().unbanPlayer(this.target.getUUID(), (response) -> {
-                if(response.successful()) Util.broadcastTagUpdate(this.target.getUUID());
+                if(response.isSuccessful()) Util.broadcastTagUpdate(this.target.getUUID());
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
                         .append(GlobalTagAddon.prefix)
