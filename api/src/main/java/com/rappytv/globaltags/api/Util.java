@@ -3,6 +3,7 @@ package com.rappytv.globaltags.api;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.rappytv.globaltags.wrapper.http.ApiHandler.ApiResponse;
+import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -10,7 +11,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.popup.SimpleAdvancedPopu
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
-import java.util.UUID;
 
 public class Util {
 
@@ -73,7 +73,7 @@ public class Util {
 
     public static Component getResponseComponent(ApiResponse<String> response) {
         return Component.text(
-            response.getData(),
+            response.isSuccessful() ? response.getData() : response.getError(),
             response.isSuccessful() ? NamedTextColor.GREEN : NamedTextColor.RED
         );
     }

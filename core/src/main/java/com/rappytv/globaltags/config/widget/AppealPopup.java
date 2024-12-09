@@ -39,7 +39,7 @@ public class AppealPopup extends AdvancedPopup {
             ))
             .addId("send-button", "popup-description");
         sendButton.setEnabled(false);
-        sendButton.setActionListener(() ->
+        sendButton.setActionListener(() -> {
             this.api.getApiHandler().appealBan(inputWidget.getText(), (response) ->
                 Util.notify(
                     Component.translatable(response.isSuccessful()
@@ -48,8 +48,9 @@ public class AppealPopup extends AdvancedPopup {
                     ),
                     Component.text(response.getData(), NamedTextColor.WHITE)
                 )
-            )
-        );
+            );
+            this.close();
+        });
         inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank()));
 
         content.addChild(labelWidget);
