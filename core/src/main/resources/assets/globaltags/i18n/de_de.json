@@ -121,6 +121,17 @@
                 "name": "Cache leeren",
                 "text": "Leeren",
                 "description": "Löscht den Tag-Cache manuell.\nDer Cache wird automatisch alle §b5 Minuten§f geleert.\nDu kannst den Cache auch mit §b/gt cc§f löschen."
+            },
+            "referralLeaderboards": {
+                "name": "Einladungsleaderboards",
+                "text": "Öffnen",
+                "activity": {
+                    "total": "Insgesamt",
+                    "current_month": "Diesen Monat",
+                    "open": "laby.net Profil öffnen",
+                    "loading": "Lädt…"
+                },
+                "description": "Zeigt Leaderboards der Spieler an, die die meisten Spieler zu GlobalTags eingeladen haben."
             }
         },
         "general": {
