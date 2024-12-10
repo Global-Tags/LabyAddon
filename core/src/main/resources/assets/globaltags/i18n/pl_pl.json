@@ -1,1 +1,42 @@
-{}
+{
+    "globaltags": {
+        "settings": {
+            "tags": {
+                "globalIcon": {
+                    "entries": {
+                        "tiktok": "TikTok",
+                        "gamescom": "Gamescom",
+                        "pinterest": "Pinterest",
+                        "android": "Android",
+                        "apple": "Apple",
+                        "bereal": "BeReal.",
+                        "crown": "Crown",
+                        "discord": "Discord",
+                        "duolingo": "Luodingo",
+                        "ebio": "e.bio",
+                        "epicgames": "Epic Games",
+                        "github": "GitHub",
+                        "gitlab": "GitLab",
+                        "instagram": "Instagram",
+                        "kick": "Kick",
+                        "labynet": "laby.net",
+                        "paypal": "PayPal",
+                        "playstation": "Playstation",
+                        "reddit": "Reddit",
+                        "snapchat": "Snapchat",
+                        "soundcloud": "Soundcloud",
+                        "spotify": "Spotify",
+                        "statsfm": "StatsFM",
+                        "steam": "Steam",
+                        "telegram": "Telegram",
+                        "threads": "Threads",
+                        "twitch": "Twitch",
+                        "x": "x",
+                        "xbox": "Xbox",
+                        "youtube": "YouTube"
+                    }
+                }
+            }
+        }
+    }
+}
