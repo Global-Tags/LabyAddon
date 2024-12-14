@@ -44,15 +44,20 @@
             alignment-y: center;
         }
 
-        .appealable-label {
+        .checkbox-wrapper {
+            height: 20;
+            width: 100%;
             margin-top: 8;
-            alignment-x: center;
-            alignment-y: center;
-        }
+            space-between-entries: 4;
 
-        .check-box {
-            margin-top: 5;
-            alignment-x: center;
+            .check-box {
+                alignment: center;
+            }
+
+            .checkbox-label {
+                font-size: 0.8;
+                alignment: center;
+            }
         }
 
         .send-button {
