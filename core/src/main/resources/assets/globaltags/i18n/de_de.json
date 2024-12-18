@@ -176,7 +176,12 @@
             "report": {
                 "name": "GlobalTag melden",
                 "title": "%s melden",
-                "send": "Meldung senden"
+                "send": "Meldung senden",
+                "checkbox": {
+                    "label": "Dieser Tag bricht die %s.",
+                    "rules": "GlobalTags Regeln",
+                    "hover": "Klicke hier, um die GlobalTags Regeln zu öffnen."
+                }
             },
             "ban": {
                 "name": "GlobalTag-Spieler bannen",
