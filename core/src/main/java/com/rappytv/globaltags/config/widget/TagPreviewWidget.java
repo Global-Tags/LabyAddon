@@ -2,8 +2,6 @@ package com.rappytv.globaltags.config.widget;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.api.Util;
-import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
@@ -40,32 +38,19 @@ import java.util.function.Consumer;
 public class TagPreviewWidget extends HorizontalListWidget {
 
     private static boolean refetch = true;
-    private static boolean changed = false;
-    private final TagSubConfig config;
-
-    private TagPreviewWidget(TagSubConfig config) {
-        this.config = config;
-    }
 
     @Override
     public void tick() {
         super.tick();
-        if(!refetch && !changed) return;
-        if(refetch)
-            GlobalTagAddon.getAPI().getCache().remove(GlobalTagAddon.getAPI().getClientUUID());
+        if(!refetch) return;
+        GlobalTagAddon.getAPI().getCache().remove(GlobalTagAddon.getAPI().getClientUUID());
         this.reInitialize();
         refetch = false;
-        changed = false;
     }
 
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        this.initialize(refetch);
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    public void initialize(boolean refetched) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
 
         this.addEntry(ButtonWidget
@@ -74,16 +59,16 @@ public class TagPreviewWidget extends HorizontalListWidget {
         );
         api.getCache().resolveSelf((info) -> {
             if (ThreadSafe.isRenderThread()) {
-                this.initializeWithInfo(info, refetched, false);
+                this.initializeWithInfo(info, false);
             } else {
                 Laby.labyAPI().minecraft().executeOnRenderThread(
-                    () -> this.initializeWithInfo(info, refetched, true)
+                    () -> this.initializeWithInfo(info, true)
                 );
             }
         });
     }
 
-    private void initializeWithInfo(PlayerInfo<Component> info, boolean refetched, boolean async) {
+    private void initializeWithInfo(PlayerInfo<Component> info, boolean async) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
         Consumer<Widget> addEntry = async ? this::addEntryInitialized : this::addEntry;
 
@@ -93,30 +78,16 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 .addId("text", "error");
             addEntry.accept(errorComponent);
         } else {
-            if (refetched) {
-                this.config.tag().set(info.getPlainTag());
-                this.config.position().set(info.getPosition());
-                this.config.icon().set(info.getGlobalIcon());
-            }
-            boolean updated = !this.config.tag().get().equals(info.getPlainTag())
-                || !this.config.position().get().equals(info.getPosition())
-                || !this.config.icon().get().equals(info.getGlobalIcon());
-            if (changed && updated) {
-                Util.notify(
-                    I18n.translate("globaltags.settings.tags.staged.title"),
-                    I18n.translate("globaltags.settings.tags.staged.description")
-                );
-            }
             ComponentWidget tag = ComponentWidget.component(
-                this.config.tag().get().isBlank()
-                    ? Component.translatable(
-                    "globaltags.settings.tags.tagPreview.empty",
-                    NamedTextColor.RED
-                )
-                    : api.translateColorCodes(this.config.tag().get())
+                info.getTag() != null
+                    ? info.getTag()
+                    : Component.translatable(
+                        "globaltags.settings.tags.tagPreview.empty",
+                        NamedTextColor.RED
+                    )
             ).addId("text");
 
-            if (this.config.icon().get() != GlobalIcon.NONE) {
+            if (info.getGlobalIcon() != GlobalIcon.NONE) {
                 addEntry.accept(
                     new IconWidget(Icon.url(this.getIconUrl(api, info)))
                         .addId("icon")
@@ -145,18 +116,14 @@ public class TagPreviewWidget extends HorizontalListWidget {
         }
     }
 
-    public static void change() {
-        TagPreviewWidget.changed = true;
-    }
-
     public static void refetch() {
         TagPreviewWidget.refetch = true;
     }
 
     private String getIconUrl(GlobalTagAPI api, PlayerInfo<?> info) {
-        return this.config.icon().get() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
+        return info.getGlobalIcon() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
             ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
-            : api.getUrls().getDefaultIcon(this.config.icon().get());
+            : api.getUrls().getDefaultIcon(info.getGlobalIcon());
     }
 
     private Component getError(PlayerInfo<Component> info) {
@@ -179,7 +146,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
         @Override
         public TagPreviewWidget[] create(Setting setting, TagPreviewSetting annotation, SettingAccessor accessor) {
-            return new TagPreviewWidget[]{new TagPreviewWidget((TagSubConfig) accessor.config())};
+            return new TagPreviewWidget[]{new TagPreviewWidget()};
         }
 
         @Override

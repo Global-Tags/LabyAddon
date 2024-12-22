@@ -51,48 +51,78 @@ public class TagUpdateActivity extends SimpleActivity {
             .addId("label");
 
         DropdownWidget<GlobalPosition> positionWidget = new DropdownWidget<>();
-        for(GlobalPosition position : GlobalPosition.values()) {
+        for (GlobalPosition position : GlobalPosition.values()) {
             positionWidget.add(position);
         }
-        positionWidget.setSelected(dataExists ? this.currentInfo.getPosition() : GlobalPosition.ABOVE);
+        positionWidget.setSelected(
+            dataExists ? this.currentInfo.getPosition() : GlobalPosition.ABOVE);
         positionWidget.setTranslationKeyPrefix("globaltags.settings.tags.position.entries.");
 
         ComponentWidget iconLabel = ComponentWidget.i18n("Icon")
             .addId("label");
 
         DropdownWidget<GlobalIcon> iconWidget = new DropdownWidget<>();
-        for(GlobalIcon icon : GlobalIcon.values()) {
+        for (GlobalIcon icon : GlobalIcon.values()) {
             iconWidget.add(icon);
         }
         iconWidget.setSelected(dataExists ? this.currentInfo.getGlobalIcon() : GlobalIcon.NONE);
         iconWidget.setTranslationKeyPrefix("globaltags.settings.tags.globalIcon.entries.");
 
         ButtonWidget submitButton = ButtonWidget.i18n("Update Tag", () -> {
-            if(this.api.getAuthorization() == null) {
+            if (this.api.getAuthorization() == null) {
                 Util.notify(
                     Component.translatable("globaltags.general.error"),
                     Component.translatable("globaltags.settings.tags.tagPreview.labyConnect")
                 );
                 return;
             }
-            if(this.currentInfo == null || !this.currentInfo.getPlainTag().equals(inputWidget.getText())) this.api.getApiHandler().setTag(
-                inputWidget.getText(),(response) -> {
-                    if(response.isSuccessful()) Util.update(this.api, ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
-                    else Util.update(this.api, ResultType.TAG, Component.text(response.getData(), NamedTextColor.RED));
-                });
-            else Util.update(this.api, ResultType.TAG, Util.unchanged);
-            if(this.currentInfo != null && !this.currentInfo.getPosition().equals(positionWidget.getSelected())) this.api.getApiHandler().setPosition(
-                positionWidget.getSelected(), (response) -> {
-                    if(response.isSuccessful()) Util.update(this.api, ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
-                    else Util.update(this.api, ResultType.POSITION, Component.text(response.getData(), NamedTextColor.RED));
-                });
-            else Util.update(this.api, ResultType.POSITION, Util.unchanged);
-            if(this.currentInfo != null && !this.currentInfo.getGlobalIcon().equals(iconWidget.getSelected())) this.api.getApiHandler().setIcon(
-                iconWidget.getSelected(), (response) -> {
-                    if(response.isSuccessful()) Util.update(this.api, ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
-                    else Util.update(this.api, ResultType.ICON, Component.text(response.getData(), NamedTextColor.RED));
-                });
-            else Util.update(this.api, ResultType.ICON, Util.unchanged);
+            this.api.getCache().renewSelf(info -> {
+                if (info == null || !info.getPlainTag()
+                    .equals(inputWidget.getText())) {
+                    this.api.getApiHandler().setTag(
+                        inputWidget.getText(), (response) -> {
+                            if (response.isSuccessful()) {
+                                Util.update(this.api, ResultType.TAG,
+                                    Component.text("✔", NamedTextColor.GREEN));
+                            } else {
+                                Util.update(this.api, ResultType.TAG,
+                                    Component.text(response.getError(), NamedTextColor.RED));
+                            }
+                        });
+                } else {
+                    Util.update(this.api, ResultType.TAG, Util.unchanged);
+                }
+                if (info == null || !info.getPosition()
+                    .equals(positionWidget.getSelected())) {
+                    this.api.getApiHandler().setPosition(
+                        positionWidget.getSelected(), (response) -> {
+                            if (response.isSuccessful()) {
+                                Util.update(this.api, ResultType.POSITION,
+                                    Component.text("✔", NamedTextColor.GREEN));
+                            } else {
+                                Util.update(this.api, ResultType.POSITION,
+                                    Component.text(response.getError(), NamedTextColor.RED));
+                            }
+                        });
+                } else {
+                    Util.update(this.api, ResultType.POSITION, Util.unchanged);
+                }
+                if (info == null || !info.getGlobalIcon()
+                    .equals(iconWidget.getSelected())) {
+                    this.api.getApiHandler().setIcon(
+                        iconWidget.getSelected(), (response) -> {
+                            if (response.isSuccessful()) {
+                                Util.update(this.api, ResultType.ICON,
+                                    Component.text("✔", NamedTextColor.GREEN));
+                            } else {
+                                Util.update(this.api, ResultType.ICON,
+                                    Component.text(response.getError(), NamedTextColor.RED));
+                            }
+                        });
+                } else {
+                    Util.update(this.api, ResultType.ICON, Util.unchanged);
+                }
+            });
         });
         submitButton.addId("submit-button");
 
