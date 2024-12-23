@@ -3,7 +3,38 @@
     width: 100%;
 
     .input-div {
-        margin-top: 20;
+        margin-top: 10;
+    }
+
+    Div {
+        height: 35;
+        width: fit-content;
+        alignment-x: center;
+
+        .label {
+            top: 0;
+            alignment-x: center;
+            font-size: 0.8;
+        }
+    }
+
+    .preview-div {
+        TagPreview {
+            top: 0;
+            margin-top: 10;
+            alignment-x: center;
+        }
+    }
+
+    .input-div {
+        width: 200;
+
+        TextField {
+            top: 0;
+            margin-top: 10;
+            width: 100%;
+            alignment-x: center;
+        }
     }
 
     .dropdown-list {
@@ -12,25 +43,9 @@
         margin-top: 20;
         height: 35;
         width: fit-content;
-    }
 
-    Div {
-        height: 35;
-        width: fit-content;
-        max-width: 150;
-        alignment-x: center;
-
-        .label {
-            top: 0;
-            alignment-x: center;
-            font-size: 0.8;
-        }
-
-        TextField {
-            top: 0;
-            margin-top: 10;
-            width: 150;
-            alignment-x: center;
+        Div {
+            max-width: 200;
         }
 
         Dropdown {

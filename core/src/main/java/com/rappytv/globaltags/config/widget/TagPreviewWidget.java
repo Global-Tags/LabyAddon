@@ -4,18 +4,22 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalRole;
+import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
+import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
+import net.labymod.api.util.ThreadSafe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 
+@AutoWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
     private final GlobalTagAPI api;
@@ -62,7 +66,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 "globaltags.settings.tags.tagPreview.empty",
                 NamedTextColor.RED
             );
-        this.tagWidget.setComponent(this.tag);
+        this.runThreadSafely(() -> this.tagWidget.setComponent(this.tag));
     }
 
     public void updateTag(@NotNull String tag) {
@@ -72,7 +76,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
     public void updateGlobalIcon(@Nullable Icon icon) {
         this.globalIconWidget.setVisible((this.globalIcon = icon) != null);
-        this.globalIconWidget.icon().set(this.globalIcon);
+        this.runThreadSafely(() -> this.globalIconWidget.icon().set(this.globalIcon));
     }
 
     public void updateGlobalIcon(@Nullable GlobalIcon icon, @Nullable UUID uuid, @Nullable String hash) {
@@ -86,11 +90,19 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
     public void updateRoleIcon(@Nullable Icon icon) {
         this.roleIconWidget.setVisible((this.roleIcon = icon) != null);
-        this.roleIconWidget.icon().set(this.roleIcon);
+        this.runThreadSafely(() -> this.roleIconWidget.icon().set(this.roleIcon));
     }
 
     public void updateRoleIcon(@Nullable GlobalRole role) {
         this.roleIcon = role != null ? Icon.url(this.api.getUrls().getRoleIcon(role)) : null;
         this.updateRoleIcon(this.roleIcon);
+    }
+
+    private void runThreadSafely(Runnable runnable) {
+        if(ThreadSafe.isRenderThread()) {
+            runnable.run();
+        } else {
+            Laby.labyAPI().minecraft().executeOnRenderThread(runnable);
+        }
     }
 }

@@ -4,14 +4,17 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
+import com.rappytv.globaltags.config.widget.TagPreviewWidget;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
+import net.labymod.api.client.gui.screen.activity.Links;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.DivWidget;
@@ -21,7 +24,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownW
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 
-@Link("tag-update.lss")
+@Links({@Link("tag-update.lss"), @Link("preview.lss")})
 @AutoActivity
 public class TagUpdateActivity extends SimpleActivity {
 
@@ -41,11 +44,26 @@ public class TagUpdateActivity extends SimpleActivity {
         FlexibleContentWidget windowWidget = new FlexibleContentWidget()
             .addId("window");
 
+        ComponentWidget previewLabel = ComponentWidget.i18n("Preview")
+            .addId("label");
+
+        String tag = dataExists ? this.currentInfo.getPlainTag() : "";
+        GlobalIcon globalIcon = dataExists ? this.currentInfo.getGlobalIcon() : GlobalIcon.NONE;
+        String globalIconUrl = this.getIconUrl(this.api, globalIcon);
+        String roleIconUrl = dataExists ? this.currentInfo.getHighestRoleIcon() : null;
+
+        TagPreviewWidget previewWidget = new TagPreviewWidget(
+            tag,
+            globalIconUrl != null ? Icon.url(globalIconUrl) : null,
+            roleIconUrl != null ? Icon.url(roleIconUrl) : null
+        );
+
         ComponentWidget inputLabel = ComponentWidget.i18n("Tag")
             .addId("label");
 
         TextFieldWidget inputWidget = new TextFieldWidget();
-        inputWidget.setText(dataExists ? this.currentInfo.getPlainTag() : "");
+        inputWidget.setText(tag);
+        inputWidget.updateListener(previewWidget::updateTag);
 
         ComponentWidget positionLabel = ComponentWidget.i18n("Position")
             .addId("label");
@@ -65,8 +83,13 @@ public class TagUpdateActivity extends SimpleActivity {
         for (GlobalIcon icon : GlobalIcon.values()) {
             iconWidget.add(icon);
         }
-        iconWidget.setSelected(dataExists ? this.currentInfo.getGlobalIcon() : GlobalIcon.NONE);
+        iconWidget.setSelected(globalIcon);
         iconWidget.setTranslationKeyPrefix("globaltags.settings.tags.globalIcon.entries.");
+        iconWidget.setChangeListener(icon -> previewWidget.updateGlobalIcon(
+            icon,
+            dataExists ? this.currentInfo.getUUID() : null,
+            dataExists ? this.currentInfo.getGlobalIconHash() : null
+        ));
 
         ButtonWidget submitButton = ButtonWidget.i18n("Update Tag", () -> {
             if (this.api.getAuthorization() == null) {
@@ -126,6 +149,10 @@ public class TagUpdateActivity extends SimpleActivity {
         });
         submitButton.addId("submit-button");
 
+        DivWidget previewDiv = new DivWidget().addId("preview-div");
+        previewDiv.addChild(previewLabel);
+        previewDiv.addChild(previewWidget);
+
         DivWidget inputDiv = new DivWidget().addId("input-div");
         inputDiv.addChild(inputLabel);
         inputDiv.addChild(inputWidget);
@@ -143,10 +170,18 @@ public class TagUpdateActivity extends SimpleActivity {
         dropdownListWidget.addEntry(positionDiv);
         dropdownListWidget.addEntry(iconDiv);
 
+        windowWidget.addContent(previewDiv);
         windowWidget.addContent(inputDiv);
         windowWidget.addContent(dropdownListWidget);
         windowWidget.addContent(submitButton);
 
         this.document.addChild(windowWidget);
+    }
+
+    private String getIconUrl(GlobalTagAPI api, GlobalIcon icon) {
+        return this.currentInfo != null && icon == GlobalIcon.CUSTOM
+            && this.currentInfo.getGlobalIconHash() != null
+            ? api.getUrls().getCustomIcon(api.getClientUUID(), this.currentInfo.getGlobalIconHash())
+            : icon != GlobalIcon.NONE ? api.getUrls().getDefaultIcon(icon) : null;
     }
 }

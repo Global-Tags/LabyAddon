@@ -4,7 +4,6 @@ TagPreview {
     orientation: horizontal;
 
     .tag {
-        max-width: 75%;
         scale-to-fit: false;
         max-lines: 1;
         margin-left: 2;
