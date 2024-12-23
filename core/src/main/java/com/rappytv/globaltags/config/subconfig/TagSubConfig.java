@@ -5,7 +5,7 @@ import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.activity.TagUpdateActivity;
 import com.rappytv.globaltags.config.widget.AccountInfoWidget;
-import com.rappytv.globaltags.config.widget.AccountInfoWidget.TagPreviewSetting;
+import com.rappytv.globaltags.config.widget.AccountInfoWidget.AccountInfoSetting;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -21,7 +21,7 @@ public class TagSubConfig extends Config {
 
     @SpriteSlot(size = 32, x = 1)
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
-    @TagPreviewSetting
+    @AccountInfoSetting
     private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
 
     // TODO: ADD IntroducedIn annotation

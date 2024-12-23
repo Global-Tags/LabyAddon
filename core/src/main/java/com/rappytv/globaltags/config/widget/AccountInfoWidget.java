@@ -125,10 +125,10 @@ public class AccountInfoWidget extends HorizontalListWidget {
     }
 
     @SettingFactory
-    public static class Factory implements WidgetFactory<TagPreviewSetting, AccountInfoWidget> {
+    public static class Factory implements WidgetFactory<AccountInfoSetting, AccountInfoWidget> {
 
         @Override
-        public AccountInfoWidget[] create(Setting setting, TagPreviewSetting annotation, SettingAccessor accessor) {
+        public AccountInfoWidget[] create(Setting setting, AccountInfoSetting annotation, SettingAccessor accessor) {
             return new AccountInfoWidget[]{new AccountInfoWidget()};
         }
 
@@ -141,7 +141,7 @@ public class AccountInfoWidget extends HorizontalListWidget {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     @SettingElement(extended = true)
-    public @interface TagPreviewSetting {
+    public @interface AccountInfoSetting {
 
     }
 }
