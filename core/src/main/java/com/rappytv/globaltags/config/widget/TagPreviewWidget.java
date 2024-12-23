@@ -3,162 +3,94 @@ package com.rappytv.globaltags.config.widget;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
-import com.rappytv.globaltags.wrapper.model.PlayerInfo;
-import net.labymod.api.Laby;
-import net.labymod.api.Textures.SpriteCommon;
+import com.rappytv.globaltags.wrapper.enums.GlobalRole;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
-import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
-import net.labymod.api.client.gui.screen.activity.Link;
-import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
-import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
-import net.labymod.api.configuration.settings.Setting;
-import net.labymod.api.configuration.settings.accessor.SettingAccessor;
-import net.labymod.api.configuration.settings.annotation.SettingElement;
-import net.labymod.api.configuration.settings.annotation.SettingFactory;
-import net.labymod.api.configuration.settings.annotation.SettingWidget;
-import net.labymod.api.configuration.settings.widget.WidgetFactory;
-import net.labymod.api.util.I18n;
-import net.labymod.api.util.ThreadSafe;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.Objects;
+import java.util.UUID;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.function.Consumer;
-
-@Link("preview.lss")
-@AutoWidget
-@SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
-    private static boolean refetch = true;
+    private final GlobalTagAPI api;
+    private Component tag;
+    private Icon globalIcon;
+    private Icon roleIcon;
 
-    @Override
-    public void tick() {
-        super.tick();
-        if(!refetch) return;
-        GlobalTagAddon.getAPI().getCache().remove(GlobalTagAddon.getAPI().getClientUUID());
-        this.reInitialize();
-        refetch = false;
+    private ComponentWidget tagWidget;
+    private IconWidget globalIconWidget;
+    private IconWidget roleIconWidget;
+
+    public TagPreviewWidget(@NotNull String tag, @Nullable Icon globalIcon, @Nullable Icon roleIcon) {
+        this.api = GlobalTagAddon.getAPI();
+        this.tag = !tag.isBlank() ? this.api.translateColorCodes(tag) : null;
+        this.globalIcon = globalIcon;
+        this.roleIcon = roleIcon;
+    }
+
+    public TagPreviewWidget(@Nullable Component tag, @Nullable Icon globalIcon, @Nullable Icon roleIcon) {
+        this.api = GlobalTagAddon.getAPI();
+        this.tag = tag;
+        this.globalIcon = globalIcon;
+        this.roleIcon = roleIcon;
     }
 
     @Override
     public void initialize(Parent parent) {
         super.initialize(parent);
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
-
-        this.addEntry(ButtonWidget
-            .icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
-            .addId("refresh-button")
-        );
-        api.getCache().resolveSelf((info) -> {
-            if (ThreadSafe.isRenderThread()) {
-                this.initializeWithInfo(info, false);
-            } else {
-                Laby.labyAPI().minecraft().executeOnRenderThread(
-                    () -> this.initializeWithInfo(info, true)
-                );
-            }
-        });
+        this.tagWidget = ComponentWidget.empty().addId("tag");
+        this.globalIconWidget = new IconWidget(null).addId("global-icon");
+        this.roleIconWidget = new IconWidget(null).addId("role-icon");
+        this.updateTag(this.tag);
+        this.updateGlobalIcon(this.globalIcon);
+        this.updateRoleIcon(this.roleIcon);
+        this.addEntry(this.globalIconWidget);
+        this.addEntry(this.tagWidget);
+        this.addEntry(this.roleIconWidget);
     }
 
-    private void initializeWithInfo(PlayerInfo<Component> info, boolean async) {
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
-        Consumer<Widget> addEntry = async ? this::addEntryInitialized : this::addEntry;
+    public void updateTag(@Nullable Component component) {
+        this.tag = component != null
+            ? component
+            : Component.translatable(
+                "globaltags.settings.tags.tagPreview.empty",
+                NamedTextColor.RED
+            );
+        this.tagWidget.setComponent(this.tag);
+    }
 
-        Component error = this.getError(info);
-        if (error != null) {
-            ComponentWidget errorComponent = ComponentWidget.component(error)
-                .addId("text", "error");
-            addEntry.accept(errorComponent);
+    public void updateTag(@NotNull String tag) {
+        Objects.requireNonNull(tag);
+        this.updateTag(!tag.isBlank() ? this.api.translateColorCodes(tag) : null);
+    }
+
+    public void updateGlobalIcon(@Nullable Icon icon) {
+        this.globalIconWidget.setVisible((this.globalIcon = icon) != null);
+        this.globalIconWidget.icon().set(this.globalIcon);
+    }
+
+    public void updateGlobalIcon(@Nullable GlobalIcon icon, @Nullable UUID uuid, @Nullable String hash) {
+        if (icon == GlobalIcon.CUSTOM && uuid != null && hash != null) {
+            this.globalIcon = Icon.url(this.api.getUrls().getCustomIcon(uuid, hash));
         } else {
-            ComponentWidget tag = ComponentWidget.component(
-                info.getTag() != null
-                    ? info.getTag()
-                    : Component.translatable(
-                        "globaltags.settings.tags.tagPreview.empty",
-                        NamedTextColor.RED
-                    )
-            ).addId("text");
-
-            if (info.getGlobalIcon() != GlobalIcon.NONE) {
-                addEntry.accept(
-                    new IconWidget(Icon.url(this.getIconUrl(api, info)))
-                        .addId("icon")
-                );
-            }
-            addEntry.accept(tag);
-            if (info.getHighestRoleIcon() != null) {
-                addEntry.accept(
-                    new IconWidget(Icon.url(info.getHighestRoleIcon()))
-                        .addId("staff-icon")
-                );
-            }
+            this.globalIcon = Icon.url(this.api.getUrls().getDefaultIcon(icon));
         }
-
-        if (info != null && info.isSuspended()) {
-            ButtonWidget appealButton = ButtonWidget.i18n(
-                "globaltags.settings.tags.tagPreview.appeal.name",
-                () -> new AppealPopup(api).displayInOverlay()
-            ).addId("appeal-button");
-            appealButton.setHoverComponent(Component.translatable(
-                "globaltags.settings.tags.tagPreview.appeal.description",
-                NamedTextColor.GOLD
-            ));
-            appealButton.setEnabled(info.getSuspension().isAppealable());
-            addEntry.accept(appealButton);
-        }
+        this.updateGlobalIcon(this.globalIcon);
     }
 
-    public static void refetch() {
-        TagPreviewWidget.refetch = true;
+    public void updateRoleIcon(@Nullable Icon icon) {
+        this.roleIconWidget.setVisible((this.roleIcon = icon) != null);
+        this.roleIconWidget.icon().set(this.roleIcon);
     }
 
-    private String getIconUrl(GlobalTagAPI api, PlayerInfo<?> info) {
-        return info.getGlobalIcon() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
-            ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
-            : api.getUrls().getDefaultIcon(info.getGlobalIcon());
-    }
-
-    private Component getError(PlayerInfo<Component> info) {
-        String session = GlobalTagAddon.getAPI().getAuthorization();
-        if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
-        else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-        else if(info.isSuspended()) return Component.translatable(
-            "globaltags.settings.tags.tagPreview.banned",
-            Component.text(
-                info.getSuspension().getReason() != null
-                    ? info.getSuspension().getReason()
-                    : I18n.translate("globaltags.settings.tags.tagPreview.emptyReason")
-            )
-        );
-        return null;
-    }
-
-    @SettingFactory
-    public static class Factory implements WidgetFactory<TagPreviewSetting, TagPreviewWidget> {
-
-        @Override
-        public TagPreviewWidget[] create(Setting setting, TagPreviewSetting annotation, SettingAccessor accessor) {
-            return new TagPreviewWidget[]{new TagPreviewWidget()};
-        }
-
-        @Override
-        public Class<?>[] types() {
-            return new Class[0];
-        }
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.FIELD)
-    @SettingElement(extended = true)
-    public @interface TagPreviewSetting {
-
+    public void updateRoleIcon(@Nullable GlobalRole role) {
+        this.roleIcon = role != null ? Icon.url(this.api.getUrls().getRoleIcon(role)) : null;
+        this.updateRoleIcon(this.roleIcon);
     }
 }

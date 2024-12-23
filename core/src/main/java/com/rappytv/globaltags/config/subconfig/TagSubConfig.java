@@ -4,8 +4,8 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.activity.TagUpdateActivity;
-import com.rappytv.globaltags.config.widget.TagPreviewWidget;
-import com.rappytv.globaltags.config.widget.TagPreviewWidget.TagPreviewSetting;
+import com.rappytv.globaltags.config.widget.AccountInfoWidget;
+import com.rappytv.globaltags.config.widget.AccountInfoWidget.TagPreviewSetting;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -42,7 +42,7 @@ public class TagSubConfig extends Config {
         api.getApiHandler().resetTag((info) -> {
             if(info.isSuccessful()) {
                 Util.broadcastTagUpdate();
-                TagPreviewWidget.refetch();
+                AccountInfoWidget.refetch();
             }
             Util.notify(
                 Component.translatable(info.isSuccessful()

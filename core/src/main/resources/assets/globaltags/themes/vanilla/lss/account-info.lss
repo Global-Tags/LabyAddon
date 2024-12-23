@@ -1,30 +1,17 @@
-TagPreview {
+AccountInfo {
     height: fit-content;
     orientation: horizontal;
 
-    .text {
-        max-width: 75%;
-        scale-to-fit: false;
-        max-lines: 1;
-        margin-left: 2;
+    TagPreview {
+        max-width: 90%;
     }
 
     .error {
-        max-lines: 2 !important;
-        text-color: red;
-    }
-
-    .icon {
-        margin-left: 1;
-        margin-right: 1;
-        height: 16;
-        width: height;
-    }
-
-    .staff-icon {
+        max-width: 75%;
         margin-left: 2;
-        height: 11;
-        width: height;
+        scale-to-fit: false;
+        max-lines: 2;
+        text-color: red;
     }
 
     .appeal-button {
