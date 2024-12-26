@@ -64,8 +64,9 @@
                         }
                     }
                 },
-                "tag": {
-                    "name": "Global Tag"
+                "updateTag": {
+                    "name": "Update Tag",
+                    "text": "Update"
                 },
                 "position": {
                     "name": "Global position",
