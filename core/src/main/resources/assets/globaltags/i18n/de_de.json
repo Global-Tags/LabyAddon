@@ -72,38 +72,9 @@
                     "entries": {
                         "none": "Kein Icon",
                         "custom": "Custom",
-                        "android": "",
-                        "apple": "",
-                        "bereal": "",
                         "crown": "Krone",
-                        "discord": "",
-                        "duolingo": "",
-                        "ebio": "",
-                        "epicgames": "",
-                        "gamescom": "",
-                        "github": "",
-                        "gitlab": "",
                         "heart": "Herz",
-                        "instagram": "",
-                        "kick": "",
-                        "labynet": "",
-                        "paypal": "",
-                        "pinterest": "",
-                        "playstation": "",
-                        "reddit": "",
-                        "snapchat": "",
-                        "soundcloud": "",
-                        "spotify": "",
-                        "star": "Stern",
-                        "statsfm": "",
-                        "steam": "",
-                        "telegram": "Telegram",
-                        "threads": "",
-                        "tiktok": "",
-                        "twitch": "",
-                        "x": "",
-                        "xbox": "",
-                        "youtube": ""
+                        "star": "Stern"
                     }
                 },
                 "updateSettings": {
@@ -121,6 +92,17 @@
                 "name": "Cache leeren",
                 "text": "Leeren",
                 "description": "Löscht den Tag-Cache manuell.\nDer Cache wird automatisch alle §b5 Minuten§f geleert.\nDu kannst den Cache auch mit §b/gt cc§f löschen."
+            },
+            "referralLeaderboards": {
+                "name": "Einladungsleaderboards",
+                "text": "Öffnen",
+                "activity": {
+                    "total": "Insgesamt",
+                    "current_month": "Diesen Monat",
+                    "open": "laby.net Profil öffnen",
+                    "loading": "Lädt…"
+                },
+                "description": "Zeigt Leaderboards der Spieler an, die die meisten Spieler zu GlobalTags eingeladen haben."
             }
         },
         "general": {
@@ -165,7 +147,12 @@
             "report": {
                 "name": "GlobalTag melden",
                 "title": "%s melden",
-                "send": "Meldung senden"
+                "send": "Meldung senden",
+                "checkbox": {
+                    "label": "Dieser Tag bricht die %s.",
+                    "rules": "GlobalTags Regeln",
+                    "hover": "Klicke hier, um die GlobalTags Regeln zu öffnen."
+                }
             },
             "ban": {
                 "name": "GlobalTag-Spieler bannen",

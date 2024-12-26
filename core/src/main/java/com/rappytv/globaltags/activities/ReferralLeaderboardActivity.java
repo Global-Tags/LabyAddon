@@ -25,13 +25,15 @@ import net.labymod.api.util.ThreadSafe;
 @AutoActivity
 public class ReferralLeaderboardActivity extends SimpleActivity {
 
+    private static Map<ReferralLeaderboardType, List<ReferralLeaderboardEntry>> leaderboards = null;
+    private final GlobalTagAPI api;
     private final VerticalListWidget<ReferralLeaderboardEntryWidget> entries = new VerticalListWidget<>().addId(
         "leaderboard-entries");
     private final HorizontalListWidget buttonMenu;
     private ReferralLeaderboardType selectedLeaderboard = ReferralLeaderboardType.TOTAL;
-    private Map<ReferralLeaderboardType, List<ReferralLeaderboardEntry>> leaderboards = null;
 
     public ReferralLeaderboardActivity() {
+        this.api = GlobalTagAddon.getAPI();
         this.buttonMenu = new HorizontalListWidget().addId("button-menu");
         ButtonWidget totalViewButton = ButtonWidget.i18n(
             "globaltags.settings.referralLeaderboards.activity.total");
@@ -57,32 +59,9 @@ public class ReferralLeaderboardActivity extends SimpleActivity {
         this.buttonMenu.addEntry(currentMonthViewButton);
     }
 
-    @Override
-    public void initialize(Parent parent) {
-        super.initialize(parent);
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
-
-        FlexibleContentWidget container = new FlexibleContentWidget().addId("container");
-
-        container.addContent(this.buttonMenu);
-        ScrollWidget scroll = new ScrollWidget(this.entries);
-        container.addContent(scroll);
-        this.document.addChild(container);
-
-        api.getApiHandler().getReferralLeaderboards(response -> {
-            if (!response.isSuccessful()) {
-                Laby.labyAPI().minecraft().executeOnRenderThread(
-                    () -> container.addContentInitialized(
-                        ComponentWidget.text(response.getError(), NamedTextColor.RED)
-                            .addId("error-component")
-                    )
-                );
-                scroll.setVisible(false);
-                return;
-            }
-            this.leaderboards = response.getData();
-            this.initializeWithInfo();
-        });
+    public static void setLeaderboards(
+        Map<ReferralLeaderboardType, List<ReferralLeaderboardEntry>> leaderboards) {
+        ReferralLeaderboardActivity.leaderboards = leaderboards;
     }
 
     private void initializeWithInfo() {
@@ -95,12 +74,43 @@ public class ReferralLeaderboardActivity extends SimpleActivity {
         }
     }
 
+    @Override
+    public void initialize(Parent parent) {
+        super.initialize(parent);
+
+        FlexibleContentWidget container = new FlexibleContentWidget().addId("container");
+
+        container.addContent(this.buttonMenu);
+        ScrollWidget scroll = new ScrollWidget(this.entries);
+        container.addContent(scroll);
+        this.document.addChild(container);
+
+        if (ReferralLeaderboardActivity.leaderboards == null) {
+            this.api.getApiHandler().getReferralLeaderboards(response -> {
+                if (!response.isSuccessful()) {
+                    Laby.labyAPI().minecraft().executeOnRenderThread(
+                        () -> container.addContentInitialized(
+                            ComponentWidget.text(response.getError(), NamedTextColor.RED)
+                                .addId("error-component")
+                        )
+                    );
+                    scroll.setVisible(false);
+                    return;
+                }
+                ReferralLeaderboardActivity.leaderboards = response.getData();
+                this.initializeWithInfo();
+            });
+        } else {
+            this.initializeWithInfo();
+        }
+    }
+
     private void initializeWithInfo(boolean initialized) {
         this.entries.getChildren().clear();
-        if (this.leaderboards == null) {
+        if (leaderboards == null) {
             return;
         }
-        for (ReferralLeaderboardEntry entry : this.leaderboards.get(this.selectedLeaderboard)) {
+        for (ReferralLeaderboardEntry entry : leaderboards.get(this.selectedLeaderboard)) {
             if (initialized) {
                 this.entries.addChildInitialized(new ReferralLeaderboardEntryWidget(entry));
             } else {

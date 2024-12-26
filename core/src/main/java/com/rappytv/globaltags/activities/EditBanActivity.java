@@ -67,11 +67,13 @@ public class EditBanActivity extends SimpleActivity {
                 .addId("input");
             String reason = suspension.getReason();
             if(reason != null) inputWidget.setText(reason, true);
-            ComponentWidget boxLabelWidget = ComponentWidget
-                .i18n("globaltags.context.editBan.appealable")
-                .addId("appealable-label");
+            HorizontalListWidget checkboxWrapper = new HorizontalListWidget().addId(
+                "checkbox-wrapper");
             CheckBoxWidget checkBoxWidget = new CheckBoxWidget().addId("check-box");
             checkBoxWidget.setState(suspension.isAppealable() ? State.CHECKED : State.UNCHECKED);
+            ComponentWidget boxLabelWidget = ComponentWidget
+                .i18n("globaltags.context.editBan.appealable")
+                .addId("checkbox-label");
             ButtonWidget sendButton = new ButtonWidget()
                 .updateComponent(Component.translatable(
                     "globaltags.context.editBan.send",
@@ -108,10 +110,12 @@ public class EditBanActivity extends SimpleActivity {
             profileWrapper.addEntry(headWidget);
             profileWrapper.addEntry(titleWidget);
 
+            checkboxWrapper.addEntry(checkBoxWidget);
+            checkboxWrapper.addEntry(boxLabelWidget);
+
             content.addChild(inputLabelWidget);
             content.addChild(inputWidget);
-            content.addChild(boxLabelWidget);
-            content.addChild(checkBoxWidget);
+            content.addChild(checkboxWrapper);
             content.addChild(sendButton);
 
             windowWidget.addContent(profileWrapper);

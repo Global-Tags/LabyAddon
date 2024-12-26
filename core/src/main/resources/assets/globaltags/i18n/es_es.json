@@ -51,7 +51,8 @@
                         "none": "Ningún",
                         "custom": "Personalizado",
                         "heart": "Corazón",
-                        "star": "Estrella"
+                        "star": "Estrella",
+                        "crown": "Corona"
                     }
                 },
                 "tag": {

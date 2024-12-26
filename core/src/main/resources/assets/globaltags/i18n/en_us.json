@@ -28,7 +28,7 @@
                     "total": "Total",
                     "current_month": "This month",
                     "open": "Open laby.net profile",
-                    "loading": "Loading..."
+                    "loading": "Loading…"
                 }
             },
             "showOwnTag": {
@@ -176,7 +176,12 @@
             "report": {
                 "name": "Report GlobalTag",
                 "title": "Report %s",
-                "send": "Send report"
+                "send": "Send report",
+                "checkbox": {
+                    "label": "This tag breaks the %s.",
+                    "rules": "GlobalTags rules",
+                    "hover": "Click here to open the GlobalTags rules."
+                }
             },
             "ban": {
                 "name": "Ban GlobalTag player",

@@ -1,5 +1,6 @@
 package com.rappytv.globaltags;
 
+import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
@@ -15,6 +16,7 @@ import com.rappytv.globaltags.listener.BroadcastListener;
 import com.rappytv.globaltags.listener.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
+import java.util.concurrent.TimeUnit;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.component.Component;
@@ -26,6 +28,7 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.labymod.api.revision.SimpleRevision;
+import net.labymod.api.util.concurrent.task.Task;
 import net.labymod.api.util.version.SemanticVersion;
 
 @AddonMain
@@ -78,6 +81,13 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint());
         this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
         this.registerCommand(new GlobalTagCommand(this));
+
+        Task.builder(() -> api.getApiHandler().getReferralLeaderboards(response -> {
+            if (!response.isSuccessful()) {
+                return;
+            }
+            ReferralLeaderboardActivity.setLeaderboards(response.getData());
+        })).repeat(5, TimeUnit.MINUTES).build().run();
     }
 
     @Override
