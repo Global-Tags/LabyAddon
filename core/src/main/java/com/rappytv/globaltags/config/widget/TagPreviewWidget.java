@@ -123,9 +123,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 );
             }
             addEntry.accept(tag);
-            if (info.getHighestRoleIcon() != null) {
+            if (info.getRoleIcon() != null) {
                 addEntry.accept(
-                    new IconWidget(Icon.url(info.getHighestRoleIcon()))
+                    new IconWidget(Icon.url(info.getRoleIcon()))
                         .addId("staff-icon")
                 );
             }
