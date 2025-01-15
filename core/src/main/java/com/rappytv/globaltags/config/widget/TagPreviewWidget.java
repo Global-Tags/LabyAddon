@@ -125,7 +125,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
             addEntry.accept(tag);
             if (info.getRoleIcon() != null) {
                 addEntry.accept(
-                    new IconWidget(Icon.url(info.getRoleIcon()))
+                    new IconWidget(Icon.url(api.getUrls().getRoleIcon(info.getRoleIcon())))
                         .addId("staff-icon")
                 );
             }

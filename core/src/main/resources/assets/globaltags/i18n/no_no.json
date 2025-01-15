@@ -72,7 +72,8 @@
                         "none": "Ingen",
                         "custom": "Egendefinert",
                         "heart": "Hjerte",
-                        "star": "Stjerne"
+                        "star": "Stjerne",
+                        "crown": "Krone"
                     }
                 },
                 "resetTag": {
@@ -91,6 +92,17 @@
                 "description": "Tømmer tag-cachen manuelt.\nCachen tømmes automatisk hvert §b5 minutter§f.\nDu kan i tillegg tømme cachen med §b/gt cc§f.",
                 "text": "Tøm",
                 "name": "Tøm cachen"
+            },
+            "referralLeaderboards": {
+                "name": "Ledertavler for henvisninger",
+                "activity": {
+                    "current_month": "Denne måneden",
+                    "open": "Åpne laby.net profil",
+                    "loading": "Laster…",
+                    "total": "Antall"
+                },
+                "text": "Vis",
+                "description": "Viser et ledertavl av spillere som har invitert de fleste spillere til GlobalTags."
             }
         },
         "commands": {
@@ -136,7 +148,12 @@
             "report": {
                 "name": "Rapporter GlobalTag",
                 "title": "Rapporter %s",
-                "send": "Send rapporten"
+                "send": "Send rapporten",
+                "checkbox": {
+                    "label": "Denne tag bryter %s.",
+                    "hover": "Klikk her for å åpne GlobalTags reglene.",
+                    "rules": "GlobalTags reglene"
+                }
             },
             "ban": {
                 "name": "Utesteng GlobalTag-spiller",

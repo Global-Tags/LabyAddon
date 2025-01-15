@@ -75,7 +75,7 @@ public class CustomTag extends NameTag {
                 9,
                 9
             );
-            if(this.info.getRoleIcon() != null) Icon.url(this.info.getRoleIcon()).render(
+            if(this.info.getRoleIcon() != null) Icon.url(this.api.getUrls().getRoleIcon(this.info.getRoleIcon())).render(
                 stack,
                 this.getWidth() + 0.9F,
                 -1.2F,
