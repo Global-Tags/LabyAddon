@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.command.subcommands;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -34,7 +34,7 @@ public class LinkSubcommand extends SubCommand {
                     } else {
                         this.displayMessage(
                             GlobalTagAddon.prefix.copy().append(Component.text(
-                                info.getData(),
+                                info.getError(),
                                 NamedTextColor.RED
                             ))
                         );
@@ -80,7 +80,7 @@ public class LinkSubcommand extends SubCommand {
                         this.displayMessage(
                             Component.empty()
                                 .append(GlobalTagAddon.prefix)
-                                .append(Component.text(info.getData(), NamedTextColor.RED))
+                                .append(Component.text(info.getError(), NamedTextColor.RED))
                         );
                     }
                 });
