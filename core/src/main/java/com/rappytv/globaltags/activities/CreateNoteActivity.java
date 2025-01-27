@@ -52,16 +52,15 @@ public class CreateNoteActivity extends SimpleActivity {
             .updateComponent(Component.translatable("globaltags.context.staff_notes.create.send", NamedTextColor.AQUA))
             .addId("send-button");
         sendButton.setEnabled(false);
-        sendButton.setActionListener(() -> this.api.getApiHandler().createNote(this.uuid, inputWidget.getText(), (response) -> {
-            Laby.references().chatExecutor().displayClientMessage(
-                Component.empty()
-                    .append(GlobalTagAddon.prefix)
-                    .append(Util.getResponseComponent(response))
-            );
-            Laby.labyAPI().minecraft().executeOnRenderThread(() ->
-                Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null)
-            );
-        }));
+        sendButton.setActionListener(() -> {
+            Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+            this.api.getApiHandler().createNote(this.uuid, inputWidget.getText(), (response) ->
+                Laby.references().chatExecutor().displayClientMessage(
+                    Component.empty()
+                        .append(GlobalTagAddon.prefix)
+                        .append(Util.getResponseComponent(response))
+                ));
+        });
         inputWidget.updateListener((text) -> sendButton.setEnabled(!text.isBlank()));
 
         profileWrapper.addEntry(headWidget);
