@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.listener;
+package com.rappytv.globaltags.listeners;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo.Cache;
