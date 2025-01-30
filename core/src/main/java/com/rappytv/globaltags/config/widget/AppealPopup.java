@@ -46,7 +46,7 @@ public class AppealPopup extends AdvancedPopup {
                         ? "globaltags.general.success"
                         : "globaltags.general.error"
                     ),
-                    Component.text(response.getData(), NamedTextColor.WHITE)
+                    Util.getResponseComponent(response).color(NamedTextColor.WHITE)
                 )
             );
             this.close();

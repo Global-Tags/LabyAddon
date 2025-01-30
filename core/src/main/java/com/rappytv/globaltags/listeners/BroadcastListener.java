@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.listener;
+package com.rappytv.globaltags.listeners;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

@@ -66,20 +66,35 @@ public class TagSubConfig extends Config {
             }
             if(info == null || !info.getPlainTag().equals(this.tag.get())) api.getApiHandler().setTag(
                 this.tag.get(), (response) -> {
-                if(response.isSuccessful()) Util.update(api, ResultType.TAG, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(api, ResultType.TAG, Component.text(response.getData(), NamedTextColor.RED));
+                    if (response.isSuccessful())
+                        Util.update(api, ResultType.TAG,
+                            Component.text("✔", NamedTextColor.GREEN));
+                    else {
+                        Util.update(api, ResultType.TAG,
+                            Component.text(response.getError(), NamedTextColor.RED));
+                    }
             });
             else Util.update(api, ResultType.TAG, Util.unchanged);
             if(info != null && !info.getPosition().equals(this.position.get())) api.getApiHandler().setPosition(
                 this.position.get(), (response) -> {
-                if(response.isSuccessful()) Util.update(api, ResultType.POSITION, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(api, ResultType.POSITION, Component.text(response.getData(), NamedTextColor.RED));
+                    if (response.isSuccessful())
+                        Util.update(api, ResultType.POSITION,
+                            Component.text("✔", NamedTextColor.GREEN));
+                    else {
+                        Util.update(api, ResultType.POSITION,
+                            Component.text(response.getError(), NamedTextColor.RED));
+                    }
             });
             else Util.update(api, ResultType.POSITION, Util.unchanged);
             if(info != null && !info.getGlobalIcon().equals(this.globalIcon.get())) api.getApiHandler().setIcon(
                 this.globalIcon.get(), (response) -> {
-                if(response.isSuccessful()) Util.update(api, ResultType.ICON, Component.text("✔", NamedTextColor.GREEN));
-                else Util.update(api, ResultType.ICON, Component.text(response.getData(), NamedTextColor.RED));
+                    if (response.isSuccessful())
+                        Util.update(api, ResultType.ICON,
+                            Component.text("✔", NamedTextColor.GREEN));
+                    else {
+                        Util.update(api, ResultType.ICON,
+                            Component.text(response.getError(), NamedTextColor.RED));
+                    }
             });
             else Util.update(api, ResultType.ICON, Util.unchanged);
         });
@@ -100,7 +115,7 @@ public class TagSubConfig extends Config {
                     ? "globaltags.general.success"
                     : "globaltags.general.error"
                 ),
-                Component.text(info.getData(), NamedTextColor.WHITE)
+                    Util.getResponseComponent(info).color(NamedTextColor.WHITE)
             );
         });
     }

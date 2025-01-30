@@ -12,8 +12,9 @@ import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.interaction.StaffNotesBulletPoint;
 import com.rappytv.globaltags.interaction.TagHistoryBulletPoint;
 import com.rappytv.globaltags.interaction.ToggleBanBulletPoint;
-import com.rappytv.globaltags.listener.BroadcastListener;
-import com.rappytv.globaltags.listener.ServerNavigationListener;
+import com.rappytv.globaltags.listeners.BroadcastListener;
+import com.rappytv.globaltags.listeners.LabyConnectDisconnectListener;
+import com.rappytv.globaltags.listeners.ServerNavigationListener;
 import com.rappytv.globaltags.nametag.CustomTag;
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
 import java.util.concurrent.TimeUnit;
@@ -71,6 +72,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
                 new CustomTag(this, positionType)
             );
         this.registerListener(new BroadcastListener(api));
+        this.registerListener(new LabyConnectDisconnectListener(api));
         this.registerListener(new ServerNavigationListener());
         this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint());
         this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint());
