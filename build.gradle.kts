@@ -8,7 +8,7 @@ group = "org.example"
 version = providers.environmentVariable("VERSION").getOrElse("1.3.9")
 
 labyMod {
-    defaultPackageName = "com.rappytv.globaltags" //change this to your main package name (used by all modules)
+    defaultPackageName = "com.rappytv.globaltags"
     addonInfo {
         namespace = "globaltags"
         displayName = "GlobalTags"
