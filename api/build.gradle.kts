@@ -3,7 +3,7 @@ import net.labymod.labygradle.common.extension.LabyModAnnotationProcessorExtensi
 dependencies {
     labyProcessor()
     labyApi("api")
-    addonMavenDependency("com.rappytv.globaltags:GlobalTagsJava:1.2.1")
+    addonMavenDependency("com.rappytv.globaltags:GlobalTagsJava:1.2.2")
 }
 
 labyModAnnotationProcessor {
