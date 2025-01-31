@@ -1,1 +1,206 @@
-{}
+{
+    "globaltags": {
+        "settings": {
+            "tags": {
+                "tagPreview": {
+                    "appeal": {
+                        "description": "⚠️ 이 버튼은 항의할수 있는 밴일 경우에만 클릭할 수 있습니다.",
+                        "name": "항의",
+                        "popup": {
+                            "label": "왜 우리가 당신은 밴 해제해야 하나요?",
+                            "placeholder": "이유를 입력하세요…",
+                            "button": "항의 전송"
+                        }
+                    },
+                    "name": "태그 미리보기",
+                    "banned": "당신의 계정은 정지되었습니다!\n이유: %s",
+                    "labyConnect": "LabyConnect에 연결되어있지 않습니다!",
+                    "empty": "<비어있는 태그>",
+                    "emptyReason": "이유가 제공되지 않음",
+                    "noInfo": "계정 정보를 불러오지 못했습니다!"
+                },
+                "position": {
+                    "description": "당신의 태그는 이 위치에서 모두에게 표시됩니다.",
+                    "name": "글로벌 위치",
+                    "entries": {
+                        "above": "이름 위",
+                        "below": "이름 아래",
+                        "left": "이름 좌측",
+                        "right": "이름 우측"
+                    }
+                },
+                "globalIcon": {
+                    "entries": {
+                        "star": "별",
+                        "none": "없음",
+                        "custom": "커스텀",
+                        "crown": "왕관",
+                        "heart": "하트"
+                    },
+                    "description": "이 아이콘은 당신의 태그 좌측에 모든 플레이어에게 표시됩니다.",
+                    "name": "글로벌 아이콘"
+                },
+                "staged": {
+                    "description": "\"설정 적용\" 버튼을 클릭해서 수정을 적용하세요!",
+                    "title": "대기중인 수정"
+                },
+                "name": "글로벌 태그 설정",
+                "tag": {
+                    "name": "글로벌 태그"
+                },
+                "updateSettings": {
+                    "name": "설정 적용",
+                    "text": "업데이트",
+                    "result": "태그: %s\n위치: %s\n아이콘: %s",
+                    "unchanged": "변경되지 않음"
+                },
+                "resetTag": {
+                    "name": "GlobalTag 삭제",
+                    "text": "삭제"
+                }
+            },
+            "clearCache": {
+                "description": "태그 캐시를 수동적으로 지웁니다.\n캐시는 $b5분$f마다 자동으로 지워집니다.\n명령어 §b/gt cc§f로도 캐시를 삭제할 수 있습니다.",
+                "name": "캐시 지우기",
+                "text": "지우기"
+            },
+            "localizedResponses": {
+                "description": "만약 이 옵션이 활성화되어있다면, 애드온이 Minecraft언어를 API로 전송합니다. 만약 번역이 발견되면, 번역된 응답을 받습니다. Minecraft 언어가 번역된 이메일을 위해서 저장됩니다.",
+                "name": "API 응답 번역"
+            },
+            "header": {
+                "tags": {
+                    "name": "태그 설정"
+                },
+                "display": {
+                    "name": "표시 설정"
+                }
+            },
+            "enabled": {
+                "name": "활성화됨"
+            },
+            "joinDiscord": {
+                "name": "Discord 서버",
+                "text": "가입"
+            },
+            "referralLeaderboards": {
+                "name": "추천인 순위",
+                "description": "GlobalTags에 가장 많은 사람을 초대한 사람들을 표시하는 리더보드를 표시함.",
+                "text": "보기",
+                "activity": {
+                    "total": "합계",
+                    "current_month": "이번 달",
+                    "open": "laby.net 프로필 열기",
+                    "loading": "로딩 중…"
+                }
+            },
+            "showOwnTag": {
+                "name": "자신의 태그 보기"
+            },
+            "tagSize": {
+                "name": "태그 크기"
+            },
+            "showBackground": {
+                "name": "배경 보기",
+                "description": "이 옵션이 활성화되면, 회색 바닐라 이름표 배경을 표시합니다."
+            }
+        },
+        "commands": {
+            "link": {
+                "discord": {
+                    "copied": "코드가 클립보드로 복사되었습니다!"
+                },
+                "email": {
+                    "verify": "이메일 인증",
+                    "hover": "여기를 클릭하여 인증 코드를 입력하세요"
+                }
+            },
+            "base": {
+                "clear_cache": {
+                    "hover": "여기를 클릭해서 태그 캐시를 삭제하세요!",
+                    "label": "캐시 삭제"
+                },
+                "version": "애드온 버전: %s",
+                "api": {
+                    "version": "API 버전: %s",
+                    "offline": "연결 실패!"
+                }
+            },
+            "usage": "사용법: %s",
+            "clear_cache": {
+                "success": "캐시가 삭제되었습니다!"
+            },
+            "renew_cache": {
+                "success": "캐시가 갱신되었습니다!"
+            }
+        },
+        "general": {
+            "success": "성공!",
+            "error": "오류 발생"
+        },
+        "context": {
+            "reason": "이유",
+            "placeholder": "이유를 입력하세요…",
+            "tag_history": {
+                "title": "%s의 태그 기록",
+                "name": "GlobalTag 기록 보기",
+                "flagged_words": "금지된 단어:"
+            },
+            "staff_notes": {
+                "create": {
+                    "placeholder": "노트를 입력하세요…",
+                    "label": "노트",
+                    "title": "%s에 노트 추가",
+                    "send": "생성"
+                },
+                "hover": {
+                    "deleted": "성공적으로 삭제됨!",
+                    "delete": "클릭하여 삭제",
+                    "create": "노트 추가"
+                },
+                "description": "%s 생성됨 (#%s)",
+                "title": "%s의 노트",
+                "name": "GlobalTags 노트 관리"
+            },
+            "clearTag": {
+                "name": "GlobalTag 지우기"
+            },
+            "changeTag": {
+                "send": "태그 업데이트",
+                "placeholder": "업데이트된 태그 입력…",
+                "label": "새 GlobalTag",
+                "title": "%s의 태그 변경",
+                "name": "GlobalTag 변경"
+            },
+            "referral": {
+                "name": "이 플레이어가 저를 GlobalTags로 초대했어요"
+            },
+            "report": {
+                "name": "GlobalTag 신고",
+                "title": "%s 신고",
+                "send": "신고 전송",
+                "checkbox": {
+                    "rules": "GlobalTags 규칙",
+                    "label": "이 태그는 %s을 위반합니다.",
+                    "hover": "여기를 클릭하여 GlobalTags 규칙을 여세요."
+                }
+            },
+            "ban": {
+                "name": "GlobalTag 플레이어 밴",
+                "title": "%s 밴",
+                "send": "밴"
+            },
+            "unban": {
+                "name": "GlobalTag 플레이어 밴 해제",
+                "title": "%s 밴 해제",
+                "send": "밴 해제"
+            },
+            "editBan": {
+                "name": "GlobalTag 밴 수정",
+                "title": "%s의 밴 수정",
+                "send": "변경사항 전송",
+                "appealable": "항의 가능"
+            }
+        }
+    }
+}
