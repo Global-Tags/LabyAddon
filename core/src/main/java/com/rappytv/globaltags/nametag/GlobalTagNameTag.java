@@ -1,11 +1,13 @@
 package com.rappytv.globaltags.nametag;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.config.GlobalTagConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
+import java.awt.*;
+import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.Entity;
@@ -17,10 +19,8 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
 import org.jetbrains.annotations.Nullable;
-import java.awt.*;
-import java.util.UUID;
 
-public class CustomTag extends NameTag {
+public class GlobalTagNameTag extends NameTag {
 
     private final int black = new Color(0, 0, 0, 70).getRGB();
     private final GlobalTagAPI api;
@@ -28,7 +28,7 @@ public class CustomTag extends NameTag {
     private final PositionType position;
     private PlayerInfo<Component> info;
 
-    public CustomTag(GlobalTagAddon addon, PositionType position) {
+    public GlobalTagNameTag(GlobalTagAddon addon, PositionType position) {
         this.api = GlobalTagAddon.getAPI();
         this.config = addon.configuration();
         this.position = position;

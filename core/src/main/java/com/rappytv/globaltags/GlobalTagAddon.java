@@ -15,7 +15,7 @@ import com.rappytv.globaltags.interaction.ToggleBanBulletPoint;
 import com.rappytv.globaltags.listeners.BroadcastListener;
 import com.rappytv.globaltags.listeners.LabyConnectDisconnectListener;
 import com.rappytv.globaltags.listeners.ServerNavigationListener;
-import com.rappytv.globaltags.nametag.CustomTag;
+import com.rappytv.globaltags.nametag.GlobalTagNameTag;
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
 import java.util.concurrent.TimeUnit;
 import net.labymod.api.Laby;
@@ -65,11 +65,11 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
 
         TagRegistry tagRegistry = this.labyAPI().tagRegistry();
         for (PositionType positionType : PositionType.values())
-            tagRegistry.registerBefore(
-                "friendtags_tag",
-                "globaltag",
+            tagRegistry.registerAfter(
+                "labymod_role",
+                "globaltags_tag",
                 positionType,
-                new CustomTag(this, positionType)
+                new GlobalTagNameTag(this, positionType)
             );
         this.registerListener(new BroadcastListener(api));
         this.registerListener(new LabyConnectDisconnectListener(api));
