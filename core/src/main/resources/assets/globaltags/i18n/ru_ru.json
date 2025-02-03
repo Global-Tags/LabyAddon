@@ -51,9 +51,6 @@
                     "result": "Тег: %s\nПозиция: %s\nИконка: %s",
                     "unchanged": "неизмененный"
                 },
-                "tag": {
-                    "name": "Global Tag"
-                },
                 "resetTag": {
                     "name": "Удалить GlobalTag",
                     "text": "Удалить"
