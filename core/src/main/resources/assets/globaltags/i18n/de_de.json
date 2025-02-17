@@ -42,7 +42,6 @@
                     "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
                     "labyConnect": "Du bist nicht mit LabyConnect verbunden!",
                     "empty": "<Leerer Tag>",
-                    "emptyReason": "Kein Grund angegeben",
                     "appeal": {
                         "name": "Entbannung",
                         "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
