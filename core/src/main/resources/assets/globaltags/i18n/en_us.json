@@ -49,11 +49,12 @@
                 },
                 "tagPreview": {
                     "name": "Tag Preview",
-                    "banned": "Your account is suspended!\nReason: %s",
+                    "banned": "Your account is suspended!",
+                    "reason": "Reason: %s",
+                    "expires": "Expires: %s",
                     "noInfo": "Couldn't fetch account info!",
                     "labyConnect": "You're not connected to LabyConnect!",
                     "empty": "<Empty Tag>",
-                    "emptyReason": "No reason provided",
                     "appeal": {
                         "name": "Appeal",
                         "description": "⚠️ This button will only be clickable if your suspension is appealable.",

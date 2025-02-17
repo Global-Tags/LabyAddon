@@ -10,10 +10,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.text.SimpleDateFormat;
 import java.util.function.Consumer;
 import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.event.HoverEvent;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
@@ -38,6 +40,7 @@ import net.labymod.api.util.ThreadSafe;
 @SettingWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     private static boolean refetch = true;
     private static boolean changed = false;
     private final TagSubConfig config;
@@ -162,11 +165,30 @@ public class TagPreviewWidget extends HorizontalListWidget {
         String session = GlobalTagAddon.getAPI().getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-        else if (info.isBanned())
-            return Component.translatable(
-            "globaltags.settings.tags.tagPreview.banned",
-                Component.text(info.getBanInfo().getReason())
-        );
+        else if (info.isBanned()) { // ⓘ
+            Component banInfo = Component.empty()
+                .append(Component.translatable(
+                    "globaltags.settings.tags.tagPreview.reason",
+                    NamedTextColor.RED,
+                    Component.text(info.getBanInfo().getReason(), NamedTextColor.GRAY)
+                ));
+
+            if (info.getBanInfo().getExpiresAt() != null) {
+                banInfo
+                    .append(Component.newline())
+                    .append(Component.translatable(
+                        "globaltags.settings.tags.tagPreview.expires",
+                        NamedTextColor.RED,
+                        Component.text(dateFormat.format(info.getBanInfo().getExpiresAt()),
+                            NamedTextColor.GRAY)
+                    ));
+            }
+
+            return Component.empty()
+                .append(Component.translatable("globaltags.settings.tags.tagPreview.banned"))
+                .append(Component.space())
+                .append(Component.text("ⓘ").hoverEvent(HoverEvent.showText(banInfo)));
+        }
         return null;
     }
 
