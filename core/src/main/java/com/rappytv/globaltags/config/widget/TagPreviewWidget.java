@@ -165,7 +165,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         String session = GlobalTagAddon.getAPI().getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-        else if (info.isBanned()) { // ⓘ
+        else if (info.isBanned()) {
             Component banInfo = Component.empty()
                 .append(Component.translatable(
                     "globaltags.settings.tags.tagPreview.reason",
