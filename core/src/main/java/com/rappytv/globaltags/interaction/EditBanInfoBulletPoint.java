@@ -45,6 +45,6 @@ public class EditBanInfoBulletPoint implements BulletPoint {
         PlayerInfo<Component> executor = this.api.getCache().get(Laby.labyAPI().getUniqueId());
         PlayerInfo<Component> target = this.api.getCache().get(player.getUniqueId());
         return executor != null && executor.hasPermission(GlobalPermission.MANAGE_BANS)
-            && target != null && target.isSuspended();
+            && target != null && target.isBanned();
     }
 }

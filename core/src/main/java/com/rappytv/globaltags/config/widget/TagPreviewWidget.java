@@ -6,6 +6,11 @@ import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.function.Consumer;
 import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
@@ -27,12 +32,6 @@ import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
 import net.labymod.api.util.I18n;
 import net.labymod.api.util.ThreadSafe;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.function.Consumer;
 
 @Link("preview.lss")
 @AutoWidget
@@ -131,7 +130,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
             }
         }
 
-        if (info != null && info.isSuspended()) {
+        if (info != null && info.isBanned()) {
             ButtonWidget appealButton = ButtonWidget.i18n(
                 "globaltags.settings.tags.tagPreview.appeal.name",
                 () -> new AppealPopup(api).displayInOverlay()
@@ -140,7 +139,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 "globaltags.settings.tags.tagPreview.appeal.description",
                 NamedTextColor.GOLD
             ));
-            appealButton.setEnabled(info.getSuspension().isAppealable());
+            appealButton.setEnabled(info.getBanInfo().isAppealable());
             addEntry.accept(appealButton);
         }
     }
@@ -163,13 +162,10 @@ public class TagPreviewWidget extends HorizontalListWidget {
         String session = GlobalTagAddon.getAPI().getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-        else if(info.isSuspended()) return Component.translatable(
+        else if (info.isBanned())
+            return Component.translatable(
             "globaltags.settings.tags.tagPreview.banned",
-            Component.text(
-                info.getSuspension().getReason() != null
-                    ? info.getSuspension().getReason()
-                    : I18n.translate("globaltags.settings.tags.tagPreview.emptyReason")
-            )
+                Component.text(info.getBanInfo().getReason())
         );
         return null;
     }

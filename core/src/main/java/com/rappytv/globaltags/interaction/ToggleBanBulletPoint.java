@@ -23,7 +23,8 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context." + (this.target.isSuspended() ? "unban" : "ban") + ".name");
+        return Component.translatable(
+            "globaltags.context." + (this.target.isBanned() ? "unban" : "ban") + ".name");
     }
 
     @Override
@@ -33,7 +34,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public void execute(Player player) {
-        if(this.target.isSuspended()) {
+        if (this.target.isBanned()) {
             this.api.getApiHandler().unbanPlayer(this.target.getUUID(), (response) -> {
                 if(response.isSuccessful()) Util.broadcastTagUpdate(this.target.getUUID());
                 Laby.references().chatExecutor().displayClientMessage(

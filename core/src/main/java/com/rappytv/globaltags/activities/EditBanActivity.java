@@ -3,7 +3,7 @@ package com.rappytv.globaltags.activities;
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
-import com.rappytv.globaltags.wrapper.model.PlayerInfo.Suspension;
+import com.rappytv.globaltags.wrapper.model.BanInfo;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.labymod.api.Laby;
@@ -44,11 +44,11 @@ public class EditBanActivity extends SimpleActivity {
     public void initialize(Parent parent) {
         super.initialize(parent);
         this.api.getCache().resolve(this.uuid, (info) -> {
-            if (info == null) {
+            if (info == null || info.getBanInfo() == null) {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
                 return;
             }
-            Suspension suspension = info.getSuspension();
+            BanInfo banInfo = info.getBanInfo();
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
@@ -65,12 +65,12 @@ public class EditBanActivity extends SimpleActivity {
                     NamedTextColor.DARK_GRAY
                 ))
                 .addId("input");
-            String reason = suspension.getReason();
-            if(reason != null) inputWidget.setText(reason, true);
+            String reason = banInfo.getReason();
+            inputWidget.setText(reason, true);
             HorizontalListWidget checkboxWrapper = new HorizontalListWidget().addId(
                 "checkbox-wrapper");
             CheckBoxWidget checkBoxWidget = new CheckBoxWidget().addId("check-box");
-            checkBoxWidget.setState(suspension.isAppealable() ? State.CHECKED : State.UNCHECKED);
+            checkBoxWidget.setState(banInfo.isAppealable() ? State.CHECKED : State.UNCHECKED);
             ComponentWidget boxLabelWidget = ComponentWidget
                 .i18n("globaltags.context.editBan.appealable")
                 .addId("checkbox-label");
@@ -83,23 +83,23 @@ public class EditBanActivity extends SimpleActivity {
             sendButton.setEnabled(false);
             sendButton.setActionListener(() -> {
                 Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
-                Suspension editedSuspension = new Suspension(
-                    inputWidget.getText(),
-                    checkBoxWidget.state() == State.CHECKED
-                );
-                this.api.getApiHandler().editBan(this.uuid, editedSuspension, (response) ->
-                    Laby.references().chatExecutor().displayClientMessage(
-                        Component.empty()
-                            .append(GlobalTagAddon.prefix)
-                            .append(Util.getResponseComponent(response))
-                    )
+                this.api.getApiHandler().editBan(
+                    this.uuid,
+                    reason,
+                    checkBoxWidget.state() == State.CHECKED,
+                    (response) ->
+                        Laby.references().chatExecutor().displayClientMessage(
+                            Component.empty()
+                                .append(GlobalTagAddon.prefix)
+                                .append(Util.getResponseComponent(response))
+                        )
                 );
             });
             Consumer<String> updateButton = (text) -> {
                 boolean reasonNotEmpty = !text.isBlank();
-                boolean updatedReason = !text.equals(suspension.getReason());
+                boolean updatedReason = !text.equals(banInfo.getReason());
                 boolean updatedCheckbox =
-                    (checkBoxWidget.state() == State.CHECKED) != suspension.isAppealable();
+                    (checkBoxWidget.state() == State.CHECKED) != banInfo.isAppealable();
                 sendButton.setEnabled(reasonNotEmpty && (updatedReason || updatedCheckbox));
             };
             inputWidget.updateListener(updateButton);
