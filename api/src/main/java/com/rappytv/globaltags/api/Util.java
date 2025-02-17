@@ -2,7 +2,7 @@ package com.rappytv.globaltags.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.rappytv.globaltags.wrapper.http.ApiHandler.ApiResponse;
+import com.rappytv.globaltags.wrapper.http.ApiResponse;
 import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
