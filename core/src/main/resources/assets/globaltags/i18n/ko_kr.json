@@ -16,7 +16,6 @@
                     "banned": "당신의 계정은 정지되었습니다!\n이유: %s",
                     "labyConnect": "LabyConnect에 연결되어있지 않습니다!",
                     "empty": "<비어있는 태그>",
-                    "emptyReason": "이유가 제공되지 않음",
                     "noInfo": "계정 정보를 불러오지 못했습니다!"
                 },
                 "position": {

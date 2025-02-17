@@ -7,7 +7,6 @@
                     "title": "Cambios pendientes"
                 },
                 "tagPreview": {
-                    "emptyReason": "No se da ninguna razón",
                     "name": "Vista previa de tu Tag",
                     "banned": "¡Tu cuenta está suspendida!\nRazón: %s",
                     "noInfo": "¡No se ha podido obtener la info de la cuenta!",
