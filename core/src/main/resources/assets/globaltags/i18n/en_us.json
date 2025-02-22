@@ -45,6 +45,12 @@
                 "name": "Show background",
                 "description": "When this option is enabled, you'll see the gray vanilla nametag background behind tags."
             },
+            "hiddenTagList": {
+                "name": "Hidden tags",
+                "text": "Manage",
+                "empty": "You don't have any hidden tags!",
+                "remove": "Remove from hidden tag list"
+            },
             "tags": {
                 "name": "Global tag settings",
                 "staged": {
@@ -237,7 +243,7 @@
             },
             "hideTag": {
                 "name": "Hide GlobalTag",
-                "success": "%s's GlobalTag will now not be shown to you anymore!"
+                "success": "%s's GlobalTag will not be shown to you anymore!"
             },
             "showTag": {
                 "name": "Show GlobalTag",

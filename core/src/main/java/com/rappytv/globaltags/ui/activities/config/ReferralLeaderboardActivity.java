@@ -21,14 +21,14 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalLi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.util.ThreadSafe;
 
-@Link("leaderboard.lss")
+@Link("player-list.lss")
 @AutoActivity
 public class ReferralLeaderboardActivity extends SimpleActivity {
 
     private static Map<ReferralLeaderboardType, List<ReferralLeaderboardEntry>> leaderboards = null;
     private final GlobalTagAPI api;
     private final VerticalListWidget<ReferralLeaderboardEntryWidget> entries = new VerticalListWidget<>().addId(
-        "leaderboard-entries");
+        "player-entries");
     private final HorizontalListWidget buttonMenu;
     private ReferralLeaderboardType selectedLeaderboard = ReferralLeaderboardType.TOTAL;
 
