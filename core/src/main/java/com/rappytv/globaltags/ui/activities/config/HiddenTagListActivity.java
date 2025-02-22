@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.ui.activities.config;
 
 import com.rappytv.globaltags.config.GlobalTagConfig;
-import com.rappytv.globaltags.ui.widgets.HiddenPlayerWidget;
+import com.rappytv.globaltags.ui.widgets.config.HiddenPlayerWidget;
 import java.util.UUID;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.Parent;

@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.ui.widgets;
+package com.rappytv.globaltags.ui.widgets.config;
 
 import com.rappytv.globaltags.config.GlobalTagConfig;
 import java.util.UUID;

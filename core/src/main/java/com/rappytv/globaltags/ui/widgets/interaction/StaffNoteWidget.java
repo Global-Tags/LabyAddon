@@ -1,9 +1,12 @@
-package com.rappytv.globaltags.ui.widgets;
+package com.rappytv.globaltags.ui.widgets.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.model.PlayerNote;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.TextComponent;
@@ -16,9 +19,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 import net.labymod.api.util.I18n;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
 
 @AutoWidget
 public class StaffNoteWidget extends SimpleWidget {

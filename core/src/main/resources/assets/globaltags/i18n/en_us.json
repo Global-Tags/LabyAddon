@@ -192,6 +192,9 @@
                     "label": "This tag breaks the %s.",
                     "rules": "GlobalTags rules",
                     "hover": "Click here to open the GlobalTags rules."
+                },
+                "hide": {
+                    "label": "Hide this player's GlobalTag"
                 }
             },
             "ban": {

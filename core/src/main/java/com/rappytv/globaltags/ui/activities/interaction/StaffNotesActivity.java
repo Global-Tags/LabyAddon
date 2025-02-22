@@ -2,7 +2,7 @@ package com.rappytv.globaltags.ui.activities.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.ui.widgets.StaffNoteWidget;
+import com.rappytv.globaltags.ui.widgets.interaction.StaffNoteWidget;
 import com.rappytv.globaltags.wrapper.model.PlayerNote;
 import java.util.UUID;
 import net.labymod.api.Laby;

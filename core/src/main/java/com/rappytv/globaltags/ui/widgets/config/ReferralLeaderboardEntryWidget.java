@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.ui.widgets;
+package com.rappytv.globaltags.ui.widgets.config;
 
 import com.rappytv.globaltags.wrapper.model.ReferralLeaderboardEntry;
 import net.labymod.api.Laby;

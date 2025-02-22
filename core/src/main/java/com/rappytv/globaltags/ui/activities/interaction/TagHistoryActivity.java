@@ -2,7 +2,7 @@ package com.rappytv.globaltags.ui.activities.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.ui.widgets.TagHistoryEntryWidget;
+import com.rappytv.globaltags.ui.widgets.interaction.TagHistoryEntryWidget;
 import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;

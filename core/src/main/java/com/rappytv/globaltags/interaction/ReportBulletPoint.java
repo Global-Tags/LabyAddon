@@ -32,6 +32,7 @@ public class ReportBulletPoint implements BulletPoint {
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new ReportUUIDActivity(
+                this.config,
                 player.getUniqueId(),
                 player.getName()
             ))
