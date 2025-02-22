@@ -35,8 +35,8 @@ public class ReportUUIDActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public ReportUUIDActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public ReportUUIDActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }

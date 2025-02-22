@@ -48,8 +48,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-14"));
-        Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
+        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
     }
 
     @Override
@@ -74,14 +73,14 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         this.registerListener(new BroadcastListener(api));
         this.registerListener(new LabyConnectDisconnectListener(api));
         this.registerListener(new ServerNavigationListener());
-        this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ReportBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
+        this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ReportBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint(this));
         this.registerCommand(new GlobalTagCommand(this));
 
         Task.builder(() -> api.getApiHandler().getReferralLeaderboards(response -> {

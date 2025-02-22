@@ -31,8 +31,8 @@ public class BanActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public BanActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public BanActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }

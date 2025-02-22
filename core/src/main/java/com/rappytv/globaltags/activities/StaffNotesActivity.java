@@ -31,8 +31,8 @@ public class StaffNotesActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public StaffNotesActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public StaffNotesActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }

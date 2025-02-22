@@ -30,8 +30,8 @@ public class TagHistoryActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public TagHistoryActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public TagHistoryActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }

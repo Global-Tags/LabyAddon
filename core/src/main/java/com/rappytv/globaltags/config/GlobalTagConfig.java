@@ -34,8 +34,11 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
 
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
+
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
-    @MethodOrder(after = "localizedResponses")
+    @MethodOrder(after = "showBulletPoints")
     @SpriteSlot(size = 32, y = 2, x = 3)
     @ButtonSetting
     public void joinDiscord(Setting setting) {
@@ -86,6 +89,9 @@ public class GlobalTagConfig extends AddonConfig {
     public ConfigProperty<Boolean> localizedResponses() {
         return this.localizedResponses;
     }
+    public ConfigProperty<Boolean> showBulletPoints() {
+        return this.showBulletPoints;
+    }
     public ConfigProperty<Boolean> showOwnTag() {
         return this.showOwnTag;
     }
@@ -94,5 +100,8 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return this.showBackground;
+    }
+    public TagSubConfig tags() {
+        return this.tags;
     }
 }

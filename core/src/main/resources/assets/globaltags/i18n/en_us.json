@@ -16,6 +16,10 @@
                 "name": "Localize API responses",
                 "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will be saved for localized emails."
             },
+            "showBulletPoints": {
+                "name": "Show interaction menu bullets",
+                "description": "Here you can disable the report and referral bullet points."
+            },
             "joinDiscord": {
                 "name": "Discord Server",
                 "text": "Join"

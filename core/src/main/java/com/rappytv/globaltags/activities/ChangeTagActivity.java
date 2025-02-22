@@ -30,8 +30,8 @@ public class ChangeTagActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public ChangeTagActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public ChangeTagActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
