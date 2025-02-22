@@ -1,9 +1,9 @@
 package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.activity.Activity;

@@ -1,6 +1,5 @@
 package com.rappytv.globaltags;
 
-import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
@@ -16,7 +15,8 @@ import com.rappytv.globaltags.interaction.ToggleHideTagBulletPoint;
 import com.rappytv.globaltags.listeners.BroadcastListener;
 import com.rappytv.globaltags.listeners.LabyConnectDisconnectListener;
 import com.rappytv.globaltags.listeners.ServerNavigationListener;
-import com.rappytv.globaltags.nametag.GlobalTagNameTag;
+import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
+import com.rappytv.globaltags.ui.nametag.GlobalTagNameTag;
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
 import java.util.concurrent.TimeUnit;
 import net.labymod.api.Laby;

@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.nametag;
+package com.rappytv.globaltags.ui.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;

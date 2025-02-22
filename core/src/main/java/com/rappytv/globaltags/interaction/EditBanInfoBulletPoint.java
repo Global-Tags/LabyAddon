@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.EditBanActivity;
 import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.ui.activities.interaction.EditBanActivity;
 import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;

@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.activities.widgets;
+package com.rappytv.globaltags.ui.widgets;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;

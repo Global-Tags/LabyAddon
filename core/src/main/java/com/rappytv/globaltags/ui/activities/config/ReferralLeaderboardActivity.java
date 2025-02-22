@@ -1,8 +1,8 @@
-package com.rappytv.globaltags.activities;
+package com.rappytv.globaltags.ui.activities.config;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.widgets.ReferralLeaderboardEntryWidget;
 import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.ui.widgets.ReferralLeaderboardEntryWidget;
 import com.rappytv.globaltags.wrapper.enums.ReferralLeaderboardType;
 import com.rappytv.globaltags.wrapper.model.ReferralLeaderboardEntry;
 import java.util.List;
