@@ -107,6 +107,8 @@ public class GlobalTagNameTag extends NameTag {
 
     @Override
     public boolean isVisible() {
-        return !this.entity.isCrouching() && super.isVisible();
+        return !this.entity.isCrouching()
+            && !this.config.tags().hiddenTags().contains(this.entity.getUniqueId())
+            && super.isVisible();
     }
 }

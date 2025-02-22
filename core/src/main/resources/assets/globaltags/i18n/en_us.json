@@ -234,6 +234,14 @@
                 "name": "Show GlobalTag history",
                 "title": "%s's tag history",
                 "flagged_words": "Flagged words:"
+            },
+            "hideTag": {
+                "name": "Hide GlobalTag",
+                "success": "%s's GlobalTag will now not be shown to you anymore!"
+            },
+            "showTag": {
+                "name": "Show GlobalTag",
+                "success": "%s's GlobalTag will now be shown to you again!"
             }
         }
     }
