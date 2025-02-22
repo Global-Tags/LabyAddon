@@ -51,8 +51,10 @@ public class GlobalTagNameTag extends NameTag {
         if(this.api.getCache().has(uuid))
             this.info = this.api.getCache().get(uuid);
         else {
-            if(this.position == PositionType.ABOVE_NAME)
+            if (this.position == PositionType.ABOVE_NAME
+                && GlobalTagAddon.getAPI().getAuthorization() != null) {
                 this.api.getCache().resolve(uuid);
+            }
         }
         if(this.info == null || this.info.getTag() == null) return null;
         if(!this.getGlobalPosition(this.position).equals(this.info.getPosition())) return null;

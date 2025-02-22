@@ -15,6 +15,7 @@ import com.rappytv.globaltags.interaction.ToggleHideTagBulletPoint;
 import com.rappytv.globaltags.listeners.BroadcastListener;
 import com.rappytv.globaltags.listeners.LabyConnectDisconnectListener;
 import com.rappytv.globaltags.listeners.ServerNavigationListener;
+import com.rappytv.globaltags.listeners.WorldEnterListener;
 import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.ui.nametag.GlobalTagNameTag;
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
@@ -74,6 +75,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         this.registerListener(new BroadcastListener(api));
         this.registerListener(new LabyConnectDisconnectListener(api));
         this.registerListener(new ServerNavigationListener());
+        this.registerListener(new WorldEnterListener());
         this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint(this));
         this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint(this));
         this.labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint(this));
