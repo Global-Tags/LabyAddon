@@ -1,9 +1,10 @@
 package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.ui.activities.config.HiddenTagListActivity;
+import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -34,8 +35,11 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
 
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
+
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
-    @MethodOrder(after = "localizedResponses")
+    @MethodOrder(after = "showBulletPoints")
     @SpriteSlot(size = 32, y = 2, x = 3)
     @ButtonSetting
     public void joinDiscord(Setting setting) {
@@ -63,6 +67,12 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
 
+    @MethodOrder(after = "showBackground")
+    @ActivitySetting
+    public Activity hiddenTagList() {
+        return new HiddenTagListActivity(this);
+    }
+
     @SettingSection("tags")
     @SpriteSlot(size = 32, y = 1)
     private final TagSubConfig tags = new TagSubConfig();
@@ -86,6 +96,9 @@ public class GlobalTagConfig extends AddonConfig {
     public ConfigProperty<Boolean> localizedResponses() {
         return this.localizedResponses;
     }
+    public ConfigProperty<Boolean> showBulletPoints() {
+        return this.showBulletPoints;
+    }
     public ConfigProperty<Boolean> showOwnTag() {
         return this.showOwnTag;
     }
@@ -94,5 +107,8 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return this.showBackground;
+    }
+    public TagSubConfig tags() {
+        return this.tags;
     }
 }

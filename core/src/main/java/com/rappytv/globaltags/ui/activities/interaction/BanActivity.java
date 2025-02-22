@@ -1,8 +1,9 @@
-package com.rappytv.globaltags.activities;
+package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
+import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -21,8 +22,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalLi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 
-import java.util.UUID;
-
 @Link("input.lss")
 @AutoActivity
 public class BanActivity extends SimpleActivity {
@@ -31,8 +30,8 @@ public class BanActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public BanActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public BanActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }

@@ -39,6 +39,7 @@
 
         .input {
             margin-top: 6;
+            margin-bottom: 10;
             width: 200;
             alignment-x: center;
             alignment-y: center;
@@ -47,7 +48,6 @@
         .checkbox-wrapper {
             height: 20;
             width: 100%;
-            margin-top: 8;
             space-between-entries: 4;
 
             .check-box {
@@ -61,7 +61,7 @@
         }
 
         .send-button {
-            margin-top: 5;
+            margin-top: 12;
             width: 80;
             height: 20;
             alignment-x: center;

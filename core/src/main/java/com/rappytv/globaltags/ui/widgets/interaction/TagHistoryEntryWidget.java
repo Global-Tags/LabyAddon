@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.activities.widgets;
+package com.rappytv.globaltags.ui.widgets.interaction;
 
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.model.TagHistoryEntry;

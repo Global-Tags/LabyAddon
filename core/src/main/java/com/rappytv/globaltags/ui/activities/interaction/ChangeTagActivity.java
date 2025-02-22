@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.activities;
+package com.rappytv.globaltags.ui.activities.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
@@ -30,8 +30,8 @@ public class ChangeTagActivity extends SimpleActivity {
     private final UUID uuid;
     private final String username;
 
-    public ChangeTagActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public ChangeTagActivity(UUID uuid, String username) {
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }

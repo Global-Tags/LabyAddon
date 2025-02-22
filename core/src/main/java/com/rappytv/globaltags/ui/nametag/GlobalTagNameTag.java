@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.nametag;
+package com.rappytv.globaltags.ui.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
@@ -107,6 +107,8 @@ public class GlobalTagNameTag extends NameTag {
 
     @Override
     public boolean isVisible() {
-        return !this.entity.isCrouching() && super.isVisible();
+        return !this.entity.isCrouching()
+            && !this.config.tags().hiddenTags().contains(this.entity.getUniqueId())
+            && super.isVisible();
     }
 }

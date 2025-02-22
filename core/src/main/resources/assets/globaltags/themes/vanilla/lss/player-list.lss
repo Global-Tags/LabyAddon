@@ -6,6 +6,7 @@
         width: 90%;
         height: 20;
         margin-top: 5;
+        margin-bottom: 5;
         top: 5;
         left: 50%;
         alignment-x: center;
@@ -15,10 +16,9 @@
 
     Scroll {
         width: 100%;
-        height: 100%;
+        height: 85%;
 
-        .leaderboard-entries {
-            margin-top: 5;
+        .player-entries {
             width: 100%;
             height: 90%;
         }
@@ -73,4 +73,36 @@ ReferralLeaderboardEntry {
         right: 2;
         alignment-y: center;
     }
+}
+
+HiddenPlayer {
+     width: 100%;
+     height: 20;
+     padding: 1;
+
+     .player-head {
+         margin-left: 3;
+         width: 16;
+         height: width;
+     }
+
+     .username-component {
+         max-width: 80%;
+         width: fit-content;
+         scale-to-fit: true;
+         max-lines: 1;
+         margin-left: 2;
+         top: 2;
+     }
+
+     Button {
+         width: 20;
+         height: width;
+         padding: 0;
+         alignment: right;
+     }
+
+     .loaded:hover {
+         text-color: aqua;
+     }
 }
