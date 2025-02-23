@@ -4,6 +4,7 @@ import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
 import com.rappytv.globaltags.command.subcommands.LinkSubcommand;
+import com.rappytv.globaltags.command.subcommands.RedeemCommand;
 import com.rappytv.globaltags.command.subcommands.RenewCacheCommand;
 import com.rappytv.globaltags.command.subcommands.UnlinkSubcommand;
 import com.rappytv.globaltags.command.subcommands.VerifyCommand;
@@ -25,8 +26,10 @@ public class GlobalTagCommand extends Command {
         this.api = GlobalTagAddon.getAPI();
         this.version = addon.addonInfo().getVersion();
 
+        this.translationKey("globaltags.commands.base");
         this.withSubCommand(new ClearCacheCommand(this.api));
         this.withSubCommand(new LinkSubcommand(this.api));
+        this.withSubCommand(new RedeemCommand(this.api));
         this.withSubCommand(new RenewCacheCommand(this.api));
         this.withSubCommand(new UnlinkSubcommand(this.api));
         this.withSubCommand(new VerifyCommand(this.api));
@@ -38,30 +41,30 @@ public class GlobalTagCommand extends Command {
             TextComponent clearComponent = TextComponent.builder()
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(
-                    "globaltags.commands.base.version",
+                    this.getTranslationKey("version"),
                     NamedTextColor.GREEN,
                     Component.text(this.version, NamedTextColor.AQUA)
                 ))
                 .append(Component.newline())
                 .append(GlobalTagAddon.prefix)
                 .append(Component.translatable(
-                    "globaltags.commands.base.api.version",
+                    this.getTranslationKey("api.version"),
                     NamedTextColor.GREEN,
                     response != null && response.isSuccessful()
                         ? Component.text(response.getData().getVersion(), NamedTextColor.AQUA)
                         : Component.translatable(
-                            "globaltags.commands.base.api.offline",
+                            this.getTranslationKey("api.offline"),
                             NamedTextColor.RED
                         )
                 ))
                 .append(Component.newline())
                 .append(GlobalTagAddon.prefix)
                 .append(Component
-                    .translatable("globaltags.commands.base.clear_cache.label")
+                    .translatable(this.getTranslationKey("clearCache.label"))
                     .color(NamedTextColor.LIGHT_PURPLE)
                     .decorate(TextDecoration.UNDERLINED)
                     .hoverEvent(HoverEvent.showText(Component.translatable(
-                        "globaltags.commands.base.clear_cache.hover",
+                        this.getTranslationKey("clearCache.hover"),
                         NamedTextColor.AQUA
                     )))
                     .clickEvent(ClickEvent.suggestCommand("/" + prefix + " cc")))

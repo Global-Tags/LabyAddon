@@ -157,13 +157,17 @@
                     "version": "API Version: %s",
                     "offline": "Connection failed!"
                 },
-                "clear_cache": {
+                "clearCache": {
                     "label": "Clear cache",
                     "hover": "Click here to clear the tag cache!"
                 }
             },
             "clear_cache": {
                 "success": "The cache was cleared!"
+            },
+            "redeem": {
+                "enterCode": "You need to enter a gift code to redeem!",
+                "expiration": "Gift expiration date: %s"
             },
             "renew_cache": {
                 "success": "The cache was renewed!"

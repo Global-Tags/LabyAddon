@@ -116,7 +116,7 @@
                     "version": "API Version: %s",
                     "offline": "Verbindung fehlgeschlagen!"
                 },
-                "clear_cache": {
+                "clearCache": {
                     "label": "Cache leeren",
                     "hover": "Klicke hier, um den Tag-Cache zu leeren!"
                 }
