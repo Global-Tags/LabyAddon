@@ -2,7 +2,6 @@ package com.rappytv.globaltags.command.subcommands;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.api.Util;
 import java.text.SimpleDateFormat;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -35,21 +34,30 @@ public class RedeemCommand extends SubCommand {
         }
         String code = arguments[0];
         this.api.getApiHandler().redeemGiftCode(code, (response) -> {
+            if (!response.isSuccessful()) {
+                this.displayMessage(
+                    Component.empty()
+                        .append(GlobalTagAddon.prefix)
+                        .append(Component.text(response.getError(), NamedTextColor.RED))
+                );
+                return;
+            }
             Component component = Component.empty()
                 .append(GlobalTagAddon.prefix)
-                .append(Util.getResponseComponent(response));
+                .append(Component.text(response.getData().message, NamedTextColor.GREEN));
 
-            // Append expiration date if available
-//            if(response.isSuccessful() && response.getData().getExpiration() != null) {
-//                component
-//                    .append(Component.newline())
-//                    .append(GlobalTagAddon.prefix)
-//                    .append(Component.translatable(
-//                        this.getTranslationKey("expiration"),
-//                        NamedTextColor.AQUA,
-//                        dateFormat.format(response.getData().getExpiration())
-//                    ));
-//            }
+            if (response.getData().getExpiresAt() != null) {
+                component
+                    .append(Component.space())
+                    .append(Component.translatable(
+                        this.getTranslationKey("expiration"),
+                        NamedTextColor.GREEN,
+                        Component.text(
+                            dateFormat.format(response.getData().getExpiresAt()),
+                            NamedTextColor.AQUA
+                        )
+                    ));
+            }
 
             this.displayMessage(component);
         });

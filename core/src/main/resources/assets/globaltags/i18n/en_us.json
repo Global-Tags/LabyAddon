@@ -167,7 +167,7 @@
             },
             "redeem": {
                 "enterCode": "You need to enter a gift code to redeem!",
-                "expiration": "Gift expiration date: %s"
+                "expiration": "Expiration date: %s"
             },
             "renew_cache": {
                 "success": "The cache was renewed!"
