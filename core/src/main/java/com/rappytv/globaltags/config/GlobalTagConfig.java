@@ -1,9 +1,10 @@
 package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.ui.activities.config.HiddenTagListActivity;
+import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -25,8 +26,8 @@ import net.labymod.api.util.MethodOrder;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
-    @SwitchSetting
     @SpriteSlot(size = 32)
+    @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
     @IntroducedIn(namespace = "globaltags", value = "1.1.9")
@@ -34,25 +35,30 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
 
+    @IntroducedIn(namespace = "globaltags", value = "1.4.0")
+    @SpriteSlot(size = 32, y = 3)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
+    @SettingSection("display")
+    @SpriteSlot(size = 32, x = 1)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
+
+    @MethodOrder(after = "showBulletPoints")
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
-    @MethodOrder(after = "localizedResponses")
     @SpriteSlot(size = 32, y = 2, x = 3)
     @ButtonSetting
     public void joinDiscord(Setting setting) {
         Laby.references().chatExecutor().openUrl("https://globaltags.xyz/discord");
     }
 
-    @IntroducedIn(namespace = "globaltags", value = "1.3.5")
     @MethodOrder(after = "joinDiscord")
+    @IntroducedIn(namespace = "globaltags", value = "1.3.5")
+    @SpriteSlot(size = 32, y = 3, x = 1)
     @ActivitySetting
     public Activity referralLeaderboards() {
         return new ReferralLeaderboardActivity();
     }
-
-    @SettingSection("display")
-    @SwitchSetting
-    @SpriteSlot(size = 32, x = 1)
-    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
 
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
@@ -63,13 +69,21 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
 
+    @MethodOrder(after = "showBackground")
+    @IntroducedIn(namespace = "globaltags", value = "1.4.0")
+    @SpriteSlot(size = 32, y = 3, x = 2)
+    @ActivitySetting
+    public Activity hiddenTagList() {
+        return new HiddenTagListActivity(this);
+    }
+
     @SettingSection("tags")
     @SpriteSlot(size = 32, y = 1)
     private final TagSubConfig tags = new TagSubConfig();
 
     @MethodOrder(after = "tags")
-    @ButtonSetting
     @SpriteSlot(size = 32, y = 2)
+    @ButtonSetting
     public void clearCache(Setting setting) {
         GlobalTagAddon.getAPI().getCache().clear();
         GlobalTagAddon.getAPI().getCache().resolveSelf();
@@ -86,6 +100,9 @@ public class GlobalTagConfig extends AddonConfig {
     public ConfigProperty<Boolean> localizedResponses() {
         return this.localizedResponses;
     }
+    public ConfigProperty<Boolean> showBulletPoints() {
+        return this.showBulletPoints;
+    }
     public ConfigProperty<Boolean> showOwnTag() {
         return this.showOwnTag;
     }
@@ -94,5 +111,8 @@ public class GlobalTagConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return this.showBackground;
+    }
+    public TagSubConfig tags() {
+        return this.tags;
     }
 }

@@ -5,7 +5,7 @@ plugins {
 
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
 group = "org.example"
-version = providers.environmentVariable("VERSION").getOrElse("1.3.11")
+version = providers.environmentVariable("VERSION").getOrElse("1.4.0")
 
 labyMod {
     defaultPackageName = "com.rappytv.globaltags"

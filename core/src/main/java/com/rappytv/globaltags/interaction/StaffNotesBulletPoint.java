@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.activities.StaffNotesActivity;
-import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.ui.activities.interaction.StaffNotesActivity;
 import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
@@ -13,10 +13,10 @@ import net.labymod.api.client.gui.icon.Icon;
 
 public class StaffNotesBulletPoint implements BulletPoint {
 
-    private final GlobalTagAPI api;
+    private final GlobalTagConfig config;
 
-    public StaffNotesBulletPoint() {
-        this.api = GlobalTagAddon.getAPI();
+    public StaffNotesBulletPoint(GlobalTagAddon addon) {
+        this.config = addon.configuration();
     }
 
     @Override
@@ -33,7 +33,6 @@ public class StaffNotesBulletPoint implements BulletPoint {
     public void execute(Player player) {
         Laby.labyAPI().minecraft().executeNextTick(() ->
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen(new StaffNotesActivity(
-                this.api,
                 player.getUniqueId(),
                 player.getName()
             ))
@@ -42,8 +41,11 @@ public class StaffNotesBulletPoint implements BulletPoint {
 
     @Override
     public boolean isVisible(Player player) {
-        PlayerInfo<Component> executor = this.api.getCache().get(Laby.labyAPI().getUniqueId());
+        if(!this.config.enabled().get() || !this.config.showBulletPoints().get()) {
+            return false;
+        }
+        PlayerInfo<Component> executor = GlobalTagAddon.getAPI().getCache().get(Laby.labyAPI().getUniqueId());
         return executor != null && executor.hasPermission(GlobalPermission.MANAGE_NOTES) &&
-            this.api.getCache().get(player.getUniqueId()) != null;
+            GlobalTagAddon.getAPI().getCache().get(player.getUniqueId()) != null;
     }
 }

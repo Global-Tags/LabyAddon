@@ -104,7 +104,7 @@
                 }
             },
             "base": {
-                "clear_cache": {
+                "clearCache": {
                     "hover": "¡Haz clic aquí para limpiar el caché de etiquetas!",
                     "label": "Limpiar caché"
                 },

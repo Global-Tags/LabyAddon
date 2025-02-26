@@ -16,6 +16,10 @@
                 "name": "Localize API responses",
                 "description": "If this option is enabled, the addon also sends your minecraft language to the API. If the translations exist, you will receive localized responses. Your minecraft language will be saved for localized emails."
             },
+            "showBulletPoints": {
+                "name": "Show interaction menu bullets",
+                "description": "Here you can disable the report and referral bullet points."
+            },
             "joinDiscord": {
                 "name": "Discord Server",
                 "text": "Join"
@@ -40,6 +44,12 @@
             "showBackground": {
                 "name": "Show background",
                 "description": "When this option is enabled, you'll see the gray vanilla nametag background behind tags."
+            },
+            "hiddenTagList": {
+                "name": "Hidden tags",
+                "text": "Manage",
+                "empty": "You don't have any hidden tags!",
+                "remove": "Remove from hidden tag list"
             },
             "tags": {
                 "name": "Global tag settings",
@@ -147,13 +157,17 @@
                     "version": "API Version: %s",
                     "offline": "Connection failed!"
                 },
-                "clear_cache": {
+                "clearCache": {
                     "label": "Clear cache",
                     "hover": "Click here to clear the tag cache!"
                 }
             },
             "clear_cache": {
                 "success": "The cache was cleared!"
+            },
+            "redeem": {
+                "enterCode": "You need to enter a gift code to redeem!",
+                "expiration": "Expiration date: %s"
             },
             "renew_cache": {
                 "success": "The cache was renewed!"
@@ -182,6 +196,9 @@
                     "label": "This tag breaks the %s.",
                     "rules": "GlobalTags rules",
                     "hover": "Click here to open the GlobalTags rules."
+                },
+                "hide": {
+                    "label": "Hide this player's GlobalTag"
                 }
             },
             "ban": {
@@ -230,6 +247,14 @@
                 "name": "Show GlobalTag history",
                 "title": "%s's tag history",
                 "flagged_words": "Flagged words:"
+            },
+            "hideTag": {
+                "name": "Hide GlobalTag",
+                "success": "%s's GlobalTag will not be shown to you anymore!"
+            },
+            "showTag": {
+                "name": "Show GlobalTag",
+                "success": "%s's GlobalTag will now be shown to you again!"
             }
         }
     }

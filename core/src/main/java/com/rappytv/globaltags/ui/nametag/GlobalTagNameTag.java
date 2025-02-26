@@ -1,4 +1,4 @@
-package com.rappytv.globaltags.nametag;
+package com.rappytv.globaltags.ui.nametag;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
@@ -51,8 +51,10 @@ public class GlobalTagNameTag extends NameTag {
         if(this.api.getCache().has(uuid))
             this.info = this.api.getCache().get(uuid);
         else {
-            if(this.position == PositionType.ABOVE_NAME)
+            if (this.position == PositionType.ABOVE_NAME
+                && GlobalTagAddon.getAPI().getAuthorization() != null) {
                 this.api.getCache().resolve(uuid);
+            }
         }
         if(this.info == null || this.info.getTag() == null) return null;
         if(!this.getGlobalPosition(this.position).equals(this.info.getPosition())) return null;
@@ -107,6 +109,8 @@ public class GlobalTagNameTag extends NameTag {
 
     @Override
     public boolean isVisible() {
-        return !this.entity.isCrouching() && super.isVisible();
+        return !this.entity.isCrouching()
+            && !this.config.tags().hiddenTags().contains(this.entity.getUniqueId())
+            && super.isVisible();
     }
 }

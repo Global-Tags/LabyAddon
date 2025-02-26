@@ -1,8 +1,9 @@
-package com.rappytv.globaltags.activities;
+package com.rappytv.globaltags.ui.activities.interaction;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
+import com.rappytv.globaltags.config.GlobalTagConfig;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.labymod.api.Laby;
@@ -31,12 +32,14 @@ import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 @AutoActivity
 public class ReportUUIDActivity extends SimpleActivity {
 
+    private final GlobalTagConfig config;
     private final GlobalTagAPI api;
     private final UUID uuid;
     private final String username;
 
-    public ReportUUIDActivity(GlobalTagAPI api, UUID uuid, String username) {
-        this.api = api;
+    public ReportUUIDActivity(GlobalTagConfig config, UUID uuid, String username) {
+        this.config = config;
+        this.api = GlobalTagAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
@@ -53,10 +56,11 @@ public class ReportUUIDActivity extends SimpleActivity {
         TextFieldWidget inputWidget = new TextFieldWidget()
             .placeholder(Component.translatable("globaltags.context.placeholder", NamedTextColor.DARK_GRAY))
             .addId("input");
-        HorizontalListWidget checkboxWrapper = new HorizontalListWidget().addId("checkbox-wrapper");
-        CheckBoxWidget checkBoxWidget = new CheckBoxWidget().addId("check-box");
-        checkBoxWidget.setState(State.UNCHECKED);
-        Component boxLabel = Component.translatable(
+        HorizontalListWidget ruleCheckBoxWrapper = new HorizontalListWidget().addId(
+            "checkbox-wrapper");
+        CheckBoxWidget ruleCheckBoxWidget = new CheckBoxWidget().addId("check-box");
+        ruleCheckBoxWidget.setState(State.UNCHECKED);
+        Component ruleCheckBoxLabel = Component.translatable(
             "globaltags.context.report.checkbox.label",
             NamedTextColor.WHITE,
             Component.translatable("globaltags.context.report.checkbox.rules")
@@ -65,15 +69,31 @@ public class ReportUUIDActivity extends SimpleActivity {
                     Component.translatable("globaltags.context.report.checkbox.hover")))
                 .clickEvent(ClickEvent.openUrl("https://docs.globaltags.xyz/rules"))
         );
-        ComponentWidget boxLabelWidget = ComponentWidget
-            .component(boxLabel)
+        ComponentWidget ruleCheckBoxLabelWidget = ComponentWidget
+            .component(ruleCheckBoxLabel)
             .addId("checkbox-label");
+
+        HorizontalListWidget hideCheckBoxWrapper = new HorizontalListWidget().addId(
+            "checkbox-wrapper");
+        CheckBoxWidget hideCheckBoxWidget = new CheckBoxWidget().addId("check-box");
+        hideCheckBoxWidget.setState(State.CHECKED);
+        Component hideCheckBoxLabel = Component.translatable(
+            "globaltags.context.report.hide.label",
+            NamedTextColor.WHITE
+        );
+        ComponentWidget hideCheckBoxLabelWidget = ComponentWidget
+            .component(hideCheckBoxLabel)
+            .addId("checkbox-label");
+
         ButtonWidget sendButton = new ButtonWidget()
             .updateComponent(Component.translatable("globaltags.context.report.send", NamedTextColor.RED))
             .addId("send-button");
         sendButton.setEnabled(false);
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+            if (hideCheckBoxWidget.state() == State.CHECKED) {
+                this.config.tags().hiddenTags().add(this.uuid);
+            }
             this.api.getApiHandler().reportPlayer(
                 this.uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
@@ -82,22 +102,26 @@ public class ReportUUIDActivity extends SimpleActivity {
             ));
         });
         Consumer<String> updateButton = (text) -> sendButton.setEnabled(
-            !text.isBlank() && checkBoxWidget.state() == State.CHECKED
+            !text.isBlank() && ruleCheckBoxWidget.state() == State.CHECKED
         );
         inputWidget.updateListener(updateButton);
-        checkBoxWidget.setActionListener(() ->
+        ruleCheckBoxWidget.setActionListener(() ->
             updateButton.accept(inputWidget.getText())
         );
 
         profileWrapper.addEntry(headWidget);
         profileWrapper.addEntry(titleWidget);
 
-        checkboxWrapper.addEntry(checkBoxWidget);
-        checkboxWrapper.addEntry(boxLabelWidget);
+        ruleCheckBoxWrapper.addEntry(ruleCheckBoxWidget);
+        ruleCheckBoxWrapper.addEntry(ruleCheckBoxLabelWidget);
+
+        hideCheckBoxWrapper.addEntry(hideCheckBoxWidget);
+        hideCheckBoxWrapper.addEntry(hideCheckBoxLabelWidget);
 
         content.addChild(labelWidget);
         content.addChild(inputWidget);
-        content.addChild(checkboxWrapper);
+        content.addChild(ruleCheckBoxWrapper);
+        content.addChild(hideCheckBoxWrapper);
         content.addChild(sendButton);
 
         windowWidget.addContent(profileWrapper);

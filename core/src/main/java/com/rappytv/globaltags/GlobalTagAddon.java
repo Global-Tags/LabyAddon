@@ -1,6 +1,5 @@
 package com.rappytv.globaltags;
 
-import com.rappytv.globaltags.activities.ReferralLeaderboardActivity;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.GlobalTagCommand;
 import com.rappytv.globaltags.config.GlobalTagConfig;
@@ -12,10 +11,13 @@ import com.rappytv.globaltags.interaction.ReportBulletPoint;
 import com.rappytv.globaltags.interaction.StaffNotesBulletPoint;
 import com.rappytv.globaltags.interaction.TagHistoryBulletPoint;
 import com.rappytv.globaltags.interaction.ToggleBanBulletPoint;
+import com.rappytv.globaltags.interaction.ToggleHideTagBulletPoint;
 import com.rappytv.globaltags.listeners.BroadcastListener;
 import com.rappytv.globaltags.listeners.LabyConnectDisconnectListener;
 import com.rappytv.globaltags.listeners.ServerNavigationListener;
-import com.rappytv.globaltags.nametag.GlobalTagNameTag;
+import com.rappytv.globaltags.listeners.WorldEnterListener;
+import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
+import com.rappytv.globaltags.ui.nametag.GlobalTagNameTag;
 import com.rappytv.globaltags.wrapper.GlobalTagsAPI.Agent;
 import java.util.concurrent.TimeUnit;
 import net.labymod.api.Laby;
@@ -48,8 +50,9 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-14"));
+        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
         Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
+            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.0"), "2024-03-01"));
     }
 
     @Override
@@ -63,26 +66,30 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         );
         roundIcon = Icon.texture(ResourceLocation.create("globaltags", "textures/icon_round.png"));
 
+        this.registerCommand(new GlobalTagCommand(this));
+        this.registerListener(new BroadcastListener(api));
+        this.registerListener(new LabyConnectDisconnectListener(api));
+        this.registerListener(new ServerNavigationListener());
+        this.registerListener(new WorldEnterListener());
+        this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ReportBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint(this));
+        this.labyAPI().interactionMenuRegistry().register(new ToggleHideTagBulletPoint(this));
+
         TagRegistry tagRegistry = this.labyAPI().tagRegistry();
-        for (PositionType positionType : PositionType.values())
+        for (PositionType positionType : PositionType.values()) {
             tagRegistry.registerAfter(
                 "labymod_role",
                 "globaltags_tag",
                 positionType,
                 new GlobalTagNameTag(this, positionType)
             );
-        this.registerListener(new BroadcastListener(api));
-        this.registerListener(new LabyConnectDisconnectListener(api));
-        this.registerListener(new ServerNavigationListener());
-        this.labyAPI().interactionMenuRegistry().register(new ChangeTagBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ClearTagBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new EditBanInfoBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ReferPlayerBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ReportBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new StaffNotesBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint());
-        this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint());
-        this.registerCommand(new GlobalTagCommand(this));
+        }
 
         Task.builder(() -> api.getApiHandler().getReferralLeaderboards(response -> {
             if (!response.isSuccessful()) {
