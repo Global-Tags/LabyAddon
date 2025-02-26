@@ -120,7 +120,7 @@
                     "version": "API Versjon: %s"
                 },
                 "version": "Tillegg Versjon: %s",
-                "clear_cache": {
+                "clearCache": {
                     "label": "Tøm cachen",
                     "hover": "Klikk her for å tømme cachen!"
                 }

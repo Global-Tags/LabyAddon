@@ -115,7 +115,7 @@
                 }
             },
             "base": {
-                "clear_cache": {
+                "clearCache": {
                     "hover": "여기를 클릭해서 태그 캐시를 삭제하세요!",
                     "label": "캐시 삭제"
                 },
