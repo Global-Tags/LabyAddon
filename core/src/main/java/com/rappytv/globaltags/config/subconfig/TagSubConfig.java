@@ -41,26 +41,26 @@ public class TagSubConfig extends Config {
         this.globalIcon.addChangeListener(runnable);
     }
 
-    @SpriteSlot(size = 32, x = 1)
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
+    @SpriteSlot(size = 32, x = 1)
     @TagPreviewSetting
     private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
 
-    @TextFieldSetting
     @SpriteSlot(size = 32, y = 1)
+    @TextFieldSetting
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
-    @DropdownSetting
     @SpriteSlot(size = 32, x = 3)
+    @DropdownSetting
     private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(GlobalPosition.ABOVE);
 
-    @DropdownSetting
     @SpriteSlot(size = 32, y = 1, x = 2)
+    @DropdownSetting
     private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
 
     @MethodOrder(after = "globalIcon")
-    @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 1)
+    @ButtonSetting
     public void updateSettings(Setting setting) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getCache().resolveSelf((info) -> {
@@ -108,8 +108,8 @@ public class TagSubConfig extends Config {
     }
 
     @MethodOrder(after = "updateSettings")
-    @ButtonSetting
     @SpriteSlot(size = 32, y = 1, x = 3)
+    @ButtonSetting
     public void resetTag(Setting setting) {
         GlobalTagAPI api = GlobalTagAddon.getAPI();
         api.getApiHandler().resetTag((info) -> {

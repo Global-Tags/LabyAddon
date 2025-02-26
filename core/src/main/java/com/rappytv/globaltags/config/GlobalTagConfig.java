@@ -26,8 +26,8 @@ import net.labymod.api.util.MethodOrder;
 @SpriteTexture("settings")
 public class GlobalTagConfig extends AddonConfig {
 
-    @SwitchSetting
     @SpriteSlot(size = 32)
+    @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
     @IntroducedIn(namespace = "globaltags", value = "1.1.9")
@@ -36,28 +36,29 @@ public class GlobalTagConfig extends AddonConfig {
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
 
     @IntroducedIn(namespace = "globaltags", value = "1.4.0")
+    @SpriteSlot(size = 32, y = 3)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
+    @SettingSection("display")
+    @SpriteSlot(size = 32, x = 1)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
 
-    @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @MethodOrder(after = "showBulletPoints")
+    @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, y = 2, x = 3)
     @ButtonSetting
     public void joinDiscord(Setting setting) {
         Laby.references().chatExecutor().openUrl("https://globaltags.xyz/discord");
     }
 
-    @IntroducedIn(namespace = "globaltags", value = "1.3.5")
     @MethodOrder(after = "joinDiscord")
+    @IntroducedIn(namespace = "globaltags", value = "1.3.5")
+    @SpriteSlot(size = 32, y = 3, x = 1)
     @ActivitySetting
     public Activity referralLeaderboards() {
         return new ReferralLeaderboardActivity();
     }
-
-    @SettingSection("display")
-    @SwitchSetting
-    @SpriteSlot(size = 32, x = 1)
-    private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
 
     @SpriteSlot(size = 32, x = 2)
     @SliderSetting(min = 5, max = 10)
@@ -70,6 +71,7 @@ public class GlobalTagConfig extends AddonConfig {
 
     @MethodOrder(after = "showBackground")
     @IntroducedIn(namespace = "globaltags", value = "1.4.0")
+    @SpriteSlot(size = 32, y = 3, x = 2)
     @ActivitySetting
     public Activity hiddenTagList() {
         return new HiddenTagListActivity(this);
@@ -80,8 +82,8 @@ public class GlobalTagConfig extends AddonConfig {
     private final TagSubConfig tags = new TagSubConfig();
 
     @MethodOrder(after = "tags")
-    @ButtonSetting
     @SpriteSlot(size = 32, y = 2)
+    @ButtonSetting
     public void clearCache(Setting setting) {
         GlobalTagAddon.getAPI().getCache().clear();
         GlobalTagAddon.getAPI().getCache().resolveSelf();
