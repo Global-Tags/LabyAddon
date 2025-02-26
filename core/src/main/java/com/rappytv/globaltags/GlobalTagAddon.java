@@ -51,6 +51,8 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-14"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
+        Laby.references().revisionRegistry()
+            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.0"), "2024-03-01"));
     }
 
     @Override
@@ -64,14 +66,7 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         );
         roundIcon = Icon.texture(ResourceLocation.create("globaltags", "textures/icon_round.png"));
 
-        TagRegistry tagRegistry = this.labyAPI().tagRegistry();
-        for (PositionType positionType : PositionType.values())
-            tagRegistry.registerAfter(
-                "labymod_role",
-                "globaltags_tag",
-                positionType,
-                new GlobalTagNameTag(this, positionType)
-            );
+        this.registerCommand(new GlobalTagCommand(this));
         this.registerListener(new BroadcastListener(api));
         this.registerListener(new LabyConnectDisconnectListener(api));
         this.registerListener(new ServerNavigationListener());
@@ -85,7 +80,16 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         this.labyAPI().interactionMenuRegistry().register(new TagHistoryBulletPoint(this));
         this.labyAPI().interactionMenuRegistry().register(new ToggleBanBulletPoint(this));
         this.labyAPI().interactionMenuRegistry().register(new ToggleHideTagBulletPoint(this));
-        this.registerCommand(new GlobalTagCommand(this));
+
+        TagRegistry tagRegistry = this.labyAPI().tagRegistry();
+        for (PositionType positionType : PositionType.values()) {
+            tagRegistry.registerAfter(
+                "labymod_role",
+                "globaltags_tag",
+                positionType,
+                new GlobalTagNameTag(this, positionType)
+            );
+        }
 
         Task.builder(() -> api.getApiHandler().getReferralLeaderboards(response -> {
             if (!response.isSuccessful()) {

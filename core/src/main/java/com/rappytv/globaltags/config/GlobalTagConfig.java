@@ -35,6 +35,7 @@ public class GlobalTagConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
 
+    @IntroducedIn(namespace = "globaltags", value = "1.4.0")
     @SwitchSetting
     private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
 
@@ -68,6 +69,7 @@ public class GlobalTagConfig extends AddonConfig {
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
 
     @MethodOrder(after = "showBackground")
+    @IntroducedIn(namespace = "globaltags", value = "1.4.0")
     @ActivitySetting
     public Activity hiddenTagList() {
         return new HiddenTagListActivity(this);
