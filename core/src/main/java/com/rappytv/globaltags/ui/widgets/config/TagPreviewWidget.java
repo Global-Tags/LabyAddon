@@ -85,6 +85,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         });
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void initializeWithInfo(PlayerInfo<Component> info, boolean refetched, boolean async) {
         GlobalTagAPI api = GlobalTagsAddon.getAPI();
         Consumer<Widget> addEntry = async ? this::addEntryInitialized : this::addEntry;
@@ -161,6 +162,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
             : api.getUrls().getDefaultIcon(this.config.icon().get());
     }
 
+    @SuppressWarnings("ConstantConditions")
     private Component getError(PlayerInfo<Component> info) {
         String session = GlobalTagsAddon.getAPI().getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
