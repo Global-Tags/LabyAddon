@@ -23,10 +23,6 @@ import net.labymod.api.util.MethodOrder;
 
 public class AccountConfig extends Config {
 
-    @SpriteSlot(size = 32, y = 1, x = 2)
-    @DropdownSetting
-    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
-
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, x = 1)
     @TagPreviewSetting
@@ -38,7 +34,12 @@ public class AccountConfig extends Config {
 
     @SpriteSlot(size = 32, x = 3)
     @DropdownSetting
-    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(GlobalPosition.ABOVE);
+    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
+        GlobalPosition.ABOVE);
+
+    @SpriteSlot(size = 32, y = 1, x = 2)
+    @DropdownSetting
+    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
     public AccountConfig() {
         Runnable runnable = () -> Debounce.of(
