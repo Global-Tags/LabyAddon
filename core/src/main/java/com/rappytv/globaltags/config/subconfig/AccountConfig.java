@@ -25,23 +25,24 @@ import net.labymod.api.util.MethodOrder;
 public class AccountConfig extends Config {
 
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
-    @SpriteSlot(size = 32, x = 1)
+    @SpriteSlot(size = 32, x = 2, y = 1)
     @TagPreviewSetting
     private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
 
-    @SpriteSlot(size = 32, y = 1)
+    @SpriteSlot(x = 3, y = 2)
     @TextFieldSetting
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
-    @SpriteSlot(size = 32, x = 3)
+    @SpriteSlot(x = 2, y = 1)
     @DropdownSetting
     private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
         GlobalPosition.ABOVE);
 
-    @SpriteSlot(size = 32, y = 1, x = 2)
+    @SpriteSlot(x = 1, y = 2)
     @DropdownSetting
     private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
+    @SpriteSlot(y = 3)
     @SwitchSetting
     private final ConfigProperty<Boolean> hideRoleIcon = new ConfigProperty<>(false);
 
@@ -58,7 +59,7 @@ public class AccountConfig extends Config {
     }
 
     @MethodOrder(after = "hideRoleIcon")
-    @SpriteSlot(size = 32, y = 1, x = 1)
+    @SpriteSlot(x = 3, y = 1)
     @ButtonSetting
     public void updateSettings(Setting setting) {
         GlobalTagAPI api = GlobalTagsAddon.getAPI();
@@ -161,7 +162,7 @@ public class AccountConfig extends Config {
     }
 
     @MethodOrder(after = "updateSettings")
-    @SpriteSlot(size = 32, y = 1, x = 3)
+    @SpriteSlot(size = 32, x = 3, y = 1)
     @ButtonSetting
     public void resetTag(Setting setting) {
         GlobalTagAPI api = GlobalTagsAddon.getAPI();

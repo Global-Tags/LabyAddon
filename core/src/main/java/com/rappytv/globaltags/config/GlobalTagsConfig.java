@@ -33,27 +33,38 @@ public class GlobalTagsConfig extends AddonConfig {
     @Exclude
     private final List<UUID> hiddenTags = new ArrayList<>();
 
-    @SpriteSlot(size = 32)
+    @SpriteSlot
     @SwitchSetting
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
     @IntroducedIn(namespace = "globaltags", value = "1.1.9")
-    @SpriteSlot(size = 32, y = 2, x = 2)
+    @SpriteSlot(size = 32, x = 2)
     @SwitchSetting
     private final ConfigProperty<Boolean> localizedResponses = new ConfigProperty<>(true);
 
     @IntroducedIn(namespace = "globaltags", value = "1.4.0")
-    @SpriteSlot(size = 32, y = 3)
+    @SpriteSlot(x = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
+
     @SettingSection("display")
-    @SpriteSlot(size = 32, x = 1)
+    @SpriteSlot(size = 32, x = 2, y = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
+    @SpriteSlot(y = 1)
+    @SliderSetting(min = 5, max = 10)
+    private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
+    @IntroducedIn(namespace = "globaltags", value = "1.1.7")
+    @SpriteSlot(x = 1, y = 1)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
+    @SettingSection("tags")
+    @SpriteSlot(y = 2)
+    private final AccountConfig account = new AccountConfig();
 
     @MethodOrder(after = "showBulletPoints")
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
-    @SpriteSlot(size = 32, y = 2, x = 3)
+    @SpriteSlot(size = 32, x = 3)
     @ButtonSetting
     public void joinDiscord(Setting setting) {
         Laby.references().chatExecutor().openUrl("https://globaltags.xyz/discord");
@@ -61,35 +72,22 @@ public class GlobalTagsConfig extends AddonConfig {
 
     @MethodOrder(after = "joinDiscord")
     @IntroducedIn(namespace = "globaltags", value = "1.3.5")
-    @SpriteSlot(size = 32, y = 3, x = 1)
+    @SpriteSlot(x = 2)
     @ActivitySetting
     public Activity referralLeaderboards() {
         return new ReferralLeaderboardActivity();
     }
 
-    @SpriteSlot(size = 32, x = 2)
-    @SliderSetting(min = 5, max = 10)
-    private final ConfigProperty<Integer> tagSize = new ConfigProperty<>(10);
-
-    @IntroducedIn(namespace = "globaltags", value = "1.1.7")
-    @SpriteSlot(size = 32, y = 2, x = 1)
-    @SwitchSetting
-    private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
-
     @MethodOrder(after = "showBackground")
     @IntroducedIn(namespace = "globaltags", value = "1.4.0")
-    @SpriteSlot(size = 32, y = 3, x = 2)
+    @SpriteSlot(x = 3)
     @ActivitySetting
     public Activity hiddenTagList() {
         return new HiddenTagListActivity(this);
     }
 
-    @SettingSection("tags")
-    @SpriteSlot(size = 32, y = 1)
-    private final AccountConfig account = new AccountConfig();
-
     @MethodOrder(after = "account")
-    @SpriteSlot(size = 32, y = 2)
+    @SpriteSlot(x = 2, y = 2)
     @ButtonSetting
     public void clearCache(Setting setting) {
         GlobalTagsAddon.getAPI().getCache().clear();
