@@ -62,7 +62,7 @@
                     "banned": "Your account is suspended!",
                     "reason": "Reason: %s",
                     "expires": "Expires: %s",
-                    "noInfo": "Couldn't fetch account info!",
+                    "noInfo": "You don't have an account yet...",
                     "labyConnect": "You're not connected to LabyConnect!",
                     "empty": "<Empty Tag>",
                     "appeal": {
