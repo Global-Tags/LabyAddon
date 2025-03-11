@@ -45,6 +45,12 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
     private TagPreviewWidget(AccountConfig config) {
         this.config = config;
+
+        Runnable reInitialize = this::reInitialize;
+        this.config.tag().addChangeListener(reInitialize);
+        this.config.position().addChangeListener(reInitialize);
+        this.config.icon().addChangeListener(reInitialize);
+        this.config.hideRoleIcon().addChangeListener(reInitialize);
     }
 
     @Override
@@ -206,7 +212,10 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
         @Override
         public TagPreviewWidget[] create(Setting setting, TagPreviewSetting annotation, SettingAccessor accessor) {
-            return new TagPreviewWidget[]{new TagPreviewWidget((AccountConfig) accessor.config())};
+            if (!(accessor.config() instanceof AccountConfig config)) {
+                return new TagPreviewWidget[0];
+            }
+            return new TagPreviewWidget[]{new TagPreviewWidget(config)};
         }
 
         @Override
