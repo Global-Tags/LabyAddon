@@ -22,7 +22,7 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
     @Override
     public Component getTitle() {
         return Component.translatable(
-            "globaltags.context." + (this.config.account().hiddenTags().contains(this.uuid)
+            "globaltags.context." + (this.config.hiddenTags().contains(this.uuid)
                 ? "showTag"
                 : "hideTag") + ".name");
     }
@@ -34,11 +34,11 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
 
     @Override
     public void execute(Player player) {
-        boolean hidden = this.config.account().hiddenTags().contains(this.uuid);
+        boolean hidden = this.config.hiddenTags().contains(this.uuid);
         if (hidden) {
-            this.config.account().hiddenTags().remove(this.uuid);
+            this.config.hiddenTags().remove(this.uuid);
         } else {
-            this.config.account().hiddenTags().add(this.uuid);
+            this.config.hiddenTags().add(this.uuid);
         }
         Laby.references().chatExecutor().displayClientMessage(
             Component.empty()

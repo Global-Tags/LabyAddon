@@ -23,7 +23,7 @@ public class HiddenTagListActivity extends SimpleActivity {
     private ComponentWidget errorComponent;
 
     public HiddenTagListActivity(GlobalTagsConfig config) {
-        for (UUID uuid : config.account().hiddenTags()) {
+        for (UUID uuid : config.hiddenTags()) {
             this.entries.addChild(new HiddenPlayerWidget(
                 uuid,
                 config,

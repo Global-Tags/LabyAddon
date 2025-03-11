@@ -92,7 +92,7 @@ public class ReportUUIDActivity extends SimpleActivity {
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
             if (hideCheckBoxWidget.state() == State.CHECKED) {
-                this.config.account().hiddenTags().add(this.uuid);
+                this.config.hiddenTags().add(this.uuid);
             }
             this.api.getApiHandler().reportPlayer(
                 this.uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(

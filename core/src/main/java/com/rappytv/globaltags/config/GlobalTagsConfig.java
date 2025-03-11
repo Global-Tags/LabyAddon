@@ -5,6 +5,9 @@ import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.ui.activities.config.HiddenTagListActivity;
 import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -13,6 +16,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.Butto
 import net.labymod.api.client.gui.screen.widget.widgets.input.SliderWidget.SliderSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
+import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.annotation.SpriteTexture;
@@ -25,6 +29,9 @@ import net.labymod.api.util.MethodOrder;
 @ConfigName("settings")
 @SpriteTexture("settings")
 public class GlobalTagsConfig extends AddonConfig {
+
+    @Exclude
+    private final List<UUID> hiddenTags = new ArrayList<>();
 
     @SpriteSlot(size = 32)
     @SwitchSetting
@@ -93,6 +100,10 @@ public class GlobalTagsConfig extends AddonConfig {
         );
     }
 
+    public List<UUID> hiddenTags() {
+        return this.hiddenTags;
+    }
+
     @Override
     public ConfigProperty<Boolean> enabled() {
         return this.enabled;
@@ -111,9 +122,5 @@ public class GlobalTagsConfig extends AddonConfig {
     }
     public ConfigProperty<Boolean> showBackground() {
         return this.showBackground;
-    }
-
-    public AccountConfig account() {
-        return this.account;
     }
 }

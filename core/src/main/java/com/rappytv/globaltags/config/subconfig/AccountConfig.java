@@ -8,16 +8,12 @@ import com.rappytv.globaltags.ui.widgets.config.TagPreviewWidget;
 import com.rappytv.globaltags.ui.widgets.config.TagPreviewWidget.TagPreviewSetting;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
@@ -26,9 +22,6 @@ import net.labymod.api.util.Debounce;
 import net.labymod.api.util.MethodOrder;
 
 public class AccountConfig extends Config {
-
-    @Exclude
-    private final List<UUID> hiddenTags = new ArrayList<>();
 
     @SpriteSlot(size = 32, y = 1, x = 2)
     @DropdownSetting
@@ -128,9 +121,6 @@ public class AccountConfig extends Config {
         });
     }
 
-    public List<UUID> hiddenTags() {
-        return this.hiddenTags;
-    }
     public ConfigProperty<String> tag() {
         return this.tag;
     }

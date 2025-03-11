@@ -43,7 +43,7 @@ public class HiddenPlayerWidget extends HorizontalListWidget {
             .addId("username-component");
 
         ButtonWidget removeButton = ButtonWidget.icon(Textures.SpriteCommon.X, () -> {
-            this.config.account().hiddenTags().remove(this.uuid);
+            this.config.hiddenTags().remove(this.uuid);
             this.onDelete.accept(this);
         }).addId("remove-button");
         removeButton.setHoverComponent(Component.translatable(
