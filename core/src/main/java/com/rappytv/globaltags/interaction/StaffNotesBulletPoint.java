@@ -21,7 +21,7 @@ public class StaffNotesBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context.staff_notes.name");
+        return Component.translatable("globaltags.context.staffNotes.name");
     }
 
     @Override

@@ -59,9 +59,11 @@ public class StaffNotesActivity extends SimpleActivity {
                     new CreateNoteActivity(this.api, this.uuid, this.username)
                 ))
                 .addId("create-button");
-            createButton.setHoverComponent(Component.translatable("globaltags.context.staff_notes.hover.create"));
+            createButton.setHoverComponent(
+                    Component.translatable("globaltags.context.staffNotes.hover.create"));
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
+            ComponentWidget titleWidget = ComponentWidget.i18n(
+                    "globaltags.context.staffNotes.title", this.username).addId("username");
             VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
             for (PlayerNote note : response.getData()) {
                 notes.addChild(new StaffNoteWidget(this.uuid, this.api, note));

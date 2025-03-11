@@ -115,10 +115,10 @@
                 }
             },
             "usage": "Uso: %s",
-            "renew_cache": {
+            "renewCache": {
                 "success": "¡El caché se ha renovado!"
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "¡Se ha limpiado el caché!"
             }
         },
@@ -129,7 +129,7 @@
                 "send": "Enviar cambios",
                 "appealable": "Apelable"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "hover": {
                     "deleted": "¡Eliminado con éxito!",
                     "create": "Crear nota",
@@ -175,10 +175,10 @@
             "clearTag": {
                 "name": "Borrar GlobalTag"
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Mostrar historia de GlobalTags",
                 "title": "Historia de GlobalTags de %s",
-                "flagged_words": "Palabras marcadas:"
+                "flaggedWords": "Palabras marcadas:"
             }
         },
         "general": {

@@ -51,7 +51,7 @@ public class StaffNoteWidget extends SimpleWidget {
         ComponentWidget description = ComponentWidget
             .text(
                 I18n.translate(
-                    "globaltags.context.staff_notes.description",
+                    "globaltags.context.staffNotes.description",
                     this.formatDate(this.note.getCreatedAt()),
                     this.note.getId()
                 ),
@@ -63,7 +63,7 @@ public class StaffNoteWidget extends SimpleWidget {
             .component(Component.text("✗", NamedTextColor.RED), this::delete)
             .addId("delete-button");
         this.deleteButton.setHoverComponent(Component.translatable(
-            "globaltags.context.staff_notes.hover.delete",
+            "globaltags.context.staffNotes.hover.delete",
             NamedTextColor.RED
         ));
 
@@ -93,7 +93,7 @@ public class StaffNoteWidget extends SimpleWidget {
             Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
                 this.deleteButton.updateComponent(Component.text("✓", NamedTextColor.GREEN));
                 this.deleteButton.setHoverComponent(Component.translatable(
-                    "globaltags.context.staff_notes.hover.deleted",
+                    "globaltags.context.staffNotes.hover.deleted",
                     NamedTextColor.GREEN
                 ));
             });

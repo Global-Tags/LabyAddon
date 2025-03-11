@@ -96,7 +96,7 @@ public class GlobalTagsConfig extends AddonConfig {
         GlobalTagsAddon.getAPI().getCache().resolveSelf();
         Util.notify(
             I18n.translate("globaltags.general.success"),
-            I18n.translate("globaltags.commands.clear_cache.success")
+            I18n.translate("globaltags.commands.clearCache.success")
         );
     }
 

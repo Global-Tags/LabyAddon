@@ -30,7 +30,7 @@
                 "text": "View",
                 "activity": {
                     "total": "Total",
-                    "current_month": "This month",
+                    "currentMonth": "This month",
                     "open": "Open laby.net profile",
                     "loading": "Loading…"
                 }
@@ -162,14 +162,14 @@
                     "hover": "Click here to clear the tag cache!"
                 }
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "The cache was cleared!"
             },
             "redeem": {
                 "enterCode": "You need to enter a gift code to redeem!",
                 "expiration": "Expiration date: %s"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "The cache was renewed!"
             },
             "link": {
@@ -227,7 +227,7 @@
             "clearTag": {
                 "name": "Clear GlobalTag"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "name": "Manage GlobalTags notes",
                 "title": "%s's notes",
                 "description": "created at %s (#%s)",
@@ -243,10 +243,10 @@
                     "send": "Create"
                 }
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Show GlobalTag history",
                 "title": "%s's tag history",
-                "flagged_words": "Flagged words:"
+                "flaggedWords": "Flagged words:"
             },
             "hideTag": {
                 "name": "Hide GlobalTag",

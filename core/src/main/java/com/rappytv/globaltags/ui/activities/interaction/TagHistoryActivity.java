@@ -53,7 +53,8 @@ public class TagHistoryActivity extends SimpleActivity {
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.tag_history.title", this.username).addId("username");
+            ComponentWidget titleWidget = ComponentWidget.i18n(
+                "globaltags.context.tagHistory.title", this.username).addId("username");
             VerticalListWidget<TagHistoryEntryWidget> notes = new VerticalListWidget<>().addId("item-list");
             for(int i = 0; i < response.getData().size(); i++) {
                 notes.addChild(new TagHistoryEntryWidget(i + 1, this.api, response.getData().get(i)));

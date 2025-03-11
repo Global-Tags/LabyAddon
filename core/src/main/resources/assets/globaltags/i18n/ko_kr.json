@@ -88,7 +88,7 @@
                 "text": "보기",
                 "activity": {
                     "total": "합계",
-                    "current_month": "이번 달",
+                    "currentMonth": "이번 달",
                     "open": "laby.net 프로필 열기",
                     "loading": "로딩 중…"
                 }
@@ -126,10 +126,10 @@
                 }
             },
             "usage": "사용법: %s",
-            "clear_cache": {
+            "clearCache": {
                 "success": "캐시가 삭제되었습니다!"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "캐시가 갱신되었습니다!"
             }
         },
@@ -140,12 +140,12 @@
         "context": {
             "reason": "이유",
             "placeholder": "이유를 입력하세요…",
-            "tag_history": {
+            "tagHistory": {
                 "title": "%s의 태그 기록",
                 "name": "GlobalTag 기록 보기",
-                "flagged_words": "금지된 단어:"
+                "flaggedWords": "금지된 단어:"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "create": {
                     "placeholder": "노트를 입력하세요…",
                     "label": "노트",

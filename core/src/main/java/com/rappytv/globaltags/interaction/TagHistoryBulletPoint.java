@@ -21,7 +21,7 @@ public class TagHistoryBulletPoint implements BulletPoint {
 
     @Override
     public Component getTitle() {
-        return Component.translatable("globaltags.context.tag_history.name");
+        return Component.translatable("globaltags.context.tagHistory.name");
     }
 
     @Override

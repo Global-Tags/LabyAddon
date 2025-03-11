@@ -38,7 +38,7 @@ public class ReferralLeaderboardActivity extends SimpleActivity {
         ButtonWidget totalViewButton = ButtonWidget.i18n(
             "globaltags.settings.referralLeaderboards.activity.total");
         ButtonWidget currentMonthViewButton = ButtonWidget.i18n(
-            "globaltags.settings.referralLeaderboards.activity.current_month");
+                "globaltags.settings.referralLeaderboards.activity.currentMonth");
         totalViewButton.setEnabled(this.selectedLeaderboard != ReferralLeaderboardType.TOTAL);
         totalViewButton.setPressable(() -> {
             this.selectedLeaderboard = ReferralLeaderboardType.TOTAL;

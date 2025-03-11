@@ -95,7 +95,7 @@
             "referralLeaderboards": {
                 "name": "Ledertavler for henvisninger",
                 "activity": {
-                    "current_month": "Denne måneden",
+                    "currentMonth": "Denne måneden",
                     "open": "Åpne laby.net profil",
                     "loading": "Laster…",
                     "total": "Antall"
@@ -126,10 +126,10 @@
                 }
             },
             "usage": "Bruk: %s",
-            "clear_cache": {
+            "clearCache": {
                 "success": "Cachen ble tømt!"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "Cachen ble fornyet!"
             }
         },
@@ -175,7 +175,7 @@
             "clearTag": {
                 "name": "Tøm GlobalTag"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "name": "Administrer GlobalTags-notater",
                 "title": "Notater til %s",
                 "description": "oppretet på %s (#%s)",
@@ -191,10 +191,10 @@
                     "send": "Opprett"
                 }
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Vis GlobalTag-historikk",
                 "title": "Tag-historikk til %s",
-                "flagged_words": "Flaggede ord:"
+                "flaggedWords": "Flaggede ord:"
             }
         },
         "general": {

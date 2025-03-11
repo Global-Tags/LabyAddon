@@ -46,7 +46,7 @@ public class ReferralLeaderboardEntryWidget extends HorizontalListWidget {
                     .append(Component.text(this.entry.getTotalReferrals(), NamedTextColor.AQUA))
                     .append(Component.newline())
                     .append(Component.translatable(
-                        "globaltags.settings.referralLeaderboards.activity.current_month"))
+                        "globaltags.settings.referralLeaderboards.activity.currentMonth"))
                     .append(Component.text(": ", NamedTextColor.DARK_GRAY))
                     .append(
                         Component.text(this.entry.getCurrentMonthReferrals(), NamedTextColor.AQUA))
