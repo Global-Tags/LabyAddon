@@ -100,10 +100,12 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 this.config.tag().set(info.getPlainTag());
                 this.config.position().set(info.getPosition());
                 this.config.icon().set(info.getGlobalIcon());
+                this.config.hideRoleIcon().set(info.isRoleIconHidden());
             }
             boolean updated = !this.config.tag().get().equals(info.getPlainTag())
                 || !this.config.position().get().equals(info.getPosition())
-                || !this.config.icon().get().equals(info.getGlobalIcon());
+                || !this.config.icon().get().equals(info.getGlobalIcon())
+                || !this.config.hideRoleIcon().get().equals(info.isRoleIconHidden());
             if (changed && updated) {
                 Util.notify(
                     I18n.translate("globaltags.settings.account.staged.title"),

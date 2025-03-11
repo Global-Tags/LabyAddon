@@ -8,6 +8,7 @@ import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.widget.widgets.popup.SimpleAdvancedPopup;
+import net.labymod.api.client.gui.screen.widget.widgets.popup.SimpleAdvancedPopup.SimplePopupButton;
 import net.labymod.api.labyconnect.LabyConnectSession;
 import net.labymod.api.notification.Notification;
 import net.labymod.api.notification.Notification.Type;
@@ -21,23 +22,51 @@ public class Util {
     private static Component tagResponse = null;
     private static Component positionResponse = null;
     private static Component iconResponse = null;
+    private static Component roleIconVisibilityResponse = null;
 
     public static void update(GlobalTagAPI api, ResultType type, Component component) {
+        System.out.println("Update " + type.name());
         switch (type) {
             case TAG -> tagResponse = component;
             case POSITION -> positionResponse = component;
             case ICON -> iconResponse = component;
+            case ROLE_ICON_VISIBILITY -> roleIconVisibilityResponse = component;
         }
-        if(tagResponse == null || positionResponse == null || iconResponse == null) return;
+        if (tagResponse == null
+            || positionResponse == null
+            || iconResponse == null
+            || roleIconVisibilityResponse == null) {
+            return;
+        }
         SimpleAdvancedPopup popup = SimpleAdvancedPopup
             .builder()
-            .title(Component.text("Update result", NamedTextColor.AQUA))
-            .description(Component.translatable(
+            .title(Component.translatable(
                 "globaltags.settings.account.updateSettings.result",
-                tagResponse,
-                positionResponse,
-                iconResponse
+                NamedTextColor.AQUA
             ))
+            .description(
+                Component.empty()
+                    .append(Component.translatable(
+                        "globaltags.settings.account.updateSettings.tag",
+                        tagResponse
+                    ))
+                    .append(Component.newline())
+                    .append(Component.translatable(
+                        "globaltags.settings.account.updateSettings.position",
+                        positionResponse
+                    ))
+                    .append(Component.newline())
+                    .append(Component.translatable(
+                        "globaltags.settings.account.updateSettings.icon",
+                        iconResponse
+                    ))
+                    .append(Component.newline())
+                    .append(Component.translatable(
+                        "globaltags.settings.account.updateSettings.roleIconVisibility",
+                        roleIconVisibilityResponse
+                    ))
+            )
+            .addButton(SimplePopupButton.confirm())
             .build();
 
         Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
@@ -47,13 +76,16 @@ public class Util {
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;
+            roleIconVisibilityResponse = null;
         });
     }
 
-    public enum ResultType {
-        TAG,
-        POSITION,
-        ICON
+    public static void sendResponseNotification(ApiResponse<String> response) {
+        notify(
+            Component.translatable(
+                "globaltags.general." + (response.isSuccessful() ? "success" : "error")),
+            Component.text(response.isSuccessful() ? response.getData() : response.getError())
+        );
     }
 
     public static void notify(String title, String text) {
@@ -69,6 +101,13 @@ public class Util {
             .text(description)
             .type(Type.SYSTEM)
             .buildAndPush();
+    }
+
+    public enum ResultType {
+        TAG,
+        POSITION,
+        ICON,
+        ROLE_ICON_VISIBILITY
     }
 
     public static Component getResponseComponent(ApiResponse<String> response) {

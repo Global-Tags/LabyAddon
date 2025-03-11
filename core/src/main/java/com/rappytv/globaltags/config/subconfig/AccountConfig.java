@@ -11,6 +11,7 @@ import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
+import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
@@ -41,18 +42,22 @@ public class AccountConfig extends Config {
     @DropdownSetting
     private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
+    @SwitchSetting
+    private final ConfigProperty<Boolean> hideRoleIcon = new ConfigProperty<>(false);
+
     public AccountConfig() {
         Runnable runnable = () -> Debounce.of(
             "globaltags-config-update",
-            1000,
+            2000,
             TagPreviewWidget::change
         );
         this.tag.addChangeListener(runnable);
         this.position.addChangeListener(runnable);
         this.icon.addChangeListener(runnable);
+        this.hideRoleIcon.addChangeListener(runnable);
     }
 
-    @MethodOrder(after = "icon")
+    @MethodOrder(after = "hideRoleIcon")
     @SpriteSlot(size = 32, y = 1, x = 1)
     @ButtonSetting
     public void updateSettings(Setting setting) {
@@ -65,40 +70,93 @@ public class AccountConfig extends Config {
                 );
                 return;
             }
-            if(info == null || !info.getPlainTag().equals(this.tag.get())) api.getApiHandler().setTag(
-                this.tag.get(), (response) -> {
-                    if (response.isSuccessful())
-                        Util.update(api, ResultType.TAG,
-                            Component.text("✔", NamedTextColor.GREEN));
-                    else {
-                        Util.update(api, ResultType.TAG,
-                            Component.text(response.getError(), NamedTextColor.RED));
+
+            // Update tag
+            if (info == null || !info.getPlainTag().equals(this.tag.get())) {
+                api.getApiHandler().setTag(
+                    this.tag.get(), (response) -> {
+                        if (response.isSuccessful()) {
+                            Util.update(
+                                api,
+                                ResultType.TAG,
+                                Component.text("✔", NamedTextColor.GREEN)
+                            );
+                        } else {
+                            Util.update(api, ResultType.TAG,
+                                Component.text(response.getError(), NamedTextColor.RED));
+                        }
+                    });
+            } else {
+                Util.update(api, ResultType.TAG, Util.unchanged);
+            }
+
+            // Update position
+            if (info == null || !info.getPosition().equals(this.position.get())) {
+                api.getApiHandler().setPosition(
+                    this.position.get(), (response) -> {
+                        if (response.isSuccessful()) {
+                            Util.update(
+                                api,
+                                ResultType.POSITION,
+                                Component.text("✔", NamedTextColor.GREEN)
+                            );
+                        } else {
+                            Util.update(
+                                api,
+                                ResultType.POSITION,
+                                Component.text(response.getError(), NamedTextColor.RED)
+                            );
+                        }
+                    });
+            } else {
+                Util.update(api, ResultType.POSITION, Util.unchanged);
+            }
+
+            // Update icon
+            if (info == null || !info.getGlobalIcon().equals(this.icon.get())) {
+                api.getApiHandler().setIcon(this.icon.get(), (response) -> {
+                    System.out.println(response.isSuccessful() + " " + response.getData() + " "
+                        + response.getError());
+                    if (response.isSuccessful()) {
+                        Util.update(
+                            api,
+                            ResultType.ICON,
+                            Component.text("✔", NamedTextColor.GREEN)
+                        );
+                    } else {
+                        Util.update(
+                            api,
+                            ResultType.ICON,
+                            Component.text(response.getError(), NamedTextColor.RED)
+                        );
                     }
-            });
-            else Util.update(api, ResultType.TAG, Util.unchanged);
-            if(info != null && !info.getPosition().equals(this.position.get())) api.getApiHandler().setPosition(
-                this.position.get(), (response) -> {
-                    if (response.isSuccessful())
-                        Util.update(api, ResultType.POSITION,
-                            Component.text("✔", NamedTextColor.GREEN));
-                    else {
-                        Util.update(api, ResultType.POSITION,
-                            Component.text(response.getError(), NamedTextColor.RED));
-                    }
-            });
-            else Util.update(api, ResultType.POSITION, Util.unchanged);
-            if (info != null && !info.getGlobalIcon().equals(this.icon.get()))
-                api.getApiHandler().setIcon(
-                    this.icon.get(), (response) -> {
-                    if (response.isSuccessful())
-                        Util.update(api, ResultType.ICON,
-                            Component.text("✔", NamedTextColor.GREEN));
-                    else {
-                        Util.update(api, ResultType.ICON,
-                            Component.text(response.getError(), NamedTextColor.RED));
-                    }
-            });
-            else Util.update(api, ResultType.ICON, Util.unchanged);
+                });
+            } else {
+                Util.update(api, ResultType.ICON, Util.unchanged);
+            }
+
+            // Update role icon visibility
+            if (info == null || info.isRoleIconHidden() != this.hideRoleIcon.get()) {
+                api.getApiHandler().setRoleIconVisibility(
+                    !this.hideRoleIcon.get(),
+                    (response) -> {
+                        if (response.isSuccessful()) {
+                            Util.update(
+                                api,
+                                ResultType.ROLE_ICON_VISIBILITY,
+                                Component.text("✔", NamedTextColor.GREEN)
+                            );
+                        } else {
+                            Util.update(
+                                api,
+                                ResultType.ROLE_ICON_VISIBILITY,
+                                Component.text(response.getError(), NamedTextColor.RED)
+                            );
+                        }
+                    });
+            } else {
+                Util.update(api, ResultType.ROLE_ICON_VISIBILITY, Util.unchanged);
+            }
         });
     }
 
@@ -112,13 +170,7 @@ public class AccountConfig extends Config {
                 Util.broadcastTagUpdate();
                 TagPreviewWidget.refetch();
             }
-            Util.notify(
-                Component.translatable(info.isSuccessful()
-                    ? "globaltags.general.success"
-                    : "globaltags.general.error"
-                ),
-                    Util.getResponseComponent(info).color(NamedTextColor.WHITE)
-            );
+            Util.sendResponseNotification(info);
         });
     }
 
@@ -130,5 +182,9 @@ public class AccountConfig extends Config {
     }
     public ConfigProperty<GlobalIcon> icon() {
         return this.icon;
+    }
+
+    public ConfigProperty<Boolean> hideRoleIcon() {
+        return this.hideRoleIcon;
     }
 }

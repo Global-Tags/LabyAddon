@@ -76,7 +76,7 @@
                     }
                 },
                 "tag": {
-                    "name": "Global Tag"
+                    "name": "Global tag"
                 },
                 "position": {
                     "name": "Global position",
@@ -128,10 +128,18 @@
                         "youtube": "YouTube"
                     }
                 },
+                "hideRoleIcon": {
+                    "name": "Hide role icon",
+                    "description": "If you have a role icon and you don't want players to see it you can hide it here."
+                },
                 "updateSettings": {
                     "name": "Publish settings",
                     "text": "Update",
-                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
+                    "result": "Update result",
+                    "tag": "Tag: %s",
+                    "position": "Position: %s",
+                    "icon": "Icon: %s",
+                    "roleIconVisibility": "Role icon visibility: %s",
                     "unchanged": "Unchanged"
                 },
                 "resetTag": {
