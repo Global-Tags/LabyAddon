@@ -19,16 +19,20 @@ import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
 import net.labymod.api.configuration.settings.Setting;
+import net.labymod.api.configuration.settings.annotation.SettingSection;
 import net.labymod.api.util.Debounce;
 import net.labymod.api.util.MethodOrder;
 
 public class AccountConfig extends Config {
+
+    private final static Component TICK = Component.text("✔", NamedTextColor.GREEN);
 
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, x = 2, y = 1)
     @TagPreviewSetting
     private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
 
+    @SettingSection("settings")
     @SpriteSlot(x = 3, y = 2)
     @TextFieldSetting
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
@@ -49,7 +53,7 @@ public class AccountConfig extends Config {
     public AccountConfig() {
         Runnable runnable = () -> Debounce.of(
             "globaltags-config-update",
-            2000,
+            1000,
             TagPreviewWidget::change
         );
         this.tag.addChangeListener(runnable);
@@ -58,6 +62,7 @@ public class AccountConfig extends Config {
         this.hideRoleIcon.addChangeListener(runnable);
     }
 
+    @SettingSection("actions")
     @MethodOrder(after = "hideRoleIcon")
     @SpriteSlot(x = 3, y = 1)
     @ButtonSetting
@@ -80,7 +85,7 @@ public class AccountConfig extends Config {
                             Util.update(
                                 api,
                                 ResultType.TAG,
-                                Component.text("✔", NamedTextColor.GREEN)
+                                TICK
                             );
                         } else {
                             Util.update(api, ResultType.TAG,
@@ -99,7 +104,7 @@ public class AccountConfig extends Config {
                             Util.update(
                                 api,
                                 ResultType.POSITION,
-                                Component.text("✔", NamedTextColor.GREEN)
+                                TICK
                             );
                         } else {
                             Util.update(
@@ -122,7 +127,7 @@ public class AccountConfig extends Config {
                         Util.update(
                             api,
                             ResultType.ICON,
-                            Component.text("✔", NamedTextColor.GREEN)
+                            TICK
                         );
                     } else {
                         Util.update(
@@ -145,7 +150,7 @@ public class AccountConfig extends Config {
                             Util.update(
                                 api,
                                 ResultType.ROLE_ICON_VISIBILITY,
-                                Component.text("✔", NamedTextColor.GREEN)
+                                TICK
                             );
                         } else {
                             Util.update(

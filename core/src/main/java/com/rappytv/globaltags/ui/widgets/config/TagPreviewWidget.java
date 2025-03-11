@@ -2,7 +2,6 @@ package com.rappytv.globaltags.ui.widgets.config;
 
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
@@ -32,7 +31,6 @@ import net.labymod.api.configuration.settings.annotation.SettingElement;
 import net.labymod.api.configuration.settings.annotation.SettingFactory;
 import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
-import net.labymod.api.util.I18n;
 import net.labymod.api.util.ThreadSafe;
 
 @Link("preview.lss")
@@ -102,16 +100,6 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 this.config.icon().set(info.getGlobalIcon());
                 this.config.hideRoleIcon().set(info.isRoleIconHidden());
             }
-            boolean updated = !this.config.tag().get().equals(info.getPlainTag())
-                || !this.config.position().get().equals(info.getPosition())
-                || !this.config.icon().get().equals(info.getGlobalIcon())
-                || !this.config.hideRoleIcon().get().equals(info.isRoleIconHidden());
-            if (changed && updated) {
-                Util.notify(
-                    I18n.translate("globaltags.settings.account.staged.title"),
-                    I18n.translate("globaltags.settings.account.staged.description")
-                );
-            }
             ComponentWidget tag = ComponentWidget.component(
                 this.config.tag().get().isBlank()
                     ? Component.translatable(
@@ -128,11 +116,26 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 );
             }
             addEntry.accept(tag);
-            if (info.getRoleIcon() != null) {
+            if (!this.config.hideRoleIcon().get() && info.getRoleIcon() != null) {
                 addEntry.accept(
                     new IconWidget(Icon.url(api.getUrls().getRoleIcon(info.getRoleIcon())))
                         .addId("staff-icon")
                 );
+            }
+
+            boolean updated = !this.config.tag().get().equals(info.getPlainTag())
+                || !this.config.position().get().equals(info.getPosition())
+                || !this.config.icon().get().equals(info.getGlobalIcon())
+                || !this.config.hideRoleIcon().get().equals(info.isRoleIconHidden());
+
+            if (updated) {
+                addEntry.accept(ComponentWidget.component(
+                    Component.text("*", NamedTextColor.DARK_GRAY)
+                        .hoverEvent(HoverEvent.showText(Component.translatable(
+                            "globaltags.settings.account.tagPreview.unsaved",
+                            NamedTextColor.GRAY
+                        )))
+                ));
             }
         }
 

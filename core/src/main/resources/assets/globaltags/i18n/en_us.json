@@ -52,6 +52,14 @@
                 "remove": "Remove from hidden tag list"
             },
             "account": {
+                "header": {
+                    "settings": {
+                        "name": "Settings"
+                    },
+                    "actions": {
+                        "name": "Actions"
+                    }
+                },
                 "name": "Account settings",
                 "staged": {
                     "title": "Pending changes",
@@ -65,6 +73,7 @@
                     "noInfo": "You don't have an account yet...",
                     "labyConnect": "You're not connected to LabyConnect!",
                     "empty": "<Empty Tag>",
+                    "unsaved": "You have unsaved changes...\nClick on the button below to save them!",
                     "appeal": {
                         "name": "Appeal",
                         "description": "⚠️ This button will only be clickable if your suspension is appealable.",
@@ -133,7 +142,8 @@
                     "description": "If you have a role icon and you don't want players to see it you can hide it here."
                 },
                 "updateSettings": {
-                    "name": "Publish settings",
+                    "name": "Publish settings §6⚠",
+                    "description": "You need to press this button to upload any changes!",
                     "text": "Update",
                     "result": "Update result",
                     "tag": "Tag: %s",
