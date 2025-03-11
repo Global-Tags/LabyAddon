@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.model.BanInfo;
@@ -35,7 +35,7 @@ public class EditBanActivity extends SimpleActivity {
     private final String username;
 
     public EditBanActivity(UUID uuid, String username) {
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
@@ -90,7 +90,7 @@ public class EditBanActivity extends SimpleActivity {
                     (response) ->
                         Laby.references().chatExecutor().displayClientMessage(
                             Component.empty()
-                                .append(GlobalTagAddon.prefix)
+                                .append(GlobalTagsAddon.prefix)
                                 .append(Util.getResponseComponent(response))
                         )
                 );

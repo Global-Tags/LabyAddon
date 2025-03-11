@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.ui.widgets.interaction.TagHistoryEntryWidget;
 import java.util.UUID;
@@ -30,7 +30,7 @@ public class TagHistoryActivity extends SimpleActivity {
     private final String username;
 
     public TagHistoryActivity(UUID uuid, String username) {
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
@@ -43,7 +43,7 @@ public class TagHistoryActivity extends SimpleActivity {
             if(!response.isSuccessful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                         .build()
                 );

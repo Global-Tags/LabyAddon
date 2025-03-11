@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.config;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
 import com.rappytv.globaltags.ui.activities.config.HiddenTagListActivity;
@@ -24,7 +24,7 @@ import net.labymod.api.util.MethodOrder;
 
 @ConfigName("settings")
 @SpriteTexture("settings")
-public class GlobalTagConfig extends AddonConfig {
+public class GlobalTagsConfig extends AddonConfig {
 
     @SpriteSlot(size = 32)
     @SwitchSetting
@@ -85,8 +85,8 @@ public class GlobalTagConfig extends AddonConfig {
     @SpriteSlot(size = 32, y = 2)
     @ButtonSetting
     public void clearCache(Setting setting) {
-        GlobalTagAddon.getAPI().getCache().clear();
-        GlobalTagAddon.getAPI().getCache().resolveSelf();
+        GlobalTagsAddon.getAPI().getCache().clear();
+        GlobalTagsAddon.getAPI().getCache().resolveSelf();
         Util.notify(
             I18n.translate("globaltags.general.success"),
             I18n.translate("globaltags.commands.clear_cache.success")

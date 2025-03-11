@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.widgets.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.wrapper.model.PlayerNote;
@@ -82,7 +82,7 @@ public class StaffNoteWidget extends SimpleWidget {
         this.api.getApiHandler().deleteNote(this.holder, this.note.getId(), (response) -> {
             Laby.references().chatExecutor().displayClientMessage(
                 TextComponent.builder()
-                    .append(GlobalTagAddon.prefix)
+                    .append(GlobalTagsAddon.prefix)
                     .append(Util.getResponseComponent(response))
                     .build()
             );

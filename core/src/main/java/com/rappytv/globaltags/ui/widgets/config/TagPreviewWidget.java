@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.widgets.config;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.TagSubConfig;
@@ -54,7 +54,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         super.tick();
         if(!refetch && !changed) return;
         if(refetch)
-            GlobalTagAddon.getAPI().getCache().remove(GlobalTagAddon.getAPI().getClientUUID());
+            GlobalTagsAddon.getAPI().getCache().remove(GlobalTagsAddon.getAPI().getClientUUID());
         this.reInitialize();
         refetch = false;
         changed = false;
@@ -68,7 +68,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
     @SuppressWarnings("ConstantConditions")
     public void initialize(boolean refetched) {
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
+        GlobalTagAPI api = GlobalTagsAddon.getAPI();
 
         this.addEntry(ButtonWidget
             .icon(SpriteCommon.REFRESH, TagPreviewWidget::refetch)
@@ -86,7 +86,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
     }
 
     private void initializeWithInfo(PlayerInfo<Component> info, boolean refetched, boolean async) {
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
+        GlobalTagAPI api = GlobalTagsAddon.getAPI();
         Consumer<Widget> addEntry = async ? this::addEntryInitialized : this::addEntry;
 
         Component error = this.getError(info);
@@ -162,7 +162,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
     }
 
     private Component getError(PlayerInfo<Component> info) {
-        String session = GlobalTagAddon.getAPI().getAuthorization();
+        String session = GlobalTagsAddon.getAPI().getAuthorization();
         if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
         else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
         else if (info.isBanned()) {

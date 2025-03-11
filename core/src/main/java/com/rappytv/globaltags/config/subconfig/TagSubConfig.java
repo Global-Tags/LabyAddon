@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.config.subconfig;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
@@ -62,7 +62,7 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, y = 1, x = 1)
     @ButtonSetting
     public void updateSettings(Setting setting) {
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
+        GlobalTagAPI api = GlobalTagsAddon.getAPI();
         api.getCache().resolveSelf((info) -> {
             if(api.getAuthorization() == null) {
                 Util.notify(
@@ -111,7 +111,7 @@ public class TagSubConfig extends Config {
     @SpriteSlot(size = 32, y = 1, x = 3)
     @ButtonSetting
     public void resetTag(Setting setting) {
-        GlobalTagAPI api = GlobalTagAddon.getAPI();
+        GlobalTagAPI api = GlobalTagsAddon.getAPI();
         api.getApiHandler().resetTag((info) -> {
             if(info.isSuccessful()) {
                 Util.broadcastTagUpdate();

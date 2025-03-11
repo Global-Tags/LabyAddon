@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.widgets.config;
 
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.labymod.api.Laby;
@@ -21,10 +21,10 @@ import net.labymod.api.util.ThreadSafe;
 public class HiddenPlayerWidget extends HorizontalListWidget {
 
     private final UUID uuid;
-    private final GlobalTagConfig config;
+    private final GlobalTagsConfig config;
     private final Consumer<HiddenPlayerWidget> onDelete;
 
-    public HiddenPlayerWidget(UUID uuid, GlobalTagConfig config,
+    public HiddenPlayerWidget(UUID uuid, GlobalTagsConfig config,
         Consumer<HiddenPlayerWidget> onDelete) {
         this.uuid = uuid;
         this.config = config;

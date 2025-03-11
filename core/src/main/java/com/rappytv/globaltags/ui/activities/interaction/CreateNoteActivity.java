@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import java.util.UUID;
@@ -57,7 +57,7 @@ public class CreateNoteActivity extends SimpleActivity {
             this.api.getApiHandler().createNote(this.uuid, inputWidget.getText(), (response) ->
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Util.getResponseComponent(response))
                 ));
         });

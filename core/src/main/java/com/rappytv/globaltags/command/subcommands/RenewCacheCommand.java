@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.command.subcommands;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -20,7 +20,7 @@ public class RenewCacheCommand extends SubCommand {
         this.api.getCache().renewAll();
         this.displayMessage(
             Component.empty()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.translatable(
                     "globaltags.commands.renew_cache.success",
                     NamedTextColor.GREEN

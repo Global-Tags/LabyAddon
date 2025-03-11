@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.GlobalTagsAddon;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -12,10 +12,10 @@ import net.labymod.api.client.gui.icon.Icon;
 
 public class ToggleHideTagBulletPoint implements BulletPoint {
 
-    private final GlobalTagConfig config;
+    private final GlobalTagsConfig config;
     private UUID uuid;
 
-    public ToggleHideTagBulletPoint(GlobalTagAddon addon) {
+    public ToggleHideTagBulletPoint(GlobalTagsAddon addon) {
         this.config = addon.configuration();
     }
 
@@ -28,7 +28,7 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return GlobalTagAddon.roundIcon;
+        return GlobalTagsAddon.roundIcon;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
         }
         Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.translatable(
                     "globaltags.context." + (hidden ? "showTag" : "hideTag") + ".success",
                     NamedTextColor.GRAY,
@@ -56,6 +56,6 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
             return false;
         }
         this.uuid = player.getUniqueId();
-        return GlobalTagAddon.getAPI().getCache().get(player.getUniqueId()) != null;
+        return GlobalTagsAddon.getAPI().getCache().get(player.getUniqueId()) != null;
     }
 }

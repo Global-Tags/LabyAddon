@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.command.subcommands;
 
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -21,7 +21,7 @@ public class ClearCacheCommand extends SubCommand {
         this.api.getCache().resolveSelf();
         this.displayMessage(
             Component.empty()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.translatable(
                     "globaltags.commands.clear_cache.success",
                     NamedTextColor.GREEN
