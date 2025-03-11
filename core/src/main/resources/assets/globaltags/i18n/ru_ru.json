@@ -1,8 +1,8 @@
 {
     "globaltags": {
         "settings": {
-            "tags": {
-                "globalIcon": {
+            "account": {
+                "icon": {
                     "entries": {
                         "crown": "Корона",
                         "none": "Нет",

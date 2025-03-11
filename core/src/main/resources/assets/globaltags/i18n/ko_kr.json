@@ -1,7 +1,7 @@
 {
     "globaltags": {
         "settings": {
-            "tags": {
+            "account": {
                 "tagPreview": {
                     "appeal": {
                         "description": "⚠️ 이 버튼은 항의할수 있는 밴일 경우에만 클릭할 수 있습니다.",
@@ -28,7 +28,7 @@
                         "right": "이름 우측"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "entries": {
                         "star": "별",
                         "none": "없음",

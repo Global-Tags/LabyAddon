@@ -1,7 +1,7 @@
 {
     "globaltags": {
         "settings": {
-            "tags": {
+            "account": {
                 "staged": {
                     "description": "¡Haz clic en el botón «Publicar ajustes» para publicar los cambios!",
                     "title": "Cambios pendientes"
@@ -43,7 +43,7 @@
                     "text": "Borrar",
                     "name": "Borrar GlobalTag"
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Icono global",
                     "description": "Este icono se muestra globalmente a la izquierda de tu tag.",
                     "entries": {

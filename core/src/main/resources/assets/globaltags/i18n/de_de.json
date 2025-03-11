@@ -30,8 +30,8 @@
                 "name": "Hintergrund anzeigen",
                 "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Tags."
             },
-            "tags": {
-                "name": "Globale Tag-Einstellungen",
+            "account": {
+                "name": "Account-Einstellungen",
                 "staged": {
                     "title": "Ausstehende Änderungen",
                     "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen anzuwenden!"
@@ -65,7 +65,7 @@
                         "left": "Links vom Namen"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Globales Icon",
                     "description": "Dieses Icon wird global links neben deinem Tag angezeigt.",
                     "entries": {

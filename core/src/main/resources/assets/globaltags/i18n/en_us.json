@@ -51,8 +51,8 @@
                 "empty": "You don't have any hidden tags!",
                 "remove": "Remove from hidden tag list"
             },
-            "tags": {
-                "name": "Global tag settings",
+            "account": {
+                "name": "Account settings",
                 "staged": {
                     "title": "Pending changes",
                     "description": "Click on the \"Publish settings\" button to publish changes!"
@@ -88,7 +88,7 @@
                         "left": "Left to name"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Global icon",
                     "description": "This icon will be displayed left to your tag globally.",
                     "entries": {

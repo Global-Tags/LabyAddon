@@ -15,7 +15,7 @@ import net.labymod.api.notification.Notification.Type;
 public class Util {
 
     public static final Component unchanged = Component.translatable(
-        "globaltags.settings.tags.updateSettings.unchanged",
+        "globaltags.settings.account.updateSettings.unchanged",
         NamedTextColor.DARK_GRAY
     );
     private static Component tagResponse = null;
@@ -33,7 +33,7 @@ public class Util {
             .builder()
             .title(Component.text("Update result", NamedTextColor.AQUA))
             .description(Component.translatable(
-                "globaltags.settings.tags.updateSettings.result",
+                "globaltags.settings.account.updateSettings.result",
                 tagResponse,
                 positionResponse,
                 iconResponse

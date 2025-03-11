@@ -2,7 +2,7 @@ package com.rappytv.globaltags.config;
 
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.Util;
-import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.ui.activities.config.HiddenTagListActivity;
 import com.rappytv.globaltags.ui.activities.config.ReferralLeaderboardActivity;
 import net.labymod.api.Laby;
@@ -79,9 +79,9 @@ public class GlobalTagsConfig extends AddonConfig {
 
     @SettingSection("tags")
     @SpriteSlot(size = 32, y = 1)
-    private final TagSubConfig tags = new TagSubConfig();
+    private final AccountConfig account = new AccountConfig();
 
-    @MethodOrder(after = "tags")
+    @MethodOrder(after = "account")
     @SpriteSlot(size = 32, y = 2)
     @ButtonSetting
     public void clearCache(Setting setting) {
@@ -112,7 +112,8 @@ public class GlobalTagsConfig extends AddonConfig {
     public ConfigProperty<Boolean> showBackground() {
         return this.showBackground;
     }
-    public TagSubConfig tags() {
-        return this.tags;
+
+    public AccountConfig account() {
+        return this.account;
     }
 }

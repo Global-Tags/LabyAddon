@@ -25,21 +25,14 @@ import net.labymod.api.configuration.settings.Setting;
 import net.labymod.api.util.Debounce;
 import net.labymod.api.util.MethodOrder;
 
-public class TagSubConfig extends Config {
+public class AccountConfig extends Config {
 
     @Exclude
     private final List<UUID> hiddenTags = new ArrayList<>();
 
-    public TagSubConfig() {
-        Runnable runnable = () -> Debounce.of(
-            "globaltags-config-update",
-            1000,
-            TagPreviewWidget::change
-        );
-        this.tag.addChangeListener(runnable);
-        this.position.addChangeListener(runnable);
-        this.globalIcon.addChangeListener(runnable);
-    }
+    @SpriteSlot(size = 32, y = 1, x = 2)
+    @DropdownSetting
+    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, x = 1)
@@ -54,11 +47,18 @@ public class TagSubConfig extends Config {
     @DropdownSetting
     private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(GlobalPosition.ABOVE);
 
-    @SpriteSlot(size = 32, y = 1, x = 2)
-    @DropdownSetting
-    private final ConfigProperty<GlobalIcon> globalIcon = new ConfigProperty<>(GlobalIcon.NONE);
+    public AccountConfig() {
+        Runnable runnable = () -> Debounce.of(
+            "globaltags-config-update",
+            1000,
+            TagPreviewWidget::change
+        );
+        this.tag.addChangeListener(runnable);
+        this.position.addChangeListener(runnable);
+        this.icon.addChangeListener(runnable);
+    }
 
-    @MethodOrder(after = "globalIcon")
+    @MethodOrder(after = "icon")
     @SpriteSlot(size = 32, y = 1, x = 1)
     @ButtonSetting
     public void updateSettings(Setting setting) {
@@ -67,7 +67,7 @@ public class TagSubConfig extends Config {
             if(api.getAuthorization() == null) {
                 Util.notify(
                     Component.translatable("globaltags.general.error"),
-                    Component.translatable("globaltags.settings.tags.tagPreview.labyConnect")
+                    Component.translatable("globaltags.settings.account.tagPreview.labyConnect")
                 );
                 return;
             }
@@ -93,8 +93,9 @@ public class TagSubConfig extends Config {
                     }
             });
             else Util.update(api, ResultType.POSITION, Util.unchanged);
-            if(info != null && !info.getGlobalIcon().equals(this.globalIcon.get())) api.getApiHandler().setIcon(
-                this.globalIcon.get(), (response) -> {
+            if (info != null && !info.getGlobalIcon().equals(this.icon.get()))
+                api.getApiHandler().setIcon(
+                    this.icon.get(), (response) -> {
                     if (response.isSuccessful())
                         Util.update(api, ResultType.ICON,
                             Component.text("✔", NamedTextColor.GREEN));
@@ -137,6 +138,6 @@ public class TagSubConfig extends Config {
         return this.position;
     }
     public ConfigProperty<GlobalIcon> icon() {
-        return this.globalIcon;
+        return this.icon;
     }
 }

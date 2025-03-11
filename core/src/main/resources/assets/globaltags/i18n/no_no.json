@@ -23,7 +23,7 @@
                 "name": "Lokaliser API-svar",
                 "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt blir lagret for lokaliserte e-poster."
             },
-            "tags": {
+            "account": {
                 "staged": {
                     "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!",
                     "title": "Ventende endringer"
@@ -64,7 +64,7 @@
                         "left": "Venstre til navnet"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Global ikon",
                     "description": "Dette ikonet vil vises til venstre til taggen din globalt.",
                     "entries": {

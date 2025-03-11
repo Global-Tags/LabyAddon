@@ -3,7 +3,7 @@ package com.rappytv.globaltags.ui.widgets.config;
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
-import com.rappytv.globaltags.config.subconfig.TagSubConfig;
+import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import java.lang.annotation.ElementType;
@@ -43,9 +43,9 @@ public class TagPreviewWidget extends HorizontalListWidget {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     private static boolean refetch = true;
     private static boolean changed = false;
-    private final TagSubConfig config;
+    private final AccountConfig config;
 
-    private TagPreviewWidget(TagSubConfig config) {
+    private TagPreviewWidget(AccountConfig config) {
         this.config = config;
     }
 
@@ -106,14 +106,14 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 || !this.config.icon().get().equals(info.getGlobalIcon());
             if (changed && updated) {
                 Util.notify(
-                    I18n.translate("globaltags.settings.tags.staged.title"),
-                    I18n.translate("globaltags.settings.tags.staged.description")
+                    I18n.translate("globaltags.settings.account.staged.title"),
+                    I18n.translate("globaltags.settings.account.staged.description")
                 );
             }
             ComponentWidget tag = ComponentWidget.component(
                 this.config.tag().get().isBlank()
                     ? Component.translatable(
-                    "globaltags.settings.tags.tagPreview.empty",
+                    "globaltags.settings.account.tagPreview.empty",
                     NamedTextColor.RED
                 )
                     : api.translateColorCodes(this.config.tag().get())
@@ -136,11 +136,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
         if (info != null && info.isBanned()) {
             ButtonWidget appealButton = ButtonWidget.i18n(
-                "globaltags.settings.tags.tagPreview.appeal.name",
+                "globaltags.settings.account.tagPreview.appeal.name",
                 () -> new AppealPopup(api).displayInOverlay()
             ).addId("appeal-button");
             appealButton.setHoverComponent(Component.translatable(
-                "globaltags.settings.tags.tagPreview.appeal.description",
+                "globaltags.settings.account.tagPreview.appeal.description",
                 NamedTextColor.GOLD
             ));
             appealButton.setEnabled(info.getBanInfo().isAppealable());
@@ -165,12 +165,14 @@ public class TagPreviewWidget extends HorizontalListWidget {
     @SuppressWarnings("ConstantConditions")
     private Component getError(PlayerInfo<Component> info) {
         String session = GlobalTagsAddon.getAPI().getAuthorization();
-        if(session == null) return Component.translatable("globaltags.settings.tags.tagPreview.labyConnect");
-        else if(info == null) return Component.translatable("globaltags.settings.tags.tagPreview.noInfo");
-        else if (info.isBanned()) {
+        if (session == null) {
+            return Component.translatable("globaltags.settings.account.tagPreview.labyConnect");
+        } else if (info == null) {
+            return Component.translatable("globaltags.settings.account.tagPreview.noInfo");
+        } else if (info.isBanned()) {
             Component banInfo = Component.empty()
                 .append(Component.translatable(
-                    "globaltags.settings.tags.tagPreview.reason",
+                    "globaltags.settings.account.tagPreview.reason",
                     NamedTextColor.RED,
                     Component.text(info.getBanInfo().getReason(), NamedTextColor.GRAY)
                 ));
@@ -179,7 +181,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
                 banInfo
                     .append(Component.newline())
                     .append(Component.translatable(
-                        "globaltags.settings.tags.tagPreview.expires",
+                        "globaltags.settings.account.tagPreview.expires",
                         NamedTextColor.RED,
                         Component.text(dateFormat.format(info.getBanInfo().getExpiresAt()),
                             NamedTextColor.GRAY)
@@ -187,7 +189,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
             }
 
             return Component.empty()
-                .append(Component.translatable("globaltags.settings.tags.tagPreview.banned"))
+                .append(Component.translatable("globaltags.settings.account.tagPreview.banned"))
                 .append(Component.space())
                 .append(Component.text("ⓘ").hoverEvent(HoverEvent.showText(banInfo)));
         }
@@ -199,7 +201,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
 
         @Override
         public TagPreviewWidget[] create(Setting setting, TagPreviewSetting annotation, SettingAccessor accessor) {
-            return new TagPreviewWidget[]{new TagPreviewWidget((TagSubConfig) accessor.config())};
+            return new TagPreviewWidget[]{new TagPreviewWidget((AccountConfig) accessor.config())};
         }
 
         @Override
