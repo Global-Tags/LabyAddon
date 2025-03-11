@@ -2,6 +2,7 @@ package com.rappytv.globaltags.command.subcommands;
 
 import com.rappytv.globaltags.GlobalTagAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.Util;
 import java.text.SimpleDateFormat;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -60,6 +61,8 @@ public class RedeemCommand extends SubCommand {
             }
 
             this.displayMessage(component);
+            this.api.getCache().renewSelf();
+            Util.broadcastTagUpdate();
         });
         return true;
     }
