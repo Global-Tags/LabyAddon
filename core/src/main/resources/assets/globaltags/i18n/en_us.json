@@ -61,10 +61,6 @@
                     }
                 },
                 "name": "Account settings",
-                "staged": {
-                    "title": "Pending changes",
-                    "description": "Click on the \"Publish settings\" button to publish changes!"
-                },
                 "tagPreview": {
                     "name": "Tag Preview",
                     "banned": "Your account is suspended!",
