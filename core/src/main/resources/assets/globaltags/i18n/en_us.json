@@ -61,7 +61,7 @@
                     }
                 },
                 "name": "Account settings",
-                "tagPreview": {
+                "accountInfo": {
                     "name": "Tag Preview",
                     "banned": "Your account is suspended!",
                     "reason": "Reason: %s",

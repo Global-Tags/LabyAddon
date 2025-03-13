@@ -5,6 +5,12 @@ import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.text.SimpleDateFormat;
+import java.util.function.Consumer;
 import net.labymod.api.Laby;
 import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
@@ -26,13 +32,6 @@ import net.labymod.api.configuration.settings.annotation.SettingFactory;
 import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
 import net.labymod.api.util.ThreadSafe;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.text.SimpleDateFormat;
-import java.util.function.Consumer;
 
 @Links({@Link("account-info.lss"), @Link("preview.lss")})
 @AutoWidget
@@ -124,7 +123,7 @@ public class AccountInfoWidget extends HorizontalListWidget {
                 addEntry.accept(ComponentWidget.component(
                         Component.text("*", NamedTextColor.DARK_GRAY)
                                 .hoverEvent(HoverEvent.showText(Component.translatable(
-                                        "globaltags.settings.account.tagPreview.unsaved",
+                                    "globaltags.settings.account.accountInfo.unsaved",
                                         NamedTextColor.GRAY
                                 )))
                 ));
@@ -133,11 +132,11 @@ public class AccountInfoWidget extends HorizontalListWidget {
 
         if (info != null && info.isBanned()) {
             ButtonWidget appealButton = ButtonWidget.i18n(
-                    "globaltags.settings.account.tagPreview.appeal.name",
+                "globaltags.settings.account.accountInfo.appeal.name",
                     () -> new AppealPopup(api).displayInOverlay()
             ).addId("appeal-button");
             appealButton.setHoverComponent(Component.translatable(
-                    "globaltags.settings.account.tagPreview.appeal.description",
+                "globaltags.settings.account.accountInfo.appeal.description",
                     NamedTextColor.GOLD
             ));
             appealButton.setEnabled(info.getBanInfo().isAppealable());
@@ -155,13 +154,13 @@ public class AccountInfoWidget extends HorizontalListWidget {
     private Component getError(PlayerInfo<Component> info) {
         String session = GlobalTagsAddon.getAPI().getAuthorization();
         if (session == null) {
-            return Component.translatable("globaltags.settings.account.tagPreview.labyConnect");
+            return Component.translatable("globaltags.settings.account.accountInfo.labyConnect");
         } else if (info == null) {
-            return Component.translatable("globaltags.settings.account.tagPreview.noInfo");
+            return Component.translatable("globaltags.settings.account.accountInfo.noInfo");
         } else if (info.isBanned()) {
             Component banInfo = Component.empty()
                     .append(Component.translatable(
-                            "globaltags.settings.account.tagPreview.reason",
+                        "globaltags.settings.account.accountInfo.reason",
                             NamedTextColor.RED,
                             Component.text(info.getBanInfo().getReason(), NamedTextColor.GRAY)
                     ));
@@ -170,7 +169,7 @@ public class AccountInfoWidget extends HorizontalListWidget {
                 banInfo
                         .append(Component.newline())
                         .append(Component.translatable(
-                                "globaltags.settings.account.tagPreview.expires",
+                            "globaltags.settings.account.accountInfo.expires",
                                 NamedTextColor.RED,
                                 Component.text(dateFormat.format(info.getBanInfo().getExpiresAt()),
                                         NamedTextColor.GRAY)
@@ -178,7 +177,7 @@ public class AccountInfoWidget extends HorizontalListWidget {
             }
 
             return Component.empty()
-                    .append(Component.translatable("globaltags.settings.account.tagPreview.banned"))
+                .append(Component.translatable("globaltags.settings.account.accountInfo.banned"))
                     .append(Component.space())
                     .append(Component.text("ⓘ").hoverEvent(HoverEvent.showText(banInfo)));
         }
@@ -188,15 +187,16 @@ public class AccountInfoWidget extends HorizontalListWidget {
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     @SettingElement(extended = true)
-    public @interface TagPreviewSetting {
+    public @interface AccountInfoSetting {
 
     }
 
     @SettingFactory
-    public static class Factory implements WidgetFactory<TagPreviewSetting, AccountInfoWidget> {
+    public static class Factory implements WidgetFactory<AccountInfoSetting, AccountInfoWidget> {
 
         @Override
-        public AccountInfoWidget[] create(Setting setting, TagPreviewSetting annotation, SettingAccessor accessor) {
+        public AccountInfoWidget[] create(Setting setting, AccountInfoSetting annotation,
+            SettingAccessor accessor) {
             if (!(accessor.config() instanceof AccountConfig config)) {
                 return new AccountInfoWidget[0];
             }

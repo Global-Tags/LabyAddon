@@ -28,7 +28,7 @@
                     "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!",
                     "title": "Ventende endringer"
                 },
-                "tagPreview": {
+                "accountInfo": {
                     "noInfo": "Kunne ikke hente kontoinformasjon!",
                     "appeal": {
                         "popup": {

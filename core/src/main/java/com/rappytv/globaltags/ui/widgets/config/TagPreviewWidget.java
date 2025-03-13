@@ -67,7 +67,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
         this.tag = component != null
             ? component
             : Component.translatable(
-                "globaltags.settings.tags.tagPreview.empty",
+                "globaltags.settings.tags.accountInfo.empty",
                 NamedTextColor.RED
             );
         this.runThreadSafely(() -> this.tagWidget.setComponent(this.tag));

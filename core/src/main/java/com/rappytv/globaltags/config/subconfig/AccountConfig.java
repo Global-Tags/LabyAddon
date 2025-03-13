@@ -5,7 +5,7 @@ import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
 import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget;
-import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget.TagPreviewSetting;
+import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget.AccountInfoSetting;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import net.labymod.api.client.component.Component;
@@ -29,10 +29,10 @@ public class AccountConfig extends Config {
 
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, x = 2, y = 1)
-    @TagPreviewSetting
-    private final ConfigProperty<Boolean> tagPreview = new ConfigProperty<>(false);
+    @AccountInfoSetting
+    private final ConfigProperty<Boolean> accountInfo = new ConfigProperty<>(false);
 
-    @SettingSection("settings")
+    @SettingSection(value = "settings", center = true)
     @SpriteSlot(x = 3, y = 2)
     @TextFieldSetting
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
@@ -62,7 +62,7 @@ public class AccountConfig extends Config {
         this.hideRoleIcon.addChangeListener(runnable);
     }
 
-    @SettingSection("actions")
+    @SettingSection(value = "actions", center = true)
     @MethodOrder(after = "hideRoleIcon")
     @SpriteSlot(x = 3, y = 1)
     @ButtonSetting
@@ -72,7 +72,7 @@ public class AccountConfig extends Config {
             if(api.getAuthorization() == null) {
                 Util.notify(
                     Component.translatable("globaltags.general.error"),
-                    Component.translatable("globaltags.settings.account.tagPreview.labyConnect")
+                    Component.translatable("globaltags.settings.account.accountInfo.labyConnect")
                 );
                 return;
             }

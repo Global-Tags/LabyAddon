@@ -6,7 +6,7 @@
                     "description": "¡Haz clic en el botón «Publicar ajustes» para publicar los cambios!",
                     "title": "Cambios pendientes"
                 },
-                "tagPreview": {
+                "accountInfo": {
                     "name": "Vista previa de tu Tag",
                     "banned": "¡Tu cuenta está suspendida!\nRazón: %s",
                     "noInfo": "¡No se ha podido obtener la info de la cuenta!",

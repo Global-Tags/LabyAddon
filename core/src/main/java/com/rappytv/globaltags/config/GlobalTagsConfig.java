@@ -47,7 +47,7 @@ public class GlobalTagsConfig extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> showBulletPoints = new ConfigProperty<>(true);
 
-    @SettingSection("display")
+    @SettingSection(value = "display", center = true)
     @SpriteSlot(size = 32, x = 2, y = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> showOwnTag = new ConfigProperty<>(true);
@@ -58,7 +58,7 @@ public class GlobalTagsConfig extends AddonConfig {
     @SpriteSlot(x = 1, y = 1)
     @SwitchSetting
     private final ConfigProperty<Boolean> showBackground = new ConfigProperty<>(false);
-    @SettingSection("tags")
+    @SettingSection(value = "tags", center = true)
     @SpriteSlot(y = 2)
     private final AccountConfig account = new AccountConfig();
 
