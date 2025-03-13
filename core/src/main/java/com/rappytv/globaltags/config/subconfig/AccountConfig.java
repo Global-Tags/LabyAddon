@@ -43,6 +43,10 @@ public class AccountConfig extends Config {
     @SpriteSlot(x = 3, y = 2)
     @ActivitySetting
     public Activity tagEditor() {
+        String session = GlobalTagsAddon.getAPI().getAuthorization();
+        if (session == null) {
+            return new TagEditorActivity();
+        }
         return new TagEditorActivity(
             GlobalTagsAddon.getAPI().getCache().get(GlobalTagsAddon.getAPI().getClientUUID()),
             this

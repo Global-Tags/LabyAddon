@@ -1,8 +1,16 @@
+.error {
+    max-width: 80%;
+    text-color: red;
+    max-lines: 3;
+    alignment-x: center;
+    alignment-y: center;
+}
+
 .container {
     height: 100%;
     width: 100%;
 
-    Div {
+    FlexibleContent {
         height: fit-content;
         width: fit-content;
         alignment-x: center;
@@ -11,33 +19,64 @@
         .heading {
             top: 0;
             alignment-x: center;
-            font-size: 0.8;
+            font-size: 0.9;
             text-color: yellow;
+            margin-bottom: 3;
         }
 
         TagPreview {
-            top: 10;
             alignment-x: center;
             padding: 2;
         }
 
         TextField {
             width: 200;
-            top: 10;
             alignment-x: center;
             padding: 2;
         }
+
+        HorizontalList {
+            height: fit-content;
+            width: fit-content;
+            alignment-x: center;
+            space-between-entries: 1;
+            margin-bottom: 3;
+
+            Component {
+                padding: 2;
+                font-size: 0.8;
+                border: 1;
+            }
+
+            Component:hover {
+                background-color: dark_gray;
+                border: 1 #ffffff;
+            }
+        }
+
+        .square-wrapper {
+            height: fit-content;
+            width: fit-content;
+            alignment-x: center;
+            space-between-entries: 5;
+            margin-top: 5;
+
+            ColorPicker {
+                hover-box-delay: 0;
+            }
+
+            .gradient-button {
+                height: 22;
+                width: height;
+                padding: 0;
+                hover-box-delay: 0;
+            }
+        }
     }
 
-    .buttons {
-        height: fit-content;
-        width: fit-content;
+    .save-button {
+        margin-top: 10;
         alignment-x: center;
-        space-between-entries: 10;
-        margin-top: 20;
-
-        Button {
-            width: 50;
-        }
+        width: 50;
     }
 }

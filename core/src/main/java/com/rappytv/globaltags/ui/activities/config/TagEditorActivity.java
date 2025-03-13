@@ -6,41 +6,82 @@ import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.ui.widgets.config.TagPreviewWidget;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
+import java.util.Arrays;
+import java.util.List;
+import net.labymod.api.Laby;
+import net.labymod.api.Textures.SpriteCommon;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextColor;
+import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.AutoActivity;
 import net.labymod.api.client.gui.screen.activity.Link;
 import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
-import net.labymod.api.client.gui.screen.widget.widgets.DivWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.input.color.ColorPickerWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
+import net.labymod.api.util.Color;
+import net.labymod.api.util.Debounce;
 
 @Link("tag-editor.lss")
 @AutoActivity
 public class TagEditorActivity extends SimpleActivity {
 
+    private final static List<ColorEntry> numberColors = Arrays.asList(
+        new ColorEntry('0', NamedTextColor.BLACK),
+        new ColorEntry('1', NamedTextColor.DARK_BLUE),
+        new ColorEntry('2', NamedTextColor.DARK_GREEN),
+        new ColorEntry('3', NamedTextColor.DARK_AQUA),
+        new ColorEntry('4', NamedTextColor.DARK_RED),
+        new ColorEntry('5', NamedTextColor.DARK_PURPLE),
+        new ColorEntry('6', NamedTextColor.GOLD),
+        new ColorEntry('7', NamedTextColor.GRAY),
+        new ColorEntry('8', NamedTextColor.DARK_GRAY),
+        new ColorEntry('9', NamedTextColor.BLUE)
+    );
+    private final static List<ColorEntry> symbolColors = Arrays.asList(
+        new ColorEntry('a', NamedTextColor.GREEN),
+        new ColorEntry('b', NamedTextColor.AQUA),
+        new ColorEntry('c', NamedTextColor.RED),
+        new ColorEntry('d', NamedTextColor.LIGHT_PURPLE),
+        new ColorEntry('e', NamedTextColor.YELLOW),
+        new ColorEntry('f', NamedTextColor.WHITE)
+    );
+    private final static List<DecorationEntry> decorations = Arrays.asList(
+        new DecorationEntry('k', TextDecoration.OBFUSCATED),
+        new DecorationEntry('l', TextDecoration.BOLD),
+        new DecorationEntry('m', TextDecoration.STRIKETHROUGH),
+        new DecorationEntry('n', TextDecoration.UNDERLINED),
+        new DecorationEntry('o', TextDecoration.ITALIC)
+    );
     private final AccountConfig config;
+    private final Component errorComponent;
     private final TagPreviewWidget previewWidget;
+
+    private TextFieldWidget editorTextField;
+
+    public TagEditorActivity() {
+        this.config = null;
+        this.errorComponent = Component.translatable("globaltags.settings.account.tagEditor.error");
+        this.previewWidget = null;
+    }
 
     public TagEditorActivity(PlayerInfo<?> info, AccountConfig config) {
         this.config = config;
+        this.errorComponent = null;
         if (info == null) {
-            this.previewWidget = new TagPreviewWidget((Component) null, null, null);
-            GlobalTagsAddon.getAPI().getCache().resolveSelf((newInfo) -> {
-                if (newInfo == null) {
-                    this.displayPreviousScreen();
-                    return;
-                }
-                this.previewWidget.updateTag(newInfo.getPlainTag());
-                this.previewWidget.updateGlobalIcon(newInfo.getGlobalIcon(), newInfo.getUUID(),
-                    newInfo.getGlobalIconHash());
-                this.previewWidget.updateRoleIcon(newInfo.getRoleIcon());
-            });
+            this.previewWidget = new TagPreviewWidget(
+                config.tag().get(),
+                config.icon().get() != GlobalIcon.NONE
+                    ? Icon.url(TagPreviewWidget.getIconUrl(null, config.icon().get()))
+                    : null,
+                null
+            );
             return;
         }
         this.previewWidget = new TagPreviewWidget(
@@ -57,66 +98,132 @@ public class TagEditorActivity extends SimpleActivity {
     }
 
     @Override
-    public void initialize(Parent parent) { // TODO: Actually translate strings
+    public void initialize(Parent parent) {
         super.initialize(parent);
+
+        if (this.errorComponent != null) {
+            this.document.addChild(ComponentWidget.component(this.errorComponent).addId("error"));
+            return;
+        }
 
         FlexibleContentWidget container = new FlexibleContentWidget()
             .addId("container");
 
-        DivWidget previewDiv = new DivWidget()
+        FlexibleContentWidget previewWrapper = new FlexibleContentWidget()
             .addId("preview");
-        ComponentWidget previewComponent = ComponentWidget.i18n("Preview")
+        ComponentWidget previewComponent = ComponentWidget.i18n(
+                "globaltags.settings.account.tagEditor.preview")
             .addId("heading");
-        previewDiv.addChild(previewComponent);
-        previewDiv.addChild(this.previewWidget);
+        previewWrapper.addContent(previewComponent);
+        previewWrapper.addContent(this.previewWidget);
 
-        DivWidget editorDiv = new DivWidget()
+        FlexibleContentWidget editorWrapper = new FlexibleContentWidget()
             .addId("editor");
-        ComponentWidget editorComponent = ComponentWidget.i18n("Editor")
+        ComponentWidget editorComponent = ComponentWidget.i18n(
+                "globaltags.settings.account.tagEditor.editor")
             .addId("heading");
-        TextFieldWidget editorTextField = new TextFieldWidget()
+        this.editorTextField = new TextFieldWidget()
             .addId("editor-input");
-        editorTextField.setText(this.config.tag().get());
-        editorTextField.updateListener(this.previewWidget::updateTag);
-        editorTextField.setFocused(true);
-        editorTextField.setCursorAtEnd();
-        // TODO: Update view index somehow
-        editorDiv.addChild(editorComponent);
-        editorDiv.addChild(editorTextField);
+        this.addText(this.config.tag().get());
+        this.editorTextField.updateListener(this.previewWidget::updateTag);
+        editorWrapper.addContent(editorComponent);
+        editorWrapper.addContent(this.editorTextField);
 
-        DivWidget utilsDiv = new DivWidget()
+        FlexibleContentWidget utilsWrapper = new FlexibleContentWidget()
             .addId("utils");
-        ComponentWidget utilsComponent = ComponentWidget.i18n("Utils")
+        ComponentWidget utilsComponent = ComponentWidget.i18n(
+                "globaltags.settings.account.tagEditor.utils")
             .addId("heading");
-        // TODO: Add utils
-        utilsDiv.addChild(utilsComponent);
+        HorizontalListWidget utilsLine1 = new HorizontalListWidget();
+        HorizontalListWidget utilsLine2 = new HorizontalListWidget();
+        HorizontalListWidget utilsLine3 = new HorizontalListWidget();
+        for (ColorEntry entry : numberColors) {
+            String label = "&" + entry.character;
+            ComponentWidget colorButton = ComponentWidget.text(
+                label,
+                entry.color
+            ).addId("color-button");
+            colorButton.setPressable(() -> this.addText(label));
+            utilsLine1.addEntry(colorButton);
+        }
+        for (ColorEntry entry : symbolColors) {
+            String label = "&" + entry.character;
+            ComponentWidget colorButton = ComponentWidget.text(
+                label,
+                entry.color
+            ).addId("color-button");
+            colorButton.setPressable(() -> this.addText(label));
+            utilsLine2.addEntry(colorButton);
+        }
+        for (DecorationEntry entry : decorations) {
+            String label = "&" + entry.character;
+            ComponentWidget colorButton = ComponentWidget.component(
+                Component.text(label).decorate(entry.decoration)
+            ).addId("color-button");
+            colorButton.setPressable(() -> this.addText(label));
+            utilsLine3.addEntry(colorButton);
+        }
+        HorizontalListWidget utilSquareWrapper = new HorizontalListWidget()
+            .addId("square-wrapper");
+        ColorPickerWidget utilsColorPicker = ColorPickerWidget.of(Color.WHITE);
+        utilsColorPicker.addUpdateListener(utilsColorPicker, (color) -> Debounce.of(
+            "globaltags-colorpicker",
+            1000,
+            () -> this.addText(String.format("<#%06X>", 0xFFFFFF & color.get()))
+        ));
+        ButtonWidget utilsGradientButton = ButtonWidget.icon(SpriteCommon.PAINT, () ->
+            Laby.references().chatExecutor().openUrl(
+                "https://globaltags.xyz/gradients",
+                false
+            )
+        ).addId("gradient-button");
+        utilsColorPicker.setHoverComponent(
+            Component.translatable("globaltags.settings.account.tagEditor.hexChooser"));
+        utilsGradientButton.setHoverComponent(
+            Component.translatable("globaltags.settings.account.tagEditor.gradientGenerator"));
 
-        HorizontalListWidget buttons = new HorizontalListWidget()
-            .addId("buttons");
+        utilSquareWrapper.addEntry(utilsColorPicker);
+        utilSquareWrapper.addEntry(utilsGradientButton);
+
+        utilsWrapper.addContent(utilsComponent);
+        utilsWrapper.addContent(utilsLine1);
+        utilsWrapper.addContent(utilsLine2);
+        utilsWrapper.addContent(utilsLine3);
+        utilsWrapper.addContent(utilSquareWrapper);
+
         ButtonWidget saveButton = ButtonWidget.component(Component.translatable(
-            "Save",
+            "globaltags.settings.account.tagEditor.save.button",
             NamedTextColor.GREEN
         ), () -> {
-            this.config.tag().set(editorTextField.getText());
-            // TODO: Go back to AccountConfig
+            this.config.tag().set(this.editorTextField.getText());
             Util.notify(
-                Component.translatable("Tag changed..."),
+                Component.translatable("globaltags.settings.account.tagEditor.save.title"),
                 Component.translatable(
-                    "Don't forget to upload your changes by clicking on the button below!")
+                    "globaltags.settings.account.tagEditor.save.description",
+                    Component.translatable("globaltags.settings.account.updateSettings.name")
+                )
             );
-        });
-        ButtonWidget cancelButton = ButtonWidget.component(Component.translatable(
-            "Cancel",
-            NamedTextColor.RED
-        ), () -> { /* TODO: Go back to AccountConfig */ });
-        buttons.addEntry(saveButton);
-        buttons.addEntry(cancelButton);
+        }).addId("save-button");
 
-        container.addContent(previewDiv);
-        container.addContent(editorDiv);
-        container.addContent(utilsDiv);
-        container.addContent(buttons);
+        container.addContent(previewWrapper);
+        container.addContent(editorWrapper);
+        container.addContent(utilsWrapper);
+        container.addContent(saveButton);
 
         this.document.addChild(container);
+    }
+
+    private void addText(String text) {
+        this.editorTextField.setText(this.editorTextField.getText() + text);
+        this.editorTextField.setFocused(true);
+        this.editorTextField.setCursorAtEnd();
+    }
+
+    private record ColorEntry(Character character, TextColor color) {
+
+    }
+
+    private record DecorationEntry(Character character, TextDecoration decoration) {
+
     }
 }

@@ -81,7 +81,18 @@
                     }
                 },
                 "tagEditor": {
-                    "name": "Global tag"
+                    "name": "Global tag",
+                    "error": "An error ocurred! Please click on the reload icon in the Tag preview window.",
+                    "preview": "Preview",
+                    "editor": "Editor",
+                    "utils": "Utils",
+                    "hexChooser": "Choose hex color",
+                    "gradientGenerator": "Open gradient generator",
+                    "save": {
+                        "button": "Save",
+                        "title": "Tag changed...",
+                        "description": "Don't forget to upload your changes by clicking on the \"%s\" button!"
+                    }
                 },
                 "position": {
                     "name": "Global position",
