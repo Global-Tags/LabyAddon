@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.ui.widgets.interaction.StaffNoteWidget;
 import com.rappytv.globaltags.wrapper.model.PlayerNote;
@@ -32,7 +32,7 @@ public class StaffNotesActivity extends SimpleActivity {
     private final String username;
 
     public StaffNotesActivity(UUID uuid, String username) {
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
@@ -45,7 +45,7 @@ public class StaffNotesActivity extends SimpleActivity {
             if(!response.isSuccessful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                         .build()
                 );
@@ -59,9 +59,11 @@ public class StaffNotesActivity extends SimpleActivity {
                     new CreateNoteActivity(this.api, this.uuid, this.username)
                 ))
                 .addId("create-button");
-            createButton.setHoverComponent(Component.translatable("globaltags.context.staff_notes.hover.create"));
+            createButton.setHoverComponent(
+                    Component.translatable("globaltags.context.staffNotes.hover.create"));
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.title", this.username).addId("username");
+            ComponentWidget titleWidget = ComponentWidget.i18n(
+                    "globaltags.context.staffNotes.title", this.username).addId("username");
             VerticalListWidget<StaffNoteWidget> notes = new VerticalListWidget<>().addId("item-list");
             for (PlayerNote note : response.getData()) {
                 notes.addChild(new StaffNoteWidget(this.uuid, this.api, note));

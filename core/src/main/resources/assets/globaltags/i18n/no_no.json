@@ -23,12 +23,12 @@
                 "name": "Lokaliser API-svar",
                 "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt blir lagret for lokaliserte e-poster."
             },
-            "tags": {
+            "account": {
                 "staged": {
                     "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!",
                     "title": "Ventende endringer"
                 },
-                "tagPreview": {
+                "accountInfo": {
                     "noInfo": "Kunne ikke hente kontoinformasjon!",
                     "appeal": {
                         "popup": {
@@ -51,7 +51,7 @@
                     "result": "Tagg: %s\nPosisjon: %s\nIkon: %s",
                     "unchanged": "Uendret"
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Global Tagg"
                 },
                 "position": {
@@ -64,7 +64,7 @@
                         "left": "Venstre til navnet"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Global ikon",
                     "description": "Dette ikonet vil vises til venstre til taggen din globalt.",
                     "entries": {
@@ -95,7 +95,7 @@
             "referralLeaderboards": {
                 "name": "Ledertavler for henvisninger",
                 "activity": {
-                    "current_month": "Denne måneden",
+                    "currentMonth": "Denne måneden",
                     "open": "Åpne laby.net profil",
                     "loading": "Laster…",
                     "total": "Antall"
@@ -126,10 +126,10 @@
                 }
             },
             "usage": "Bruk: %s",
-            "clear_cache": {
+            "clearCache": {
                 "success": "Cachen ble tømt!"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "Cachen ble fornyet!"
             }
         },
@@ -175,7 +175,7 @@
             "clearTag": {
                 "name": "Tøm GlobalTag"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "name": "Administrer GlobalTags-notater",
                 "title": "Notater til %s",
                 "description": "oppretet på %s (#%s)",
@@ -191,10 +191,10 @@
                     "send": "Opprett"
                 }
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Vis GlobalTag-historikk",
                 "title": "Tag-historikk til %s",
-                "flagged_words": "Flaggede ord:"
+                "flaggedWords": "Flaggede ord:"
             }
         },
         "general": {

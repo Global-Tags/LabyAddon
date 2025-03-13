@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.command.subcommands;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import net.labymod.api.client.chat.command.SubCommand;
@@ -23,7 +23,7 @@ public class VerifyCommand extends SubCommand {
                 if(arguments.length < 2) {
                     this.displayMessage(
                         Component.empty()
-                            .append(GlobalTagAddon.prefix)
+                            .append(GlobalTagsAddon.prefix)
                             .append(Component.translatable(
                                 "globaltags.commands.usage",
                                 NamedTextColor.RED,
@@ -34,13 +34,13 @@ public class VerifyCommand extends SubCommand {
                 }
 
                 this.api.getApiHandler().verifyEmail(arguments[1], (response) -> this.displayMessage(
-                        GlobalTagAddon.prefix.copy().append(Util.getResponseComponent(response))
+                        GlobalTagsAddon.prefix.copy().append(Util.getResponseComponent(response))
                 ));
                 break;
             default:
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.translatable(
                             "globaltags.commands.usage",
                             NamedTextColor.RED,

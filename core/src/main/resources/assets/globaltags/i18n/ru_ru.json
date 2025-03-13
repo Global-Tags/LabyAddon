@@ -1,8 +1,8 @@
 {
     "globaltags": {
         "settings": {
-            "tags": {
-                "globalIcon": {
+            "account": {
+                "icon": {
                     "entries": {
                         "crown": "Корона",
                         "none": "Нет",
@@ -13,7 +13,7 @@
                     "name": "Глобальная иконка",
                     "description": "Этот значок будет отображаться слева от вашего тега во всем мире."
                 },
-                "tagPreview": {
+                "accountInfo": {
                     "appeal": {
                         "description": "⚠️ На эту кнопку можно будет нажать только в том случае если ваше отстранение можно обжаловать.",
                         "name": "Апелляция",
@@ -90,7 +90,7 @@
                 "text": "Просмотр",
                 "activity": {
                     "total": "Итого",
-                    "current_month": "В этом месяце",
+                    "currentMonth": "В этом месяце",
                     "open": "Открыть профиль laby.net",
                     "loading": "Загрузка…"
                 }
@@ -119,7 +119,7 @@
                 "title": "Отчет %s",
                 "send": "Отправить отчет"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "create": {
                     "title": "Добавить заметку для %s",
                     "label": "Примечание",
@@ -159,10 +159,10 @@
                 "title": "Разбанить %s",
                 "send": "Разбанить"
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Показать историю GlobalTag",
                 "title": "История меток %s's",
-                "flagged_words": "Отмеченные слова:"
+                "flaggedWords": "Отмеченные слова:"
             }
         },
         "general": {
@@ -182,10 +182,10 @@
                     "hover": "Нажмите здесь, чтобы очистить кэш тегов!"
                 }
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "Кэш очищен!"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "Кэш обновлен!"
             },
             "link": {

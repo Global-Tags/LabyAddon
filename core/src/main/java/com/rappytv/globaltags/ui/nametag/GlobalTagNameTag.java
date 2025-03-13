@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.ui.nametag;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
@@ -24,12 +24,12 @@ public class GlobalTagNameTag extends NameTag {
 
     private final int black = new Color(0, 0, 0, 70).getRGB();
     private final GlobalTagAPI api;
-    private final GlobalTagConfig config;
+    private final GlobalTagsConfig config;
     private final PositionType position;
     private PlayerInfo<Component> info;
 
-    public GlobalTagNameTag(GlobalTagAddon addon, PositionType position) {
-        this.api = GlobalTagAddon.getAPI();
+    public GlobalTagNameTag(GlobalTagsAddon addon, PositionType position) {
+        this.api = GlobalTagsAddon.getAPI();
         this.config = addon.configuration();
         this.position = position;
     }
@@ -52,7 +52,7 @@ public class GlobalTagNameTag extends NameTag {
             this.info = this.api.getCache().get(uuid);
         else {
             if (this.position == PositionType.ABOVE_NAME
-                && GlobalTagAddon.getAPI().getAuthorization() != null) {
+                && GlobalTagsAddon.getAPI().getAuthorization() != null) {
                 this.api.getCache().resolve(uuid);
             }
         }
@@ -110,7 +110,7 @@ public class GlobalTagNameTag extends NameTag {
     @Override
     public boolean isVisible() {
         return !this.entity.isCrouching()
-            && !this.config.tags().hiddenTags().contains(this.entity.getUniqueId())
+            && !this.config.hiddenTags().contains(this.entity.getUniqueId())
             && super.isVisible();
     }
 }

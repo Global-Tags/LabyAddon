@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.GlobalTagsAddon;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.ui.activities.interaction.ReportUUIDActivity;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
@@ -12,9 +12,9 @@ import net.labymod.api.client.gui.icon.Icon;
 
 public class ReportBulletPoint implements BulletPoint {
 
-    private final GlobalTagConfig config;
+    private final GlobalTagsConfig config;
 
-    public ReportBulletPoint(GlobalTagAddon addon) {
+    public ReportBulletPoint(GlobalTagsAddon addon) {
         this.config = addon.configuration();
     }
 
@@ -25,7 +25,7 @@ public class ReportBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return GlobalTagAddon.roundIcon;
+        return GlobalTagsAddon.roundIcon;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ReportBulletPoint implements BulletPoint {
         if(!this.config.enabled().get() || !this.config.showBulletPoints().get()) {
             return false;
         }
-        PlayerInfo<Component> playerInfo = GlobalTagAddon.getAPI().getCache().get(player.getUniqueId());
+        PlayerInfo<Component> playerInfo = GlobalTagsAddon.getAPI().getCache().get(player.getUniqueId());
         return playerInfo != null && playerInfo.getTag() != null;
     }
 }

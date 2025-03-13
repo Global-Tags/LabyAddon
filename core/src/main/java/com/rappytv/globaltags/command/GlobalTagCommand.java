@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.command;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.subcommands.ClearCacheCommand;
 import com.rappytv.globaltags.command.subcommands.LinkSubcommand;
@@ -21,9 +21,9 @@ public class GlobalTagCommand extends Command {
     private final GlobalTagAPI api;
     private final String version;
 
-    public GlobalTagCommand(GlobalTagAddon addon) {
+    public GlobalTagCommand(GlobalTagsAddon addon) {
         super("globaltags", "globaltag", "gt");
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.version = addon.addonInfo().getVersion();
 
         this.translationKey("globaltags.commands.base");
@@ -39,14 +39,14 @@ public class GlobalTagCommand extends Command {
     public boolean execute(String prefix, String[] arguments) {
         this.api.getApiHandler().getApiInfo((response) -> {
             TextComponent clearComponent = TextComponent.builder()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.translatable(
                     this.getTranslationKey("version"),
                     NamedTextColor.GREEN,
                     Component.text(this.version, NamedTextColor.AQUA)
                 ))
                 .append(Component.newline())
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.translatable(
                     this.getTranslationKey("api.version"),
                     NamedTextColor.GREEN,
@@ -58,7 +58,7 @@ public class GlobalTagCommand extends Command {
                         )
                 ))
                 .append(Component.newline())
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component
                     .translatable(this.getTranslationKey("clearCache.label"))
                     .color(NamedTextColor.LIGHT_PURPLE)

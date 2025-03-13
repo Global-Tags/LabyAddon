@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.command.subcommands;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.SubCommand;
@@ -27,13 +27,13 @@ public class LinkSubcommand extends SubCommand {
                     if (info.isSuccessful()) {
                         String code = info.getData();
                         Laby.references().chatExecutor().copyToClipboard(code);
-                        this.displayMessage(GlobalTagAddon.prefix.copy().append(Component.translatable(
+                        this.displayMessage(GlobalTagsAddon.prefix.copy().append(Component.translatable(
                             "globaltags.commands.link.discord.copied",
                             NamedTextColor.GREEN
                         )));
                     } else {
                         this.displayMessage(
-                            GlobalTagAddon.prefix.copy().append(Component.text(
+                            GlobalTagsAddon.prefix.copy().append(Component.text(
                                 info.getError(),
                                 NamedTextColor.RED
                             ))
@@ -45,7 +45,7 @@ public class LinkSubcommand extends SubCommand {
                 if (arguments.length < 2) {
                     this.displayMessage(
                         Component.empty()
-                            .append(GlobalTagAddon.prefix)
+                            .append(GlobalTagsAddon.prefix)
                             .append(Component.translatable(
                                 "globaltags.commands.usage",
                                 NamedTextColor.RED,
@@ -59,10 +59,10 @@ public class LinkSubcommand extends SubCommand {
                     if (info.isSuccessful()) {
                         this.displayMessage(
                             Component.empty()
-                                .append(GlobalTagAddon.prefix)
+                                .append(GlobalTagsAddon.prefix)
                                 .append(Component.text(info.getData(), NamedTextColor.GREEN))
                                 .append(Component.newline())
-                                .append(GlobalTagAddon.prefix)
+                                .append(GlobalTagsAddon.prefix)
                                 .append(
                                     Component.translatable(
                                             "globaltags.commands.link.email.verify",
@@ -79,7 +79,7 @@ public class LinkSubcommand extends SubCommand {
                     } else {
                         this.displayMessage(
                             Component.empty()
-                                .append(GlobalTagAddon.prefix)
+                                .append(GlobalTagsAddon.prefix)
                                 .append(Component.text(info.getError(), NamedTextColor.RED))
                         );
                     }
@@ -88,7 +88,7 @@ public class LinkSubcommand extends SubCommand {
             default:
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.translatable(
                             "globaltags.commands.usage",
                             NamedTextColor.RED,

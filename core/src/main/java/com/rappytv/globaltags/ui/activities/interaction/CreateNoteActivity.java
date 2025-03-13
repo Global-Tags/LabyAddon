@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import java.util.UUID;
@@ -42,14 +42,18 @@ public class CreateNoteActivity extends SimpleActivity {
         FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
         HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
         IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-        ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.staff_notes.create.title", this.username).addId("username");
+        ComponentWidget titleWidget = ComponentWidget.i18n(
+            "globaltags.context.staffNotes.create.title", this.username).addId("username");
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
-        ComponentWidget labelWidget = ComponentWidget.i18n("globaltags.context.staff_notes.create.label").addId("label");
+        ComponentWidget labelWidget = ComponentWidget.i18n(
+            "globaltags.context.staffNotes.create.label").addId("label");
         TextFieldWidget inputWidget = new TextFieldWidget()
-            .placeholder(Component.translatable("globaltags.context.staff_notes.create.placeholder", NamedTextColor.DARK_GRAY))
+            .placeholder(Component.translatable("globaltags.context.staffNotes.create.placeholder",
+                NamedTextColor.DARK_GRAY))
             .addId("input");
         ButtonWidget sendButton = new ButtonWidget()
-            .updateComponent(Component.translatable("globaltags.context.staff_notes.create.send", NamedTextColor.AQUA))
+            .updateComponent(Component.translatable("globaltags.context.staffNotes.create.send",
+                NamedTextColor.AQUA))
             .addId("send-button");
         sendButton.setEnabled(false);
         sendButton.setActionListener(() -> {
@@ -57,7 +61,7 @@ public class CreateNoteActivity extends SimpleActivity {
             this.api.getApiHandler().createNote(this.uuid, inputWidget.getText(), (response) ->
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Util.getResponseComponent(response))
                 ));
         });

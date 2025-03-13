@@ -1,0 +1,35 @@
+AccountInfo {
+    height: fit-content;
+    orientation: horizontal;
+
+    TagPreview {
+        height: 100%;
+        width: fit-content;
+        max-width: 90%;
+    }
+
+    .error {
+        max-width: 75%;
+        margin-left: 2;
+        scale-to-fit: false;
+        text-color: red;
+    }
+
+    .appeal-button {
+        height: 20;
+        width: fit-content;
+        alignment: right;
+    }
+
+    .refresh-button {
+        height: 20;
+        width: height;
+        padding: 0;
+        alignment: right;
+
+        .button-icon {
+            height: 8;
+            width: height;
+        }
+    }
+}

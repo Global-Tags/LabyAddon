@@ -1,12 +1,12 @@
 {
     "globaltags": {
         "settings": {
-            "tags": {
+            "account": {
                 "staged": {
                     "description": "¡Haz clic en el botón «Publicar ajustes» para publicar los cambios!",
                     "title": "Cambios pendientes"
                 },
-                "tagPreview": {
+                "accountInfo": {
                     "name": "Vista previa de tu Tag",
                     "banned": "¡Tu cuenta está suspendida!\nRazón: %s",
                     "noInfo": "¡No se ha podido obtener la info de la cuenta!",
@@ -43,7 +43,7 @@
                     "text": "Borrar",
                     "name": "Borrar GlobalTag"
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Icono global",
                     "description": "Este icono se muestra globalmente a la izquierda de tu tag.",
                     "entries": {
@@ -54,7 +54,7 @@
                         "crown": "Corona"
                     }
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Tag global"
                 }
             },
@@ -115,10 +115,10 @@
                 }
             },
             "usage": "Uso: %s",
-            "renew_cache": {
+            "renewCache": {
                 "success": "¡El caché se ha renovado!"
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "¡Se ha limpiado el caché!"
             }
         },
@@ -129,7 +129,7 @@
                 "send": "Enviar cambios",
                 "appealable": "Apelable"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "hover": {
                     "deleted": "¡Eliminado con éxito!",
                     "create": "Crear nota",
@@ -175,10 +175,10 @@
             "clearTag": {
                 "name": "Borrar GlobalTag"
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Mostrar historia de GlobalTags",
                 "title": "Historia de GlobalTags de %s",
-                "flagged_words": "Palabras marcadas:"
+                "flaggedWords": "Palabras marcadas:"
             }
         },
         "general": {
