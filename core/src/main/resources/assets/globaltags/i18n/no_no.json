@@ -51,7 +51,7 @@
                     "result": "Tagg: %s\nPosisjon: %s\nIkon: %s",
                     "unchanged": "Uendret"
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Global Tagg"
                 },
                 "position": {

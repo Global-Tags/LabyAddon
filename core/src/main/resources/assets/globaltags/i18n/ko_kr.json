@@ -44,7 +44,7 @@
                     "title": "대기중인 수정"
                 },
                 "name": "글로벌 태그 설정",
-                "tag": {
+                "tagEditor": {
                     "name": "글로벌 태그"
                 },
                 "updateSettings": {

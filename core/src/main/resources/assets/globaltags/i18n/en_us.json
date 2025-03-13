@@ -80,7 +80,7 @@
                         }
                     }
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Global tag"
                 },
                 "position": {

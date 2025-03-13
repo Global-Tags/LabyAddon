@@ -52,7 +52,7 @@
                         }
                     }
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Globaler Tag"
                 },
                 "position": {

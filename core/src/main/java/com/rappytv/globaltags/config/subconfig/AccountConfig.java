@@ -4,17 +4,20 @@ import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
+import com.rappytv.globaltags.ui.activities.config.TagEditorActivity;
 import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget;
 import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget.AccountInfoSetting;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.gui.screen.activity.Activity;
+import net.labymod.api.client.gui.screen.widget.widgets.activity.settings.ActivitySettingWidget.ActivitySetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget.ButtonSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
-import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget.TextFieldSetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget.DropdownSetting;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.annotation.IntroducedIn;
 import net.labymod.api.configuration.loader.annotation.SpriteSlot;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
@@ -27,15 +30,24 @@ public class AccountConfig extends Config {
 
     private final static Component TICK = Component.text("✔", NamedTextColor.GREEN);
 
+    @Exclude
+    private final ConfigProperty<String> tag = new ConfigProperty<>("");
+
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, x = 2, y = 1)
     @AccountInfoSetting
     private final ConfigProperty<Boolean> accountInfo = new ConfigProperty<>(false);
 
     @SettingSection(value = "settings", center = true)
+    @MethodOrder(after = "accountInfo")
     @SpriteSlot(x = 3, y = 2)
-    @TextFieldSetting
-    private final ConfigProperty<String> tag = new ConfigProperty<>("");
+    @ActivitySetting
+    public Activity tagEditor() {
+        return new TagEditorActivity(
+            GlobalTagsAddon.getAPI().getCache().get(GlobalTagsAddon.getAPI().getClientUUID()),
+            this
+        );
+    }
 
     @SpriteSlot(x = 2, y = 1)
     @DropdownSetting

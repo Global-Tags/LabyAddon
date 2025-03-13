@@ -1,0 +1,43 @@
+.container {
+    height: 100%;
+    width: 100%;
+
+    Div {
+        height: fit-content;
+        width: fit-content;
+        alignment-x: center;
+        margin-top: 10;
+
+        .heading {
+            top: 0;
+            alignment-x: center;
+            font-size: 0.8;
+            text-color: yellow;
+        }
+
+        TagPreview {
+            top: 10;
+            alignment-x: center;
+            padding: 2;
+        }
+
+        TextField {
+            width: 200;
+            top: 10;
+            alignment-x: center;
+            padding: 2;
+        }
+    }
+
+    .buttons {
+        height: fit-content;
+        width: fit-content;
+        alignment-x: center;
+        space-between-entries: 10;
+        margin-top: 20;
+
+        Button {
+            width: 50;
+        }
+    }
+}
