@@ -20,7 +20,6 @@ import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.Link;
-import net.labymod.api.client.gui.screen.activity.Links;
 import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
@@ -33,7 +32,7 @@ import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
 import net.labymod.api.util.ThreadSafe;
 
-@Links({@Link("account-info.lss"), @Link("preview.lss")})
+@Link("account-info.lss")
 @AutoWidget
 @SettingWidget
 public class AccountInfoWidget extends HorizontalListWidget {
@@ -110,8 +109,14 @@ public class AccountInfoWidget extends HorizontalListWidget {
             }
             addEntry.accept(new TagPreviewWidget(
                     this.config.tag().get(),
-                    this.config.icon().get() != GlobalIcon.NONE ? Icon.url(this.getIconUrl(api, info)) : null,
-                    this.config.hideRoleIcon().get() ? null : info.getRoleIcon() != null ? Icon.url(api.getUrls().getRoleIcon(info.getRoleIcon())) : null
+                this.config.icon().get() != GlobalIcon.NONE
+                    ? Icon.url(TagPreviewWidget.getIconUrl(info, this.config.icon().get()))
+                    : null,
+                this.config.hideRoleIcon().get()
+                    ? null
+                    : info.getRoleIcon() != null
+                        ? Icon.url(api.getUrls().getRoleIcon(info.getRoleIcon()))
+                        : null
             ));
 
             boolean updated = !this.config.tag().get().equals(info.getPlainTag())
@@ -142,12 +147,6 @@ public class AccountInfoWidget extends HorizontalListWidget {
             appealButton.setEnabled(info.getBanInfo().isAppealable());
             addEntry.accept(appealButton);
         }
-    }
-
-    private String getIconUrl(GlobalTagAPI api, PlayerInfo<?> info) {
-        return this.config.icon().get() == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
-                ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
-                : api.getUrls().getDefaultIcon(this.config.icon().get());
     }
 
     @SuppressWarnings("ConstantConditions")

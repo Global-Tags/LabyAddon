@@ -3,6 +3,7 @@ package com.rappytv.globaltags.ui.widgets.config;
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
+import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import java.util.Objects;
 import java.util.UUID;
 import net.labymod.api.Laby;
@@ -19,7 +20,7 @@ import net.labymod.api.util.ThreadSafe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Link("account-info.lss")
+@Link("preview.lss")
 @AutoWidget
 public class TagPreviewWidget extends HorizontalListWidget {
 
@@ -63,14 +64,11 @@ public class TagPreviewWidget extends HorizontalListWidget {
         this.addEntry(this.roleIconWidget);
     }
 
-    public void updateTag(@Nullable Component component) {
-        this.tag = component != null
-            ? component
-            : Component.translatable(
-                "globaltags.settings.tags.accountInfo.empty",
-                NamedTextColor.RED
-            );
-        this.runThreadSafely(() -> this.tagWidget.setComponent(this.tag));
+    public static String getIconUrl(PlayerInfo<?> info, GlobalIcon icon) {
+        GlobalTagAPI api = GlobalTagsAddon.getAPI();
+        return icon == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
+            ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
+            : api.getUrls().getDefaultIcon(icon);
     }
 
     public void updateTag(@NotNull String tag) {
@@ -113,4 +111,13 @@ public class TagPreviewWidget extends HorizontalListWidget {
         }
     }
 
+    public void updateTag(@Nullable Component component) {
+        this.tag = component != null
+            ? component
+            : Component.translatable(
+                "globaltags.settings.account.accountInfo.empty",
+                NamedTextColor.RED
+            );
+        this.runThreadSafely(() -> this.tagWidget.setComponent(this.tag));
+    }
 }
