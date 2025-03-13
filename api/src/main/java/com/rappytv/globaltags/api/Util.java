@@ -25,7 +25,6 @@ public class Util {
     private static Component roleIconVisibilityResponse = null;
 
     public static void update(GlobalTagAPI api, ResultType type, Component component) {
-        System.out.println("Update " + type.name());
         switch (type) {
             case TAG -> tagResponse = component;
             case POSITION -> positionResponse = component;
