@@ -4,11 +4,12 @@ import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
+import com.rappytv.globaltags.api.event.RefreshInfoEvent;
 import com.rappytv.globaltags.ui.activities.config.TagEditorActivity;
-import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget;
 import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget.AccountInfoSetting;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
+import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.gui.screen.activity.Activity;
@@ -70,7 +71,7 @@ public class AccountConfig extends Config {
         Runnable runnable = () -> Debounce.of(
             "globaltags-config-update",
             1000,
-            AccountInfoWidget::change
+            () -> Laby.fireEvent(new RefreshInfoEvent())
         );
         this.tag.addChangeListener(runnable);
         this.position.addChangeListener(runnable);
@@ -190,7 +191,7 @@ public class AccountConfig extends Config {
         api.getApiHandler().resetTag((info) -> {
             if(info.isSuccessful()) {
                 Util.broadcastTagUpdate();
-                AccountInfoWidget.refetch();
+                Laby.fireEvent(new RefreshInfoEvent(true));
             }
             Util.sendResponseNotification(info);
         });

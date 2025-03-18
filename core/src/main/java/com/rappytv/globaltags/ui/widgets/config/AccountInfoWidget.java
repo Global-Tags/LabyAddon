@@ -2,6 +2,7 @@ package com.rappytv.globaltags.ui.widgets.config;
 
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.event.RefreshInfoEvent;
 import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
@@ -30,6 +31,7 @@ import net.labymod.api.configuration.settings.annotation.SettingElement;
 import net.labymod.api.configuration.settings.annotation.SettingFactory;
 import net.labymod.api.configuration.settings.annotation.SettingWidget;
 import net.labymod.api.configuration.settings.widget.WidgetFactory;
+import net.labymod.api.event.Subscribe;
 import net.labymod.api.util.ThreadSafe;
 
 @Link("account-info.lss")
@@ -38,60 +40,38 @@ import net.labymod.api.util.ThreadSafe;
 public class AccountInfoWidget extends HorizontalListWidget {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private static boolean refetch = true;
-    private static boolean changed = false;
     private final AccountConfig config;
+    private boolean reset = true;
 
     private AccountInfoWidget(AccountConfig config) {
         this.config = config;
-    }
-
-    public static void change() {
-        AccountInfoWidget.changed = true;
-    }
-
-    public static void refetch() {
-        AccountInfoWidget.refetch = true;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (!refetch && !changed) return;
-        if (refetch)
-            GlobalTagsAddon.getAPI().getCache().remove(GlobalTagsAddon.getAPI().getClientUUID());
-        this.reInitialize();
-        refetch = false;
-        changed = false;
-    }
-
-    @Override
-    public void initialize(Parent parent) {
-        super.initialize(parent);
-        this.initialize(refetch);
+        Laby.labyAPI().eventBus().registerListener(this);
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void initialize(boolean refetched) {
+    @Override
+    public void initialize(Parent parent) {
+        super.initialize(parent);
         GlobalTagAPI api = GlobalTagsAddon.getAPI();
 
-        this.addEntry(ButtonWidget
-                .icon(SpriteCommon.REFRESH, AccountInfoWidget::refetch)
+        this.addEntry(
+            ButtonWidget
+                .icon(SpriteCommon.REFRESH, () -> Laby.fireEvent(new RefreshInfoEvent(true)))
                 .addId("refresh-button")
         );
         api.getCache().resolveSelf((info) -> {
             if (ThreadSafe.isRenderThread()) {
-                this.initializeWithInfo(info, refetched, false);
+                this.initializeWithInfo(info, false);
             } else {
                 Laby.labyAPI().minecraft().executeOnRenderThread(
-                        () -> this.initializeWithInfo(info, refetched, true)
+                    () -> this.initializeWithInfo(info, true)
                 );
             }
         });
     }
 
     @SuppressWarnings("ConstantConditions")
-    private void initializeWithInfo(PlayerInfo<Component> info, boolean refetched, boolean async) {
+    private void initializeWithInfo(PlayerInfo<Component> info, boolean async) {
         GlobalTagAPI api = GlobalTagsAddon.getAPI();
         Consumer<Widget> addEntry = async ? this::addEntryInitialized : this::addEntry;
 
@@ -101,11 +81,12 @@ public class AccountInfoWidget extends HorizontalListWidget {
                     .addId("text", "error");
             addEntry.accept(errorComponent);
         } else {
-            if (refetched) {
+            if (this.reset) {
                 this.config.tag().set(info.getPlainTag());
                 this.config.position().set(info.getPosition());
                 this.config.icon().set(info.getGlobalIcon());
                 this.config.hideRoleIcon().set(info.isRoleIconHidden());
+                this.reset = false;
             }
             addEntry.accept(new TagPreviewWidget(
                     this.config.tag().get(),
@@ -181,6 +162,25 @@ public class AccountInfoWidget extends HorizontalListWidget {
                     .append(Component.text("ⓘ").hoverEvent(HoverEvent.showText(banInfo)));
         }
         return null;
+    }
+
+    @Subscribe
+    public void onRefresh(RefreshInfoEvent event) {
+        if (event.refetch()) {
+            GlobalTagsAddon.getAPI().getCache().removeSelf();
+            this.reset = true;
+        }
+        if (ThreadSafe.isRenderThread()) {
+            this.reInitialize();
+        } else {
+            Laby.labyAPI().minecraft().executeOnRenderThread(this::reInitialize);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        Laby.labyAPI().eventBus().unregisterListener(this);
     }
 
     @Retention(RetentionPolicy.RUNTIME)

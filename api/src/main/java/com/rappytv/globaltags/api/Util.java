@@ -2,6 +2,7 @@ package com.rappytv.globaltags.api;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.rappytv.globaltags.api.event.RefreshInfoEvent;
 import com.rappytv.globaltags.wrapper.http.ApiResponse;
 import java.util.UUID;
 import net.labymod.api.Laby;
@@ -72,6 +73,7 @@ public class Util {
             popup.displayInOverlay();
             api.getCache().renewSelf();
             broadcastTagUpdate();
+            Laby.fireEvent(new RefreshInfoEvent());
             tagResponse = null;
             positionResponse = null;
             iconResponse = null;
