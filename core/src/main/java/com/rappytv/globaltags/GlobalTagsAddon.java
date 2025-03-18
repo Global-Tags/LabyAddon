@@ -96,7 +96,7 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
                 return;
             }
             ReferralLeaderboardActivity.setLeaderboards(response.getData());
-        })).repeat(5, TimeUnit.MINUTES).build().run();
+        })).repeat(5, TimeUnit.MINUTES).build().execute();
     }
 
     @Override
