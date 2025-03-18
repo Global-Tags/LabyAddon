@@ -24,10 +24,6 @@
                 "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt blir lagret for lokaliserte e-poster."
             },
             "account": {
-                "staged": {
-                    "description": "Klikk på \"Publiser innstillinger\"-knappen for å publisere endringer!",
-                    "title": "Ventende endringer"
-                },
                 "accountInfo": {
                     "noInfo": "Kunne ikke hente kontoinformasjon!",
                     "appeal": {

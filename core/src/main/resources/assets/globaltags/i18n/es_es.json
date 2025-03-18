@@ -2,10 +2,6 @@
     "globaltags": {
         "settings": {
             "account": {
-                "staged": {
-                    "description": "¡Haz clic en el botón «Publicar ajustes» para publicar los cambios!",
-                    "title": "Cambios pendientes"
-                },
                 "accountInfo": {
                     "name": "Vista previa de tu Tag",
                     "banned": "¡Tu cuenta está suspendida!\nRazón: %s",

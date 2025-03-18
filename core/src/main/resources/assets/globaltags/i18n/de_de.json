@@ -32,10 +32,6 @@
             },
             "account": {
                 "name": "Account-Einstellungen",
-                "staged": {
-                    "title": "Ausstehende Änderungen",
-                    "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen anzuwenden!"
-                },
                 "accountInfo": {
                     "name": "Tag-Vorschau",
                     "banned": "Dein Account wurde gesperrt!\nGrund: %s",
