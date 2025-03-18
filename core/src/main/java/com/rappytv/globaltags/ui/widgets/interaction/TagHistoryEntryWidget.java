@@ -39,7 +39,7 @@ public class TagHistoryEntryWidget extends SimpleWidget {
         this.addChild(text);
         if(!this.entry.getFlaggedWords().isEmpty()) {
             Component hoverComponent = Component.translatable(
-                "globaltags.context.tag_history.flagged_words",
+                "globaltags.context.tagHistory.flaggedWords",
                 NamedTextColor.GOLD
             );
             for(String word : this.entry.getFlaggedWords()) {

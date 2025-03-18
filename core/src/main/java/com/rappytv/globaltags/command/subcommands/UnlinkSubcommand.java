@@ -1,7 +1,7 @@
 package com.rappytv.globaltags.command.subcommands;
 
 import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.Util;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -21,18 +21,18 @@ public class UnlinkSubcommand extends SubCommand {
         switch (arguments.length > 0 ? arguments[0].toLowerCase() : "none") {
             case "discord":
                 this.api.getApiHandler().unlinkDiscord((response) -> this.displayMessage(
-                    GlobalTagAddon.prefix.copy().append(Util.getResponseComponent(response)))
+                    GlobalTagsAddon.prefix.copy().append(Util.getResponseComponent(response)))
                 );
                 break;
             case "email":
                 this.api.getApiHandler().unlinkEmail((response) -> this.displayMessage(
-                    GlobalTagAddon.prefix.copy().append(Util.getResponseComponent(response)))
+                    GlobalTagsAddon.prefix.copy().append(Util.getResponseComponent(response)))
                 );
                 break;
             default:
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.translatable(
                             "globaltags.commands.usage",
                             NamedTextColor.RED,

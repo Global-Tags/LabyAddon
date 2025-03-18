@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.config;
 
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.ui.widgets.config.HiddenPlayerWidget;
 import java.util.UUID;
 import net.labymod.api.client.component.format.NamedTextColor;
@@ -22,8 +22,8 @@ public class HiddenTagListActivity extends SimpleActivity {
     private ScrollWidget scrollWidget;
     private ComponentWidget errorComponent;
 
-    public HiddenTagListActivity(GlobalTagConfig config) {
-        for (UUID uuid : config.tags().hiddenTags()) {
+    public HiddenTagListActivity(GlobalTagsConfig config) {
+        for (UUID uuid : config.hiddenTags()) {
             this.entries.addChild(new HiddenPlayerWidget(
                 uuid,
                 config,

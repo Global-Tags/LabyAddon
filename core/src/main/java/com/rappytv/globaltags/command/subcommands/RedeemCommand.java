@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.command.subcommands;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import java.text.SimpleDateFormat;
@@ -25,7 +25,7 @@ public class RedeemCommand extends SubCommand {
         if (arguments.length < 1) {
             this.displayMessage(
                 Component.empty()
-                    .append(GlobalTagAddon.prefix)
+                    .append(GlobalTagsAddon.prefix)
                     .append(Component.translatable(
                         this.getTranslationKey("enterCode"),
                         NamedTextColor.RED
@@ -38,13 +38,13 @@ public class RedeemCommand extends SubCommand {
             if (!response.isSuccessful()) {
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                 );
                 return;
             }
             Component component = Component.empty()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.text(response.getData().message, NamedTextColor.GREEN));
 
             if (response.getData().getExpiresAt() != null) {
@@ -61,7 +61,6 @@ public class RedeemCommand extends SubCommand {
             }
 
             this.displayMessage(component);
-            this.api.getCache().renewSelf();
             Util.broadcastTagUpdate();
         });
         return true;

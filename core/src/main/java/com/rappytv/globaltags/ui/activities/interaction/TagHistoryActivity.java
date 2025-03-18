@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.ui.widgets.interaction.TagHistoryEntryWidget;
 import java.util.UUID;
@@ -30,7 +30,7 @@ public class TagHistoryActivity extends SimpleActivity {
     private final String username;
 
     public TagHistoryActivity(UUID uuid, String username) {
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
@@ -43,7 +43,7 @@ public class TagHistoryActivity extends SimpleActivity {
             if(!response.isSuccessful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                         .build()
                 );
@@ -53,7 +53,8 @@ public class TagHistoryActivity extends SimpleActivity {
             FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
             HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
             IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
-            ComponentWidget titleWidget = ComponentWidget.i18n("globaltags.context.tag_history.title", this.username).addId("username");
+            ComponentWidget titleWidget = ComponentWidget.i18n(
+                "globaltags.context.tagHistory.title", this.username).addId("username");
             VerticalListWidget<TagHistoryEntryWidget> notes = new VerticalListWidget<>().addId("item-list");
             for(int i = 0; i < response.getData().size(); i++) {
                 notes.addChild(new TagHistoryEntryWidget(i + 1, this.api, response.getData().get(i)));

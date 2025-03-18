@@ -1,47 +1,24 @@
 TagPreview {
     height: fit-content;
+    width: fit-content;
     orientation: horizontal;
 
-    .text {
-        max-width: 75%;
+    .tag {
         scale-to-fit: false;
         max-lines: 1;
         margin-left: 2;
     }
 
-    .error {
-        max-lines: 2 !important;
-        text-color: red;
-    }
-
-    .icon {
+    .global-icon {
         margin-left: 1;
         margin-right: 1;
         height: 16;
         width: height;
     }
 
-    .staff-icon {
+    .role-icon {
         margin-left: 2;
         height: 11;
         width: height;
-    }
-
-    .appeal-button {
-        height: 20;
-        width: fit-content;
-        alignment: right;
-    }
-
-    .refresh-button {
-        height: 20;
-        width: height;
-        padding: 0;
-        alignment: right;
-
-        .button-icon {
-            height: 8;
-            width: height;
-        }
     }
 }

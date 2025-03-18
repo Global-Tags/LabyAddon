@@ -30,13 +30,13 @@
                 "name": "Hintergrund anzeigen",
                 "description": "Wenn diese Option aktiviert ist, siehst du den standard Vanilla-Hintergrund hinter den Tags."
             },
-            "tags": {
-                "name": "Globale Tag-Einstellungen",
+            "account": {
+                "name": "Account-Einstellungen",
                 "staged": {
                     "title": "Ausstehende Änderungen",
                     "description": "Klicke auf den Knopf \"Einstellungen anwenden\", um die ausstehenden Änderungen anzuwenden!"
                 },
-                "tagPreview": {
+                "accountInfo": {
                     "name": "Tag-Vorschau",
                     "banned": "Dein Account wurde gesperrt!\nGrund: %s",
                     "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
@@ -52,7 +52,7 @@
                         }
                     }
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Globaler Tag"
                 },
                 "position": {
@@ -65,7 +65,7 @@
                         "left": "Links vom Namen"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Globales Icon",
                     "description": "Dieses Icon wird global links neben deinem Tag angezeigt.",
                     "entries": {
@@ -97,7 +97,7 @@
                 "text": "Öffnen",
                 "activity": {
                     "total": "Insgesamt",
-                    "current_month": "Diesen Monat",
+                    "currentMonth": "Diesen Monat",
                     "open": "laby.net Profil öffnen",
                     "loading": "Lädt…"
                 },
@@ -121,10 +121,10 @@
                     "hover": "Klicke hier, um den Tag-Cache zu leeren!"
                 }
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "Der Cache wurde geleert!"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "Der Cache wurde erneuert!"
             },
             "link": {
@@ -179,7 +179,7 @@
             "clearTag": {
                 "name": "GlobalTag löschen"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "name": "GlobalTags Notizen verwalten",
                 "title": "%s's Notizen",
                 "description": "erstellt am %s (#%s)",
@@ -195,10 +195,10 @@
                     "send": "Erstellen"
                 }
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "GlobalTag-Verlauf anzeigen",
                 "title": "%s's Tag-Verlauf",
-                "flagged_words": "Geflaggte Wörter:"
+                "flaggedWords": "Geflaggte Wörter:"
             }
         }
     }

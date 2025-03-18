@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.listeners;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo.Cache;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.event.Subscribe;
@@ -11,7 +11,7 @@ public class ServerNavigationListener {
     private final Cache<Component> cache;
 
     public ServerNavigationListener() {
-        this.cache = GlobalTagAddon.getAPI().getCache();
+        this.cache = GlobalTagsAddon.getAPI().getCache();
     }
 
     @Subscribe

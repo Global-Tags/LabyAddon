@@ -30,7 +30,7 @@
                 "text": "View",
                 "activity": {
                     "total": "Total",
-                    "current_month": "This month",
+                    "currentMonth": "This month",
                     "open": "Open laby.net profile",
                     "loading": "Loading…"
                 }
@@ -51,20 +51,25 @@
                 "empty": "You don't have any hidden tags!",
                 "remove": "Remove from hidden tag list"
             },
-            "tags": {
-                "name": "Global tag settings",
-                "staged": {
-                    "title": "Pending changes",
-                    "description": "Click on the \"Publish settings\" button to publish changes!"
+            "account": {
+                "header": {
+                    "settings": {
+                        "name": "Settings"
+                    },
+                    "actions": {
+                        "name": "Actions"
+                    }
                 },
-                "tagPreview": {
+                "name": "Account settings",
+                "accountInfo": {
                     "name": "Tag Preview",
                     "banned": "Your account is suspended!",
                     "reason": "Reason: %s",
                     "expires": "Expires: %s",
-                    "noInfo": "Couldn't fetch account info!",
+                    "noInfo": "You don't have an account yet...",
                     "labyConnect": "You're not connected to LabyConnect!",
                     "empty": "<Empty Tag>",
+                    "unsaved": "You have unsaved changes...\nClick on the button below to save them!",
                     "appeal": {
                         "name": "Appeal",
                         "description": "⚠️ This button will only be clickable if your suspension is appealable.",
@@ -75,8 +80,19 @@
                         }
                     }
                 },
-                "tag": {
-                    "name": "Global Tag"
+                "tagEditor": {
+                    "name": "Global tag",
+                    "error": "An error ocurred! Please click on the reload icon in the Tag preview window.",
+                    "preview": "Preview",
+                    "editor": "Editor",
+                    "utils": "Utils",
+                    "hexChooser": "Choose hex color",
+                    "gradientGenerator": "Open gradient generator",
+                    "save": {
+                        "button": "Save",
+                        "title": "Tag changed...",
+                        "description": "Don't forget to upload your changes by clicking on the \"%s\" button!"
+                    }
                 },
                 "position": {
                     "name": "Global position",
@@ -88,7 +104,7 @@
                         "left": "Left to name"
                     }
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Global icon",
                     "description": "This icon will be displayed left to your tag globally.",
                     "entries": {
@@ -128,10 +144,19 @@
                         "youtube": "YouTube"
                     }
                 },
+                "hideRoleIcon": {
+                    "name": "Hide role icon",
+                    "description": "If you have a role icon and you don't want players to see it you can hide it here."
+                },
                 "updateSettings": {
-                    "name": "Publish settings",
+                    "name": "Publish settings §6⚠",
+                    "description": "You need to press this button to upload any changes!",
                     "text": "Update",
-                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
+                    "result": "Update result",
+                    "tag": "Tag: %s",
+                    "position": "Position: %s",
+                    "icon": "Icon: %s",
+                    "roleIconVisibility": "Role icon visibility: %s",
                     "unchanged": "Unchanged"
                 },
                 "resetTag": {
@@ -162,14 +187,14 @@
                     "hover": "Click here to clear the tag cache!"
                 }
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "The cache was cleared!"
             },
             "redeem": {
                 "enterCode": "You need to enter a gift code to redeem!",
                 "expiration": "Expiration date: %s"
             },
-            "renew_cache": {
+            "renewCache": {
                 "success": "The cache was renewed!"
             },
             "link": {
@@ -227,7 +252,7 @@
             "clearTag": {
                 "name": "Clear GlobalTag"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "name": "Manage GlobalTags notes",
                 "title": "%s's notes",
                 "description": "created at %s (#%s)",
@@ -243,10 +268,10 @@
                     "send": "Create"
                 }
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Show GlobalTag history",
                 "title": "%s's tag history",
-                "flagged_words": "Flagged words:"
+                "flaggedWords": "Flagged words:"
             },
             "hideTag": {
                 "name": "Hide GlobalTag",

@@ -2,7 +2,7 @@ package com.rappytv.globaltags;
 
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.GlobalTagCommand;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.interaction.ChangeTagBulletPoint;
 import com.rappytv.globaltags.interaction.ClearTagBulletPoint;
 import com.rappytv.globaltags.interaction.EditBanInfoBulletPoint;
@@ -35,7 +35,7 @@ import net.labymod.api.util.concurrent.task.Task;
 import net.labymod.api.util.version.SemanticVersion;
 
 @AddonMain
-public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
+public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
 
     public static final Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
@@ -100,8 +100,8 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
     }
 
     @Override
-    protected Class<? extends GlobalTagConfig> configurationClass() {
-        return GlobalTagConfig.class;
+    protected Class<? extends GlobalTagsConfig> configurationClass() {
+        return GlobalTagsConfig.class;
     }
 
     public static GlobalTagAPI getAPI() {

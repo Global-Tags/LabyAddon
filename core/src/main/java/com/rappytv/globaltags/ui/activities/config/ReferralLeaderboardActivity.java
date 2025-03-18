@@ -1,6 +1,6 @@
 package com.rappytv.globaltags.ui.activities.config;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.ui.widgets.config.ReferralLeaderboardEntryWidget;
 import com.rappytv.globaltags.wrapper.enums.ReferralLeaderboardType;
@@ -33,12 +33,12 @@ public class ReferralLeaderboardActivity extends SimpleActivity {
     private ReferralLeaderboardType selectedLeaderboard = ReferralLeaderboardType.TOTAL;
 
     public ReferralLeaderboardActivity() {
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.buttonMenu = new HorizontalListWidget().addId("button-menu");
         ButtonWidget totalViewButton = ButtonWidget.i18n(
             "globaltags.settings.referralLeaderboards.activity.total");
         ButtonWidget currentMonthViewButton = ButtonWidget.i18n(
-            "globaltags.settings.referralLeaderboards.activity.current_month");
+                "globaltags.settings.referralLeaderboards.activity.currentMonth");
         totalViewButton.setEnabled(this.selectedLeaderboard != ReferralLeaderboardType.TOTAL);
         totalViewButton.setPressable(() -> {
             this.selectedLeaderboard = ReferralLeaderboardType.TOTAL;
