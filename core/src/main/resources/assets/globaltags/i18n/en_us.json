@@ -229,7 +229,11 @@
             "ban": {
                 "name": "Ban GlobalTag player",
                 "title": "Ban %s",
-                "send": "Ban"
+                "send": "Ban",
+                "duration": {
+                    "title": "Duration",
+                    "placeholder": "Example: 2h, 7d, 3w, 1y"
+                }
             },
             "unban": {
                 "name": "Unban GlobalTag player",

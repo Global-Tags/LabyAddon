@@ -30,14 +30,14 @@ import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 
 @Link("input.lss")
 @AutoActivity
-public class ReportUUIDActivity extends SimpleActivity {
+public class ReportActivity extends SimpleActivity {
 
     private final GlobalTagsConfig config;
     private final GlobalTagAPI api;
     private final UUID uuid;
     private final String username;
 
-    public ReportUUIDActivity(GlobalTagsConfig config, UUID uuid, String username) {
+    public ReportActivity(GlobalTagsConfig config, UUID uuid, String username) {
         this.config = config;
         this.api = GlobalTagsAddon.getAPI();
         this.uuid = uuid;
