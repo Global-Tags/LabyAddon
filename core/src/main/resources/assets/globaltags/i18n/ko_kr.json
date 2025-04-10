@@ -13,7 +13,7 @@
                         }
                     },
                     "name": "태그 미리보기",
-                    "banned": "당신의 계정은 정지되었습니다!\n이유: %s",
+                    "banned": "당신의 계정은 정지되었습니다!",
                     "labyConnect": "LabyConnect에 연결되어있지 않습니다!",
                     "empty": "<비어있는 태그>",
                     "noInfo": "계정 정보를 불러오지 못했습니다!"
@@ -46,7 +46,6 @@
                 "updateSettings": {
                     "name": "설정 적용",
                     "text": "업데이트",
-                    "result": "태그: %s\n위치: %s\n아이콘: %s",
                     "unchanged": "변경되지 않음"
                 },
                 "resetTag": {

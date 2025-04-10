@@ -34,53 +34,84 @@
                 "name": "Account-Einstellungen",
                 "accountInfo": {
                     "name": "Tag-Vorschau",
-                    "banned": "Dein Account wurde gesperrt!\nGrund: %s",
-                    "noInfo": "Kontoinformationen konnten nicht abgerufen werden!",
+                    "banned": "Dein Account wurde gesperrt!",
+                    "noInfo": "Du hast noch keinen Account…",
                     "labyConnect": "Du bist nicht mit LabyConnect verbunden!",
                     "empty": "<Leerer Tag>",
                     "appeal": {
                         "name": "Entbannung",
-                        "description": "⚠️ Dieser Button ist nur klickbar, wenn du Entbannungsanträge stellen darfst.",
+                        "description": "⚠️ Dieser Button ist nur klickbar, wenn du einen Entbannungsantrag stellen darfst.",
                         "popup": {
                             "label": "Warum sollten wir dich entbannen?",
-                            "placeholder": "Bitte gebe einen Grund an…",
+                            "placeholder": "Bitte gib einen Grund an…",
                             "button": "Antrag senden"
                         }
-                    }
+                    },
+                    "reason": "Grund: %s",
+                    "expires": "Bis: %s",
+                    "unsaved": "Du hast ungespeicherte Änderungen\nKlicke auf den Knopf unten, um sie zu speicher!"
                 },
                 "tagEditor": {
-                    "name": "Globaler Tag"
+                    "name": "Text",
+                    "error": "Ein Fehler ist aufgetreten! Bitte klick auf den Aktualisierungsbutton im Tag-Vorschaufenster.",
+                    "preview": "Vorschau",
+                    "utils": "Nützlich",
+                    "editor": "Tag bearbeiten",
+                    "hexChooser": "Hex color auswählen",
+                    "gradientGenerator": "Verlaufsgenerator öffnen",
+                    "save": {
+                        "button": "Speichern",
+                        "title": "Tag geändert",
+                        "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
+                    }
                 },
                 "position": {
-                    "name": "Globale Position",
+                    "name": "Position",
                     "description": "Dein Tag ist an dieser Position für alle sichtbar.",
                     "entries": {
                         "above": "Über dem Namen",
-                        "below": "Unten dem Namen",
+                        "below": "Unter dem Namen",
                         "right": "Rechts vom Namen",
                         "left": "Links vom Namen"
                     }
                 },
                 "icon": {
-                    "name": "Globales Icon",
+                    "name": "Icon",
                     "description": "Dieses Icon wird global links neben deinem Tag angezeigt.",
                     "entries": {
                         "none": "Kein Icon",
-                        "custom": "Custom",
+                        "custom": "Eigenes",
                         "crown": "Krone",
                         "heart": "Herz",
                         "star": "Stern"
                     }
                 },
                 "updateSettings": {
-                    "name": "Einstellungen anwenden",
+                    "name": "Einstellungen anwenden §6⚠",
                     "text": "Aktualisieren",
-                    "result": "Tag: %s\nPosition: %s\nIcon: %s",
-                    "unchanged": "Unverändert"
+                    "result": "Update-Ergebnis",
+                    "unchanged": "Unverändert",
+                    "description": "Du musst diesen Button drücken, um jegliche Änderungen zu veröffentlichen!",
+                    "tag": "Tag: %s",
+                    "position": "Position: %s",
+                    "icon": "Icon: %s",
+                    "roleIconVisibility": "Rollenicon-Sichtbarkeit: %s"
                 },
                 "resetTag": {
                     "name": "GlobalTag löschen",
                     "text": "Löschen"
+                },
+                "header": {
+                    "settings": {
+                        "name": "Optionen"
+                    },
+                    "actions": {
+                        "name": "Aktionen"
+                    }
+                },
+                "hideRoleIcon": {
+                    "name": "Rollenicon verstecken",
+                    "description": "Falls du ein Rollenicon hast, aber nicht möchtest, dass es von anderen Spielern gesehen wird, kannst du es hier verstecken."
                 }
             },
             "clearCache": {
@@ -98,6 +129,16 @@
                     "loading": "Lädt…"
                 },
                 "description": "Zeigt Leaderboards der Spieler an, die die meisten Spieler zu GlobalTags eingeladen haben."
+            },
+            "showBulletPoints": {
+                "name": "Interaktionsmenü-Punkte anzeigen",
+                "description": "Hier kannst du die Meldungs- und Vermittlungs-Punkte in deinem Interaktionsmenü deaktivieren."
+            },
+            "hiddenTagList": {
+                "name": "Versteckte Tags",
+                "text": "Verwalten",
+                "empty": "Du hast keine versteckten Tags!",
+                "remove": "Von der Liste entfernen"
             }
         },
         "general": {
@@ -131,6 +172,10 @@
                     "verify": "Email verifizieren",
                     "hover": "Klicke, um den Verifizierungscode einzugeben"
                 }
+            },
+            "redeem": {
+                "expiration": "Ablaufdatum: %s",
+                "enterCode": "Du musst einen Geschenkcode eingeben, den du einlösen möchtest!"
             }
         },
         "context": {
@@ -147,12 +192,19 @@
                     "label": "Dieser Tag bricht die %s.",
                     "rules": "GlobalTags Regeln",
                     "hover": "Klicke hier, um die GlobalTags Regeln zu öffnen."
+                },
+                "hide": {
+                    "label": "Den GlobalTag dieses Spielers verstecken"
                 }
             },
             "ban": {
                 "name": "GlobalTag-Spieler bannen",
                 "title": "%s bannen",
-                "send": "Bannen"
+                "send": "Bannen",
+                "duration": {
+                    "placeholder": "Beispiel: 2h, 7d, 3w, 1y",
+                    "title": "Dauer"
+                }
             },
             "unban": {
                 "name": "GlobalTag-Spieler entbannen",
@@ -181,7 +233,7 @@
                 "description": "erstellt am %s (#%s)",
                 "hover": {
                     "create": "Notiz erstellen",
-                    "delete": "Klicke, um zu löschen",
+                    "delete": "Löschen",
                     "deleted": "Erfolgreich gelöscht!"
                 },
                 "create": {
@@ -195,6 +247,14 @@
                 "name": "GlobalTag-Verlauf anzeigen",
                 "title": "%s's Tag-Verlauf",
                 "flaggedWords": "Geflaggte Wörter:"
+            },
+            "showTag": {
+                "name": "GlobalTag anzeigen",
+                "success": "%s's GlobalTag wird dir nun wieder angezeigt!"
+            },
+            "hideTag": {
+                "name": "GlobalTag verstecken",
+                "success": "%s's GlobalTag wird dir nun nicht mehr angezeigt!"
             }
         }
     }

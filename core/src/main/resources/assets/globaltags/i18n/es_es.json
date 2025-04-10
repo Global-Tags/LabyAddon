@@ -4,7 +4,7 @@
             "account": {
                 "accountInfo": {
                     "name": "Vista previa de tu Tag",
-                    "banned": "¡Tu cuenta está suspendida!\nRazón: %s",
+                    "banned": "¡Tu cuenta está baneada!",
                     "noInfo": "¡No se ha podido obtener la info de la cuenta!",
                     "labyConnect": "¡No estás conectado a LabyConnect!",
                     "empty": "<Tag vació>",
@@ -22,7 +22,6 @@
                 "updateSettings": {
                     "name": "Publicar ajustes",
                     "text": "Actualizar",
-                    "result": "Tag: %s\nPosición: %s\nIcono: %s",
                     "unchanged": "Sin cambios"
                 },
                 "position": {

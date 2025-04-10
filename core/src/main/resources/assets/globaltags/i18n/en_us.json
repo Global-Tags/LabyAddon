@@ -63,16 +63,16 @@
                 "name": "Account settings",
                 "accountInfo": {
                     "name": "Tag Preview",
-                    "banned": "Your account is suspended!",
+                    "banned": "Your account is banned!",
                     "reason": "Reason: %s",
                     "expires": "Expires: %s",
-                    "noInfo": "You don't have an account yet...",
+                    "noInfo": "You don't have an account yet…",
                     "labyConnect": "You're not connected to LabyConnect!",
                     "empty": "<Empty Tag>",
-                    "unsaved": "You have unsaved changes...\nClick on the button below to save them!",
+                    "unsaved": "You have unsaved changes\nClick on the button below to save them!",
                     "appeal": {
                         "name": "Appeal",
-                        "description": "⚠️ This button will only be clickable if your suspension is appealable.",
+                        "description": "⚠️ This button will only be clickable if your ban is appealable.",
                         "popup": {
                             "label": "Why should we unban you?",
                             "placeholder": "Please enter a reason…",
@@ -81,7 +81,7 @@
                     }
                 },
                 "tagEditor": {
-                    "name": "Global tag",
+                    "name": "Tag",
                     "error": "An error ocurred! Please click on the reload icon in the Tag preview window.",
                     "preview": "Preview",
                     "editor": "Editor",
@@ -90,12 +90,12 @@
                     "gradientGenerator": "Open gradient generator",
                     "save": {
                         "button": "Save",
-                        "title": "Tag changed...",
+                        "title": "Tag changed",
                         "description": "Don't forget to upload your changes by clicking on the \"%s\" button!"
                     }
                 },
                 "position": {
-                    "name": "Global position",
+                    "name": "Position",
                     "description": "Your tag is visible in this position to everyone.",
                     "entries": {
                         "above": "Above name",
@@ -105,7 +105,7 @@
                     }
                 },
                 "icon": {
-                    "name": "Global icon",
+                    "name": "Icon",
                     "description": "This icon will be displayed left to your tag globally.",
                     "entries": {
                         "none": "None",
