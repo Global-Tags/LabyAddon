@@ -8,6 +8,6 @@ public class WorldEnterListener {
 
     @Subscribe
     public void onWorldEnter(WorldEnterEvent event) {
-        GlobalTagsAddon.getAPI().getCache().resolveSelf();
+        GlobalTagsAddon.getAPI().getCache().renewSelf();
     }
 }
