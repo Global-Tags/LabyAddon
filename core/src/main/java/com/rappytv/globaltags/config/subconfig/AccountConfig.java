@@ -39,7 +39,22 @@ public class AccountConfig extends Config {
     @AccountInfoSetting
     private final ConfigProperty<Boolean> accountInfo = new ConfigProperty<>(false);
 
+    @IntroducedIn(namespace = "globaltags", value = "1.4.1")
+    @SpriteSlot(y = 3)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> hideRoleIcon = new ConfigProperty<>(false);
+
+    @SpriteSlot(x = 2, y = 1)
+    @DropdownSetting
+    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
+        GlobalPosition.ABOVE);
+
+    @SpriteSlot(x = 1, y = 2)
+    @DropdownSetting
+    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
+
     @SettingSection(value = "settings", center = true)
+    @IntroducedIn(namespace = "globaltags", value = "1.4.1")
     @MethodOrder(after = "accountInfo")
     @SpriteSlot(x = 3, y = 2)
     @ActivitySetting
@@ -53,19 +68,6 @@ public class AccountConfig extends Config {
             this
         );
     }
-
-    @SpriteSlot(x = 2, y = 1)
-    @DropdownSetting
-    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
-        GlobalPosition.ABOVE);
-
-    @SpriteSlot(x = 1, y = 2)
-    @DropdownSetting
-    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
-
-    @SpriteSlot(y = 3)
-    @SwitchSetting
-    private final ConfigProperty<Boolean> hideRoleIcon = new ConfigProperty<>(false);
 
     public AccountConfig() {
         Runnable runnable = () -> Debounce.of(
@@ -206,7 +208,6 @@ public class AccountConfig extends Config {
     public ConfigProperty<GlobalIcon> icon() {
         return this.icon;
     }
-
     public ConfigProperty<Boolean> hideRoleIcon() {
         return this.hideRoleIcon;
     }
