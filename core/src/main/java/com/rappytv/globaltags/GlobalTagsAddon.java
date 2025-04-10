@@ -2,7 +2,7 @@ package com.rappytv.globaltags;
 
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.command.GlobalTagCommand;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.interaction.ChangeTagBulletPoint;
 import com.rappytv.globaltags.interaction.ClearTagBulletPoint;
 import com.rappytv.globaltags.interaction.EditBanInfoBulletPoint;
@@ -35,7 +35,7 @@ import net.labymod.api.util.concurrent.task.Task;
 import net.labymod.api.util.version.SemanticVersion;
 
 @AddonMain
-public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
+public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
 
     public static final Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
@@ -52,7 +52,9 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-14"));
         Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
         Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.0"), "2024-03-01"));
+            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.0"), "2025-03-01"));
+        Laby.references().revisionRegistry()
+            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.1"), "2025-04-10"));
     }
 
     @Override
@@ -96,12 +98,12 @@ public class GlobalTagAddon extends LabyAddon<GlobalTagConfig> {
                 return;
             }
             ReferralLeaderboardActivity.setLeaderboards(response.getData());
-        })).repeat(5, TimeUnit.MINUTES).build().run();
+        })).repeat(5, TimeUnit.MINUTES).build().execute();
     }
 
     @Override
-    protected Class<? extends GlobalTagConfig> configurationClass() {
-        return GlobalTagConfig.class;
+    protected Class<? extends GlobalTagsConfig> configurationClass() {
+        return GlobalTagsConfig.class;
     }
 
     public static GlobalTagAPI getAPI() {

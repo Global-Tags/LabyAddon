@@ -1,9 +1,9 @@
 package com.rappytv.globaltags.ui.activities.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.labymod.api.Laby;
@@ -30,16 +30,16 @@ import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 
 @Link("input.lss")
 @AutoActivity
-public class ReportUUIDActivity extends SimpleActivity {
+public class ReportActivity extends SimpleActivity {
 
-    private final GlobalTagConfig config;
+    private final GlobalTagsConfig config;
     private final GlobalTagAPI api;
     private final UUID uuid;
     private final String username;
 
-    public ReportUUIDActivity(GlobalTagConfig config, UUID uuid, String username) {
+    public ReportActivity(GlobalTagsConfig config, UUID uuid, String username) {
         this.config = config;
-        this.api = GlobalTagAddon.getAPI();
+        this.api = GlobalTagsAddon.getAPI();
         this.uuid = uuid;
         this.username = username;
     }
@@ -92,12 +92,12 @@ public class ReportUUIDActivity extends SimpleActivity {
         sendButton.setActionListener(() -> {
             Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
             if (hideCheckBoxWidget.state() == State.CHECKED) {
-                this.config.tags().hiddenTags().add(this.uuid);
+                this.config.hiddenTags().add(this.uuid);
             }
             this.api.getApiHandler().reportPlayer(
                 this.uuid, inputWidget.getText(), (response) -> Laby.references().chatExecutor().displayClientMessage(
                 Component.empty()
-                    .append(GlobalTagAddon.prefix)
+                    .append(GlobalTagsAddon.prefix)
                     .append(Util.getResponseComponent(response))
             ));
         });

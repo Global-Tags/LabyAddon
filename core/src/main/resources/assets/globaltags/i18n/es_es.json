@@ -1,14 +1,10 @@
 {
     "globaltags": {
         "settings": {
-            "tags": {
-                "staged": {
-                    "description": "¡Haz clic en el botón «Publicar ajustes» para publicar los cambios!",
-                    "title": "Cambios pendientes"
-                },
-                "tagPreview": {
+            "account": {
+                "accountInfo": {
                     "name": "Vista previa de tu Tag",
-                    "banned": "¡Tu cuenta está suspendida!\nRazón: %s",
+                    "banned": "¡Tu cuenta está baneada!",
                     "noInfo": "¡No se ha podido obtener la info de la cuenta!",
                     "labyConnect": "¡No estás conectado a LabyConnect!",
                     "empty": "<Tag vació>",
@@ -26,7 +22,6 @@
                 "updateSettings": {
                     "name": "Publicar ajustes",
                     "text": "Actualizar",
-                    "result": "Tag: %s\nPosición: %s\nIcono: %s",
                     "unchanged": "Sin cambios"
                 },
                 "position": {
@@ -43,7 +38,7 @@
                     "text": "Borrar",
                     "name": "Borrar GlobalTag"
                 },
-                "globalIcon": {
+                "icon": {
                     "name": "Icono global",
                     "description": "Este icono se muestra globalmente a la izquierda de tu tag.",
                     "entries": {
@@ -54,7 +49,7 @@
                         "crown": "Corona"
                     }
                 },
-                "tag": {
+                "tagEditor": {
                     "name": "Tag global"
                 }
             },
@@ -115,10 +110,10 @@
                 }
             },
             "usage": "Uso: %s",
-            "renew_cache": {
+            "renewCache": {
                 "success": "¡El caché se ha renovado!"
             },
-            "clear_cache": {
+            "clearCache": {
                 "success": "¡Se ha limpiado el caché!"
             }
         },
@@ -129,7 +124,7 @@
                 "send": "Enviar cambios",
                 "appealable": "Apelable"
             },
-            "staff_notes": {
+            "staffNotes": {
                 "hover": {
                     "deleted": "¡Eliminado con éxito!",
                     "create": "Crear nota",
@@ -175,10 +170,10 @@
             "clearTag": {
                 "name": "Borrar GlobalTag"
             },
-            "tag_history": {
+            "tagHistory": {
                 "name": "Mostrar historia de GlobalTags",
                 "title": "Historia de GlobalTags de %s",
-                "flagged_words": "Palabras marcadas:"
+                "flaggedWords": "Palabras marcadas:"
             }
         },
         "general": {

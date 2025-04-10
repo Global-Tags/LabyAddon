@@ -24,17 +24,17 @@ public class AppealPopup extends AdvancedPopup {
     public @Nullable Widget initialize() {
         VerticalListWidget<Widget> content = new VerticalListWidget<>().addId("content");
         ComponentWidget labelWidget = ComponentWidget.i18n(
-            "globaltags.settings.tags.tagPreview.appeal.popup.label"
+            "globaltags.settings.account.accountInfo.appeal.popup.label"
         ).addId("label", "popup-description");
         TextFieldWidget inputWidget = new TextFieldWidget()
             .placeholder(Component.translatable(
-                "globaltags.settings.tags.tagPreview.appeal.popup.placeholder",
+                "globaltags.settings.account.accountInfo.appeal.popup.placeholder",
                 NamedTextColor.DARK_GRAY
             ))
             .addId("input", "popup-description");
         ButtonWidget sendButton = new ButtonWidget()
             .updateComponent(Component.translatable(
-                "globaltags.settings.tags.tagPreview.appeal.popup.button",
+                "globaltags.settings.account.accountInfo.appeal.popup.button",
                 NamedTextColor.RED
             ))
             .addId("send-button", "popup-description");

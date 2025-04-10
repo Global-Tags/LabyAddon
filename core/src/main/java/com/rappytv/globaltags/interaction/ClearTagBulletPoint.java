@@ -1,8 +1,8 @@
 package com.rappytv.globaltags.interaction;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.Util;
-import com.rappytv.globaltags.config.GlobalTagConfig;
+import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.wrapper.enums.GlobalPermission;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import net.labymod.api.Laby;
@@ -13,9 +13,9 @@ import net.labymod.api.client.gui.icon.Icon;
 
 public class ClearTagBulletPoint implements BulletPoint {
 
-    private final GlobalTagConfig config;
+    private final GlobalTagsConfig config;
 
-    public ClearTagBulletPoint(GlobalTagAddon addon) {
+    public ClearTagBulletPoint(GlobalTagsAddon addon) {
         this.config = addon.configuration();
     }
 
@@ -26,14 +26,14 @@ public class ClearTagBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return GlobalTagAddon.roundIcon;
+        return GlobalTagsAddon.roundIcon;
     }
 
     @Override
     public void execute(Player player) {
-        GlobalTagAddon.getAPI().getApiHandler().resetTag(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
+        GlobalTagsAddon.getAPI().getApiHandler().resetTag(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Util.getResponseComponent(response))
         ));
     }
@@ -43,8 +43,8 @@ public class ClearTagBulletPoint implements BulletPoint {
         if(!this.config.enabled().get() || !this.config.showBulletPoints().get()) {
             return false;
         }
-        PlayerInfo<?> executor = GlobalTagAddon.getAPI().getCache().get(Laby.labyAPI().getUniqueId());
-        PlayerInfo<?> target = GlobalTagAddon.getAPI().getCache().get(player.getUniqueId());
+        PlayerInfo<?> executor = GlobalTagsAddon.getAPI().getCache().get(Laby.labyAPI().getUniqueId());
+        PlayerInfo<?> target = GlobalTagsAddon.getAPI().getCache().get(player.getUniqueId());
         return executor != null && executor.hasPermission(GlobalPermission.MANAGE_TAGS)
             && target != null && target.getTag() != null;
     }

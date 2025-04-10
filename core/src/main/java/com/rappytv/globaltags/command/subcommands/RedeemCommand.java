@@ -1,7 +1,8 @@
 package com.rappytv.globaltags.command.subcommands;
 
-import com.rappytv.globaltags.GlobalTagAddon;
+import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.api.Util;
 import java.text.SimpleDateFormat;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -24,7 +25,7 @@ public class RedeemCommand extends SubCommand {
         if (arguments.length < 1) {
             this.displayMessage(
                 Component.empty()
-                    .append(GlobalTagAddon.prefix)
+                    .append(GlobalTagsAddon.prefix)
                     .append(Component.translatable(
                         this.getTranslationKey("enterCode"),
                         NamedTextColor.RED
@@ -37,13 +38,13 @@ public class RedeemCommand extends SubCommand {
             if (!response.isSuccessful()) {
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagAddon.prefix)
+                        .append(GlobalTagsAddon.prefix)
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                 );
                 return;
             }
             Component component = Component.empty()
-                .append(GlobalTagAddon.prefix)
+                .append(GlobalTagsAddon.prefix)
                 .append(Component.text(response.getData().message, NamedTextColor.GREEN));
 
             if (response.getData().getExpiresAt() != null) {
@@ -60,6 +61,7 @@ public class RedeemCommand extends SubCommand {
             }
 
             this.displayMessage(component);
+            Util.broadcastTagUpdate();
         });
         return true;
     }
