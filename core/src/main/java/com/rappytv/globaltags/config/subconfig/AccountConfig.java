@@ -31,6 +31,18 @@ public class AccountConfig extends Config {
 
     private final static Component TICK = Component.text("✔", NamedTextColor.GREEN);
 
+    public AccountConfig() {
+        Runnable runnable = () -> Debounce.of(
+            "globaltags-config-update",
+            1000,
+            () -> Laby.fireEvent(new RefreshInfoEvent())
+        );
+        this.tag.addChangeListener(runnable);
+        this.position.addChangeListener(runnable);
+        this.icon.addChangeListener(runnable);
+        this.hideRoleIcon.addChangeListener(runnable);
+    }
+
     @Exclude
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
@@ -38,20 +50,6 @@ public class AccountConfig extends Config {
     @SpriteSlot(size = 32, x = 2, y = 1)
     @AccountInfoSetting
     private final ConfigProperty<Boolean> accountInfo = new ConfigProperty<>(false);
-
-    @IntroducedIn(namespace = "globaltags", value = "1.4.1")
-    @SpriteSlot(y = 3)
-    @SwitchSetting
-    private final ConfigProperty<Boolean> hideRoleIcon = new ConfigProperty<>(false);
-
-    @SpriteSlot(x = 2, y = 1)
-    @DropdownSetting
-    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
-        GlobalPosition.ABOVE);
-
-    @SpriteSlot(x = 1, y = 2)
-    @DropdownSetting
-    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
 
     @SettingSection(value = "settings", center = true)
     @IntroducedIn(namespace = "globaltags", value = "1.4.1")
@@ -69,17 +67,19 @@ public class AccountConfig extends Config {
         );
     }
 
-    public AccountConfig() {
-        Runnable runnable = () -> Debounce.of(
-            "globaltags-config-update",
-            1000,
-            () -> Laby.fireEvent(new RefreshInfoEvent())
-        );
-        this.tag.addChangeListener(runnable);
-        this.position.addChangeListener(runnable);
-        this.icon.addChangeListener(runnable);
-        this.hideRoleIcon.addChangeListener(runnable);
-    }
+    @SpriteSlot(x = 2, y = 1)
+    @DropdownSetting
+    private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
+        GlobalPosition.ABOVE);
+
+    @SpriteSlot(x = 1, y = 2)
+    @DropdownSetting
+    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
+
+    @IntroducedIn(namespace = "globaltags", value = "1.4.1")
+    @SpriteSlot(y = 3)
+    @SwitchSetting
+    private final ConfigProperty<Boolean> hideRoleIcon = new ConfigProperty<>(false);
 
     @SettingSection(value = "actions", center = true)
     @MethodOrder(after = "hideRoleIcon")
