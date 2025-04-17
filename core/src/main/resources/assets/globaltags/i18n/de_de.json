@@ -60,7 +60,6 @@
                     "hexChooser": "Hex color auswählen",
                     "gradientGenerator": "Verlaufsgenerator öffnen",
                     "save": {
-                        "button": "Speichern",
                         "title": "Tag geändert",
                         "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
                     }
