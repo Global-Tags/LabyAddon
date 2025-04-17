@@ -125,7 +125,24 @@ public class TagEditorActivity extends SimpleActivity {
         this.editorTextField = new TextFieldWidget()
             .addId("editor-input");
         this.addText(this.config.tag().get());
-        this.editorTextField.updateListener(this.previewWidget::updateTag);
+        this.editorTextField.updateListener((text) -> {
+            this.previewWidget.updateTag(text);
+            Debounce.of(
+                "globaltags-tag-editor",
+                2000,
+                () -> {
+                    this.config.tag().set(this.editorTextField.getText());
+                    Util.notify(
+                        Component.translatable("globaltags.settings.account.tagEditor.save.title"),
+                        Component.translatable(
+                            "globaltags.settings.account.tagEditor.save.description",
+                            Component.translatable(
+                                "globaltags.settings.account.updateSettings.name")
+                        )
+                    );
+                }
+            );
+        });
         editorWrapper.addContent(editorComponent);
         editorWrapper.addContent(this.editorTextField);
 
@@ -191,24 +208,9 @@ public class TagEditorActivity extends SimpleActivity {
         utilsWrapper.addContent(utilsLine3);
         utilsWrapper.addContent(utilSquareWrapper);
 
-        ButtonWidget saveButton = ButtonWidget.component(Component.translatable(
-            "globaltags.settings.account.tagEditor.save.button",
-            NamedTextColor.GREEN
-        ), () -> {
-            this.config.tag().set(this.editorTextField.getText());
-            Util.notify(
-                Component.translatable("globaltags.settings.account.tagEditor.save.title"),
-                Component.translatable(
-                    "globaltags.settings.account.tagEditor.save.description",
-                    Component.translatable("globaltags.settings.account.updateSettings.name")
-                )
-            );
-        }).addId("save-button");
-
         container.addContent(previewWrapper);
         container.addContent(editorWrapper);
         container.addContent(utilsWrapper);
-        container.addContent(saveButton);
 
         this.document.addChild(container);
     }

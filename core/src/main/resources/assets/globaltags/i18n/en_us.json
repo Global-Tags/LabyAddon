@@ -81,7 +81,7 @@
                     }
                 },
                 "tagEditor": {
-                    "name": "Tag",
+                    "name": "Tag Editor",
                     "error": "An error ocurred! Please click on the reload icon in the Tag preview window.",
                     "preview": "Preview",
                     "editor": "Editor",
@@ -89,8 +89,7 @@
                     "hexChooser": "Choose hex color",
                     "gradientGenerator": "Open gradient generator",
                     "save": {
-                        "button": "Save",
-                        "title": "Tag changed",
+                        "title": "Your tag was saved",
                         "description": "Don't forget to upload your changes by clicking on the \"%s\" button!"
                     }
                 },
