@@ -25,7 +25,7 @@
             },
             "account": {
                 "accountInfo": {
-                    "noInfo": "Kunne ikke hente kontoinformasjon!",
+                    "noInfo": "Du har ikke en konto ennå…",
                     "appeal": {
                         "popup": {
                             "placeholder": "Venligst skriv inn en grunn…",
@@ -33,24 +33,43 @@
                             "button": "Send en anke"
                         },
                         "name": "Anke",
-                        "description": "⚠️ Denne knappen kan bare klikkes hvis suspensjonen din kan ankes."
+                        "description": "⚠️ Denne knappen kan bare klikkes hvis utestengelsen din kan ankes."
                     },
                     "name": "Tag Forhåndsvisning",
-                    "banned": "Kontoen din ble suspendert!",
+                    "banned": "Kontoen din ble utestengt!",
                     "labyConnect": "Du er ikke koblet til LabyConnect!",
-                    "empty": "<Tøm Tag>"
+                    "empty": "<Tøm Tag>",
+                    "reason": "Grunn: %s",
+                    "expires": "Utløper: %s",
+                    "unsaved": "Du har ulagrede endringer\nKlikk på knappen nedenfor for å lagre dem!"
                 },
-                "name": "Global tag-instillinger",
+                "name": "Konto-instillinger",
                 "updateSettings": {
-                    "name": "Publiser innstillinger",
+                    "name": "Publiser innstillinger §6⚠",
                     "text": "Oppdater",
-                    "unchanged": "Uendret"
+                    "unchanged": "Uendret",
+                    "description": "Du må trykke på denne knappen for å laste opp eventuelle endringer!",
+                    "result": "Oppdater resultatet",
+                    "tag": "Tagg: %s",
+                    "position": "Posisjon: %s",
+                    "roleIconVisibility": "Rolleikonsynlighet: %s",
+                    "icon": "Ikon: %s"
                 },
                 "tagEditor": {
-                    "name": "Global Tagg"
+                    "name": "Tagg Editor",
+                    "error": "Det oppstod en feil! Klikk på reload-ikonet i Tag-forhåndsvisningsvinduet.",
+                    "preview": "Forhåndsvisning",
+                    "editor": "Editor",
+                    "utils": "Verktøy",
+                    "hexChooser": "Velg hexfarge",
+                    "gradientGenerator": "Åpne gradientgenerator",
+                    "save": {
+                        "title": "Taggen din ble lagret",
+                        "description": "Ikke glem å laste opp endringene dine ved å klikke på \"%s\"-knappen!"
+                    }
                 },
                 "position": {
-                    "name": "Global posisjon",
+                    "name": "Posisjon",
                     "description": "Taggen din er synlig i denne posisjonen for alle.",
                     "entries": {
                         "above": "Over navnet",
@@ -60,7 +79,7 @@
                     }
                 },
                 "icon": {
-                    "name": "Global ikon",
+                    "name": "Ikon",
                     "description": "Dette ikonet vil vises til venstre til taggen din globalt.",
                     "entries": {
                         "none": "Ingen",
@@ -73,6 +92,18 @@
                 "resetTag": {
                     "name": "Slett GlobalTag",
                     "text": "Slett"
+                },
+                "hideRoleIcon": {
+                    "name": "Skjul rolleikon",
+                    "description": "Hvis du har et rolleikon og du ikke vil at spillere skal se det, kan du skjule det her."
+                },
+                "header": {
+                    "settings": {
+                        "name": "Innstillinger"
+                    },
+                    "actions": {
+                        "name": "Handlinger"
+                    }
                 }
             },
             "joinDiscord": {
@@ -97,6 +128,16 @@
                 },
                 "text": "Vis",
                 "description": "Viser et ledertavl av spillere som har invitert de fleste spillere til GlobalTags."
+            },
+            "showBulletPoints": {
+                "description": "Her kan du deaktivere rapporten og henvisningspunktene.",
+                "name": "Vis kuler i interaksjonsmenyen"
+            },
+            "hiddenTagList": {
+                "name": "Skjulte tagger",
+                "text": "Administrer",
+                "empty": "Du har ingen skjulte tagger!",
+                "remove": "Fjern fra skjult taggliste"
             }
         },
         "commands": {
@@ -126,6 +167,10 @@
             },
             "renewCache": {
                 "success": "Cachen ble fornyet!"
+            },
+            "redeem": {
+                "enterCode": "Du må oppgi en gavekode for å løse inn!",
+                "expiration": "Utløpsdato: %s"
             }
         },
         "context": {
@@ -147,12 +192,19 @@
                     "label": "Denne tag bryter %s.",
                     "hover": "Klikk her for å åpne GlobalTags reglene.",
                     "rules": "GlobalTags reglene"
+                },
+                "hide": {
+                    "label": "Skjul denne spillerens GlobalTag"
                 }
             },
             "ban": {
                 "name": "Utesteng GlobalTag-spiller",
                 "title": "Utesteng %s",
-                "send": "Utesteng"
+                "send": "Utesteng",
+                "duration": {
+                    "title": "Varighet",
+                    "placeholder": "Eksempel: 2h, 7d, 3w, 1y"
+                }
             },
             "editBan": {
                 "name": "Endre GlobalTag utestengelse",
@@ -190,6 +242,14 @@
                 "name": "Vis GlobalTag-historikk",
                 "title": "Tag-historikk til %s",
                 "flaggedWords": "Flaggede ord:"
+            },
+            "hideTag": {
+                "name": "Skjul GlobalTag",
+                "success": "%s sin GlobalTag vil ikke bli vist til deg lenger!"
+            },
+            "showTag": {
+                "name": "Vis GlobalTag",
+                "success": "%s sin GlobalTag vil nå bli vist til deg igjen!"
             }
         },
         "general": {

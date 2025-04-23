@@ -52,7 +52,7 @@
                     "unsaved": "Du hast ungespeicherte Änderungen\nKlicke auf den Knopf unten, um sie zu speicher!"
                 },
                 "tagEditor": {
-                    "name": "Text",
+                    "name": "Tag Editor",
                     "error": "Ein Fehler ist aufgetreten! Bitte klick auf den Aktualisierungsbutton im Tag-Vorschaufenster.",
                     "preview": "Vorschau",
                     "utils": "Nützlich",
@@ -60,7 +60,7 @@
                     "hexChooser": "Hex color auswählen",
                     "gradientGenerator": "Verlaufsgenerator öffnen",
                     "save": {
-                        "title": "Tag geändert",
+                        "title": "Dein Tag wurde gespeichert",
                         "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
                     }
                 },
