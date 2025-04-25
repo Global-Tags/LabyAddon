@@ -5,6 +5,7 @@ import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
 import com.rappytv.globaltags.api.event.RefreshInfoEvent;
+import com.rappytv.globaltags.ui.activities.config.IconChooserActivity;
 import com.rappytv.globaltags.ui.activities.config.TagEditorActivity;
 import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget.AccountInfoSetting;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
@@ -46,6 +47,9 @@ public class AccountConfig extends Config {
     @Exclude
     private final ConfigProperty<String> tag = new ConfigProperty<>("");
 
+    @Exclude
+    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
+
     @IntroducedIn(namespace = "globaltags", value = "1.2.0")
     @SpriteSlot(size = 32, x = 2, y = 1)
     @AccountInfoSetting
@@ -72,9 +76,19 @@ public class AccountConfig extends Config {
     private final ConfigProperty<GlobalPosition> position = new ConfigProperty<>(
         GlobalPosition.ABOVE);
 
+    @MethodOrder(after = "position")
     @SpriteSlot(x = 1, y = 2)
-    @DropdownSetting
-    private final ConfigProperty<GlobalIcon> icon = new ConfigProperty<>(GlobalIcon.NONE);
+    @ActivitySetting
+    public Activity iconChooser() {
+        String session = GlobalTagsAddon.getAPI().getAuthorization();
+        if (session == null) {
+            return new IconChooserActivity();
+        }
+        return new IconChooserActivity(
+            GlobalTagsAddon.getAPI().getCache().get(GlobalTagsAddon.getAPI().getClientUUID()),
+            this
+        );
+    }
 
     @IntroducedIn(namespace = "globaltags", value = "1.4.1")
     @SpriteSlot(y = 3)
