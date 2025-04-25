@@ -2,7 +2,7 @@
     "globaltags": {
         "settings": {
             "account": {
-                "iconChooser": {
+                "iconSelector": {
                     "entries": {
                         "crown": "Корона",
                         "none": "Нет",

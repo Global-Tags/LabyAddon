@@ -77,7 +77,7 @@
                         "left": "Venstre til navnet"
                     }
                 },
-                "iconChooser": {
+                "iconSelector": {
                     "entries": {
                         "none": "Ingen",
                         "custom": "Egendefinert",

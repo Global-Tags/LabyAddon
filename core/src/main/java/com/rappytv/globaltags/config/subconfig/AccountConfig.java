@@ -5,7 +5,7 @@ import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.api.Util.ResultType;
 import com.rappytv.globaltags.api.event.RefreshInfoEvent;
-import com.rappytv.globaltags.ui.activities.config.IconChooserActivity;
+import com.rappytv.globaltags.ui.activities.config.IconSelectorActivity;
 import com.rappytv.globaltags.ui.activities.config.TagEditorActivity;
 import com.rappytv.globaltags.ui.widgets.config.AccountInfoWidget.AccountInfoSetting;
 import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
@@ -79,12 +79,12 @@ public class AccountConfig extends Config {
     @MethodOrder(after = "position")
     @SpriteSlot(x = 1, y = 2)
     @ActivitySetting
-    public Activity iconChooser() {
+    public Activity iconSelector() {
         String session = GlobalTagsAddon.getAPI().getAuthorization();
         if (session == null) {
-            return new IconChooserActivity();
+            return new IconSelectorActivity();
         }
-        return new IconChooserActivity(
+        return new IconSelectorActivity(
             GlobalTagsAddon.getAPI().getCache().get(GlobalTagsAddon.getAPI().getClientUUID()),
             this
         );

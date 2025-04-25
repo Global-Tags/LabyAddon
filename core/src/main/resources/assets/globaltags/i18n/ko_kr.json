@@ -28,7 +28,7 @@
                         "right": "이름 우측"
                     }
                 },
-                "iconChooser": {
+                "iconSelector": {
                     "entries": {
                         "star": "별",
                         "none": "없음",

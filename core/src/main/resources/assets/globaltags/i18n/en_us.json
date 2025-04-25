@@ -103,8 +103,8 @@
                         "left": "Left to name"
                     }
                 },
-                "iconChooser": {
-                    "name": "Icon chooser",
+                "iconSelector": {
+                    "name": "Icon selector",
                     "description": "Here you can select your icon type and also upload custom icons.",
                     "heading": {
                         "preview": "Preview",

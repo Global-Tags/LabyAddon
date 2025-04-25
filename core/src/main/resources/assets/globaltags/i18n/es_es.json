@@ -38,7 +38,7 @@
                     "text": "Borrar",
                     "name": "Borrar GlobalTag"
                 },
-                "iconChooser": {
+                "iconSelector": {
                     "entries": {
                         "none": "Ningún",
                         "custom": "Personalizado",

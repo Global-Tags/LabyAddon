@@ -36,6 +36,7 @@
 
         .hint {
             margin-top: 6;
+            alignment-x: center;
             font-size: 0.8;
             text-color: dark_gray;
         }

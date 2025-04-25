@@ -31,21 +31,21 @@ import net.labymod.api.util.I18n;
 
 @Link("icon-chooser.lss")
 @AutoActivity
-public class IconChooserActivity extends SimpleActivity {
+public class IconSelectorActivity extends SimpleActivity {
 
     private final PlayerInfo<?> info;
     private final AccountConfig config;
     private final Component errorComponent;
     private final TagPreviewWidget previewWidget;
 
-    public IconChooserActivity() {
+    public IconSelectorActivity() {
         this.info = null;
         this.config = null;
         this.errorComponent = Component.translatable("globaltags.settings.account.tagEditor.error");
         this.previewWidget = null;
     }
 
-    public IconChooserActivity(PlayerInfo<?> info, AccountConfig config) {
+    public IconSelectorActivity(PlayerInfo<?> info, AccountConfig config) {
         this.info = info;
         this.config = config;
         this.errorComponent = null;
@@ -85,7 +85,7 @@ public class IconChooserActivity extends SimpleActivity {
 
         FlexibleContentWidget previewWrapper = new FlexibleContentWidget();
         ComponentWidget previewComponent = ComponentWidget.i18n(
-            "globaltags.settings.account.iconChooser.heading.preview"
+            "globaltags.settings.account.iconSelector.heading.preview"
         ).addId("heading");
 
         previewWrapper.addContent(previewComponent);
@@ -95,13 +95,13 @@ public class IconChooserActivity extends SimpleActivity {
 
         FlexibleContentWidget dropdownWrapper = new FlexibleContentWidget();
         ComponentWidget dropdownComponent = ComponentWidget.i18n(
-            "globaltags.settings.account.iconChooser.heading.dropdown"
+            "globaltags.settings.account.iconSelector.heading.dropdown"
         ).addId("heading");
         DropdownWidget<GlobalIcon> iconDropdown = new DropdownWidget<>();
         for (GlobalIcon icon : GlobalIcon.values()) {
             iconDropdown.add(icon);
         }
-        iconDropdown.setTranslationKeyPrefix("globaltags.settings.account.iconChooser.entries");
+        iconDropdown.setTranslationKeyPrefix("globaltags.settings.account.iconSelector.entries");
         iconDropdown.setSelected(this.config.icon().get());
         uploadWrapper.setVisible(iconDropdown.getSelected() == GlobalIcon.CUSTOM);
         iconDropdown.setChangeListener((icon) -> {
@@ -126,15 +126,15 @@ public class IconChooserActivity extends SimpleActivity {
         });
 
         ComponentWidget uploadComponent = ComponentWidget.i18n(
-                "globaltags.settings.account.iconChooser.heading.uploader")
+                "globaltags.settings.account.iconSelector.heading.uploader")
             .addId("heading");
         ButtonWidget uploadButton = ButtonWidget.i18n(
-            "globaltags.settings.account.iconChooser.selector.button",
+            "globaltags.settings.account.iconSelector.selector.button",
             SpriteCommon.PICTURE,
             () -> Laby.references().fileDialogs().open(
-                I18n.translate("globaltags.settings.account.iconChooser.selector.title"),
+                I18n.translate("globaltags.settings.account.iconSelector.selector.title"),
                 Path.of("/"),
-                I18n.translate("globaltags.settings.account.iconChooser.selector.description"),
+                I18n.translate("globaltags.settings.account.iconSelector.selector.description"),
                 new String[]{"png"},
                 false,
                 (paths) -> {
@@ -150,7 +150,7 @@ public class IconChooserActivity extends SimpleActivity {
             )
         );
         uploadButton.setHoverComponent(Component.translatable(
-            "globaltags.settings.account.iconChooser.selector.hover."
+            "globaltags.settings.account.iconSelector.selector.hover."
                 + (hasCustomIconPermission ? "note" : "noPermission"),
             hasCustomIconPermission ? NamedTextColor.WHITE : NamedTextColor.RED
         ));
@@ -164,7 +164,7 @@ public class IconChooserActivity extends SimpleActivity {
         if (hasCustomIconPermission && (!OperatingSystem.isOSX() || Laby.labyAPI().labyModLoader()
             .isAddonDevelopmentEnvironment())) {
             uploadWrapper.addContent(ComponentWidget.i18n(
-                "globaltags.settings.account.iconChooser.selector.hint"
+                "globaltags.settings.account.iconSelector.selector.hint"
             ).addId("hint"));
         }
 
