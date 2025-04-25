@@ -4,7 +4,6 @@ import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.event.RefreshInfoEvent;
 import com.rappytv.globaltags.config.subconfig.AccountConfig;
-import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -88,11 +87,10 @@ public class AccountInfoWidget extends HorizontalListWidget {
                 this.config.hideRoleIcon().set(info.isRoleIconHidden());
                 this.reset = false;
             }
+            String iconUrl = TagPreviewWidget.getIconUrl(info, this.config.icon().get());
             addEntry.accept(new TagPreviewWidget(
-                    this.config.tag().get(),
-                this.config.icon().get() != GlobalIcon.NONE
-                    ? Icon.url(TagPreviewWidget.getIconUrl(info, this.config.icon().get()))
-                    : null,
+                this.config.tag().get(),
+                iconUrl != null ? Icon.url(iconUrl) : null,
                 this.config.hideRoleIcon().get()
                     ? null
                     : info.getRoleIcon() != null
