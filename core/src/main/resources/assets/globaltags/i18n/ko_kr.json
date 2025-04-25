@@ -28,16 +28,14 @@
                         "right": "이름 우측"
                     }
                 },
-                "icon": {
+                "iconChooser": {
                     "entries": {
                         "star": "별",
                         "none": "없음",
                         "custom": "커스텀",
                         "crown": "왕관",
                         "heart": "하트"
-                    },
-                    "description": "이 아이콘은 당신의 태그 좌측에 모든 플레이어에게 표시됩니다.",
-                    "name": "글로벌 아이콘"
+                    }
                 },
                 "name": "글로벌 태그 설정",
                 "tagEditor": {

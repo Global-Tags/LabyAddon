@@ -32,6 +32,10 @@
             },
             "account": {
                 "name": "Account-Einstellungen",
+                "save": {
+                    "title": "Deine Einstellungen wurden gespeichert",
+                    "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
+                },
                 "accountInfo": {
                     "name": "Tag-Vorschau",
                     "banned": "Dein Account wurde gesperrt!",
@@ -58,11 +62,7 @@
                     "utils": "Nützlich",
                     "editor": "Tag bearbeiten",
                     "hexChooser": "Hex color auswählen",
-                    "gradientGenerator": "Verlaufsgenerator öffnen",
-                    "save": {
-                        "title": "Dein Tag wurde gespeichert",
-                        "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
-                    }
+                    "gradientGenerator": "Verlaufsgenerator öffnen"
                 },
                 "position": {
                     "name": "Position",
@@ -74,9 +74,7 @@
                         "left": "Links vom Namen"
                     }
                 },
-                "icon": {
-                    "name": "Icon",
-                    "description": "Dieses Icon wird global links neben deinem Tag angezeigt.",
+                "iconChooser": {
                     "entries": {
                         "none": "Kein Icon",
                         "custom": "Eigenes",

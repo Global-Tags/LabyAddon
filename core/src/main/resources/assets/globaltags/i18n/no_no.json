@@ -24,6 +24,9 @@
                 "description": "Hvis dette valgmulighet er aktivert, sender tillegget også minecraft-språket ditt til API-en. Hvis oversettelsene finnes, vil du motta lokaliserte svar. Minecraft-språket ditt blir lagret for lokaliserte e-poster."
             },
             "account": {
+                "save": {
+                    "description": "Ikke glem å laste opp endringene dine ved å klikke på \"%s\"-knappen!"
+                },
                 "accountInfo": {
                     "noInfo": "Du har ikke en konto ennå…",
                     "appeal": {
@@ -62,11 +65,7 @@
                     "editor": "Editor",
                     "utils": "Verktøy",
                     "hexChooser": "Velg hexfarge",
-                    "gradientGenerator": "Åpne gradientgenerator",
-                    "save": {
-                        "title": "Taggen din ble lagret",
-                        "description": "Ikke glem å laste opp endringene dine ved å klikke på \"%s\"-knappen!"
-                    }
+                    "gradientGenerator": "Åpne gradientgenerator"
                 },
                 "position": {
                     "name": "Posisjon",
@@ -78,9 +77,7 @@
                         "left": "Venstre til navnet"
                     }
                 },
-                "icon": {
-                    "name": "Ikon",
-                    "description": "Dette ikonet vil vises til venstre til taggen din globalt.",
+                "iconChooser": {
                     "entries": {
                         "none": "Ingen",
                         "custom": "Egendefinert",

@@ -2,16 +2,14 @@
     "globaltags": {
         "settings": {
             "account": {
-                "icon": {
+                "iconChooser": {
                     "entries": {
                         "crown": "Корона",
                         "none": "Нет",
                         "custom": "Обычай",
                         "heart": "Сердце",
                         "star": "Звезда"
-                    },
-                    "name": "Глобальная иконка",
-                    "description": "Этот значок будет отображаться слева от вашего тега во всем мире."
+                    }
                 },
                 "accountInfo": {
                     "appeal": {
