@@ -72,7 +72,7 @@ public class TagPreviewWidget extends HorizontalListWidget {
     @Nullable
     public static String getIconUrl(@Nullable PlayerInfo<?> info, GlobalIcon icon) {
         GlobalTagAPI api = GlobalTagsAddon.getAPI();
-        if (info != null && icon == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null) {
+        if (info != null && info.hasCustomGlobalIcon()) {
             return api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash());
         }
         if (icon != GlobalIcon.NONE && icon != GlobalIcon.CUSTOM) {
