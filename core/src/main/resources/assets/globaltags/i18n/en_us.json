@@ -61,6 +61,10 @@
                     }
                 },
                 "name": "Account settings",
+                "save": {
+                    "title": "Your settings were saved",
+                    "description": "Don't forget to upload your changes by clicking on the \"%s\" button!"
+                },
                 "accountInfo": {
                     "name": "Tag Preview",
                     "banned": "Your account is banned!",
@@ -87,11 +91,7 @@
                     "editor": "Editor",
                     "utils": "Utils",
                     "hexChooser": "Choose hex color",
-                    "gradientGenerator": "Open gradient generator",
-                    "save": {
-                        "title": "Your tag was saved",
-                        "description": "Don't forget to upload your changes by clicking on the \"%s\" button!"
-                    }
+                    "gradientGenerator": "Open gradient generator"
                 },
                 "position": {
                     "name": "Position",
@@ -103,9 +103,24 @@
                         "left": "Left to name"
                     }
                 },
-                "icon": {
-                    "name": "Icon",
-                    "description": "This icon will be displayed left to your tag globally.",
+                "iconSelector": {
+                    "name": "Icon selector",
+                    "description": "Here you can select your icon type and also upload custom icons.",
+                    "heading": {
+                        "preview": "Preview",
+                        "dropdown": "Choose icon",
+                        "uploader": "Upload custom icon"
+                    },
+                    "selector": {
+                        "button": "Select file",
+                        "hover": {
+                            "note": "Info: The image will be uploaded instantly to the GlobalTags servers.",
+                            "noPermission": "You need GlobalTags Premium to use this feature!"
+                        },
+                        "hint": "Hint: You can also drag and drop a PNG file into this window.",
+                        "title": "Choose a custom icon texture",
+                        "description": "Image files (*.png)"
+                    },
                     "entries": {
                         "none": "None",
                         "custom": "Custom",

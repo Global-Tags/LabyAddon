@@ -4,7 +4,6 @@ import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.subconfig.AccountConfig;
 import com.rappytv.globaltags.ui.widgets.config.TagPreviewWidget;
-import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import java.util.Arrays;
 import java.util.List;
@@ -74,21 +73,18 @@ public class TagEditorActivity extends SimpleActivity {
     public TagEditorActivity(PlayerInfo<?> info, AccountConfig config) {
         this.config = config;
         this.errorComponent = null;
+        String iconUrl = TagPreviewWidget.getIconUrl(info, config.icon().get());
         if (info == null) {
             this.previewWidget = new TagPreviewWidget(
                 config.tag().get(),
-                config.icon().get() != GlobalIcon.NONE
-                    ? Icon.url(TagPreviewWidget.getIconUrl(null, config.icon().get()))
-                    : null,
+                iconUrl != null ? Icon.url(iconUrl) : null,
                 null
             );
             return;
         }
         this.previewWidget = new TagPreviewWidget(
             config.tag().get(),
-            config.icon().get() != GlobalIcon.NONE
-                ? Icon.url(TagPreviewWidget.getIconUrl(info, config.icon().get()))
-                : null,
+            iconUrl != null ? Icon.url(iconUrl) : null,
             config.hideRoleIcon().get()
                 ? null
                 : info.getRoleIcon() != null

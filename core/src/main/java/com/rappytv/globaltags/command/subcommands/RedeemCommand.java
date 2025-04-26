@@ -3,6 +3,7 @@ package com.rappytv.globaltags.command.subcommands;
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.api.Util;
+import com.rappytv.globaltags.wrapper.http.schemas.GiftCodeRedeemSchema;
 import java.text.SimpleDateFormat;
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
@@ -43,18 +44,19 @@ public class RedeemCommand extends SubCommand {
                 );
                 return;
             }
+            GiftCodeRedeemSchema data = response.getData();
             Component component = Component.empty()
                 .append(GlobalTagsAddon.prefix)
-                .append(Component.text(response.getData().message, NamedTextColor.GREEN));
+                .append(Component.text(data.getMessage(), NamedTextColor.GREEN));
 
-            if (response.getData().getExpiresAt() != null) {
+            if (data.getExpiresAt() != null) {
                 component
                     .append(Component.space())
                     .append(Component.translatable(
                         this.getTranslationKey("expiration"),
                         NamedTextColor.GREEN,
                         Component.text(
-                            dateFormat.format(response.getData().getExpiresAt()),
+                            dateFormat.format(data.getExpiresAt()),
                             NamedTextColor.AQUA
                         )
                     ));
