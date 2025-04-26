@@ -81,6 +81,23 @@
                         "crown": "Krone",
                         "heart": "Herz",
                         "star": "Stern"
+                    },
+                    "name": "Iconauswahl",
+                    "description": "Hier kannst du deinen Icontyp auswählen und auch eigene Icons hochladen.",
+                    "heading": {
+                        "preview": "Vorschau",
+                        "dropdown": "Icon auswählen",
+                        "uploader": "Eigenes Icon hochladen"
+                    },
+                    "selector": {
+                        "button": "Datei auswählen",
+                        "hover": {
+                            "noPermission": "Du benötigst GlobalTags Premium, um dieses Feature zu benutzen!",
+                            "note": "Info: Das Bild wird direkt auf die GlobalTags server hochgeladen."
+                        },
+                        "hint": "Hinweis: Du kannst auch PNG Dateien in dieses Fenster reinziehen.",
+                        "title": "Eigene Icontextur auswählen",
+                        "description": "Bilddateien (*.png)"
                     }
                 },
                 "updateSettings": {

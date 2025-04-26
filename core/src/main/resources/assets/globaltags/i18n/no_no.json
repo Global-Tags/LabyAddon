@@ -25,7 +25,8 @@
             },
             "account": {
                 "save": {
-                    "description": "Ikke glem å laste opp endringene dine ved å klikke på \"%s\"-knappen!"
+                    "description": "Ikke glem å laste opp endringene dine ved å klikke på \"%s\"-knappen!",
+                    "title": "Dine innstillinger ble lagret"
                 },
                 "accountInfo": {
                     "noInfo": "Du har ikke en konto ennå…",
