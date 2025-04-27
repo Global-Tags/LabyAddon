@@ -129,9 +129,9 @@ public class TagEditorActivity extends SimpleActivity {
                 () -> {
                     this.config.tag().set(this.editorTextField.getText());
                     Util.notify(
-                        Component.translatable("globaltags.settings.account.tagEditor.save.title"),
+                        Component.translatable("globaltags.settings.account.save.title"),
                         Component.translatable(
-                            "globaltags.settings.account.tagEditor.save.description",
+                            "globaltags.settings.account.save.description",
                             Component.translatable(
                                 "globaltags.settings.account.updateSettings.name")
                         )
