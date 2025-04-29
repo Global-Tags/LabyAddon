@@ -56,7 +56,7 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
         Laby.references().revisionRegistry()
             .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.1"), "2025-04-10"));
         Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.2"), "2025-05-20"));
+            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.3"), "2025-05-20"));
     }
 
     @Override
