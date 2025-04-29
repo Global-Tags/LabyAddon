@@ -1,8 +1,11 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Read the documentation
-    url: https://docs.globaltags.xyz
-    about: Check out our documentation to understand our API better.
-  - name: Join our Discord
-    url: https://globaltags.xyz/discord
-    about: Join our Discord where you can get help from our community.
+    -   name: Suggest a feature / Report a bug
+        url: https://feedback.globaltags.xyz
+        about: Tell us your feedback on fider.
+    -   name: Read the documentation
+        url: https://docs.globaltags.xyz
+        about: Check out our documentation to understand our API better.
+    -   name: Join our Discord
+        url: https://globaltags.xyz/discord
+        about: Join our Discord where you can get help from our community.

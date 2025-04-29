@@ -1,0 +1,44 @@
+.error {
+    max-width: 80%;
+    text-color: red;
+    max-lines: 3;
+    alignment-x: center;
+    alignment-y: center;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+
+    FlexibleContent {
+        height: fit-content;
+        width: fit-content;
+        alignment-x: center;
+        margin-top: 10;
+
+        .heading {
+            top: 0;
+            alignment-x: center;
+            font-size: 0.9;
+            text-color: yellow;
+            margin-bottom: 3;
+        }
+
+        TagPreview {
+            alignment-x: center;
+            padding: 2;
+        }
+
+        Dropdown, Button {
+            margin-top: 2;
+            alignment-x: center;
+        }
+
+        .hint {
+            margin-top: 6;
+            alignment-x: center;
+            font-size: 0.8;
+            text-color: dark_gray;
+        }
+    }
+}

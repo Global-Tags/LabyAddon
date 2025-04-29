@@ -32,6 +32,10 @@
             },
             "account": {
                 "name": "Account-Einstellungen",
+                "save": {
+                    "title": "Deine Einstellungen wurden gespeichert",
+                    "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
+                },
                 "accountInfo": {
                     "name": "Tag-Vorschau",
                     "banned": "Dein Account wurde gesperrt!",
@@ -52,18 +56,13 @@
                     "unsaved": "Du hast ungespeicherte Änderungen\nKlicke auf den Knopf unten, um sie zu speicher!"
                 },
                 "tagEditor": {
-                    "name": "Text",
+                    "name": "Tag Editor",
                     "error": "Ein Fehler ist aufgetreten! Bitte klick auf den Aktualisierungsbutton im Tag-Vorschaufenster.",
                     "preview": "Vorschau",
                     "utils": "Nützlich",
                     "editor": "Tag bearbeiten",
                     "hexChooser": "Hex color auswählen",
-                    "gradientGenerator": "Verlaufsgenerator öffnen",
-                    "save": {
-                        "button": "Speichern",
-                        "title": "Tag geändert",
-                        "description": "Vergiss nicht, deine Änderungen mit dem \"%s\"-Button zu speichern!"
-                    }
+                    "gradientGenerator": "Verlaufsgenerator öffnen"
                 },
                 "position": {
                     "name": "Position",
@@ -75,15 +74,30 @@
                         "left": "Links vom Namen"
                     }
                 },
-                "icon": {
-                    "name": "Icon",
-                    "description": "Dieses Icon wird global links neben deinem Tag angezeigt.",
+                "iconSelector": {
                     "entries": {
                         "none": "Kein Icon",
                         "custom": "Eigenes",
                         "crown": "Krone",
                         "heart": "Herz",
                         "star": "Stern"
+                    },
+                    "name": "Iconauswahl",
+                    "description": "Hier kannst du deinen Icontyp auswählen und auch eigene Icons hochladen.",
+                    "heading": {
+                        "preview": "Vorschau",
+                        "dropdown": "Icon auswählen",
+                        "uploader": "Eigenes Icon hochladen"
+                    },
+                    "selector": {
+                        "button": "Datei auswählen",
+                        "hover": {
+                            "noPermission": "Du benötigst GlobalTags Premium, um dieses Feature zu benutzen!",
+                            "note": "Info: Das Bild wird direkt auf die GlobalTags server hochgeladen."
+                        },
+                        "hint": "Hinweis: Du kannst auch PNG Dateien in dieses Fenster reinziehen.",
+                        "title": "Eigene Icontextur auswählen",
+                        "description": "Bilddateien (*.png)"
                     }
                 },
                 "updateSettings": {

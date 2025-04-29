@@ -64,11 +64,22 @@ public class TagPreviewWidget extends HorizontalListWidget {
         this.addEntry(this.roleIconWidget);
     }
 
+    /**
+     * @param info The player info
+     * @param icon The global icon
+     * @return The icon url to the players global icon if available; else null
+     */
+    @Nullable
     public static String getIconUrl(@Nullable PlayerInfo<?> info, GlobalIcon icon) {
         GlobalTagAPI api = GlobalTagsAddon.getAPI();
-        return info != null && icon == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null
-            ? api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash())
-            : api.getUrls().getDefaultIcon(icon);
+        if (info != null && icon == GlobalIcon.CUSTOM && info.getGlobalIconHash() != null) {
+            return api.getUrls().getCustomIcon(api.getClientUUID(), info.getGlobalIconHash());
+        }
+        if (icon != GlobalIcon.NONE && icon != GlobalIcon.CUSTOM) {
+            return api.getUrls().getDefaultIcon(icon);
+        }
+
+        return null;
     }
 
     public void updateTag(@NotNull String tag) {

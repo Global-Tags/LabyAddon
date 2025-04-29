@@ -38,9 +38,7 @@
                     "text": "Borrar",
                     "name": "Borrar GlobalTag"
                 },
-                "icon": {
-                    "name": "Icono global",
-                    "description": "Este icono se muestra globalmente a la izquierda de tu tag.",
+                "iconSelector": {
                     "entries": {
                         "none": "Ningún",
                         "custom": "Personalizado",
