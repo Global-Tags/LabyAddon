@@ -77,6 +77,7 @@ public class AccountConfig extends Config {
         GlobalPosition.ABOVE);
 
     @MethodOrder(after = "position")
+    @IntroducedIn(namespace = "globaltags", value = "1.4.2")
     @SpriteSlot(x = 1, y = 2)
     @ActivitySetting
     public Activity iconSelector() {
