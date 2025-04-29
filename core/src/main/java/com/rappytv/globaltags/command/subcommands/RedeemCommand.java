@@ -63,6 +63,7 @@ public class RedeemCommand extends SubCommand {
             }
 
             this.displayMessage(component);
+            this.api.getCache().renewSelf();
             Util.broadcastTagUpdate();
         });
         return true;
