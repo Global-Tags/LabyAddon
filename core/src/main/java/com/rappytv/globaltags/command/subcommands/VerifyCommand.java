@@ -23,7 +23,7 @@ public class VerifyCommand extends SubCommand {
                 if(arguments.length < 2) {
                     this.displayMessage(
                         Component.empty()
-                            .append(GlobalTagsAddon.prefix)
+                            .append(GlobalTagsAddon.prefix())
                             .append(Component.translatable(
                                 "globaltags.commands.usage",
                                 NamedTextColor.RED,
@@ -34,13 +34,13 @@ public class VerifyCommand extends SubCommand {
                 }
 
                 this.api.getApiHandler().verifyEmail(arguments[1], (response) -> this.displayMessage(
-                        GlobalTagsAddon.prefix.copy().append(Util.getResponseComponent(response))
+                        GlobalTagsAddon.prefix().append(Util.getResponseComponent(response))
                 ));
                 break;
             default:
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Component.translatable(
                             "globaltags.commands.usage",
                             NamedTextColor.RED,

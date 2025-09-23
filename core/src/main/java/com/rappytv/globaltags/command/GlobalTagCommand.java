@@ -39,14 +39,14 @@ public class GlobalTagCommand extends Command {
     public boolean execute(String prefix, String[] arguments) {
         this.api.getApiHandler().getApiInfo((response) -> {
             TextComponent clearComponent = TextComponent.builder()
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component.translatable(
                     this.getTranslationKey("version"),
                     NamedTextColor.GREEN,
                     Component.text(this.version, NamedTextColor.AQUA)
                 ))
                 .append(Component.newline())
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component.translatable(
                     this.getTranslationKey("api.version"),
                     NamedTextColor.GREEN,
@@ -58,7 +58,7 @@ public class GlobalTagCommand extends Command {
                         )
                 ))
                 .append(Component.newline())
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component
                     .translatable(this.getTranslationKey("clearCache.label"))
                     .color(NamedTextColor.LIGHT_PURPLE)

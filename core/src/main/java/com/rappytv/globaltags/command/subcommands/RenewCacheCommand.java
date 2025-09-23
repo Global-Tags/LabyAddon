@@ -20,7 +20,7 @@ public class RenewCacheCommand extends SubCommand {
         this.api.getCache().renewAll();
         this.displayMessage(
             Component.empty()
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component.translatable(
                     "globaltags.commands.renewCache.success",
                     NamedTextColor.GREEN

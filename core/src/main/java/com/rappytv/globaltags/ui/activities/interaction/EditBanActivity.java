@@ -90,7 +90,7 @@ public class EditBanActivity extends SimpleActivity {
                     (response) ->
                         Laby.references().chatExecutor().displayClientMessage(
                             Component.empty()
-                                .append(GlobalTagsAddon.prefix)
+                                .append(GlobalTagsAddon.prefix())
                                 .append(Util.getResponseComponent(response))
                         )
                 );

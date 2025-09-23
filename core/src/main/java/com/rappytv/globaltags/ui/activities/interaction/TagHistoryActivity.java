@@ -43,7 +43,7 @@ public class TagHistoryActivity extends SimpleActivity {
             if(!response.isSuccessful()) {
                 Laby.references().chatExecutor().displayClientMessage(
                     TextComponent.builder()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                         .build()
                 );

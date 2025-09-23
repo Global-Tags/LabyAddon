@@ -26,7 +26,7 @@ public class RedeemCommand extends SubCommand {
         if (arguments.length < 1) {
             this.displayMessage(
                 Component.empty()
-                    .append(GlobalTagsAddon.prefix)
+                    .append(GlobalTagsAddon.prefix())
                     .append(Component.translatable(
                         this.getTranslationKey("enterCode"),
                         NamedTextColor.RED
@@ -39,14 +39,14 @@ public class RedeemCommand extends SubCommand {
             if (!response.isSuccessful()) {
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Component.text(response.getError(), NamedTextColor.RED))
                 );
                 return;
             }
             GiftCodeRedeemSchema data = response.getData();
             Component component = Component.empty()
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component.text(data.getMessage(), NamedTextColor.GREEN));
 
             if (data.getExpiresAt() != null) {

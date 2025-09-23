@@ -35,7 +35,7 @@ import net.labymod.api.util.version.SemanticVersion;
 @AddonMain
 public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
 
-    public static final Component prefix = Component.empty()
+    private static final Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
 
@@ -102,6 +102,10 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
     @Override
     protected Class<? extends GlobalTagsConfig> configurationClass() {
         return GlobalTagsConfig.class;
+    }
+
+    public static Component prefix() {
+        return prefix.copy();
     }
 
     public static GlobalTagAPI getAPI() {

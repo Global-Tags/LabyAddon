@@ -21,7 +21,7 @@ public class ClearCacheCommand extends SubCommand {
         this.api.getCache().resolveSelf();
         this.displayMessage(
             Component.empty()
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component.translatable(
                         "globaltags.commands.clearCache.success",
                     NamedTextColor.GREEN

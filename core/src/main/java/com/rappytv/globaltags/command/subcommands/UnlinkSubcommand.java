@@ -21,18 +21,18 @@ public class UnlinkSubcommand extends SubCommand {
         switch (arguments.length > 0 ? arguments[0].toLowerCase() : "none") {
             case "discord":
                 this.api.getApiHandler().unlinkDiscord((response) -> this.displayMessage(
-                    GlobalTagsAddon.prefix.copy().append(Util.getResponseComponent(response)))
+                    GlobalTagsAddon.prefix().append(Util.getResponseComponent(response)))
                 );
                 break;
             case "email":
                 this.api.getApiHandler().unlinkEmail((response) -> this.displayMessage(
-                    GlobalTagsAddon.prefix.copy().append(Util.getResponseComponent(response)))
+                    GlobalTagsAddon.prefix().append(Util.getResponseComponent(response)))
                 );
                 break;
             default:
                 this.displayMessage(
                     Component.empty()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Component.translatable(
                             "globaltags.commands.usage",
                             NamedTextColor.RED,

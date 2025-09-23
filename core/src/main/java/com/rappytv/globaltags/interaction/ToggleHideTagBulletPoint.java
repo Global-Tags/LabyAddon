@@ -43,7 +43,7 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
         }
         Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Component.translatable(
                     "globaltags.context." + (hidden ? "showTag" : "hideTag") + ".success",
                     NamedTextColor.GRAY,

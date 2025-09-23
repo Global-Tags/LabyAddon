@@ -61,7 +61,7 @@ public class CreateNoteActivity extends SimpleActivity {
             this.api.getApiHandler().createNote(this.uuid, inputWidget.getText(), (response) ->
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Util.getResponseComponent(response))
                 ));
         });

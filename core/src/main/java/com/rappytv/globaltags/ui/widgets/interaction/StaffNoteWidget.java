@@ -82,7 +82,7 @@ public class StaffNoteWidget extends SimpleWidget {
         this.api.getApiHandler().deleteNote(this.holder, this.note.getId(), (response) -> {
             Laby.references().chatExecutor().displayClientMessage(
                 TextComponent.builder()
-                    .append(GlobalTagsAddon.prefix)
+                    .append(GlobalTagsAddon.prefix())
                     .append(Util.getResponseComponent(response))
                     .build()
             );

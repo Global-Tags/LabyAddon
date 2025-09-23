@@ -82,7 +82,7 @@ public class BanActivity extends SimpleActivity {
                 if(response.isSuccessful()) Util.broadcastTagUpdate(this.uuid);
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Util.getResponseComponent(response))
                 );
             });

@@ -40,7 +40,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
                 if(response.isSuccessful()) Util.broadcastTagUpdate(this.target.getUUID());
                 Laby.references().chatExecutor().displayClientMessage(
                     Component.empty()
-                        .append(GlobalTagsAddon.prefix)
+                        .append(GlobalTagsAddon.prefix())
                         .append(Util.getResponseComponent(response))
                 );
             });

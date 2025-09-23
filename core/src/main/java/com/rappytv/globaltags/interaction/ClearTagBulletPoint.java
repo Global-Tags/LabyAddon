@@ -34,7 +34,7 @@ public class ClearTagBulletPoint implements BulletPoint {
     public void execute(Player player) {
         GlobalTagsAddon.getAPI().getApiHandler().resetTag(player.getUniqueId(), (response) -> Laby.references().chatExecutor().displayClientMessage(
             Component.empty()
-                .append(GlobalTagsAddon.prefix)
+                .append(GlobalTagsAddon.prefix())
                 .append(Util.getResponseComponent(response))
         ));
     }
