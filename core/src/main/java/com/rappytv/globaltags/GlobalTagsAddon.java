@@ -40,20 +40,26 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
 
     private static GlobalTagAPI api;
+    private static final String[][] versions = {
+        {"1.1.0", "2023-11-24"},
+        {"1.1.7", "2024-02-27"},
+        {"1.1.9", "2024-06-01"},
+        {"1.2.0", "2024-07-14"},
+        {"1.3.5", "2024-12-15"},
+        {"1.4.0", "2025-03-01"},
+        {"1.4.1", "2025-04-10"},
+        {"1.4.3", "2025-05-20"},
+    };
 
     @Override
     protected void preConfigurationLoad() {
-        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.0"), "2023-11-24"));
-        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.7"), "2024-02-27"));
-        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.1.9"), "2024-06-01"));
-        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.2.0"), "2024-07-14"));
-        Laby.references().revisionRegistry().register(new SimpleRevision("globaltags", new SemanticVersion("1.3.5"), "2024-12-15"));
-        Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.0"), "2025-03-01"));
-        Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.1"), "2025-04-10"));
-        Laby.references().revisionRegistry()
-            .register(new SimpleRevision("globaltags", new SemanticVersion("1.4.3"), "2025-05-20"));
+        for (String[] version : versions) {
+            Laby.references().revisionRegistry().register(new SimpleRevision(
+                "globaltags",
+                new SemanticVersion(version[0]),
+                version[1]
+            ));
+        }
     }
 
     @Override
