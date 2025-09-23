@@ -27,8 +27,6 @@ import net.labymod.api.client.component.format.NamedTextColor;
 import net.labymod.api.client.component.format.TextDecoration;
 import net.labymod.api.client.entity.player.tag.PositionType;
 import net.labymod.api.client.entity.player.tag.TagRegistry;
-import net.labymod.api.client.gui.icon.Icon;
-import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.models.addon.annotation.AddonMain;
 import net.labymod.api.revision.SimpleRevision;
 import net.labymod.api.util.concurrent.task.Task;
@@ -40,7 +38,6 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
     public static final Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
-    public static Icon roundIcon;
 
     private static GlobalTagAPI api;
 
@@ -68,7 +65,6 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
                 ? Laby.labyAPI().minecraft().options().getCurrentLanguage()
                 : "en_us"
         );
-        roundIcon = Icon.texture(ResourceLocation.create("globaltags", "textures/icon_round.png"));
 
         this.registerCommand(new GlobalTagCommand(this));
         this.registerListener(new BroadcastListener(api));

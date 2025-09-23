@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.interaction;
 
 import com.rappytv.globaltags.GlobalTagsAddon;
+import com.rappytv.globaltags.api.Textures;
 import com.rappytv.globaltags.api.Util;
 import com.rappytv.globaltags.config.GlobalTagsConfig;
 import com.rappytv.globaltags.ui.activities.interaction.BanActivity;
@@ -29,7 +30,7 @@ public class ToggleBanBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return GlobalTagsAddon.roundIcon;
+        return Icon.texture(Textures.ICON_ROUND);
     }
 
     @Override

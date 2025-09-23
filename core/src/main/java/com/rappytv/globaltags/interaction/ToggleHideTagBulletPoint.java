@@ -1,6 +1,7 @@
 package com.rappytv.globaltags.interaction;
 
 import com.rappytv.globaltags.GlobalTagsAddon;
+import com.rappytv.globaltags.api.Textures;
 import com.rappytv.globaltags.config.GlobalTagsConfig;
 import java.util.UUID;
 import net.labymod.api.Laby;
@@ -29,7 +30,7 @@ public class ToggleHideTagBulletPoint implements BulletPoint {
 
     @Override
     public Icon getIcon() {
-        return GlobalTagsAddon.roundIcon;
+        return Icon.texture(Textures.ICON_ROUND);
     }
 
     @Override
