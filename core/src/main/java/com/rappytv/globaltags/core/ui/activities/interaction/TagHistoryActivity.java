@@ -1,0 +1,71 @@
+package com.rappytv.globaltags.core.ui.activities.interaction;
+
+import com.rappytv.globaltags.api.GlobalTagAPI;
+import com.rappytv.globaltags.core.GlobalTagsAddon;
+import com.rappytv.globaltags.core.ui.widgets.interaction.TagHistoryEntryWidget;
+import java.util.UUID;
+import net.labymod.api.Laby;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.TextComponent;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.gui.icon.Icon;
+import net.labymod.api.client.gui.screen.Parent;
+import net.labymod.api.client.gui.screen.ScreenInstance;
+import net.labymod.api.client.gui.screen.activity.AutoActivity;
+import net.labymod.api.client.gui.screen.activity.Link;
+import net.labymod.api.client.gui.screen.activity.types.SimpleActivity;
+import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.ScrollWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
+
+@Link("list.lss")
+@AutoActivity
+public class TagHistoryActivity extends SimpleActivity {
+
+    private final GlobalTagAPI api;
+    private final UUID uuid;
+    private final String username;
+
+    public TagHistoryActivity(UUID uuid, String username) {
+        this.api = GlobalTagsAddon.getAPI();
+        this.uuid = uuid;
+        this.username = username;
+    }
+
+    @Override
+    public void initialize(Parent parent) {
+        super.initialize(parent);
+        this.api.getApiHandler().getTagHistory(this.uuid, (response) -> Laby.labyAPI().minecraft().executeOnRenderThread(() -> {
+            if(this.document.getChild("window") != null) return;
+            if(!response.isSuccessful()) {
+                Laby.references().chatExecutor().displayClientMessage(
+                    TextComponent.builder()
+                        .append(GlobalTagsAddon.prefix())
+                        .append(Component.text(response.getError(), NamedTextColor.RED))
+                        .build()
+                );
+                Laby.labyAPI().minecraft().minecraftWindow().displayScreen((ScreenInstance) null);
+                return;
+            }
+            FlexibleContentWidget windowWidget = new FlexibleContentWidget().addId("window");
+            HorizontalListWidget profileWrapper = new HorizontalListWidget().addId("header");
+            IconWidget headWidget = new IconWidget(Icon.head(this.uuid)).addId("head");
+            ComponentWidget titleWidget = ComponentWidget.i18n(
+                "globaltags.context.tagHistory.title", this.username).addId("username");
+            VerticalListWidget<TagHistoryEntryWidget> notes = new VerticalListWidget<>().addId("item-list");
+            for(int i = 0; i < response.getData().size(); i++) {
+                notes.addChild(new TagHistoryEntryWidget(i + 1, this.api, response.getData().get(i)));
+            }
+
+            profileWrapper.addEntryInitialized(headWidget);
+            profileWrapper.addEntryInitialized(titleWidget);
+
+            windowWidget.addContentInitialized(profileWrapper);
+            windowWidget.addContentInitialized(new ScrollWidget(notes));
+            this.document.addChildInitialized(windowWidget);
+        }));
+    }
+}
