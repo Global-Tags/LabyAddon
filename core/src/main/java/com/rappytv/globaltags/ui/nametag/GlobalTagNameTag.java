@@ -27,6 +27,7 @@ public class GlobalTagNameTag extends NameTag {
     private final GlobalTagsConfig config;
     private final PositionType position;
     private PlayerInfo<Component> info;
+    private boolean renderIcons = false;
 
     public GlobalTagNameTag(GlobalTagsAddon addon, PositionType position) {
         this.api = GlobalTagsAddon.getAPI();
@@ -59,6 +60,7 @@ public class GlobalTagNameTag extends NameTag {
         if(this.info == null || this.info.getTag() == null) return null;
         if(!this.getGlobalPosition(this.position).equals(this.info.getPosition())) return null;
 
+        this.renderIcons = true;
         return RenderableComponent.of(this.info.getTag());
     }
 
@@ -66,8 +68,9 @@ public class GlobalTagNameTag extends NameTag {
     @SuppressWarnings("deprecation")
     public void render(Stack stack, Entity entity) {
         super.render(stack, entity);
-        if(this.getRenderableComponent() == null) return;
-        if(this.info == null) return;
+        if (!this.renderIcons) {
+            return;
+        }
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
             if(this.info.getGlobalIcon() != GlobalIcon.NONE) Icon.url(this.info.getIconUrl()).render(
@@ -85,6 +88,7 @@ public class GlobalTagNameTag extends NameTag {
                 11
             );
         });
+        this.renderIcons = false;
     }
 
     private GlobalPosition getGlobalPosition(PositionType type) {
