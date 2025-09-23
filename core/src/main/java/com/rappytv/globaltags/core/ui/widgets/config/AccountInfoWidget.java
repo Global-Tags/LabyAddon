@@ -83,7 +83,7 @@ public class AccountInfoWidget extends HorizontalListWidget {
             if (this.reset) {
                 this.config.tag().set(info.getPlainTag());
                 this.config.position().set(info.getPosition());
-                this.config.icon().set(info.getGlobalIcon());
+                this.config.icon().set(info.getGlobalIconType());
                 this.config.hideRoleIcon().set(info.isRoleIconHidden());
                 this.reset = false;
             }
@@ -100,7 +100,7 @@ public class AccountInfoWidget extends HorizontalListWidget {
 
             boolean updated = !this.config.tag().get().equals(info.getPlainTag())
                     || !this.config.position().get().equals(info.getPosition())
-                    || !this.config.icon().get().equals(info.getGlobalIcon())
+                || !this.config.icon().get().equals(info.getGlobalIconType())
                     || !this.config.hideRoleIcon().get().equals(info.isRoleIconHidden());
 
             if (updated) {

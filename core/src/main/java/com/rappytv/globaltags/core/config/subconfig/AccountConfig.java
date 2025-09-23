@@ -153,7 +153,7 @@ public class AccountConfig extends Config {
             }
 
             // Update icon
-            if (info == null || !info.getGlobalIcon().equals(this.icon.get())) {
+            if (info == null || !info.getGlobalIconType().equals(this.icon.get())) {
                 api.getApiHandler().setIcon(this.icon.get(), (response) -> {
                     System.out.println(response.isSuccessful() + " " + response.getData() + " "
                         + response.getError());
