@@ -3,10 +3,10 @@ package com.rappytv.globaltags.ui.nametag;
 import com.rappytv.globaltags.GlobalTagsAddon;
 import com.rappytv.globaltags.api.GlobalTagAPI;
 import com.rappytv.globaltags.config.GlobalTagsConfig;
-import com.rappytv.globaltags.wrapper.enums.GlobalIcon;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import java.awt.*;
+import java.util.Objects;
 import java.util.UUID;
 import net.labymod.api.Laby;
 import net.labymod.api.client.component.Component;
@@ -73,20 +73,24 @@ public class GlobalTagNameTag extends NameTag {
         }
 
         Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            if(this.info.getGlobalIcon() != GlobalIcon.NONE) Icon.url(this.info.getIconUrl()).render(
-                stack,
-                -11,
-                0,
-                9,
-                9
-            );
-            if(this.info.getRoleIcon() != null) Icon.url(this.api.getUrls().getRoleIcon(this.info.getRoleIcon())).render(
-                stack,
-                this.getWidth() + 0.9F,
-                -1.2F,
-                11,
-                11
-            );
+            if (this.info.hasGlobalIcon()) {
+                Icon.url(Objects.requireNonNull(this.info.getIconUrl())).render(
+                    stack,
+                    -11,
+                    0,
+                    9,
+                    9
+                );
+            }
+            if (this.info.getRoleIcon() != null) {
+                Icon.url(this.api.getUrls().getRoleIcon(this.info.getRoleIcon())).render(
+                    stack,
+                    this.getWidth() + 0.9F,
+                    -1.2F,
+                    11,
+                    11
+                );
+            }
         });
         this.renderIcons = false;
     }
