@@ -155,8 +155,6 @@ public class AccountConfig extends Config {
             // Update icon
             if (info == null || !info.getGlobalIconType().equals(this.icon.get())) {
                 api.getApiHandler().setIcon(this.icon.get(), (response) -> {
-                    System.out.println(response.isSuccessful() + " " + response.getData() + " "
-                        + response.getError());
                     if (response.isSuccessful()) {
                         Util.update(
                             api,
