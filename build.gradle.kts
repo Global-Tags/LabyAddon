@@ -1,3 +1,5 @@
+import net.labymod.labygradle.common.extension.model.labymod.ReleaseChannels
+
 plugins {
     id("net.labymod.labygradle")
     id("net.labymod.labygradle.addon")
@@ -5,7 +7,7 @@ plugins {
 
 val versions = providers.gradleProperty("net.labymod.minecraft-versions").get().split(";")
 group = "org.example"
-version = providers.environmentVariable("VERSION").getOrElse("1.4.4")
+version = providers.environmentVariable("VERSION").getOrElse("1.4.5")
 
 labyMod {
     defaultPackageName = "com.rappytv.globaltags"
@@ -16,6 +18,8 @@ labyMod {
         description = "Get yourself a custom GlobalTag that's publicly visible to anyone using this addon."
         minecraftVersion = "*"
         version = rootProject.version.toString()
+
+        releaseChannel.set(ReleaseChannels.SNAPSHOT)
     }
 
     minecraft {

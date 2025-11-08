@@ -1,1 +1,11 @@
-{}
+{
+    "globaltags": {
+        "settings": {
+            "header": {
+                "display": {
+                    "name": "Azeigeistellige"
+                }
+            }
+        }
+    }
+}
