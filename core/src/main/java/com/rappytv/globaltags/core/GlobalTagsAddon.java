@@ -38,7 +38,7 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
     private static final Component prefix = Component.empty()
         .append(Component.text("GlobalTags").color(NamedTextColor.BLUE).decorate(TextDecoration.BOLD))
         .append(Component.text(" » ", NamedTextColor.DARK_GRAY));
-
+    private static GlobalTagsAddon instance;
     private static GlobalTagAPI api;
     private static final String[][] versions = {
         {"1.1.0", "2023-11-24"},
@@ -64,6 +64,7 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
 
     @Override
     protected void enable() {
+        instance = this;
         this.registerSettingCategory();
         api = new GlobalTagAPI(
             new Agent("LabyAddon", this.addonInfo().getVersion(), Laby.labyAPI().minecraft().getVersion()),
@@ -91,9 +92,9 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
         for (PositionType positionType : PositionType.values()) {
             tagRegistry.registerAfter(
                 "labymod_role",
-                "globaltags_tag",
+                "globaltags_tag_" + positionType.name().split("_")[0].toLowerCase(),
                 positionType,
-                new GlobalTagNameTag(this, positionType)
+                new GlobalTagNameTag(positionType, () -> this.configuration().tagSize().get() / 10f)
             );
         }
 
@@ -108,6 +109,10 @@ public class GlobalTagsAddon extends LabyAddon<GlobalTagsConfig> {
     @Override
     protected Class<? extends GlobalTagsConfig> configurationClass() {
         return GlobalTagsConfig.class;
+    }
+
+    public static GlobalTagsConfig config() {
+        return instance.configuration();
     }
 
     public static Component prefix() {

@@ -1,124 +1,103 @@
 package com.rappytv.globaltags.core.ui.nametag;
 
-import com.rappytv.globaltags.api.GlobalTagAPI;
-import com.rappytv.globaltags.core.GlobalTagsAddon;
-import com.rappytv.globaltags.core.config.GlobalTagsConfig;
+import com.rappytv.globaltags.core.ui.snapshot.GlobalTagsExtraKeys;
+import com.rappytv.globaltags.core.ui.snapshot.GlobalTagsUserSnapshot;
 import com.rappytv.globaltags.wrapper.enums.GlobalPosition;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
-import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
-import net.labymod.api.Laby;
+import java.util.function.Supplier;
 import net.labymod.api.client.component.Component;
-import net.labymod.api.client.entity.Entity;
-import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.entity.player.tag.PositionType;
-import net.labymod.api.client.entity.player.tag.tags.NameTag;
-import net.labymod.api.client.entity.player.tag.tags.NameTagBackground;
+import net.labymod.api.client.entity.player.tag.tags.ComponentNameTag;
 import net.labymod.api.client.gui.icon.Icon;
-import net.labymod.api.client.render.font.RenderableComponent;
 import net.labymod.api.client.render.matrix.Stack;
-import org.jetbrains.annotations.Nullable;
+import net.labymod.api.client.render.state.entity.EntitySnapshot;
+import net.labymod.api.laby3d.render.queue.SubmissionCollector;
+import net.labymod.api.laby3d.render.queue.submissions.IconSubmission.DisplayMode;
+import org.jetbrains.annotations.NotNull;
 
-public class GlobalTagNameTag extends NameTag {
+public class GlobalTagNameTag extends ComponentNameTag {
 
-    private final int black = new Color(0, 0, 0, 70).getRGB();
-    private final GlobalTagAPI api;
-    private final GlobalTagsConfig config;
-    private final PositionType position;
-    private PlayerInfo<Component> info;
-    private boolean renderIcons = false;
+    private static final float globalIconSize = 9;
+    private static final float staffIconSize = 11;
 
-    public GlobalTagNameTag(GlobalTagsAddon addon, PositionType position) {
-        this.api = GlobalTagsAddon.getAPI();
-        this.config = addon.configuration();
-        this.position = position;
+    private final PositionType registeredPosition;
+    private final Supplier<Float> scaleSupplier;
+    private GlobalTagsUserSnapshot globaltagsUser;
+
+    public GlobalTagNameTag(PositionType position, Supplier<Float> scaleSupplier) {
+        this.registeredPosition = position;
+        this.scaleSupplier = scaleSupplier;
     }
 
     @Override
     public float getScale() {
-        return (float) this.config.tagSize().get() / 10;
+        return this.scaleSupplier.get();
     }
 
     @Override
-    protected @Nullable RenderableComponent getRenderableComponent() {
-        if(!this.config.enabled().get()) return null;
-        if(this.entity == null || !(this.entity instanceof Player)) return null;
-        UUID uuid = this.entity.getUniqueId();
-        if(!this.config.showOwnTag().get() && Laby.labyAPI().getUniqueId().equals(uuid))
-            return null;
-
-        this.info = null;
-        if(this.api.getCache().has(uuid))
-            this.info = this.api.getCache().get(uuid);
-        else {
-            if (this.position == PositionType.ABOVE_NAME
-                && GlobalTagsAddon.getAPI().getAuthorization() != null) {
-                this.api.getCache().resolve(uuid);
-            }
+    protected @NotNull List<Component> buildComponents(EntitySnapshot snapshot) {
+        this.globaltagsUser = snapshot.get(GlobalTagsExtraKeys.GLOBALTAGS_USER);
+        if (this.globaltagsUser == null) {
+            return super.buildComponents(snapshot);
         }
-        if(this.info == null || this.info.getTag() == null) return null;
-        if(!this.getGlobalPosition(this.position).equals(this.info.getPosition())) return null;
+        PlayerInfo<Component> info = this.globaltagsUser.getPlayerInfo();
+        if (snapshot.isDiscrete()
+            || info == null
+            || info.getTag() == null
+            || !this.getGlobalPosition(this.registeredPosition).equals(info.getPosition())
+            || this.globaltagsUser.isHidden()
+            || !this.globaltagsUser.passedSelfCheck()) {
+            return super.buildComponents(snapshot);
+        }
 
-        this.renderIcons = true;
-        return RenderableComponent.of(this.info.getTag());
+        return Collections.singletonList(info.getTag());
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public void render(Stack stack, Entity entity) {
-        super.render(stack, entity);
-        if (!this.renderIcons) {
+    public void render(Stack stack, SubmissionCollector submissionCollector,
+        EntitySnapshot snapshot) {
+        super.render(stack, submissionCollector, snapshot);
+        PlayerInfo<Component> info = this.globaltagsUser.getPlayerInfo();
+        if (info == null) {
             return;
         }
 
-        Laby.labyAPI().renderPipeline().renderSeeThrough(entity, () -> {
-            if (this.info.hasGlobalIcon()) {
-                Icon.url(Objects.requireNonNull(this.info.getIconUrl())).render(
-                    stack,
-                    -11,
-                    0,
-                    9,
-                    9
-                );
-            }
-            if (this.info.getRoleIcon() != null) {
-                Icon.url(this.api.getUrls().getRoleIcon(this.info.getRoleIcon())).render(
-                    stack,
-                    this.getWidth() + 0.9F,
-                    -1.2F,
-                    11,
-                    11
-                );
-            }
-        });
-        this.renderIcons = false;
-    }
-
-    private GlobalPosition getGlobalPosition(PositionType type) {
-        try {
-            return GlobalPosition.valueOf(type.name().split("_")[0]);
-        } catch (Exception e) {
-            return GlobalPosition.ABOVE;
+        if (info.hasGlobalIcon()) {
+            submissionCollector.submitIcon(
+                stack,
+                Icon.url(Objects.requireNonNull(info.getIconUrl())),
+                DisplayMode.NORMAL,
+                -11,
+                -1,
+                globalIconSize,
+                globalIconSize,
+                -1
+            );
+        }
+        Icon staffIcon = this.globaltagsUser.getStaffIcon();
+        if (staffIcon != null) {
+            submissionCollector.submitIcon(
+                stack,
+                staffIcon,
+                DisplayMode.NORMAL,
+                this.getWidth() + 0.9F,
+                -1.8F,
+                staffIconSize,
+                staffIconSize,
+                -1
+            );
         }
     }
 
-    @Override
-    protected NameTagBackground getCustomBackground() {
-        boolean enabled = this.config.showBackground().get();
-        NameTagBackground background = super.getCustomBackground();
-
-        if (background == null)
-            background = NameTagBackground.custom(enabled, this.black);
-
-        background.setEnabled(enabled);
-        return background;
-    }
-
-    @Override
-    public boolean isVisible() {
-        return !this.entity.isCrouching()
-            && !this.config.hiddenTags().contains(this.entity.getUniqueId())
-            && super.isVisible();
+    private GlobalPosition getGlobalPosition(PositionType type) {
+        return switch (type) {
+            case ABOVE_NAME -> GlobalPosition.ABOVE;
+            case BELOW_NAME -> GlobalPosition.BELOW;
+            case RIGHT_TO_NAME -> GlobalPosition.RIGHT;
+            case LEFT_TO_NAME -> GlobalPosition.LEFT;
+        };
     }
 }
