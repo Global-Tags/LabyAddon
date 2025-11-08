@@ -1,3 +1,5 @@
+import net.labymod.labygradle.common.extension.model.labymod.ReleaseChannels
+
 plugins {
     id("net.labymod.labygradle")
     id("net.labymod.labygradle.addon")
@@ -16,6 +18,8 @@ labyMod {
         description = "Get yourself a custom GlobalTag that's publicly visible to anyone using this addon."
         minecraftVersion = "*"
         version = rootProject.version.toString()
+
+        releaseChannel.set(ReleaseChannels.SNAPSHOT)
     }
 
     minecraft {
