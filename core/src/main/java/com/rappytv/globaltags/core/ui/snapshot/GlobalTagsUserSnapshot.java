@@ -4,6 +4,8 @@ import com.rappytv.globaltags.core.GlobalTagsAddon;
 import com.rappytv.globaltags.core.config.GlobalTagsConfig;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo;
 import com.rappytv.globaltags.wrapper.model.PlayerInfo.Cache;
+import java.util.HashMap;
+import java.util.Map;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.entity.player.Player;
 import net.labymod.api.client.gui.icon.Icon;
@@ -13,27 +15,25 @@ import org.jetbrains.annotations.Nullable;
 
 public class GlobalTagsUserSnapshot extends AbstractLabySnapshot {
 
+    private static final Map<String, Icon> roleIconCache = new HashMap<>();
+
     private final GlobalTagsConfig config;
+    private final boolean enabled;
     private final PlayerInfo<Component> playerInfo;
-    private final Icon staffIcon;
 
     public GlobalTagsUserSnapshot(Player player, Extras extras, GlobalTagsAddon addon) {
         super(extras);
-        this.config = addon.configuration();
         Cache<Component> cache = GlobalTagsAddon.getAPI().getCache();
-        if (cache.has(player.getUniqueId())) {
-            this.playerInfo = cache.get(player.getUniqueId());
-        } else {
-            this.playerInfo = null;
+        this.config = addon.configuration();
+        this.enabled = this.config.enabled().get();
+        this.playerInfo = cache.get(player.getUniqueId());
+        if (this.playerInfo == null) {
             cache.resolve(player.getUniqueId());
         }
-        this.staffIcon = this.playerInfo != null && this.playerInfo.getRoleIcon() != null
-            ? Icon.url(
-            GlobalTagsAddon.getAPI()
-                .getUrls()
-                .getRoleIcon(this.playerInfo.getRoleIcon())
-        )
-            : null;
+    }
+
+    public boolean isAddonEnabled() {
+        return this.enabled;
     }
 
     @Nullable
@@ -43,15 +43,21 @@ public class GlobalTagsUserSnapshot extends AbstractLabySnapshot {
 
     @Nullable
     public Icon getStaffIcon() {
-        return this.staffIcon;
-    }
-
-    public boolean passedSelfCheck() {
-        return this.playerInfo != null && (this.config.showOwnTag().get()
-            || !this.playerInfo.getUUID().equals(GlobalTagsAddon.getAPI().getClientUUID()));
+        if (this.playerInfo == null || this.playerInfo.getRoleIcon() == null) {
+            return null;
+        }
+        return roleIconCache.computeIfAbsent(this.playerInfo.getRoleIcon(), (icon) ->
+            Icon.url(GlobalTagsAddon.getAPI().getUrls().getRoleIcon(icon))
+        );
     }
 
     public boolean isHidden() {
-        return this.config.hiddenTags().contains(this.playerInfo.getUUID());
+        if (this.playerInfo == null) {
+            return true;
+        }
+        boolean isSelf = this.playerInfo.getUUID().equals(GlobalTagsAddon.getAPI().getClientUUID());
+        boolean showOwnTag = this.config.showOwnTag().get();
+        return this.config.hiddenTags().contains(this.playerInfo.getUUID())
+            || (!showOwnTag && isSelf);
     }
 }
