@@ -39,17 +39,18 @@ public class GlobalTagNameTag extends ComponentNameTag {
 
     @Override
     protected @NotNull List<Component> buildComponents(EntitySnapshot snapshot) {
-        this.globaltagsUser = snapshot.get(GlobalTagsExtraKeys.GLOBALTAGS_USER);
-        if (this.globaltagsUser == null) {
+        if (snapshot.isDiscrete()
+            || snapshot.isInvisible()
+            || !snapshot.has(GlobalTagsExtraKeys.GLOBALTAGS_USER)) {
             return super.buildComponents(snapshot);
         }
+        this.globaltagsUser = snapshot.get(GlobalTagsExtraKeys.GLOBALTAGS_USER);
         PlayerInfo<Component> info = this.globaltagsUser.getPlayerInfo();
-        if (snapshot.isDiscrete()
+        if (!this.globaltagsUser.isAddonEnabled()
             || info == null
             || info.getTag() == null
             || !this.getGlobalPosition(this.registeredPosition).equals(info.getPosition())
-            || this.globaltagsUser.isHidden()
-            || !this.globaltagsUser.passedSelfCheck()) {
+            || this.globaltagsUser.isHidden()) {
             return super.buildComponents(snapshot);
         }
 
