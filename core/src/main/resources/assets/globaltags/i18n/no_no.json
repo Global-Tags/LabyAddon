@@ -85,6 +85,23 @@
                         "heart": "Hjerte",
                         "star": "Stjerne",
                         "crown": "Krone"
+                    },
+                    "name": "Ikonvelger",
+                    "description": "Her kan du velge ikontype og også laste opp egendefinerte ikoner.",
+                    "heading": {
+                        "preview": "Forhåndsvisning",
+                        "dropdown": "Velg ikon",
+                        "uploader": "Last opp egendefinerte ikon"
+                    },
+                    "selector": {
+                        "button": "Velg fil",
+                        "hover": {
+                            "note": "Info: Bildet lastes opp umiddelbart til GlobalTags-serverne.",
+                            "noPermission": "Du trenger GlobalTags Premium for å bruke denne funktionen!"
+                        },
+                        "hint": "Tip: Du kan også dra og slippe en PNG-fil inn i dette vinduet.",
+                        "title": "Velg en egendefinert ikontekstur",
+                        "description": "Bild filer (*.png)"
                     }
                 },
                 "resetTag": {
